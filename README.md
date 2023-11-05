@@ -37,6 +37,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## 11-5-23 Updates
 
--database is hooked up, test page was created to make sure I could
+- database is hooked up, test page was created to make sure I could
 connect to it and read data from it
--env files are configured in local, and updated on vercel deploys
+- env files are configured in local, and updated on vercel deploys
