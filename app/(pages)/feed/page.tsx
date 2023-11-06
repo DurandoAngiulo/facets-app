@@ -1,7 +1,8 @@
+"use client";
 import React from "react";
 
-function feed() {
+const feed = () => {
   return <div>feed</div>;
-}
+};
 
 export default feed;
