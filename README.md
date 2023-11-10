@@ -1,5 +1,9 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## prerequisites
+
+- node v20.9.0
+
 ## Getting Started
 
 First, run the development server:
@@ -38,5 +42,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## 11-5-23 Updates
 
 - database is hooked up, test page was created to make sure I could
-connect to it and read data from it
+  connect to it and read data from it
 - env files are configured in local, and updated on vercel deploys
