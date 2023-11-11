@@ -5,7 +5,7 @@ import { UserAuth } from "../context/AuthContext";
 
 const Navbar = () => {
   //   console.log(UserAuth());
-  const { user } = UserAuth();
+  //   const { user } = UserAuth();
   //   console.log(user);
   return (
     <div>

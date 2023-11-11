@@ -5,8 +5,10 @@ import {
 } from "firebase/auth";
 import { useState, useEffect } from "react";
 import "firebase/auth";
+import { useAuth } from "@/context/AuthContext";
 
 const SignInForm = () => {
+  const { registerAndLogin, currentUser } = useAuth();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [error, setError] = useState(null);
 
@@ -19,12 +21,12 @@ const SignInForm = () => {
       size: "invisible",
       callback: (response) => {
         // reCAPTCHA solved, allow signInWithPhoneNumber.
-        onSignInSubmit();
+        handleSignInRegisterAuth();
       },
     });
   }, []); // Empty dependency array ensures this runs once on component mount
 
-  const onSignInSubmit = async () => {
+  const handleSignInRegisterAuth = async () => {
     try {
       // Validate phone number
       if (!phoneNumber) {
@@ -32,28 +34,44 @@ const SignInForm = () => {
         return;
       }
 
-      // Send the verification code to the user's phone
-      const confirmationResult = await signInWithPhoneNumber(
+      const { data, loading, error } = await registerAndLogin(
         auth,
         phoneNumber,
-        window.recaptchaVerifier // Access the recaptchaVerifier from the global window object
+        window.recaptchaVerifier
       );
 
-      // Prompt the user to enter the verification code
-      const code = window.prompt(
-        "Enter the verification code sent to your phone:"
-      );
-
-      if (code) {
-        // Confirm the verification code
-        await confirmationResult.confirm(code);
-
-        // User signed in successfully
-        console.log("User signed in successfully");
-      } else {
-        // Handle case where the user canceled entering the code
-        setError("Verification code entry canceled.");
+      if (error) {
+        console.log(data.message);
+        return;
       }
+      // redirect user if login was successful?
+
+      const user = data.user;
+      console.log("user is logged in", user);
+
+      // Send the verification code to the user's phone
+      // const confirmationResult = await signInWithPhoneNumber(
+      //   auth,
+      //   phoneNumber,
+      //   window.recaptchaVerifier // Access the recaptchaVerifier from the global window object
+      // );
+
+      // // Prompt the user to enter the verification code
+      // const code = window.prompt(
+      //   "Enter the verification code sent to your phone:"
+      // );
+
+      // if (code) {
+      //   // Confirm the verification code
+      //   await confirmationResult.confirm(code);
+
+      //   // User signed in successfully
+      //   console.log("User signed in successfully");
+      //   ``;
+      // } else {
+      //   // Handle case where the user canceled entering the code
+      //   setError("Verification code entry canceled.");
+      // }
     } catch (error) {
       // Log the entire error object for debugging
       console.error("Error during sign in:", error);
@@ -74,7 +92,7 @@ const SignInForm = () => {
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
       </label>
-      <button id={recaptchaButtonId} onClick={() => onSignInSubmit()}>
+      <button id={recaptchaButtonId} onClick={() => handleSignInRegisterAuth()}>
         Sign In
       </button>
       {error && <p style={{ color: "red" }}>{error}</p>}
