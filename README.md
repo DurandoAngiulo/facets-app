@@ -36,6 +36,8 @@ This will update everytime an new branch is pushed to main.
   connect to it and read data from it
 - env files are configured in local, and updated on vercel deploys
 
-## 11-13-23 updates
+## 11-14-23 updates
 
 -authentication up and running in basic form, see authcontext,js
+-protected routes also set up in basic form so users are gated from specific pages depending on their role and role
+-Upon autehntication if a user doesn't exist in the database they are created in it

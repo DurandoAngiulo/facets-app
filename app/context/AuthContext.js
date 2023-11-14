@@ -1,8 +1,9 @@
 "use client";
 import { useContext, createContext, useState, useEffect } from "react";
-import { signInWithPhoneNumber } from "firebase/auth";
+import { signInWithPhoneNumber, getAuth } from "firebase/auth";
 
 const AuthContext = createContext();
+const auth = getAuth();
 
 export const useAuth = () => {
   return useContext(AuthContext);
@@ -10,12 +11,9 @@ export const useAuth = () => {
 
 export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  /**
-   * TODO: what does this do
-   * @link https://firebase.google.com/docs/auth/web/phone-auth#send-a-verification-code-to-the-users-phone
-   */
-  const registerAndLogin = async (auth, phoneNumber, appVerifier) => {
+  registerAndLogin = async (auth, phoneNumber, appVerifier) => {
     const confirmationResult = await signInWithPhoneNumber(
       auth,
       phoneNumber,
@@ -45,17 +43,32 @@ export const AuthContextProvider = ({ children }) => {
           loading: false,
           error: true,
         };
+      })
+      .finally(() => {
+        setLoading(false);
       });
 
     // User signed in successfully
   };
+  //TODO: test this to make sure it works
   const logout = () => {
     auth.signOut();
+    console.log("user logged out");
   };
+
+  //   useEffect(() => {
+  //     const unsubscribe = auth.onAuthStateChanged((user) => {
+  //       setCurrentUser(user);
+  //       setLoading(false);
+  //     });
+
+  //     return unsubscribe;
+  //   }, []);
 
   const value = {
     currentUser,
     registerAndLogin,
+    loading,
     logout,
   };
 

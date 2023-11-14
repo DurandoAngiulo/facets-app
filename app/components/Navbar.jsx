@@ -1,17 +1,19 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { UserAuth } from "../context/AuthContext";
+import { useAuth } from "@/context/AuthContext";
+import { getAuth } from "firebase/auth";
 
 const Navbar = () => {
-  //   console.log(UserAuth());
-  //   const { user } = UserAuth();
-  //   console.log(user);
+  const { logout } = useAuth();
   return (
     <div>
       <ul>
         <li>
-          <Link className="border-solid border-2 border-red-500" href="/feed">
+          <Link
+            className="border-solid border-2 border-red-500"
+            href="/dashboard/feed"
+          >
             feed
           </Link>
         </li>
@@ -28,6 +30,15 @@ const Navbar = () => {
         <li>
           <Link className="border-solid border-2 border-red-500" href="/signup">
             signup
+          </Link>
+        </li>
+        <li>
+          <Link
+            className="border-solid border-2 border-red-500"
+            href="/signup"
+            onClick={() => logout()}
+          >
+            logout
           </Link>
         </li>
       </ul>

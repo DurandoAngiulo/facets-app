@@ -1,19 +1,18 @@
-import {
-  getAuth,
-  RecaptchaVerifier,
-  signInWithPhoneNumber,
-} from "firebase/auth";
+import { getAuth, RecaptchaVerifier } from "firebase/auth";
 import { useState, useEffect } from "react";
 import "firebase/auth";
 import { useAuth } from "@/context/AuthContext";
+import { getProfileById, createProfile } from "@/services/profile-service";
+import { useRouter } from "next/navigation";
 
-const SignInForm = () => {
+const SignUpForm = () => {
   const { registerAndLogin, currentUser } = useAuth();
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("+12676256168");
   const [error, setError] = useState(null);
 
   const auth = getAuth();
   const recaptchaButtonId = "sign-in-button";
+  const router = useRouter();
 
   useEffect(() => {
     // Create a new RecaptchaVerifier with invisible size
@@ -48,30 +47,25 @@ const SignInForm = () => {
 
       const user = data.user;
       console.log("user is logged in", user);
+      const { data: profileData } = await getProfileById(user.uid);
+      console.log(profileData);
+      if (profileData.data) {
+        //TODO: redirect logic
+        return;
+      }
+      // return;
+      const { error: newProfileError } = await createProfile(user.uid);
 
-      // Send the verification code to the user's phone
-      // const confirmationResult = await signInWithPhoneNumber(
-      //   auth,
-      //   phoneNumber,
-      //   window.recaptchaVerifier // Access the recaptchaVerifier from the global window object
-      // );
+      if (newProfileError) {
+        //TODO: profile creation failed display this
+        return;
+      }
+      //TODO: add to routes file
+      router.push("/dashboard/onboarding/start");
 
-      // // Prompt the user to enter the verification code
-      // const code = window.prompt(
-      //   "Enter the verification code sent to your phone:"
-      // );
+      //create all fields for data entry
 
-      // if (code) {
-      //   // Confirm the verification code
-      //   await confirmationResult.confirm(code);
-
-      //   // User signed in successfully
-      //   console.log("User signed in successfully");
-      //   ``;
-      // } else {
-      //   // Handle case where the user canceled entering the code
-      //   setError("Verification code entry canceled.");
-      // }
+      //redirect to profile creation flow
     } catch (error) {
       // Log the entire error object for debugging
       console.error("Error during sign in:", error);
@@ -100,4 +94,4 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+export default SignUpForm;

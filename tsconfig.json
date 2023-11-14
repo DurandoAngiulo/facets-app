@@ -22,7 +22,9 @@
       "@/*": ["./app/*"],
       "@/components/*": ["./app/components/*"],
       "@/lib/*": ["./app/lib/*"],
-      "@/context/*": ["./app/context/*"]
+      "@/context/*": ["./app/context/*"],
+      "@/constants/*": ["./app/constants/*"],
+      "@/services/*": ["./app/services/*"]
     }
   },
   "include": [
@@ -30,8 +32,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/page.jsx",
-    "app/(pages)/(onboarding)/signup/page.jsx"
+    "app/page.jsx"
   ],
   "exclude": ["node_modules"]
 }
