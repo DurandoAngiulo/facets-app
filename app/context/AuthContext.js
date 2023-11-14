@@ -3,7 +3,7 @@ import { useContext, createContext, useState, useEffect } from "react";
 import { signInWithPhoneNumber, getAuth } from "firebase/auth";
 
 const AuthContext = createContext();
-const auth = getAuth();
+// const auth = getAuth();
 
 export const useAuth = () => {
   return useContext(AuthContext);
@@ -13,7 +13,7 @@ export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  registerAndLogin = async (auth, phoneNumber, appVerifier) => {
+  const registerAndLogin = async (auth, phoneNumber, appVerifier) => {
     const confirmationResult = await signInWithPhoneNumber(
       auth,
       phoneNumber,
@@ -51,8 +51,8 @@ export const AuthContextProvider = ({ children }) => {
     // User signed in successfully
   };
   //TODO: test this to make sure it works
-  const logout = () => {
-    auth.signOut();
+  const logout = (currentUser) => {
+    currentUser.signOut();
     console.log("user logged out");
   };
 
