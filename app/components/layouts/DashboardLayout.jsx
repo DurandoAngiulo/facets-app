@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
-import withProtectedRoutes from "./withProtectedRoutes";
+import withProtectedRoutes from "@/components/layouts/withProtectedRoutes";
 
 const DashboardLayout = ({ children }) => {
   return (

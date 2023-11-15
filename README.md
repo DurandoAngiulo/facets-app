@@ -6,25 +6,20 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+- copy .env.exmaple, chnage the name to .env.development and ask Durando for keys
+
+To run locally:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Deploy on Vercel
+## Vercel
 
 This is the vercel link to the live site version
 This will update everytime an new branch is pushed to main.
@@ -38,6 +33,7 @@ This will update everytime an new branch is pushed to main.
 
 ## 11-14-23 updates
 
--authentication up and running in basic form, see authcontext,js
--protected routes also set up in basic form so users are gated from specific pages depending on their role and role
--Upon autehntication if a user doesn't exist in the database they are created in it
+- authentication up and running in basic form, see authcontext,js
+- protected routes also set up in basic form so users are gated from specific pages depending on their role and role
+- Upon autehntication if a user doesn't exist in the database they are created in it
+- fixed deploys issue
