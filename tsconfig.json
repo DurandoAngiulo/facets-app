@@ -24,7 +24,8 @@
       "@/lib/*": ["./app/lib/*"],
       "@/context/*": ["./app/context/*"],
       "@/constants/*": ["./app/constants/*"],
-      "@/services/*": ["./app/services/*"]
+      "@/services/*": ["./app/services/*"],
+      "@/dashboard/*": ["./app/dashboard/*"]
     }
   },
   "include": [

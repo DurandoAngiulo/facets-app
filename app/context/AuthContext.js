@@ -1,6 +1,9 @@
 "use client";
 import { useContext, createContext, useState, useEffect } from "react";
-import { signInWithPhoneNumber, getAuth } from "firebase/auth";
+import { signInWithPhoneNumber } from "firebase/auth";
+import { db, auth } from "@/lib/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import FIREBASE from "@/constants/firebase";
 
 const AuthContext = createContext();
 // const auth = getAuth();
@@ -50,10 +53,10 @@ export const AuthContextProvider = ({ children }) => {
 
     // User signed in successfully
   };
-  //TODO: test this to make sure it works
-  const logout = (currentUser) => {
-    currentUser.signOut();
+
+  const logout = () => {
     console.log("user logged out");
+    return auth.signOut();
   };
 
   //   useEffect(() => {

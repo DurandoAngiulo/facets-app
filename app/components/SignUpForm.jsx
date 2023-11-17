@@ -4,6 +4,7 @@ import "firebase/auth";
 import { useAuth } from "@/context/AuthContext";
 import { getProfileById, createProfile } from "@/services/profile-service";
 import { useRouter } from "next/navigation";
+import ROUTES from "@/constants/routes";
 
 const SignUpForm = () => {
   const { registerAndLogin, currentUser } = useAuth();
@@ -46,24 +47,22 @@ const SignUpForm = () => {
       // redirect user if login was successful?
 
       const user = data.user;
-      console.log("user is logged in", user);
+      // console.log("user is logged in and already exists", user);
       const { data: profileData } = await getProfileById(user.uid);
       console.log(profileData);
       if (profileData.data) {
-        //TODO: redirect logic
+        router.push(`${ROUTES.DASHBOARD.path}/feed`);
         return;
       }
       // return;
       const { error: newProfileError } = await createProfile(user.uid);
 
       if (newProfileError) {
-        //TODO: profile creation failed display this
+        console.error("Error making new profile:", error);
         return;
       }
-      //TODO: add to routes file
-      router.push("/dashboard/onboarding/start");
 
-      //create all fields for data entry
+      router.push(`${ROUTES.ONBOARDING}/profileCreation`);
 
       //redirect to profile creation flow
     } catch (error) {
@@ -76,12 +75,12 @@ const SignUpForm = () => {
   };
 
   return (
-    <div>
+    <div className="">
       <label>
         Phone Number:
         <input
           type="tel"
-          className="text-black"
+          className="text-black border-solid border-2 border-red-500 "
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
