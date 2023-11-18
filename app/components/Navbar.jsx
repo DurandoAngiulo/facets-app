@@ -1,8 +1,7 @@
 "use client";
-import React from "react";
-import Link from "next/link";
+
 import { useAuth } from "@/context/AuthContext";
-import { getAuth } from "firebase/auth";
+import Link from "next/link";
 
 const Navbar = () => {
   const { logout } = useAuth();

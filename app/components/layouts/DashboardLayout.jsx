@@ -1,13 +1,12 @@
-import React from "react";
+import MarketingFooter from "@/components/Footer/MarketingFooter";
 import Navbar from "@/components/Navbar";
 import withProtectedRoutes from "@/components/layouts/withProtectedRoutes";
-
 const DashboardLayout = ({ children }) => {
   return (
     <>
       <Navbar />
       {children}
-      <footer>2023</footer>
+      <MarketingFooter />
     </>
   );
 };

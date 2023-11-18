@@ -1,9 +1,10 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { db } from "@/lib/firebase";
-import FIREBASE from "@/constants/firebase";
 
-const getProfileById = async (documentId) => {
-  const docRef = doc(db, FIREBASE.COLLECTIONS.PROFILES, documentId);
+import FIREBASE from "@/constants/firebase";
+import { db } from "@/lib/firebase";
+
+const getProfileById = async (userUID) => {
+  const docRef = doc(db, FIREBASE.COLLECTIONS.PROFILES, userUID);
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
     return {
@@ -39,4 +40,5 @@ const createProfile = async (userUID) => {
   }
 };
 
-export { getProfileById, createProfile };
+export { createProfile, getProfileById };
+

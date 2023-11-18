@@ -1,9 +1,11 @@
 "use client";
 
-export default function Home() {
+import MarketingLayout from "@/components/layouts/MarketingLayout";
+
+export default function Index() {
   return (
-    <main className="">
+    <MarketingLayout>
       <h1 className="w-100">home</h1>
-    </main>
+    </MarketingLayout>
   );
 }
