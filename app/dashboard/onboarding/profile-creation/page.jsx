@@ -19,7 +19,7 @@ import {
   AddMoreDetails,
   InviteFriends,
   ProfileComplete,
-} from "@/components/onboarding";
+} from "@/components/onboarding/Index";
 
 const Index = () => {
   const { currentUser } = useAuth();
