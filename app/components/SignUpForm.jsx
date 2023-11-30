@@ -62,7 +62,7 @@ const SignUpForm = () => {
         return;
       }
 
-      router.push(`${ROUTES.ONBOARDING}/profileCreation`);
+      router.push(`${ROUTES.ONBOARDING.path}/profile-creation`);
 
       //redirect to profile creation flow
     } catch (error) {

@@ -17,6 +17,22 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
+          <Link
+            className="border-solid border-2 border-red-500"
+            href="/dashboard/profile"
+          >
+            profile
+          </Link>
+        </li>
+        <li>
+          <Link
+            className="border-solid border-2 border-red-500"
+            href="/dashboard/feed"
+          >
+            chat
+          </Link>
+        </li>
+        {/* <li>
           <Link className="border-solid border-2 border-red-500" href="/">
             home
           </Link>
@@ -30,11 +46,11 @@ const Navbar = () => {
           <Link className="border-solid border-2 border-red-500" href="/signup">
             signup
           </Link>
-        </li>
+        </li> */}
         <li>
           <Link
             className="border-solid border-2 border-red-500"
-            href="/signup"
+            href="/"
             onClick={() => logout()}
           >
             logout

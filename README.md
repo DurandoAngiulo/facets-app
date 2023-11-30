@@ -37,3 +37,10 @@ This will update everytime an new branch is pushed to main.
 - protected routes also set up in basic form so users are gated from specific pages depending on their role and role
 - Upon autehntication if a user doesn't exist in the database they are created in it
 - fixed deploys issue
+
+## 11-30-23 Updates
+
+- authentication now mostly good _Knocks on wood_. currentUser now has all auth data as well as thier database profile data, letting proetcted routes work
+- added all correct layouts on currently created pages
+- created a util-functions file
+- added all onboarding page components that let a user input all data and then enter the feed page

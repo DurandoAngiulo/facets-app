@@ -3,12 +3,12 @@ import Navbar from "@/components/Navbar";
 import withProtectedRoutes from "@/components/withProtectedRoutes";
 import React from "react";
 
-const AdminLayout = (children) => {
+const AdminLayout = ({ children }) => {
   return (
     <>
       <Navbar />
       {children}
-      <AppFooter/>
+      <AppFooter />
     </>
   );
 };

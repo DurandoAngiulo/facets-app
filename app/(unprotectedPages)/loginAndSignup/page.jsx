@@ -1,10 +1,15 @@
 "use client";
-//TODO: redirect if current user exists/logged in
+
 import React, { useState } from "react";
 import SignUpForm from "@/components/SignUpForm";
+import MarketingLayout from "@/components/layouts/MarketingLayout";
 
 const Signup = () => {
-  return <SignUpForm />;
+  return (
+    <MarketingLayout>
+      <SignUpForm />
+    </MarketingLayout>
+  );
 };
 
 export default Signup;

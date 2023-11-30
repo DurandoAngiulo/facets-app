@@ -5,26 +5,29 @@ import { useAuth } from "@/context/AuthContext";
 import { getAuth } from "firebase/auth";
 
 const UngatedNavbar = () => {
-  const { logout } = useAuth();
+  // const { logout } = useAuth();
   return (
     <div>
       <ul>
         <li>
           <Link className="border-solid border-2 border-red-500" href="/">
-            home
+            marketing/info
           </Link>
         </li>
         <li>
-          <Link className="border-solid border-2 border-red-500" href="/login">
-            login
+          <Link
+            className="border-solid border-2 border-red-500"
+            href="/loginAndSignup"
+          >
+            Login/Signup
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link className="border-solid border-2 border-red-500" href="/signup">
             signup
           </Link>
-        </li>
-        <li>
+        </li> */}
+        {/* <li>
           <Link
             className="border-solid border-2 border-red-500"
             href="/signup"
@@ -32,7 +35,7 @@ const UngatedNavbar = () => {
           >
             logout
           </Link>
-        </li>
+        </li> */}
       </ul>
     </div>
   );

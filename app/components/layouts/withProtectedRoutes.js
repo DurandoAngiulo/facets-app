@@ -10,6 +10,7 @@ const withProtectedRoutes = (ComponentToWrap) => {
     const router = useRouter();
     const pathname = usePathname();
     const isAdminRoute = pathname.startsWith("/admin");
+    const isOnboardingRoute = pathname.startsWith("/admin");
 
     if (loading) {
       return <div>Loading...</div>;
@@ -24,6 +25,18 @@ const withProtectedRoutes = (ComponentToWrap) => {
       router.push(`${ROUTES.UNAUTHORIZED.path}`);
       return;
     }
+    //TODO: fix this logic
+    // if (
+    //   currentUser?.profile?.onboardingStatus === "inProgress" &&
+    //   !isOnboardingRoute
+    // ) {
+    //   // redirect to onboarding screen
+    //   // router.push(`${ROUTES.UNAUTHORIZED.path}`);
+    //   return;
+    // }
+
+    // if onboardingStatus === complete && isOnboardingRoute
+    // redirect to dashboard main page
 
     return <ComponentToWrap {...props} />;
   };
