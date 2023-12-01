@@ -15,7 +15,6 @@ export const EnterLocation = ({ handleUpdateProfile }) => {
     } else {
       setLocation(capitalizeFirstLetter(location));
       handleUpdateProfile({ location: location, onboardingStep: 8 });
-      // TODO fix this logic
     }
   };
 

@@ -28,7 +28,7 @@ const createProfile = async (userUID) => {
       role: PROFILE_MODEL.roles[1],
       referralID: referralID,
       onboardingStatus: PROFILE_MODEL.onboardingStatus[0],
-      onboardingStep: "0",
+      onboardingStep: 0,
       firstName: "",
       birthday: "",
       gender: "",
@@ -36,6 +36,7 @@ const createProfile = async (userUID) => {
       datingPreference: "",
       ageRange: "",
       location: "",
+      personalFacet: [],
     });
 
     return {
@@ -75,5 +76,7 @@ const updateProfile = async (user, profileFields) => {
     };
   }
 };
+
+
 
 export { createProfile, getProfileById, updateProfile };
