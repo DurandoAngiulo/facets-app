@@ -29,7 +29,7 @@ export const EnterAgeRange = ({ handleUpdateProfile }) => {
     event.preventDefault();
     handleUpdateProfile({
       ageRange: [lowerBound, upperBound],
-      onboardingStep: 7,
+      onboardingStep: 7
     });
   };
 

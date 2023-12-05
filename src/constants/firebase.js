@@ -1,5 +1,4 @@
 const FIREBASE = {
-  COLLECTIONS: { PROFILES: "profiles", 
-  USERPROMPTS: "userPrompts" },
+  COLLECTIONS: { PROFILES: "profiles", USERPROMPTS: "userPrompts" }
 };
 export default FIREBASE;

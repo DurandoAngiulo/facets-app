@@ -15,10 +15,7 @@ const UngatedNavbar = () => {
           </Link>
         </li>
         <li>
-          <Link
-            className="border-solid border-2 border-red-500"
-            href="/loginAndSignup"
-          >
+          <Link className="border-solid border-2 border-red-500" href="/loginAndSignup">
             Login/Signup
           </Link>
         </li>

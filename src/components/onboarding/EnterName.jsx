@@ -15,7 +15,7 @@ export const EnterName = ({ handleUpdateProfile }) => {
       setName(capitalizeFirstLetter(name));
       handleUpdateProfile({
         firstName: name,
-        onboardingStep: 2,
+        onboardingStep: 2
       });
     }
   };

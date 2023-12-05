@@ -25,11 +25,7 @@ export function FirestoreProvider({ children }) {
   //   fetchCollections();
   // }, []);
 
-  return (
-    <FirestoreContext.Provider value={collections}>
-      {children}
-    </FirestoreContext.Provider>
-  );
+  return <FirestoreContext.Provider value={collections}>{children}</FirestoreContext.Provider>;
 }
 
 export function useFirestoreCollections() {

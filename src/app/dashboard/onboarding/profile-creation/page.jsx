@@ -18,7 +18,7 @@ import {
   UploadPhotos,
   AddMoreDetails,
   InviteFriends,
-  ProfileComplete,
+  ProfileComplete
 } from "@/components/onboarding/Index";
 
 const Index = () => {
@@ -39,7 +39,7 @@ const Index = () => {
     UploadPhotos,
     AddMoreDetails,
     InviteFriends,
-    ProfileComplete,
+    ProfileComplete
   ];
   const CurrentComponent = componentMap[progress];
   const handleUpdateProfile = async (profileData) => {
@@ -61,9 +61,7 @@ const Index = () => {
   return (
     <OnboardingLayout>
       <div>profile Creation</div>
-      {CurrentComponent && (
-        <CurrentComponent handleUpdateProfile={handleUpdateProfile} />
-      )}
+      {CurrentComponent && <CurrentComponent handleUpdateProfile={handleUpdateProfile} />}
     </OnboardingLayout>
   );
 };

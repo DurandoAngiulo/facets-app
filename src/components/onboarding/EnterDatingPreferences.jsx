@@ -2,9 +2,7 @@
 import React, { useState } from "react";
 
 export const EnterDatingPreferences = ({ handleUpdateProfile }) => {
-  const [selectedDatingPreferences, setSelectedDatingPreferences] = useState(
-    []
-  );
+  const [selectedDatingPreferences, setSelectedDatingPreferences] = useState([]);
 
   const handlePreferenceChange = (event) => {
     const selectedValue = event.target.value;
@@ -13,16 +11,11 @@ export const EnterDatingPreferences = ({ handleUpdateProfile }) => {
     if (isSelected) {
       // If already selected, remove it
       setSelectedDatingPreferences(
-        selectedDatingPreferences.filter(
-          (datingPreference) => datingPreference !== selectedValue
-        )
+        selectedDatingPreferences.filter((datingPreference) => datingPreference !== selectedValue)
       );
     } else {
       // If not selected, add it
-      setSelectedDatingPreferences([
-        ...selectedDatingPreferences,
-        selectedValue,
-      ]);
+      setSelectedDatingPreferences([...selectedDatingPreferences, selectedValue]);
     }
   };
 
@@ -34,7 +27,7 @@ export const EnterDatingPreferences = ({ handleUpdateProfile }) => {
     } else {
       handleUpdateProfile({
         datingPreference: selectedDatingPreferences,
-        onboardingStep: 6,
+        onboardingStep: 6
       });
     }
   };

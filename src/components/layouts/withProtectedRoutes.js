@@ -26,20 +26,14 @@ const withProtectedRoutes = (ComponentToWrap) => {
       return;
     }
 
-    if (
-      currentUser?.profile?.onboardingStatus === "inProgress" &&
-      !isOnboardingRoute
-    ) {
+    if (currentUser?.profile?.onboardingStatus === "inProgress" && !isOnboardingRoute) {
       router.push(`${ROUTES.ONBOARDING.path}/profile-creation`);
       // redirect to onboarding screen
       // router.push(`${ROUTES.UNAUTHORIZED.path}`);
       return;
     }
 
-    if (
-      currentUser?.profile?.onboardingStatus === "complete" &&
-      isOnboardingRoute
-    ) {
+    if (currentUser?.profile?.onboardingStatus === "complete" && isOnboardingRoute) {
       router.push(`${ROUTES.DASHBOARD.path}/feed`);
     }
     // redirect to dashboard main page

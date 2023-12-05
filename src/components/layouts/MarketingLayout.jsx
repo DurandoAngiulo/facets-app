@@ -1,12 +1,12 @@
 import AppFooter from "@/components/Footer/AppFooter";
 import UngatedNavbar from "@/components/UngatedNavbar";
 
-const MarketingLayout = ({children}) => {
+const MarketingLayout = ({ children }) => {
   return (
     <>
-      <UngatedNavbar/>
+      <UngatedNavbar />
       {children}
-      <AppFooter/>
+      <AppFooter />
     </>
   );
 };

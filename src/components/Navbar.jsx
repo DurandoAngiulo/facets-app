@@ -9,26 +9,17 @@ const Navbar = () => {
     <div>
       <ul>
         <li>
-          <Link
-            className="border-solid border-2 border-red-500"
-            href="/dashboard/feed"
-          >
+          <Link className="border-solid border-2 border-red-500" href="/dashboard/feed">
             feed
           </Link>
         </li>
         <li>
-          <Link
-            className="border-solid border-2 border-red-500"
-            href="/dashboard/profile"
-          >
+          <Link className="border-solid border-2 border-red-500" href="/dashboard/profile">
             profile
           </Link>
         </li>
         <li>
-          <Link
-            className="border-solid border-2 border-red-500"
-            href="/dashboard/feed"
-          >
+          <Link className="border-solid border-2 border-red-500" href="/dashboard/feed">
             chat
           </Link>
         </li>
@@ -48,11 +39,7 @@ const Navbar = () => {
           </Link>
         </li> */}
         <li>
-          <Link
-            className="border-solid border-2 border-red-500"
-            href="/"
-            onClick={() => logout()}
-          >
+          <Link className="border-solid border-2 border-red-500" href="/" onClick={() => logout()}>
             logout
           </Link>
         </li>

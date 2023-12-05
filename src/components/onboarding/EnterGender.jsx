@@ -20,23 +20,11 @@ export const EnterGender = ({ handleUpdateProfile }) => {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        <input
-          type="radio"
-          name="gender"
-          value="male"
-          checked={gender === "male"}
-          onChange={handleGenderChange}
-        />
+        <input type="radio" name="gender" value="male" checked={gender === "male"} onChange={handleGenderChange} />
         Male
       </label>
       <label>
-        <input
-          type="radio"
-          name="gender"
-          value="female"
-          checked={gender === "female"}
-          onChange={handleGenderChange}
-        />
+        <input type="radio" name="gender" value="female" checked={gender === "female"} onChange={handleGenderChange} />
         Female
       </label>
       <label>
@@ -50,13 +38,7 @@ export const EnterGender = ({ handleUpdateProfile }) => {
         Non-Binary
       </label>
       <label>
-        <input
-          type="radio"
-          name="gender"
-          value="other"
-          checked={gender === "other"}
-          onChange={handleGenderChange}
-        />
+        <input type="radio" name="gender" value="other" checked={gender === "other"} onChange={handleGenderChange} />
         Other
       </label>
       <button type="submit">Submit</button>

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -31,7 +31,7 @@ export const AuthContextProvider = ({ children }) => {
       const profileResult = await getProfileById(uid);
       const profileData = profileResult?.data?.data;
       if (profileData) {
-        setCurrentUser(prevUser => ({ ...prevUser, profile: profileData }));
+        setCurrentUser((prevUser) => ({ ...prevUser, profile: profileData }));
       }
     } catch (error) {
       console.error("Failed to fetch user profile:", error);
@@ -61,14 +61,14 @@ export const AuthContextProvider = ({ children }) => {
           profile: currentUserProfile // Remove if not needed when calling this function
         },
         loading: false,
-        error: false,
+        error: false
       };
     } catch (error) {
       setLoading(false);
       return {
         data: { message: `User could not sign in (bad verification code?)` },
         loading: false,
-        error: true,
+        error: true
       };
     }
   };
@@ -101,7 +101,7 @@ export const AuthContextProvider = ({ children }) => {
     currentUser,
     registerAndLogin,
     loading,
-    logout,
+    logout
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

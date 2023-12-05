@@ -1,10 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import {
-  capitalizeFirstLetter,
-  getRandomPrompts,
-} from "@/services/util-functions";
+import { capitalizeFirstLetter, getRandomPrompts } from "@/services/util-functions";
 //TODO: import prompt table for IDS
 export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
   const [promptArray, setPromptArray] = useState([]);
@@ -20,7 +17,7 @@ export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
     facetPromptThreeID: 2,
     facetResponseOne: "",
     facetResponseTwo: "",
-    facetResponseThree: "",
+    facetResponseThree: ""
   });
   const [error, setError] = useState(null);
 
@@ -35,7 +32,7 @@ export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
           ...prevFacet,
           facetPromptOneID: prompts[0].id,
           facetPromptTwoID: prompts[1].id,
-          facetPromptThreeID: prompts[2].id,
+          facetPromptThreeID: prompts[2].id
         }));
         setPromptOne(prompts[0].prompt);
         setPromptTwo(prompts[1].prompt);
@@ -52,11 +49,7 @@ export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (
-      inputOne.trim() === "" ||
-      inputTwo.trim() === "" ||
-      inputThree.trim() === ""
-    ) {
+    if (inputOne.trim() === "" || inputTwo.trim() === "" || inputThree.trim() === "") {
       setError("Please answer all prompts");
     } else {
       const capInputOne = capitalizeFirstLetter(inputOne);
@@ -67,14 +60,14 @@ export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
         ...personalFacet,
         facetResponseOne: capInputOne,
         facetResponseTwo: capInputTwo,
-        facetResponseThree: capInputThree,
+        facetResponseThree: capInputThree
       });
 
       // Call handleUpdateProfile in the callback of setPersonalFacet to ensure the state is updated
       setPersonalFacet((updatedFacet) => {
         handleUpdateProfile({
           personalFacet: updatedFacet,
-          onboardingStep: 10,
+          onboardingStep: 10
         });
       });
     }
