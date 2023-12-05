@@ -1,42 +1,37 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-echo '🏗️👷 Styling, testing and building your project before committing'
+echo 'Running pre-commit checks:'
 
 # Check Prettier standards
 npm run check-format ||
   (
-    echo '🤢🤮🤢🤮 Its F**KING RAW - Your styling looks disgusting. 🤢🤮🤢🤮
-            Prettier Check Failed. Run npm run format, add changes and try commit again.'
+    echo '🖌️ Prettier check failed. Please run "npm run format", add changes, and try to commit again.'
     false
   )
 
-# Check ESLint Standards
+# Check ESLint standards
 npm run check-lint ||
   (
-    echo '😤🏀👋😤 Get that weak s**t out of here! 😤🏀👋😤 
-                ESLint Check Failed. Make the required changes listed above, add changes and try to commit again.'
+    echo '🚨 ESLint check failed. Review and address the listed issues, add changes, and attempt the commit again.'
     false
   )
 
-# Check tsconfig standards
+# Check TypeScript standards
 npm run check-types ||
   (
-    echo '🤡😂❌🤡 Failed Type check. 🤡😂❌🤡
-            Are you seriously trying to write that? Make the changes required above.'
+    echo '🧐 TypeScript check failed. Make the necessary corrections as indicated above.'
     false
   )
 
-# If everything passes... Now we can commit
-echo '🤔🤔🤔🤔... Alright... Code looks good to me... Trying to build now. 🤔🤔🤔🤔'
+# If all checks pass, proceed with the build
+echo '✅ All checks passed. Building project...'
 
 npm run build ||
   (
-    echo '❌👷🔨❌ Better call Bob... Because your build failed ❌👷🔨❌
-            Next build failed: View the errors above to see why. 
-    '
+    echo '❌ Build failed. Please review the errors above and resolve them.'
     false
   )
 
-# If everything passes... Now we can commit
-echo '✅✅✅✅ You win this time... I am committing this now. ✅✅✅✅'
+# If everything passes, continue with the commit
+echo '✅ All checks passed. Committing changes...'
