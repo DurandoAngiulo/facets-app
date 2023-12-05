@@ -1,6 +1,5 @@
-import { FirestoreProvider } from "@/context/FirebaseContext";
 import { AuthContextProvider } from "@/context/AuthContext";
-// import {AuthContextProvider } from "@/context/AuthContext"
+import { FirestoreProvider } from "@/context/FirebaseContext";
 
 const Providers = ({ children }) => {
   return (

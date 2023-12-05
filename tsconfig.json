@@ -19,13 +19,13 @@
       }
     ],
     "paths": {
-      "@/*": ["./app/*"],
-      "@/components/*": ["./app/components/*"],
-      "@/lib/*": ["./app/lib/*"],
-      "@/context/*": ["./app/context/*"],
-      "@/constants/*": ["./app/constants/*"],
-      "@/services/*": ["./app/services/*"],
-      "@/dashboard/*": ["./app/dashboard/*"]
+      "@/*": ["src/app/*"],
+      "@/components/*": ["src/components/*"],
+      "@/lib/*": ["src/lib/*"],
+      "@/context/*": ["src/context/*"],
+      "@/constants/*": ["src/constants/*"],
+      "@/services/*": ["src/services/*"],
+      "@/dashboard/*": ["src/app/dashboard/*"]
     }
   },
   "include": [
@@ -33,7 +33,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/page.jsx"
+    "src/app/page.jsx"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,11 +1,4 @@
-import {
-  collection,
-  doc,
-  getDocs,
-  getDoc,
-  setDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 
 import FIREBASE from "@/constants/firebase";
 import { db } from "@/lib/firebase";
@@ -37,7 +30,7 @@ async function getRandomPrompts() {
       const data = docSnapshot.data();
       return {
         id: docSnapshot.id,
-        ...data, // Include all fields and values from the document
+        ...data // Include all fields and values from the document
       };
     } else {
       // Handle the case where the document doesn't exist

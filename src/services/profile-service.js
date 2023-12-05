@@ -1,8 +1,9 @@
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
 import FIREBASE from "@/constants/firebase";
-import { db } from "@/lib/firebase";
 import { PROFILE_MODEL } from "@/constants/model";
+import { db } from "@/lib/firebase";
+
 const getProfileById = async (userUID) => {
   const docRef = doc(db, FIREBASE.COLLECTIONS.PROFILES, userUID);
   const docSnap = await getDoc(docRef);
@@ -10,13 +11,13 @@ const getProfileById = async (userUID) => {
     return {
       data: { data: docSnap.data() },
       loading: false,
-      error: false,
+      error: false
     };
   }
   return {
     data: { data: null },
     loading: false,
-    error: false,
+    error: false
   };
 };
 
@@ -36,19 +37,19 @@ const createProfile = async (userUID) => {
       datingPreference: "",
       ageRange: "",
       location: "",
-      personalFacet: [],
+      personalFacet: []
     });
 
     return {
       data: { message: `Document successfully written!` },
       loading: false,
-      error: false,
+      error: false
     };
   } catch (error) {
     return {
       data: { message: `Error writing document ${error}` },
       loading: false,
-      error: true,
+      error: true
     };
   }
 };
@@ -58,25 +59,23 @@ const updateProfile = async (user, profileFields) => {
   try {
     await updateDoc(doc(db, FIREBASE.COLLECTIONS.PROFILES, user.uid), {
       ...userProfile,
-      ...profileFields,
+      ...profileFields
     });
     return {
       data: {
         message: `profile successfully updated`,
-        profile: profileFields,
+        profile: profileFields
       },
       loading: false,
-      error: false,
+      error: false
     };
   } catch (error) {
     return {
       data: { message: `Error updating profile ${error}` },
       loading: false,
-      error: true,
+      error: true
     };
   }
 };
-
-
 
 export { createProfile, getProfileById, updateProfile };

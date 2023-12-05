@@ -1,6 +1,6 @@
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { GoogleAuthProvider, getAuth } from "firebase/auth";
+
+import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -13,7 +13,7 @@ const firebaseConfig = {
   storageBucket: `${process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}`,
   messagingSenderId: `${process.env.NEXT_PUBLIC_FIREBASE_MESSAGE_SENDER_ID}`,
   appId: `${process.env.NEXT_PUBLIC_APP_ID}`,
-  measurementId: `${process.env.NEXT_PUBLIC_MEASUREMENT_ID}`,
+  measurementId: `${process.env.NEXT_PUBLIC_MEASUREMENT_ID}`
 };
 
 // Initialize Firebase
