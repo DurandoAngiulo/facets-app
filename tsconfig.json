@@ -18,14 +18,15 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/app/*"],
-      "@/components/*": ["src/components/*"],
-      "@/lib/*": ["src/lib/*"],
-      "@/context/*": ["src/context/*"],
-      "@/constants/*": ["src/constants/*"],
-      "@/services/*": ["src/services/*"],
-      "@/dashboard/*": ["src/app/dashboard/*"]
+      "@/*": ["./src/app/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/context/*": ["./src/context/*"],
+      "@/constants/*": ["./src/constants/*"],
+      "@/services/*": ["./src/services/*"],
+      "@/dashboard/*": ["./src/app/dashboard/*"]
     }
   },
   "include": [

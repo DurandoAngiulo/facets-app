@@ -1,10 +1,12 @@
-import { getAuth, RecaptchaVerifier } from "firebase/auth";
-import { useState, useEffect } from "react";
 import "firebase/auth";
-import { useAuth } from "@/context/AuthContext";
-import { getProfileById, createProfile } from "@/services/profile-service";
-import { useRouter } from "next/navigation";
+
+import { createProfile, getProfileById } from "@/services/profile-service";
+import { RecaptchaVerifier, getAuth } from "firebase/auth";
+import { useEffect, useState } from "react";
+
 import ROUTES from "@/constants/routes";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 const SignUpForm = () => {
   const { registerAndLogin, currentUser } = useAuth();
@@ -22,7 +24,7 @@ const SignUpForm = () => {
       callback: (response) => {
         // reCAPTCHA solved, allow signInWithPhoneNumber.
         handleSignInRegisterAuth();
-      },
+      }
     });
   }, []); // Empty dependency array ensures this runs once on component mount
 
@@ -34,11 +36,7 @@ const SignUpForm = () => {
         return;
       }
 
-      const { data, loading, error } = await registerAndLogin(
-        auth,
-        phoneNumber,
-        window.recaptchaVerifier
-      );
+      const { data, loading, error } = await registerAndLogin(auth, phoneNumber, window.recaptchaVerifier);
 
       if (error) {
         console.log(data.message);
