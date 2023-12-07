@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "stylelint.vscode-stylelint",
+    "steoates.autoimport",
+    "dsznajder.es7-react-js-snippets"
+  ]
+}

@@ -6,14 +6,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-- copy .env.exmaple, chnage the name to .env.development and ask Durando for keys
-
-To run locally:
-
-```bash
-npm run dev
-
-```
+- Run `cp .env.example .env.development` to copy the .env.example file to .env.development. Ask Durando for values
+- Run `npm install` to install all dependencies
+- Run `npm run dev` to start the development server
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
