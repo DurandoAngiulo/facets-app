@@ -1,37 +1,37 @@
-# #!/bin/sh
-# . "$(dirname "$0")/_/husky.sh"
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
 
-# echo 'Running pre-commit checks:'
+echo 'Running pre-commit checks:'
 
-# # Check Prettier standards
-# npm run check-format ||
-#   (
-#     echo '🖌️ Prettier check failed. Please run "npm run format", add changes, and try to commit again.'
-#     false
-#   )
+# Check Prettier standards
+npm run check-format ||
+  (
+    echo '🖌️ Prettier check failed. Please run "npm run format", add changes, and try to commit again.'
+    false
+  )
 
-# # Check ESLint standards
-# npm run check-lint ||
-#   (
-#     echo '🚨 ESLint check failed. Review and address the listed issues, add changes, and attempt the commit again.'
-#     false
-#   )
+# Check ESLint standards
+npm run check-lint ||
+  (
+    echo '🚨 ESLint check failed. Review and address the listed issues, add changes, and attempt the commit again.'
+    false
+  )
 
-# # Check TypeScript standards
-# npm run check-types ||
-#   (
-#     echo '🧐 TypeScript check failed. Make the necessary corrections as indicated above.'
-#     false
-#   )
+# Check TypeScript standards
+npm run check-types ||
+  (
+    echo '🧐 TypeScript check failed. Make the necessary corrections as indicated above.'
+    false
+  )
 
-# # If all checks pass, proceed with the build
-# echo '✅ All checks passed. Building project...'
+# If all checks pass, proceed with the build
+echo '✅ All checks passed. Building project...'
 
-# npm run build ||
-#   (
-#     echo '❌ Build failed. Please review the errors above and resolve them.'
-#     false
-#   )
+npm run build ||
+  (
+    echo '❌ Build failed. Please review the errors above and resolve them.'
+    false
+  )
 
-# # If everything passes, continue with the commit
-# echo '✅ All checks passed. Committing changes...'
+# If everything passes, continue with the commit
+echo '✅ All checks passed. Committing changes...'
