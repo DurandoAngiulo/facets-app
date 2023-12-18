@@ -3,7 +3,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 import { auth } from "@/lib/firebase";
-import { getProfileById } from "@/services/profile-service";
+import { getProfileById, createProfile } from "@/services/profile-service";
 import { signInWithPhoneNumber } from "firebase/auth";
 
 const AuthContext = createContext();
@@ -26,13 +26,18 @@ export const AuthContextProvider = ({ children }) => {
    * Fetches the current user's profile and merges it with the currentUser state.
    * @param {string} uid - The UID of the user.
    */
-  const fetchAndSetUserProfile = async (uid) => {
+  const fetchAndSetUserProfile = async (uid, isGuest) => {
     try {
       const profileResult = await getProfileById(uid);
-      const profileData = profileResult?.data?.data;
-      if (profileData) {
-        setCurrentUser((prevUser) => ({ ...prevUser, profile: profileData }));
+      let profileData = profileResult?.data?.data;
+
+      if (!profileData) {
+        const { data } = await createProfile(uid, isGuest);
+        profileData = data?.profile;
       }
+
+      // Append profile to the user model
+      await setCurrentUser((prevUser) => ({ ...prevUser, profile: profileData }));
     } catch (error) {
       console.error("Failed to fetch user profile:", error);
     }
@@ -45,20 +50,19 @@ export const AuthContextProvider = ({ children }) => {
    * @param {firebase.auth.ApplicationVerifier} appVerifier - The app verifier for reCAPTCHA.
    * @returns {Promise<object>} An object containing user data and profile.
    */
-  const registerAndLogin = async (auth, phoneNumber, appVerifier) => {
+  const registerAndLogin = async (auth, phoneNumber, appVerifier, isGuest = false) => {
     try {
       setLoading(true);
       const confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
       const code = window.prompt("Enter the verification code sent to your phone:");
       const { user } = await confirmationResult.confirm(code);
-      setCurrentUser(user);
-      await fetchAndSetUserProfile(user.uid);
+      await setCurrentUser(user);
+      await fetchAndSetUserProfile(user.uid, isGuest);
 
       setLoading(false);
       return {
         data: {
-          user,
-          profile: currentUserProfile // Remove if not needed when calling this function
+          user: currentUser
         },
         loading: false,
         error: false

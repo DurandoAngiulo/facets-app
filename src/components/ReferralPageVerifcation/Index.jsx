@@ -1,6 +1,6 @@
 import "firebase/auth";
 
-import { createProfile, getProfileById } from "@/services/profile-service";
+import { createGuestProfile, getProfileById } from "@/services/profile-service";
 import { RecaptchaVerifier, getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
 
@@ -8,13 +8,13 @@ import ROUTES from "@/constants/routes";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 
-const SignUpForm = () => {
-  const { registerAndLogin, currentUser } = useAuth();
-  const [phoneNumber, setPhoneNumber] = useState("+12676256168");
+const ReferralPageVerifcation = ({ pageReferralId, setVerificationState }) => {
+  const { registerAndLogin } = useAuth();
+  const [phoneNumber, setPhoneNumber] = useState("+11234567899");
   const [error, setError] = useState(null);
 
   const auth = getAuth();
-  const recaptchaButtonId = "sign-in-button";
+  const recaptchaButtonId = "verfiy-button";
   const router = useRouter();
 
   useEffect(() => {
@@ -23,12 +23,12 @@ const SignUpForm = () => {
       size: "invisible",
       callback: (response) => {
         // reCAPTCHA solved, allow signInWithPhoneNumber.
-        handleSignInRegisterAuth();
+        handleRegisterGuestUser();
       }
     });
   }, []); // Empty dependency array ensures this runs once on component mount
 
-  const handleSignInRegisterAuth = async () => {
+  const handleRegisterGuestUser = async () => {
     try {
       // Validate phone number
       if (!phoneNumber) {
@@ -36,31 +36,27 @@ const SignUpForm = () => {
         return;
       }
 
-      const { data, loading, error } = await registerAndLogin(auth, phoneNumber, window.recaptchaVerifier);
+      const { data, loading, error } = await registerAndLogin(auth, phoneNumber, window.recaptchaVerifier, true);
 
       if (error) {
         console.log(data.message);
         return;
       }
-      // redirect user if login was successful?
 
       const user = data.user;
+      const profileData = user?.profile;
       // console.log("user is logged in and already exists", user);
-      const { data: profileData } = await getProfileById(user.uid);
-      console.log(profileData);
-      if (profileData.data) {
-        router.push(`${ROUTES.DASHBOARD.path}/feed`);
+      if (profileData) {
+        if (profileData.referralID === pageReferralId) {
+          //TODO: make componeent to render you can't edit your own friend facet page
+        }
+        if (profileData.friendFacets.some((facet) => facet.respondantUserId === pageReferralId)) {
+          //TODO: make component render you've already responded to this facet
+        }
+        //otherwise route them/render friend facet creation screen
+        setVerificationState(true);
         return;
       }
-      // return;
-      const { error: newProfileError } = await createProfile(user.uid);
-
-      if (newProfileError) {
-        console.error("Error making new profile:", error);
-        return;
-      }
-
-      router.push(`${ROUTES.ONBOARDING.path}/profile-creation`);
 
       //redirect to profile creation flow
     } catch (error) {
@@ -74,6 +70,7 @@ const SignUpForm = () => {
 
   return (
     <div className="">
+      <p>verify you are human</p>
       <label>
         Phone Number:
         <input
@@ -83,12 +80,12 @@ const SignUpForm = () => {
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
       </label>
-      <button id={recaptchaButtonId} onClick={() => handleSignInRegisterAuth()}>
-        Sign In
+      <button id={recaptchaButtonId} onClick={() => handleRegisterGuestUser()}>
+        Verify
       </button>
       {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 };
 
-export default SignUpForm;
+export default ReferralPageVerifcation;

@@ -2,22 +2,15 @@
 
 import React, { useState, useEffect } from "react";
 import { capitalizeFirstLetter, getRandomPrompts } from "@/utils/util-functions";
-//TODO: import prompt table for IDS
-export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
-  const [promptArray, setPromptArray] = useState([]);
-  const [promptOne, setPromptOne] = useState("loading");
-  const [promptTwo, setPromptTwo] = useState("loading");
-  const [promptThree, setPromptThree] = useState("loading");
-  const [inputOne, setInputOne] = useState("");
-  const [inputTwo, setInputTwo] = useState("");
-  const [inputThree, setInputThree] = useState("");
-  const [personalFacet, setPersonalFacet] = useState({
-    facetPromptOneID: 0,
-    facetPromptTwoID: 1,
-    facetPromptThreeID: 2,
-    facetResponseOne: "",
-    facetResponseTwo: "",
-    facetResponseThree: ""
+
+const FriendFacetCreation = () => {
+  const [facetResponses, setFacetResponses] = useState([]);
+
+  const [friendFacet, setFriendFacet] = useState({
+    friendshipPeriod: "",
+    last_updated: "",
+    createdAt: "",
+    respondantUserId: ""
   });
   const [error, setError] = useState(null);
 
@@ -25,18 +18,25 @@ export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
     const fetchData = async () => {
       try {
         const prompts = await getRandomPrompts();
-        setPromptArray(prompts);
+        // setPromptArray(prompts);
 
-        // Assuming prompts is an array with three prompt objects
-        setPersonalFacet((prevFacet) => ({
-          ...prevFacet,
-          facetPromptOneID: prompts[0].id,
-          facetPromptTwoID: prompts[1].id,
-          facetPromptThreeID: prompts[2].id
+        // setFriendFacet((prevFacet) => ({
+        //   ...prevFacet,
+        //   responses: prompts.map((prompt) => ({
+        //     prompt_id: prompt.id,
+        //     response: ""
+        //   }))
+        // }));
+
+        const responsesArray = prompts.map((prompt) => ({
+          prompt_id: prompt.id,
+          response: ""
         }));
-        setPromptOne(prompts[0].prompt);
-        setPromptTwo(prompts[1].prompt);
-        setPromptThree(prompts[2].prompt);
+
+        setFriendFacet((prevFacet) => ({
+          ...prevFacet,
+          responses: responsesArray
+        }));
       } catch (error) {
         console.error("Error fetching prompts:", error);
         // Handle error if needed
@@ -49,34 +49,33 @@ export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (inputOne.trim() === "" || inputTwo.trim() === "" || inputThree.trim() === "") {
+    const areAllResponsesAnswered = friendFacet.responses.every((response) => response.response.trim() !== "");
+
+    if (!areAllResponsesAnswered) {
       setError("Please answer all prompts");
     } else {
-      const capInputOne = capitalizeFirstLetter(inputOne);
-      const capInputTwo = capitalizeFirstLetter(inputTwo);
-      const capInputThree = capitalizeFirstLetter(inputThree);
+      const updatedFacet = {
+        ...friendFacet,
+        responses: friendFacet.responses.map((response) => ({
+          ...response,
+          response: capitalizeFirstLetter(response.response.trim())
+        }))
+      };
 
-      setPersonalFacet({
-        ...personalFacet,
-        facetResponseOne: capInputOne,
-        facetResponseTwo: capInputTwo,
-        facetResponseThree: capInputThree
-      });
+      setFriendFacet(updatedFacet);
 
       // Call handleUpdateProfile in the callback of setPersonalFacet to ensure the state is updated
-      setPersonalFacet((updatedFacet) => {
-        handleUpdateProfile({
-          personalFacet: updatedFacet,
-          onboardingStep: 10
-        });
-      });
+      // handleUpdateProfile({
+      //   personalFacet: updatedFacet,
+      //   onboardingStep: 10,
+      // });
     }
   };
 
   useEffect(() => {
     // Log the updated personalFacet whenever it changes
-    console.log("Updated personalFacet:", personalFacet);
-  }, [personalFacet]);
+    console.log("Updated personalFacet:", friendFacet);
+  }, [friendFacet]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -122,3 +121,5 @@ export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
     </form>
   );
 };
+
+export default FriendFacetCreation;

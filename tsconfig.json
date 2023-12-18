@@ -24,6 +24,7 @@
       "@/components/*": ["./src/components/*"],
       "@/lib/*": ["./src/lib/*"],
       "@/context/*": ["./src/context/*"],
+      "@/utils/*": ["./src/utils/*"],
       "@/constants/*": ["./src/constants/*"],
       "@/services/*": ["./src/services/*"],
       "@/dashboard/*": ["./src/app/dashboard/*"]

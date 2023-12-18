@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { capitalizeFirstLetter } from "@/services/util-functions";
+import { capitalizeFirstLetter } from "@/utils/util-functions";
 export const EnterName = ({ handleUpdateProfile }) => {
   const [name, setName] = useState("john");
   const [error, setError] = useState(null);

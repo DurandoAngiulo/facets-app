@@ -1,4 +1,4 @@
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, getDocs, setDoc, updateDoc, collection, where, query, limit } from "firebase/firestore";
 
 import FIREBASE from "@/constants/firebase";
 import { PROFILE_MODEL } from "@/constants/model";
@@ -21,13 +21,11 @@ const getProfileById = async (userUID) => {
   };
 };
 
-const createProfile = async (userUID) => {
+const createProfile = async (userUID, isGuest) => {
   try {
-    const referralID = 0;
-    //TODO figure out referralID logic
-    await setDoc(doc(db, FIREBASE.COLLECTIONS.PROFILES, userUID), {
-      role: PROFILE_MODEL.roles[1],
-      referralID: referralID,
+    const profileFields = {
+      role: isGuest ? PROFILE_MODEL.roles[2] : PROFILE_MODEL.roles[1],
+      referralID: generateUniqueUid(),
       onboardingStatus: PROFILE_MODEL.onboardingStatus[0],
       onboardingStep: 0,
       firstName: "",
@@ -37,11 +35,26 @@ const createProfile = async (userUID) => {
       datingPreference: "",
       ageRange: "",
       location: "",
-      personalFacet: []
-    });
+      personalFacet: [],
+      friendFacets: [
+        {
+          responses: [
+            { prompt_id: "", response: "" },
+            { prompt_id: "", response: "" },
+            { prompt_id: "", response: "" }
+          ],
+          friendshipPeriod: "",
+          last_updated: "",
+          createdAt: "",
+          respondantUserId: ""
+        }
+      ]
+    };
+
+    await setDoc(doc(db, FIREBASE.COLLECTIONS.PROFILES, userUID), profileFields);
 
     return {
-      data: { message: `Document successfully written!` },
+      data: { profile: profileFields },
       loading: false,
       error: false
     };
@@ -78,4 +91,53 @@ const updateProfile = async (user, profileFields) => {
   }
 };
 
-export { createProfile, getProfileById, updateProfile };
+const referralIdValidation = async (referralId) => {
+  console.log(referralId);
+  try {
+    const collectionRef = collection(db, FIREBASE.COLLECTIONS.PROFILES);
+    const q = query(collectionRef, where("referralID", "==", referralId), limit(1));
+    const querySnapshot = await getDocs(q);
+
+    let referral = null;
+
+    querySnapshot.forEach((doc) => {
+      referral = doc.data();
+    });
+
+    return {
+      data: referral,
+      loading: false,
+      error: false
+    };
+  } catch (error) {
+    console.error("Error searching for referralID:", error);
+    // throw error;
+  }
+};
+
+//create guest profile function
+
+const createGuestProfile = async (userUID) => {
+  try {
+    const referralID = 5;
+    //TODO figure out referralID logic
+    await setDoc(doc(db, FIREBASE.COLLECTIONS.PROFILES, userUID), {
+      role: PROFILE_MODEL.roles[2],
+      referralID: referralID
+    });
+
+    return {
+      data: { message: `Document successfully written!` },
+      loading: false,
+      error: false
+    };
+  } catch (error) {
+    return {
+      data: { message: `Error writing document ${error}` },
+      loading: false,
+      error: true
+    };
+  }
+};
+
+export { createProfile, getProfileById, updateProfile, referralIdValidation, createGuestProfile };
