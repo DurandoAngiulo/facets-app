@@ -1,6 +1,6 @@
 import "firebase/auth";
 
-import { createGuestProfile, getProfileById } from "@/services/profile-service";
+// import { createGuestProfile, getProfileById } from "@/services/profile-service";
 import { RecaptchaVerifier, getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
 
@@ -15,7 +15,6 @@ const ReferralPageVerifcation = ({ pageReferralId, setVerificationState }) => {
 
   const auth = getAuth();
   const recaptchaButtonId = "verfiy-button";
-  const router = useRouter();
 
   useEffect(() => {
     // Create a new RecaptchaVerifier with invisible size
@@ -48,10 +47,10 @@ const ReferralPageVerifcation = ({ pageReferralId, setVerificationState }) => {
       // console.log("user is logged in and already exists", user);
       if (profileData) {
         if (profileData.referralID === pageReferralId) {
-          //TODO: make componeent to render you can't edit your own friend facet page
+          return <p>You cannot edit your own facte</p>;
         }
         if (profileData.friendFacets.some((facet) => facet.respondantUserId === pageReferralId)) {
-          //TODO: make component render you've already responded to this facet
+          return <p>You already inputted a respond for this friend`&apos;`s facet</p>;
         }
         //otherwise route them/render friend facet creation screen
         setVerificationState(true);

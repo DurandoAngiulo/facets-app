@@ -1,123 +1,134 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
-import { capitalizeFirstLetter, getRandomPrompts } from "@/utils/util-functions";
+import { capitalizeFirstLetter } from "@/utils/util-functions";
+import { getRandomPrompts } from "@/services/prompt.service";
+import { useAuth } from "@/context/AuthContext";
+import { getUserByReferralId, updateFacet } from "@/services/profile-service";
 
-const FriendFacetCreation = () => {
-  const [facetResponses, setFacetResponses] = useState([]);
-
+const FriendFacetCreation = ({ pageReferralId }) => {
   const [friendFacet, setFriendFacet] = useState({
-    friendshipPeriod: "",
-    last_updated: "",
-    createdAt: "",
-    respondantUserId: ""
+    responses: [
+      { prompt_id: "", prompt: "", response: "" },
+      { prompt_id: "", prompt: "", response: "" },
+      { prompt_id: "", prompt: "", response: "" }
+    ],
+    friendshipPeriod: ""
   });
-  const [error, setError] = useState(null);
 
+  const [isLoaded, setIsLoaded] = useState(false); // New state for loading status
+  const [facetOwnerProfile, setFacetOwnerProfile] = useState({});
+  const { currentUser } = useAuth();
+  const userId = currentUser?.uid;
+  // const facetOwnerProfile = getUserByReferralId(pageReferralId);
+
+  // useEffect to run on page load and fetch prompts
   useEffect(() => {
     const fetchData = async () => {
+      const facetUser = await getUserByReferralId(pageReferralId);
+      setFacetOwnerProfile(facetUser);
+      console.log("facetuser", facetUser, pageReferralId);
       try {
         const prompts = await getRandomPrompts();
-        // setPromptArray(prompts);
 
-        // setFriendFacet((prevFacet) => ({
-        //   ...prevFacet,
-        //   responses: prompts.map((prompt) => ({
-        //     prompt_id: prompt.id,
-        //     response: ""
-        //   }))
-        // }));
-
-        const responsesArray = prompts.map((prompt) => ({
-          prompt_id: prompt.id,
-          response: ""
+        setFriendFacet(() => ({
+          responses: prompts.map((prompt) => ({
+            prompt_id: prompt.id,
+            prompt: prompt.prompt
+          }))
         }));
 
-        setFriendFacet((prevFacet) => ({
-          ...prevFacet,
-          responses: responsesArray
-        }));
+        setIsLoaded(true); // Set loading status to true once prompts are fetched
       } catch (error) {
         console.error("Error fetching prompts:", error);
-        // Handle error if needed
       }
     };
 
     fetchData();
   }, []);
 
+  const handleInputChange = (promptId, value) => {
+    setFriendFacet((prevState) => {
+      // Find the index of the response with the matching promptId
+      const responseIndex = prevState.responses.findIndex((response) => response.prompt_id === promptId);
+
+      if (responseIndex === -1) {
+        return prevState; // If no matching response is found, return the current state
+      }
+
+      // Clone the responses array
+      const updatedResponses = [...prevState.responses];
+      // Update the specific response
+      updatedResponses[responseIndex] = {
+        ...updatedResponses[responseIndex],
+        response: value
+      };
+
+      // Return the updated state
+      return {
+        ...prevState,
+        responses: updatedResponses
+      };
+    });
+  };
+
+  // Form submission handler
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const areAllResponsesAnswered = friendFacet.responses.every((response) => response.response.trim() !== "");
-
-    if (!areAllResponsesAnswered) {
-      setError("Please answer all prompts");
-    } else {
-      const updatedFacet = {
-        ...friendFacet,
-        responses: friendFacet.responses.map((response) => ({
-          ...response,
-          response: capitalizeFirstLetter(response.response.trim())
-        }))
-      };
-
-      setFriendFacet(updatedFacet);
-
-      // Call handleUpdateProfile in the callback of setPersonalFacet to ensure the state is updated
-      // handleUpdateProfile({
-      //   personalFacet: updatedFacet,
-      //   onboardingStep: 10,
-      // });
+    setFriendFacet((prev) => ({
+      ...prev,
+      respondantUserId: userId,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+      // updateAt: getTimeStamp();
+      //TODO: getTimeStamp add file from paul
+    }));
+    console.log(facetOwnerProfile, "profile to submit");
+    const profileData = {
+      friendFacets: [...facetOwnerProfile.friendFacets, friendFacet]
+    };
+    if (facetOwnerProfile.friendFacets.length > 4) {
+      console.error("top many facets");
+      return;
     }
+    updateFacet(facetOwnerProfile, profileData);
   };
 
-  useEffect(() => {
-    // Log the updated personalFacet whenever it changes
-    console.log("Updated personalFacet:", friendFacet);
-  }, [friendFacet]);
+  // Conditional rendering based on loading status
+  if (!isLoaded || !pageReferralId) {
+    return <div>Loading...</div>;
+  }
+  console.log(friendFacet, "friendFacet");
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="">
-        <div>
-          <label>
-            {promptOne}
-            <input
-              type="text"
-              className="text-black border-solid border-2 border-red-500"
-              value={inputOne}
-              onChange={(e) => setInputOne(e.target.value)}
-            />
-          </label>
+      {friendFacet.responses.map((response, index) => (
+        <div key={response.prompt_id}>
+          <label htmlFor={`prompt-${response.prompt_id}`}>{response.prompt}</label>
+          {
+            //TODO logic here to slot name into promot variables renderPrompt()
+          }
+          <input
+            id={`prompt-${response.prompt_id}`}
+            className="text-black border-solid border-2 border-red-500"
+            type="text"
+            onChange={(e) => handleInputChange(response.prompt_id, e.target.value)}
+          />
         </div>
-        <div>
-          <label>
-            {promptTwo}
-            <input
-              type="text"
-              className="text-black border-solid border-2 border-red-500"
-              value={inputTwo}
-              onChange={(e) => setInputTwo(e.target.value)}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            {promptThree}
-            <input
-              type="text"
-              className="text-black border-solid border-2 border-red-500"
-              value={inputThree}
-              onChange={(e) => setInputThree(e.target.value)}
-            />
-          </label>
-        </div>
-        <button id="location-continue" type="submit">
-          Continue
-        </button>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+      ))}
+      <div>
+        <label>{"friendship period"}</label>
+        <input
+          className="text-black border-solid border-2 border-red-500"
+          type="text"
+          onChange={(e) =>
+            setFriendFacet((prev) => ({
+              ...prev,
+              friendshipPeriod: e.target.value
+            }))
+          }
+        />
       </div>
+      <button type="submit">Submit</button>
     </form>
   );
 };
