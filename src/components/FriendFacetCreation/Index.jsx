@@ -3,8 +3,12 @@ import { capitalizeFirstLetter } from "@/utils/util-functions";
 import { getRandomPrompts } from "@/services/prompt.service";
 import { useAuth } from "@/context/AuthContext";
 import { getUserByReferralId, updateFacet } from "@/services/profile-service";
+import { useRouter } from "next/navigation";
+import ROUTES from "@/constants/routes";
 
 const FriendFacetCreation = ({ pageReferralId }) => {
+  const router = useRouter();
+
   const [friendFacet, setFriendFacet] = useState({
     responses: [
       { prompt_id: "", prompt: "", response: "" },
@@ -18,7 +22,6 @@ const FriendFacetCreation = ({ pageReferralId }) => {
   const [facetOwnerProfile, setFacetOwnerProfile] = useState({});
   const { currentUser } = useAuth();
   const userId = currentUser?.uid;
-  // const facetOwnerProfile = getUserByReferralId(pageReferralId);
 
   // useEffect to run on page load and fetch prompts
   useEffect(() => {
@@ -76,6 +79,7 @@ const FriendFacetCreation = ({ pageReferralId }) => {
 
     setFriendFacet((prev) => ({
       ...prev,
+      //TODO: this doesnt get added need to fix
       respondantUserId: userId,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
@@ -91,13 +95,14 @@ const FriendFacetCreation = ({ pageReferralId }) => {
       return;
     }
     updateFacet(facetOwnerProfile, profileData);
+    router.push(`${ROUTES.THANKYOU.path}`);
   };
 
   // Conditional rendering based on loading status
   if (!isLoaded || !pageReferralId) {
     return <div>Loading...</div>;
   }
-  console.log(friendFacet, "friendFacet");
+  // console.log(friendFacet, "friendFacet");
 
   return (
     <form onSubmit={handleSubmit}>

@@ -57,9 +57,7 @@ const createProfile = async (userUID, isGuest) => {
         }
       ]
     };
-
     await setDoc(doc(db, FIREBASE.COLLECTIONS.PROFILES, userUID), profileFields);
-
     return {
       data: { profile: profileFields },
       loading: false,

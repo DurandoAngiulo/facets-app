@@ -4,6 +4,7 @@ const ROUTES = {
   UNAUTHORIZED: { path: "/unauthorized", name: "Unauthorized" },
   DASHBOARD: { path: "/dashboard", name: "Dashboard" },
   ONBOARDING: { path: "/dashboard/onboarding", name: "Onboarding" },
-  FRIENDFACETCREATION: { path: "/friendFacetCreation", name: "FriendFacetCreation" }
+  FRIENDFACETCREATION: { path: "/friendFacetCreation", name: "FriendFacetCreation" },
+  THANKYOU: { path: "/thank-you", name: "Thank You" }
 };
 export default ROUTES;

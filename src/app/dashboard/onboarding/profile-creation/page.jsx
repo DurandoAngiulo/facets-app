@@ -3,6 +3,9 @@ import OnboardingLayout from "@/components/layouts/OnboardingLayout";
 import { useState, useEffect } from "react";
 import { updateProfile } from "@/services/profile-service";
 import { useAuth } from "@/context/AuthContext";
+import ROUTES from "@/constants/routes";
+import { PROFILE_MODEL } from "@/constants/model";
+import { useRouter } from "next/navigation";
 
 import {
   LearnAboutYou,
@@ -25,6 +28,7 @@ const Index = () => {
   const { currentUser } = useAuth();
   const [progress, setProgress] = useState(0);
   console.log("current step", progress);
+  const router = useRouter();
   const componentMap = [
     LearnAboutYou,
     EnterName,
@@ -51,6 +55,10 @@ const Index = () => {
     }
 
     setProgress(data?.profile?.onboardingStep);
+
+    if (data?.profile?.onboardingStatus === PROFILE_MODEL.onboardingStatus[1]) {
+      router.push(`${ROUTES.DASHBOARD.path}/feed`);
+    }
   };
 
   useEffect(() => {
