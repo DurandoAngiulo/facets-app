@@ -105,8 +105,6 @@ const updateFacet = async (profile, profileFields) => {
     ...profile,
     ...profileFields
   };
-  console.log(newFields, "newFields");
-
   try {
     await updateDoc(doc(db, FIREBASE.COLLECTIONS.PROFILES, profile.uid), newFields);
     return {

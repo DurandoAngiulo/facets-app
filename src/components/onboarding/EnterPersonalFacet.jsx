@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { capitalizeFirstLetter, getRandomPrompts } from "@/utils/util-functions";
+import { capitalizeFirstLetter } from "@/utils/util-functions";
+import { getRandomPrompts } from "@/services/prompt.service";
 //TODO: import prompt table for IDS
 export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
   const [promptArray, setPromptArray] = useState([]);

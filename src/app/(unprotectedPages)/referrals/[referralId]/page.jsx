@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
-import FriendFacetCreation from "@/components/FriendFacetCreation";
+import FriendFacetCreation from "@/components/FriendFacetCreation/Index";
 import { referralIdValidation } from "@/services/profile-service";
-import ReferralPageVerifcation from "@/components/ReferralPageVerifcation";
+import ReferralPageVerifcation from "@/components/ReferralPageVerifcation/Index";
 
 const Index = ({ params }) => {
   const [verificationState, setVerificationState] = useState(null);
