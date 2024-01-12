@@ -23,7 +23,7 @@ const Icon = forwardRef<SVGSVGElement, IconProps>(function IconComponent(
     console.error(`Icon "${iconName}" not found.`);
     return null;
   }
-
+  //hi
   const accessibilityProps = isDecorative
     ? { "aria-hidden": "true", role: "presentation" }
     : { "aria-label": title, role: "img" };
