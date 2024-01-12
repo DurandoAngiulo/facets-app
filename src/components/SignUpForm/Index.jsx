@@ -8,6 +8,7 @@ import ROUTES from "@/constants/routes";
 import { PROFILE_MODEL } from "@/constants/model";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import styles from "./styles.module.css";
 
 const SignUpForm = () => {
   const { registerAndLogin, currentUser } = useAuth();
@@ -66,7 +67,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className="">
+    <div className={`border-4 border-opacity-100 ${styles.testBorderColor}`}>
       <label>
         Phone Number:
         <input

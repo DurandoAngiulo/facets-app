@@ -23,21 +23,6 @@ const Navbar = () => {
             chat
           </Link>
         </li>
-        {/* <li>
-          <Link className="border-solid border-2 border-red-500" href="/">
-            home
-          </Link>
-        </li>
-        <li>
-          <Link className="border-solid border-2 border-red-500" href="/login">
-            login
-          </Link>
-        </li>
-        <li>
-          <Link className="border-solid border-2 border-red-500" href="/signup">
-            signup
-          </Link>
-        </li> */}
         <li>
           <Link className="border-solid border-2 border-red-500" href="/" onClick={() => logout()}>
             logout
