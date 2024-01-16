@@ -5,6 +5,7 @@
 @tailwind utilities;
 
 :root {
+  /* Colors */
   --background: #ffffff;
   --background-gradient: linear-gradient(
     177deg,
@@ -19,6 +20,30 @@
   --text: #4f4d5e;
   --element-subtle: #848484;
   --element-subtle-secondary: #cdd5f7;
+
+  /* Fonts */
+  --font-header: "gyst-variable", sans-serif;
+  --font-body: "arboria", sans-serif;
+  --font-body-semibold: "arboria Medium", sans-serif;
+  --font-body-bold: "arboria Bold", sans-serif;
+
+  /* Font sizes: headers */
+  --font-size-h-xl: 2rem;
+  --font-size-h-lg: 1.75rem;
+  --font-size-h-md: 1.5rem;
+  --font-size-h-sm: 1.25rem;
+  --font-size-h-xs: 1rem;
+
+  /* Font sizes: body */
+  --font-size-p-xs: 0.875rem;
+  --font-size-p-sm: 1rem; /* standard copy text size */
+  --font-size-p-md: 1.25rem;
+  --font-size-p-lg: 1.5rem;
+
+  /* Font weights */
+  --weight-bold: 700;
+  --weight-normal: 400;
+  --weight-semibold: 500;
 }
 
 body {
@@ -26,58 +51,43 @@ body {
 }
 
 h1 {
-  font-family: "gyst-variable", sans-serif;
-  font-variation-settings: "wght" 600;
-  font-size: 32px;
+  font-family: var(--font-header);
+  font-variation-settings: "wght" var(--weight-bold);
+  font-size: var(--font-size-h-xl);
 }
 
 h2 {
-  font-family: "gyst-variable", sans-serif;
-  font-variation-settings: "wght" 600;
-  font-size: 28px;
+  font-family: var(--font-header);
+  font-variation-settings: "wght" var(--weight-bold);
+  font-size: var(--font-size-h-lg);
 }
 h3 {
-  font-family: "gyst-variable", sans-serif;
-  font-variation-settings: "wght" 450;
-  font-size: 24px;
+  font-family: var(--font-header);
+  font-variation-settings: "wght" var(--weight-semibold);
+  font-size: var(--font-size-h-md);
 }
 h4 {
-  font-family: "gyst-variable", sans-serif;
-  font-variation-settings: "wght" 300;
-  font-size: 20px;
+  font-family: var(--font-header);
+  font-variation-settings: "wght" var(--weight-normal);
+  font-size: var(--font-size-h-sm);
 }
 h5 {
-  font-family: "gyst-variable", sans-serif;
-  font-variation-settings: "wght" 300;
-  font-size: 16px;
+  font-family: var(--font-header);
+  font-variation-settings: "wght" var(--weight-normal);
+  font-size: var(--font-size-h-xs);
 }
 
 p {
-  font-family: "arboria Book", sans-serif;
+  font-family: var(--font-body);
   font-style: normal;
-  font-size: 16px;
+  font-size: var(--font-size-p-sm);
+  font-weight: var(--weight-normal);
 }
 
-p.semibold {
-  font-family: "arboria Medium", sans-serif;
-  font-style: normal;
-  font-size: 16px;
+.semibold {
+  font-family: var(--font-body-semibold);
 }
 
-p.bold {
-  font-family: "arboria Bold", sans-serif;
-  font-style: normal;
-  font-size: 16px;
-}
-
-p.small {
-  font-family: "arboria Book", sans-serif;
-  font-style: normal;
-  font-size: 14px;
-}
-
-p.large {
-  font-family: "arboria Book", sans-serif;
-  font-style: normal;
-  font-size: 24px;
+.bold {
+  font-family: var(--font-body-bold);
 }
