@@ -24,11 +24,57 @@
 
 h1 {
   font-family: "gyst-variable", sans-serif;
-  font-variation-settings: "wght" 100;
+  font-variation-settings: "wght" 600;
+  font-size: 32px;
+}
+
+h2 {
+  font-family: "gyst-variable", sans-serif;
+  font-variation-settings: "wght" 600;
+  font-size: 28px;
+}
+h3 {
+  font-family: "gyst-variable", sans-serif;
+  font-variation-settings: "wght" 450;
+  font-size: 24px;
+}
+h4 {
+  font-family: "gyst-variable", sans-serif;
+  font-variation-settings: "wght" 300;
+  font-size: 20px;
+}
+h5 {
+  font-family: "gyst-variable", sans-serif;
+  font-variation-settings: "wght" 300;
+  font-size: 16px;
 }
 
 p {
-  font-family: "arboria", sans-serif;
-  font-weight: 400;
+  font-family: "arboria Book", sans-serif;
   font-style: normal;
+  font-size: 16px;
+}
+
+p.semibold {
+  font-family: "arboria Medium", sans-serif;
+  font-style: normal;
+  font-size: 16px;
+}
+
+p.bold {
+  font-family: "arboria Bold", sans-serif;
+  font-style: normal;
+  font-size: 16px;
+}
+
+p.small {
+  font-family: "arboria Book", sans-serif;
+  font-style: normal;
+  font-size: 14px;
+}
+
+p.large {
+  font-family: "arboria Book", sans-serif;
+  font-style: normal;
+  font-size: 24px;
 }
