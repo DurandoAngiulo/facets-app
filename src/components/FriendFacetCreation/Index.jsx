@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { capitalizeFirstLetter } from "@/utils/util-functions";
+import { getTimeStamp } from "@/utils/time-functions";
+import { replaceNameInString } from "@/utils/util-functions";
 import { getRandomPrompts } from "@/services/prompt.service";
 import { useAuth } from "@/context/AuthContext";
 import { getUserByReferralId, updateFacet } from "@/services/profile-service";
 import { useRouter } from "next/navigation";
 import ROUTES from "@/constants/routes";
+import FIREBASE from "@/constants/firebase";
 
 const FriendFacetCreation = ({ pageReferralId }) => {
   const router = useRouter();
@@ -30,7 +32,7 @@ const FriendFacetCreation = ({ pageReferralId }) => {
       setFacetOwnerProfile(facetUser);
       console.log("facetuser", facetUser, pageReferralId);
       try {
-        const prompts = await getRandomPrompts();
+        const prompts = await getRandomPrompts(FIREBASE.COLLECTIONS.FRIENDPROMPTS);
 
         setFriendFacet(() => ({
           responses: prompts.map((prompt) => ({
@@ -82,9 +84,8 @@ const FriendFacetCreation = ({ pageReferralId }) => {
       //TODO: this doesnt get added need to fix
       respondantUserId: userId,
       createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-      // updateAt: getTimeStamp();
-      //TODO: getTimeStamp add file from paul
+      updatedAt: new Date().toISOString(),
+      updateAt: getTimeStamp()
     }));
     console.log(facetOwnerProfile, "profile to submit");
     const profileData = {
@@ -108,7 +109,9 @@ const FriendFacetCreation = ({ pageReferralId }) => {
     <form onSubmit={handleSubmit}>
       {friendFacet.responses.map((response, index) => (
         <div key={response.prompt_id}>
-          <label htmlFor={`prompt-${response.prompt_id}`}>{response.prompt}</label>
+          <label htmlFor={`prompt-${response.prompt_id}`}>
+            {replaceNameInString(response.prompt, facetOwnerProfile.firstName)}
+          </label>
           {
             //TODO logic here to slot name into promot variables renderPrompt()
           }

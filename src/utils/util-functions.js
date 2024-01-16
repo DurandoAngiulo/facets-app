@@ -12,4 +12,8 @@ const generateUniqueUid = () => {
   return uniqueUid;
 };
 
-export { capitalizeFirstLetter, generateUniqueUid };
+function replaceNameInString(inputString, userName) {
+  const replacedString = inputString.replace(/\[Name\]/g, userName);
+  return replacedString;
+}
+export { capitalizeFirstLetter, generateUniqueUid, replaceNameInString };

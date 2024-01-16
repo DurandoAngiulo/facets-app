@@ -136,6 +136,10 @@ https://github.com/mrpaulphan/drexel-attendance
 - created a util-functions file
 - added all onboarding page components that let a user input all data and then enter the feed page
 
-## 1-10-24
+## 1-15-24
 
-- finished friend link logic so guests can add facers to other users's data
+- finished friend link logic so guests can add facets to other users's data
+- onboarding system gltich still exists where when the onboarding finishes, it loops the user back to the start
+- friend facet link logic still has an issue where some info isnt added in the new friend Facet
+- created a test page at top level so people can test visuals of thier components/CSS
+- Added all prompts tables into database and created function to slot names into prompt questions
