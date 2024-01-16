@@ -5,22 +5,25 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background: #ffffff;
+  --background-gradient: linear-gradient(
+    177deg,
+    #fafafa 12.08%,
+    #edf6f7 36.86%,
+    #fef6f4 48.01%,
+    #ebedf9 78.99%,
+    #fafafa 103.18%
+  );
+  --surface-card: #ffffff;
+  --brand: #734498;
+  --text: #4f4d5e;
+  --element-subtle: #848484;
+  --element-subtle-secondary: #cdd5f7;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+body {
+  background-color: var(--background-gradient);
 }
-
-/* body {
-  color: rgb(var(--foreground-rgb));
-} */
 
 h1 {
   font-family: "gyst-variable", sans-serif;

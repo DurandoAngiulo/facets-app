@@ -4,8 +4,11 @@ import { collection, doc, setDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
 const Index = () => {
+  const containerStyle = {
+    background: "var(--background-gradient)"
+  };
   return (
-    <div>
+    <div style={containerStyle}>
       <h1>
         Test <i>page</i>
       </h1>
