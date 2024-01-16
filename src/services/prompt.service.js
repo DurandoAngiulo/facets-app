@@ -2,8 +2,8 @@ import { doc, getDoc, getDocs, setDoc, updateDoc, collection, where, query, limi
 import FIREBASE from "@/constants/firebase";
 import { db } from "@/lib/firebase";
 
-async function getPrompts() {
-  const collectionRef = collection(db, FIREBASE.COLLECTIONS.PROMPTS);
+async function getPrompts(promptTable) {
+  const collectionRef = collection(db, promptTable);
   const querySnapshot = await getDocs(collectionRef);
 
   let prompts = [];
@@ -19,8 +19,8 @@ async function getPrompts() {
   };
 }
 
-async function getRandomPrompts(limit = 3) {
-  const { data: prompts } = await getPrompts();
+async function getRandomPrompts(promptTable, limit = 3) {
+  const { data: prompts } = await getPrompts(promptTable);
   const totalPrompts = prompts.length;
 
   const uniquePromptIds = new Set();

@@ -38,20 +38,20 @@ This will update everytime an new branch is pushed to main.
   );
   ```
 
-````
-
-
 ## CSS & Tailwind
+
 - CSS is pretty simple here. I have set up an example for you of how it works in the `SignupForm` component.
 - Basically you add a style sheet file (can be named whatever but I chose styles) with the the file ending of `.module.css`. You would then do all the specific selector styling with css like normal on the actual jsx file in the same folder.
--  next all you need to do is import the relevant style sheet in the import section of the file, as I show in the signupform jsx file, and your css should show up, as mine does in the example (you should see the purple border that I added).
+- next all you need to do is import the relevant style sheet in the import section of the file, as I show in the signupform jsx file, and your css should show up, as mine does in the example (you should see the purple border that I added).
 - Whenever you can though, you should try to use tailwind for all styling. Tailwind is like bootstrap and it just makes monotonous styling easier. Only whee tailwind can't accomplihs what you're trying to do should you use custom styling.
 - tailwinds documentation (https://v2.tailwindcss.com/docs). The documentation has a robust search bar so you shpould have no issue searching for what you want to do.
 
 ## Global styling/variables
+
 - there is a file at root level, called globals.css Any `root: {}` global styligns you want to assign, fonts, colors, spacings, etc. Define them here, then they will be accessible everywhere and can be called using the `var(--"value")` css like normal
 
 ## Fonts
+
 - ok so this is a bit more involved, attaching the font documentation here.
 - https://nextjs.org/docs/app/building-your-application/optimizing/fonts
 - https://www.youtube.com/watch?v=L8_98i_bMMA
@@ -59,7 +59,8 @@ This will update everytime an new branch is pushed to main.
 - I will be availible to help configure/set this up for our fonts
 
 ## Icons
- the `Icon` component which is used to integrate SVG icons into the application.
+
+the `Icon` component which is used to integrate SVG icons into the application.
 
 ### Usage
 
@@ -75,7 +76,7 @@ const MyComponent = () => (
     <Icon iconName="CheckMarkIcon" />
   </div>
 );
-````
+```
 
 ### Adding New Icons
 
@@ -135,6 +136,10 @@ https://github.com/mrpaulphan/drexel-attendance
 - created a util-functions file
 - added all onboarding page components that let a user input all data and then enter the feed page
 
-## 1-10-24
+## 1-15-24
 
-- finished friend link logic so guests can add facers to other users's data
+- finished friend link logic so guests can add facets to other users's data
+- onboarding system gltich still exists where when the onboarding finishes, it loops the user back to the start
+- friend facet link logic still has an issue where some info isnt added in the new friend Facet
+- created a test page at top level so people can test visuals of thier components/CSS
+- Added all prompts tables into database and created function to slot names into prompt questions

@@ -7,6 +7,7 @@ export const ProfileComplete = ({ handleUpdateProfile }) => {
   const router = useRouter();
   const handleClick = () => {
     handleUpdateProfile({
+      onboardingStep: 14,
       onboardingStatus: PROFILE_MODEL.onboardingStatus[1]
     });
     router.push(`${ROUTES.DASHBOARD.path}/feed`);
