@@ -5,12 +5,11 @@ import ROUTES from "@/constants/routes";
 
 export const ProfileComplete = ({ handleUpdateProfile }) => {
   const router = useRouter();
-  const handleClick = () => {
-    handleUpdateProfile({
-      onboardingStep: 14,
+  const handleClick = async () => {
+    await handleUpdateProfile({
+      onboardingStep: 16,
       onboardingStatus: PROFILE_MODEL.onboardingStatus[1]
     });
-    router.push(`${ROUTES.DASHBOARD.path}/feed`);
   };
 
   return (

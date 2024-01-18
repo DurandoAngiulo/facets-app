@@ -11,6 +11,7 @@ const withProtectedRoutes = (ComponentToWrap) => {
     const pathname = usePathname();
     const isAdminRoute = pathname.startsWith("/admin");
     const isOnboardingRoute = pathname.includes("/onboarding");
+    const profileCreationRoute = `${ROUTES.ONBOARDING.path}/profile-creation`;
 
     if (loading && !currentUser) {
       return <div>Loading...</div>;
@@ -26,7 +27,11 @@ const withProtectedRoutes = (ComponentToWrap) => {
       return;
     }
 
-    if (currentUser?.profile?.onboardingStatus === "inProgress" && !isOnboardingRoute) {
+    if (
+      currentUser?.profile?.onboardingStatus === "inProgress" &&
+      !isOnboardingRoute &&
+      profileCreationRoute !== pathname
+    ) {
       router.push(`${ROUTES.ONBOARDING.path}/profile-creation`);
       // redirect to onboarding screen
       // router.push(`${ROUTES.UNAUTHORIZED.path}`);

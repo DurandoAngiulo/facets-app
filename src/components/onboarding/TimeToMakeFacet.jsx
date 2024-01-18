@@ -3,7 +3,7 @@ import React from "react";
 export const TimeToMakeFacet = ({ handleUpdateProfile }) => {
   const handleClick = () => {
     handleUpdateProfile({
-      onboardingStep: 9
+      onboardingStep: 10
     });
   };
   return (

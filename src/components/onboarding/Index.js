@@ -12,3 +12,5 @@ export * from "@/components/onboarding/UploadPhotos";
 export * from "@/components/onboarding/AddMoreDetails";
 export * from "@/components/onboarding/InviteFriends";
 export * from "@/components/onboarding/ProfileComplete";
+export * from "@/components/onboarding/EnterOccupation";
+export * from "@/components/onboarding/EnterMoreDetails";

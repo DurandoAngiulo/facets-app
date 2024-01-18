@@ -3,7 +3,7 @@ import React from "react";
 export const UploadPhotos = ({ handleUpdateProfile }) => {
   const handleClick = () => {
     handleUpdateProfile({
-      onboardingStep: 11
+      onboardingStep: 12
     });
   };
 

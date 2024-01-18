@@ -16,18 +16,19 @@ import {
   EnterDatingPreferences,
   EnterAgeRange,
   EnterLocation,
+  EnterOccupation,
   TimeToMakeFacet,
   EnterPersonalFacet,
   UploadPhotos,
   AddMoreDetails,
+  EnterMoreDetails,
   InviteFriends,
   ProfileComplete
 } from "@/components/onboarding/Index";
 
 const Index = () => {
-  const { currentUser } = useAuth();
+  const { currentUser, updateUserProfile } = useAuth();
   const [progress, setProgress] = useState(0);
-  console.log("current step", progress);
   const router = useRouter();
   const componentMap = [
     LearnAboutYou,
@@ -38,15 +39,23 @@ const Index = () => {
     EnterDatingPreferences,
     EnterAgeRange,
     EnterLocation,
+    EnterOccupation,
     TimeToMakeFacet,
     EnterPersonalFacet,
     UploadPhotos,
     AddMoreDetails,
+    EnterMoreDetails,
     InviteFriends,
     ProfileComplete
   ];
+
   const CurrentComponent = componentMap[progress];
+
+  console.log("current step", progress);
+  console.log("currentUser", currentUser?.profile?.onboardingStep);
+
   const handleUpdateProfile = async (profileData) => {
+    console.group("handleUpdateProfile");
     const { data, error } = await updateProfile(currentUser, profileData);
 
     if (error) {
@@ -54,17 +63,25 @@ const Index = () => {
       return;
     }
 
-    setProgress(data?.profile?.onboardingStep);
+    console.log("data", data);
 
-    if (data?.profile?.onboardingStatus === PROFILE_MODEL.onboardingStatus[1]) {
+    await updateUserProfile(data?.profile);
+    await setProgress(data?.profile?.onboardingStep);
+
+    const complete_status = PROFILE_MODEL.onboardingStatus[1];
+
+    if (data?.profile?.onboardingStatus === complete_status) {
+      console.log("about to reroute");
       router.push(`${ROUTES.DASHBOARD.path}/feed`);
+      console.log("routed");
     }
+    console.groupEnd();
   };
 
   useEffect(() => {
     // also have to check if user is done onboarding? If they are, should redirect them
     setProgress(currentUser?.profile?.onboardingStep ?? 0);
-  }, [currentUser]);
+  }, [currentUser?.profile?.onboardingStep]);
 
   return (
     <OnboardingLayout>

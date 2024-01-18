@@ -16,4 +16,11 @@ function replaceNameInString(inputString, userName) {
   const replacedString = inputString.replace(/\[Name\]/g, userName);
   return replacedString;
 }
-export { capitalizeFirstLetter, generateUniqueUid, replaceNameInString };
+
+const getReferralLink = (id) => {
+  const baseUrl = process.env.NODE_ENV === "production" ? "https://facets-app.vercel.app" : "http://localhost:3000";
+
+  return `${baseUrl}/referrals/${id}`;
+};
+
+export { capitalizeFirstLetter, generateUniqueUid, replaceNameInString, getReferralLink };

@@ -10,20 +10,22 @@ import FIREBASE from "@/constants/firebase";
 
 const FriendFacetCreation = ({ pageReferralId }) => {
   const router = useRouter();
-
+  const { currentUser } = useAuth();
+  const userId = currentUser?.uid;
   const [friendFacet, setFriendFacet] = useState({
     responses: [
       { prompt_id: "", prompt: "", response: "" },
       { prompt_id: "", prompt: "", response: "" },
       { prompt_id: "", prompt: "", response: "" }
     ],
-    friendshipPeriod: ""
+    friendshipPeriod: "",
+    respondantUserId: userId,
+    createdAt: "",
+    updatedAt: ""
   });
 
   const [isLoaded, setIsLoaded] = useState(false); // New state for loading status
   const [facetOwnerProfile, setFacetOwnerProfile] = useState({});
-  const { currentUser } = useAuth();
-  const userId = currentUser?.uid;
 
   // useEffect to run on page load and fetch prompts
   useEffect(() => {
@@ -35,6 +37,8 @@ const FriendFacetCreation = ({ pageReferralId }) => {
         const prompts = await getRandomPrompts(FIREBASE.COLLECTIONS.FRIENDPROMPTS);
 
         setFriendFacet(() => ({
+          respondantUserId: userId,
+          createdAt: getTimeStamp(),
           responses: prompts.map((prompt) => ({
             prompt_id: prompt.id,
             prompt: prompt.prompt
@@ -48,8 +52,9 @@ const FriendFacetCreation = ({ pageReferralId }) => {
     };
 
     fetchData();
-  }, []);
+  }, [JSON.stringify(currentUser)]);
 
+  // TODO Look into debouncing this
   const handleInputChange = (promptId, value) => {
     setFriendFacet((prevState) => {
       // Find the index of the response with the matching promptId
@@ -76,26 +81,27 @@ const FriendFacetCreation = ({ pageReferralId }) => {
   };
 
   // Form submission handler
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const currentFriendFacets = facetOwnerProfile.friendFacets;
 
-    setFriendFacet((prev) => ({
-      ...prev,
-      //TODO: this doesnt get added need to fix
-      respondantUserId: userId,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      updateAt: getTimeStamp()
-    }));
-    console.log(facetOwnerProfile, "profile to submit");
-    const profileData = {
-      friendFacets: [...facetOwnerProfile.friendFacets, friendFacet]
-    };
-    if (facetOwnerProfile.friendFacets.length > 4) {
-      console.error("top many facets");
+    if (currentFriendFacets.length > 4) {
+      //TODO: render this
+      console.error("too many facets");
       return;
     }
-    updateFacet(facetOwnerProfile, profileData);
+
+    const newFacetData = {
+      ...friendFacet,
+      updatedAt: getTimeStamp()
+    };
+
+    const newProfileData = {
+      friendFacets: [...currentFriendFacets, newFacetData]
+    };
+
+    await updateFacet(facetOwnerProfile, newProfileData);
+
     router.push(`${ROUTES.THANKYOU.path}`);
   };
 

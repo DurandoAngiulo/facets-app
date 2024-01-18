@@ -46,7 +46,7 @@ const SignUpForm = () => {
       }
 
       const user = data?.user;
-
+      console.log(data, user, "user");
       if (!user?.profile) return;
 
       if (user.profile.onboardingStatus === PROFILE_MODEL.onboardingStatus[1]) {

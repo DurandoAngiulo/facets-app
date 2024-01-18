@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { capitalizeFirstLetter } from "@/utils/util-functions";
 import { getRandomPrompts } from "@/services/prompt.service";
-//TODO: import prompt table for IDS
+import FIREBASE from "@/constants/firebase";
+
 export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
   const [promptArray, setPromptArray] = useState([]);
   const [promptOne, setPromptOne] = useState("loading");
@@ -25,7 +26,7 @@ export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const prompts = await getRandomPrompts();
+        const prompts = await getRandomPrompts(FIREBASE.COLLECTIONS.USERPROMPTS);
         setPromptArray(prompts);
 
         // Assuming prompts is an array with three prompt objects
@@ -68,7 +69,7 @@ export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
       setPersonalFacet((updatedFacet) => {
         handleUpdateProfile({
           personalFacet: updatedFacet,
-          onboardingStep: 10
+          onboardingStep: 11
         });
       });
     }

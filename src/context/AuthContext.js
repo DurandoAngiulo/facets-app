@@ -23,11 +23,38 @@ export const AuthContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   /**
-   * Fetches the current user's profile and merges it with the currentUser state.
-   * @param {string} uid - The UID of the user.
+   *
+   * This function is designed to be used when there's a need to reflect changes
+   * made to the user's profile data immediately within the application's context.
+   * For instance, it can be utilized after a user updates their profile
+   * information through a form and the server returns the updated profile data.
+   *
+   * @param {Object} profileData - The new profile data for the current user.
+   * This should contain the updated fields of the user's profile.
+   *
+   * @example
+   * const handleProfileUpdate = async (newProfileData) => {
+   *   const updatedData = await sendProfileUpdateToServer(newProfileData);
+   *   if (updatedData) {
+   *     updateUserProfile(updatedData);
+   *   }
+   * }
+   *
    */
-  const fetchAndSetUserProfile = async (uid, isGuest) => {
+  const updateUserProfile = async (profileData) => {
+    if (currentUser && profileData) {
+      const updatedUser = { ...currentUser, profile: profileData };
+      await setCurrentUser(updatedUser);
+    }
+  };
+
+  /**
+   * Fetches the current user's profile and merges it with the currentUser state.
+   * @param {object} user - The user object
+   */
+  const fetchAndSetUserProfile = async (user, isGuest) => {
     try {
+      const uid = user.uid;
       const profileResult = await getProfileById(uid);
       let profileData = profileResult?.data?.data;
 
@@ -36,8 +63,10 @@ export const AuthContextProvider = ({ children }) => {
         profileData = data?.profile;
       }
 
-      // Append profile to the user model
-      await setCurrentUser((prevUser) => ({ ...prevUser, profile: profileData }));
+      // Create an updated user object with profile data
+      const updatedUser = { ...user, profile: profileData };
+      await setCurrentUser(updatedUser);
+      return updatedUser;
     } catch (error) {
       console.error("Failed to fetch user profile:", error);
     }
@@ -56,14 +85,11 @@ export const AuthContextProvider = ({ children }) => {
       const confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
       const code = window.prompt("Enter the verification code sent to your phone:");
       const { user } = await confirmationResult.confirm(code);
-      await setCurrentUser(user);
-      await fetchAndSetUserProfile(user.uid, isGuest);
+      const userWithProfile = await fetchAndSetUserProfile(user, isGuest);
 
       setLoading(false);
       return {
-        data: {
-          user: currentUser
-        },
+        data: { user: userWithProfile },
         loading: false,
         error: false
       };
@@ -91,7 +117,7 @@ export const AuthContextProvider = ({ children }) => {
       setLoading(true);
       if (user) {
         setCurrentUser(user); // Set the user
-        await fetchAndSetUserProfile(user.uid); // Fetch and set user profile
+        await fetchAndSetUserProfile(user); // Fetch and set user profile
       } else {
         setCurrentUser(null); // Set current user to null if not authenticated
       }
@@ -105,7 +131,8 @@ export const AuthContextProvider = ({ children }) => {
     currentUser,
     registerAndLogin,
     loading,
-    logout
+    logout,
+    updateUserProfile
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

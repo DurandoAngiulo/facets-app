@@ -143,3 +143,8 @@ https://github.com/mrpaulphan/drexel-attendance
 - friend facet link logic still has an issue where some info isnt added in the new friend Facet
 - created a test page at top level so people can test visuals of thier components/CSS
 - Added all prompts tables into database and created function to slot names into prompt questions
+
+## 1-18-24
+
+- fixed onboarding and friendfacets bugs
+- more details still in progress

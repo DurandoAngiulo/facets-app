@@ -35,6 +35,20 @@ const createProfile = async (userUID, isGuest) => {
       datingPreference: "",
       ageRange: "",
       location: "",
+      occupation: "",
+      moreDetails: {
+        sexuality: "",
+        jobTitle: "",
+        school: "",
+        hometown: "",
+        smoking: "",
+        drinking: "",
+        mbti: "",
+        astrologicalSign: "",
+        height: "",
+        religion: "",
+        politicalAffiliation: ""
+      },
       personalFacet: {
         facetPromptOneID: "",
         facetPromptTwoID: "",
@@ -74,8 +88,6 @@ const createProfile = async (userUID, isGuest) => {
 
 const updateProfile = async (user, profileFields) => {
   const userProfile = user.profile;
-  console.log(profileFields);
-  console.log(userProfile);
   try {
     await updateDoc(doc(db, FIREBASE.COLLECTIONS.PROFILES, user.uid), {
       ...userProfile,
@@ -97,8 +109,8 @@ const updateProfile = async (user, profileFields) => {
     };
   }
 };
+
 const updateFacet = async (profile, profileFields) => {
-  console.log(profile, "profile");
   const newFields = {
     ...profile,
     ...profileFields
@@ -122,7 +134,6 @@ const updateFacet = async (profile, profileFields) => {
   }
 };
 const referralIdValidation = async (referralId) => {
-  console.log(referralId);
   try {
     const collectionRef = collection(db, FIREBASE.COLLECTIONS.PROFILES);
     const q = query(collectionRef, where("referralID", "==", referralId), limit(1));
