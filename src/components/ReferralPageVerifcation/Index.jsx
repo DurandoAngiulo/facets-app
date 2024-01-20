@@ -3,6 +3,7 @@ import "firebase/auth";
 // import { createGuestProfile, getProfileById } from "@/services/profile-service";
 import { RecaptchaVerifier, getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
+import { getUserByReferralId } from "@/services/profile-service";
 
 import ROUTES from "@/constants/routes";
 import { useAuth } from "@/context/AuthContext";
@@ -12,6 +13,7 @@ const ReferralPageVerifcation = ({ pageReferralId, setVerificationState }) => {
   const { registerAndLogin } = useAuth();
   const [phoneNumber, setPhoneNumber] = useState("+11234567899");
   const [error, setError] = useState(null);
+  const [facetOwner, setFacetOwner] = useState({});
 
   const auth = getAuth();
   const recaptchaButtonId = "verfiy-button";
@@ -26,6 +28,20 @@ const ReferralPageVerifcation = ({ pageReferralId, setVerificationState }) => {
       }
     });
   }, []); // Empty dependency array ensures this runs once on component mount
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userFacet = await getUserByReferralId(pageReferralId); // Replace 'yourReferralId' with the actual value
+        // console.log(userFacet); // Log the fetched data
+        setFacetOwner(userFacet); // Update the state with the fetched data
+      } catch (error) {
+        console.error("Error fetching facet owner:", error);
+      }
+    };
+    fetchData();
+  }, []);
+  // console.log(facetOwner, "facet owner before reacaptcha");
 
   const handleRegisterGuestUser = async () => {
     try {
@@ -43,15 +59,23 @@ const ReferralPageVerifcation = ({ pageReferralId, setVerificationState }) => {
       }
 
       const user = data.user;
+
       const profileData = user?.profile;
+      // console.log(profileData, "prof data");
+      console.log(user.uid);
+      // console.log(facetOwner, "facet owner");
+      console.log(facetOwner.friendFacets, "facet owner after recaptcha");
+      console.log(pageReferralId, "referralID");
+
       // console.log("user is logged in and already exists", user);
+      //TODO:need help here ask paul
       if (profileData) {
         if (profileData.referralID === pageReferralId) {
-          return <p>You cannot edit your own facte</p>;
+          return <p>You cannot edit your own facet</p>;
         }
-        if (profileData.friendFacets.some((facet) => facet.respondantUserId === pageReferralId)) {
-          return <p>You already inputted a respond for this friend`&apos;`s facet</p>;
-        }
+        // if (facetOwner.friendFacets.some((facet) => facet.respondantUserId === user.uid)) {
+        //   return <p>You already inputted a respond for this friend`&apos;`s facet</p>;
+        // }
         //otherwise route them/render friend facet creation screen
         setVerificationState(true);
         return;
@@ -69,6 +93,12 @@ const ReferralPageVerifcation = ({ pageReferralId, setVerificationState }) => {
 
   return (
     <div className="">
+      <h1>Text explaining facets and whats gonna happen</h1>
+      <p>
+        the rest of t this page below will be hidden until the continue button is pressehis page below will be hidden
+        until the continue button is pressed
+      </p>
+      <p>Then the rest of the verifcation page will translate in and the header will translate out</p>
       <p>verify you are human</p>
       <label>
         Phone Number:

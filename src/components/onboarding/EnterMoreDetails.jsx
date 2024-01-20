@@ -1,234 +1,184 @@
-"user client";
-import { useEffect, useState } from "react";
+"use client";
+import React, { useState } from "react";
+import TextInput from "@/components/TextInput/Index";
+import RadioInputGroup from "@/components/RadioInputGroup/Index";
 
 export const EnterMoreDetails = ({ handleUpdateProfile }) => {
-  const [sexuality, setSexuality] = useState("");
-  const [jobTitle, setJobTitle] = useState("");
-  const [school, setSchool] = useState("");
-  const [hometown, setHometown] = useState("");
-  const [smoking, setSmoking] = useState("");
-  const [drinking, setDrinking] = useState("");
-  const [mbti, setMBTI] = useState("");
-  const [astrologicalSign, setAstrologicalSign] = useState("");
-  const [height, setHeight] = useState("");
-  const [religion, setReligion] = useState("");
-  const [politicalAffiliation, setPoliticalAffiliation] = useState("");
+  const [moreDetails, setMoreDetails] = useState({
+    school: "",
+    hometown: "",
+    sexuality: "",
+    smoking: "",
+    drinking: "",
+    mtbi: "",
+    astrologicalSign: "",
+    height: "",
+    religion: "",
+    politicalAffiliation: ""
+  });
 
-  const [error, setError] = useState(null);
-  const handleRadioChange = (event, prompt) => {
-    if (prompt === "smoking") {
-      setSmoking(event.target.value);
-    }
-    if (prompt === "politics") {
-      setPoliticalAffiliation(event.target.value);
-    } else {
-      setDrinking(event.target.value);
-    }
+  const handleTextInputChange = (field, value) => {
+    setMoreDetails((prevDetails) => ({ ...prevDetails, [field]: value }));
+  };
+
+  const handleRadioInputChange = (field, value) => {
+    setMoreDetails((prevDetails) => ({ ...prevDetails, [field]: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     handleUpdateProfile({
-      moreDetails: { sexuality: sexuality },
+      moreDetails: {
+        school: moreDetails.school,
+        hometown: moreDetails.hometown,
+        sexuality: moreDetails.sexuality,
+        smoking: moreDetails.smoking,
+        drinking: moreDetails.drinking,
+        mtbi: moreDetails.mtbi,
+        astrologicalSign: moreDetails.astrologicalSign,
+        height: moreDetails.height,
+        religion: moreDetails.religion,
+        politicalAffiliation: moreDetails.politicalAffiliation
+      },
       onboardingStep: 14
     });
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      <TextInput
+        label="School:"
+        value={moreDetails.school}
+        onChange={(e) => handleTextInputChange("school", e.target.value)}
+      />
+      <TextInput
+        label="Hometown:"
+        value={moreDetails.hometown}
+        onChange={(e) => handleTextInputChange("hometown", e.target.value)}
+      />
+      <TextInput
+        label="Sexuality:"
+        value={moreDetails.sexuality}
+        onChange={(e) => handleTextInputChange("sexuality", e.target.value)}
+      />
+
+      <RadioInputGroup
+        radioInputs={[
+          {
+            name: "smoking",
+            label: "Smokes",
+            value: "smokes",
+            checked: moreDetails.smoking === "smokes",
+            onChange: () => handleRadioInputChange("smoking", "smokes")
+          },
+          {
+            name: "smoking",
+            label: "Doesn't Smoke",
+            value: "doesn't smoke",
+            checked: moreDetails.smoking === "doesn't smoke",
+            onChange: () => handleRadioInputChange("smoking", "doesn't smoke")
+          },
+          {
+            name: "smoking",
+            label: "Sometimes Smokes",
+            value: "sometimes smokes",
+            checked: moreDetails.smoking === "sometimes smokes",
+            onChange: () => handleRadioInputChange("smoking", "sometimes smokes")
+          }
+        ]}
+      />
+
+      <RadioInputGroup
+        radioInputs={[
+          {
+            name: "drinking",
+            label: "Does Drink",
+            value: "does drink",
+            checked: moreDetails.drinking === "does drink",
+            onChange: () => handleRadioInputChange("drinking", "does drink")
+          },
+          {
+            name: "drinking",
+            label: "Doesn't Drink",
+            value: "doesn't drink",
+            checked: moreDetails.drinking === "doesn't drink",
+            onChange: () => handleRadioInputChange("drinking", "doesn't drink")
+          },
+          {
+            name: "drinking",
+            label: "Sometimes Drinks",
+            value: "sometimes drinks",
+            checked: moreDetails.drinking === "sometimes drinks",
+            onChange: () => handleRadioInputChange("drinking", "sometimes drinks")
+          }
+        ]}
+      />
+
+      <TextInput
+        label="MTBI:"
+        value={moreDetails.mtbi}
+        onChange={(e) => handleTextInputChange("mtbi", e.target.value)}
+      />
+      <TextInput
+        label="Astrological Sign:"
+        value={moreDetails.astrologicalSign}
+        onChange={(e) => handleTextInputChange("astrologicalSign", e.target.value)}
+      />
+      <TextInput
+        label="Height:"
+        value={moreDetails.height}
+        onChange={(e) => handleTextInputChange("height", e.target.value)}
+      />
+      <TextInput
+        label="Religion:"
+        value={moreDetails.religion}
+        onChange={(e) => handleTextInputChange("religion", e.target.value)}
+      />
+
+      <RadioInputGroup
+        radioInputs={[
+          {
+            name: "politicalAffiliation",
+            label: "Liberal",
+            value: "liberal",
+            checked: moreDetails.politicalAffiliation === "liberal",
+            onChange: () => handleRadioInputChange("politicalAffiliation", "liberal")
+          },
+          {
+            name: "politicalAffiliation",
+            label: "Moderate",
+            value: "moderate",
+            checked: moreDetails.politicalAffiliation === "moderate",
+            onChange: () => handleRadioInputChange("politicalAffiliation", "moderate")
+          },
+          {
+            name: "politicalAffiliation",
+            label: "Conservative",
+            value: "conservative",
+            checked: moreDetails.politicalAffiliation === "conservative",
+            onChange: () => handleRadioInputChange("politicalAffiliation", "conservative")
+          },
+          {
+            name: "politicalAffiliation",
+            label: "Not Political",
+            value: "not political",
+            checked: moreDetails.politicalAffiliation === "not political",
+            onChange: () => handleRadioInputChange("politicalAffiliation", "not political")
+          },
+          {
+            name: "politicalAffiliation",
+            label: "Other",
+            value: "other",
+            checked: moreDetails.politicalAffiliation === "other",
+            onChange: () => handleRadioInputChange("politicalAffiliation", "other")
+          }
+        ]}
+      />
+
       <div className="">
-        {/* Jobtitle */}
-        <label>
-          Job Title
-          <input
-            type="text"
-            className="text-black border-solid border-2 border-red-500"
-            value={jobTitle}
-            onChange={(e) => setJobTitle(e.target.value)}
-          />
-        </label>
-        {/* School */}
-        <label>
-          School
-          <input
-            type="text"
-            className="text-black border-solid border-2 border-red-500"
-            value={school}
-            onChange={(e) => setSchool(e.target.value)}
-          />
-        </label>
-        {/* Hometown */}
-        <label>
-          Hometown
-          <input
-            type="text"
-            className="text-black border-solid border-2 border-red-500"
-            value={hometown}
-            onChange={(e) => setHometown(e.target.value)}
-          />
-        </label>
-        {/*Sexuality*/}
-        <label>
-          Sexuality
-          <input
-            type="text"
-            className="text-black border-solid border-2 border-red-500"
-            value={sexuality}
-            onChange={(e) => setSexuality(e.target.value)}
-          />
-        </label>
-        {/* smoking */}
-        <div>
-          <label>
-            <input
-              type="radio"
-              name="smoking"
-              value="smoker"
-              checked={smoking === "smoker"}
-              onChange={handleRadioChange(e, "smoking")}
-            />
-            Smoker
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="smoking"
-              value="nonsmoker"
-              checked={smoking === "nonsmoker"}
-              onChange={handleRadioChange(e, "smoking")}
-            />
-            NonSmoker
-          </label>
-        </div>
-        {/* Drinking*/}
-        <div>
-          <label>
-            <input
-              type="radio"
-              name="drinking"
-              value="socialDrinker"
-              checked={drinking === "socialDrinker"}
-              onChange={handleRadioChange(e, "drinking")}
-            />
-            social drinker
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="drinking"
-              value="nondrinker"
-              checked={drinking === "nondrinker"}
-              onChange={handleRadioChange(e, "drinking")}
-            />
-            doesnt drink
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="drinking"
-              value="drinker"
-              checked={drinking === "drinker"}
-              onChange={handleRadioChange(e, "drinking")}
-            />
-            drinks
-          </label>
-        </div>
-        {/* MBTI */}
-        <label>
-          MBTI
-          <input
-            type="text"
-            className="text-black border-solid border-2 border-red-500"
-            value={mbti}
-            onChange={(e) => setMBTI(e.target.value)}
-          />
-        </label>
-        <label>
-          Astrological Sign
-          <input
-            type="text"
-            className="text-black border-solid border-2 border-red-500"
-            value={astrologicalSign}
-            onChange={(e) => setAstrologicalSign(e.target.value)}
-          />
-          {/* TODO: make function to determine astro sign for this with toggle */}
-        </label>
-        <label>
-          Height
-          <input
-            type="text"
-            className="text-black border-solid border-2 border-red-500"
-            value={height}
-            onChange={(e) => setHeight(e.target.value)}
-          />
-          {/* TODO: scroll selection */}
-        </label>
-        <label>
-          Religion
-          <input
-            type="text"
-            className="text-black border-solid border-2 border-red-500"
-            value={religion}
-            onChange={(e) => setReligion(e.target.value)}
-          />
-        </label>
-        {/* politics*/}
-        <div>
-          <label>
-            <input
-              type="radio"
-              name="politics"
-              value="liberal"
-              checked={politics === "liberal"}
-              onChange={handleRadioChange(e, "politics")}
-            />
-            Liberal
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="politics"
-              value="moderate"
-              checked={politics === "moderate"}
-              onChange={handleRadioChange(e, "politics")}
-            />
-            Moderate
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="politics"
-              value="conservative"
-              checked={politics === "conservative"}
-              onChange={handleRadioChange(e, "politics")}
-            />
-            Conservative
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="politics"
-              value="nonPolitical"
-              checked={politics === "nonPolitical"}
-              onChange={handleRadioChange(e, "politics")}
-            />
-            Not Political
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="politics"
-              value="other"
-              checked={politics === "other"}
-              onChange={handleRadioChange(e, "politics")}
-            />
-            Other
-          </label>
-        </div>
         <button id="details-continue" type="submit">
           Continue
         </button>
-        {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
     </form>
   );
