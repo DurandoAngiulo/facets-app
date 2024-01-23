@@ -1,8 +1,44 @@
 import { forwardRef } from "react";
 import styles from "./Icon.module.css";
 import next from "@/svg/next.svg";
+import closeX from "@/svg/close-x.svg"; //top right of profile
+import diamondFilled from "@/svg/diamond-filled.svg";
+import diamondLine from "@/svg/diamond-line.svg";
+import dots from "@/svg/dots.svg"; //3 dots at top L of profile
+import edit from "@/svg/edit.svg";
+import heart from "@/svg/heart.svg";
+import link from "@/svg/link.svg";
+import logoF from "@/svg/logo-F.svg";
+import logoWord from "@/svg/logo-word.svg";
+import messageDots from "@/svg/message-dots.svg"; //shown on Facet responses to start convo
+import messageFilled from "@/svg/message-filled.svg";
+import messageLine from "@/svg/message-line.svg";
+import plus from "@/svg/plus.svg";
+import profileFilled from "@/svg/profile-filled.svg";
+import profileLine from "@/svg/profile-line.svg";
+import refresh from "@/svg/refresh.svg";
+import shuffle from "@/svg/shuffle.svg";
 
-export const iconRegistry = { next };
+export const iconRegistry = {
+  next,
+  closeX,
+  diamondFilled,
+  diamondLine,
+  dots,
+  edit,
+  heart,
+  link,
+  logoF,
+  logoWord,
+  messageDots,
+  messageFilled,
+  messageLine,
+  plus,
+  profileFilled,
+  profileLine,
+  refresh,
+  shuffle
+};
 
 type IconNames = keyof typeof iconRegistry;
 
