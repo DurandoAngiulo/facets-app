@@ -1,6 +1,5 @@
 import { forwardRef } from "react";
-import styles from "./Icon.module.css";
-import next from "@/svg/next.svg";
+
 import closeX from "@/svg/close-x.svg"; //top right of profile
 import diamondFilled from "@/svg/diamond-filled.svg";
 import diamondLine from "@/svg/diamond-line.svg";
@@ -13,11 +12,14 @@ import logoWord from "@/svg/logo-word.svg";
 import messageDots from "@/svg/message-dots.svg"; //shown on Facet responses to start convo
 import messageFilled from "@/svg/message-filled.svg";
 import messageLine from "@/svg/message-line.svg";
+import next from "@/svg/next.svg";
 import plus from "@/svg/plus.svg";
 import profileFilled from "@/svg/profile-filled.svg";
 import profileLine from "@/svg/profile-line.svg";
 import refresh from "@/svg/refresh.svg";
 import shuffle from "@/svg/shuffle.svg";
+
+import styles from "./Icon.module.css";
 
 export const iconRegistry = {
   next,
