@@ -146,5 +146,9 @@ https://github.com/mrpaulphan/drexel-attendance
 
 ## 1-18-24
 
-- fixed onboarding and friendfacets bugs
+- fixed onboarding and friendfacets bugs (one bug still outstanding that is inprogress)
 - more details still in progress
+
+## 1-20-24
+
+- moredetails page added to user flow and occupation page is tweaked
