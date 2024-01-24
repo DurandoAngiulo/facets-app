@@ -28,9 +28,9 @@
       "@/constants/*": ["./src/constants/*"],
       "@/services/*": ["./src/services/*"],
       "@/dashboard/*": ["./src/app/dashboard/*"],
-      "@/svg/*": [".src/app/components/svg"]
+      "@/svg/*": ["./src/components/svg/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/page.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }
