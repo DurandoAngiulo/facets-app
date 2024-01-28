@@ -105,7 +105,7 @@ const ReferralPageVerifcation = ({ pageReferralId, setVerificationState }) => {
       <div className="">
         <h1>Text explaining facets and whats gonna happen</h1>
         <p>
-          the rest of t this page below will be hidden until the continue button is pressehis page below will be hidden
+          the rest of this page below will be hidden until the continue button is pressehis page below will be hidden
           until the continue button is pressed
         </p>
         <p>Then the rest of the verifcation page will translate in and the header will translate out</p>

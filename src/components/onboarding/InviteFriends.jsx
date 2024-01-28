@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { getReferralLink } from "@/utils/util-functions";
 
 export const InviteFriends = ({ handleUpdateProfile }) => {
   const { currentUser } = useAuth();
-  const referralLink = getReferralLink(currentUser?.profile?.referralID);
+  const [referralLink, setReferralLink] = useState(null);
+  console.log(currentUser);
+  useEffect(() => {
+    if (currentUser?.profile?.referralID) {
+      const link = getReferralLink(currentUser?.profile?.referralID);
+      setReferralLink(link);
+    }
+  }, [currentUser]);
+
   const handleClick = () => {
     handleUpdateProfile({
       onboardingStep: 15
     });
   };
-  //TODO: fix this/ask paul
+
+  if (!referralLink) {
+    return <p>Loading referral link...</p>;
+  }
+
   return (
     <>
       <p>Invite Friends using this link {referralLink}</p>

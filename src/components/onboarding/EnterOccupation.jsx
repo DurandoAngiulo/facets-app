@@ -34,7 +34,7 @@ export const EnterOccupation = ({ handleUpdateProfile }) => {
         <RadioInput
           label="part-time employed"
           value="part-time-employed"
-          checked={occupation === "part-time employed"}
+          checked={occupation === "part-time-employed"}
           onChange={handleOccupationChange}
           name="occupation"
         />
