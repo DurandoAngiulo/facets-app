@@ -24,4 +24,25 @@ const getReferralLink = (id) => {
   return `${baseUrl}/referrals/${id}`;
 };
 
-export { capitalizeFirstLetter, generateUniqueUid, replaceNameInString, getReferralLink };
+const calculateAge = (dateString) => {
+  const today = new Date();
+  const birthDate = new Date(dateString);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const month = today.getMonth() - birthDate.getMonth();
+
+  // If the birth month has not occurred yet in the current year,
+  // or if the birth month is occurring in the current month but the birth day hasn't passed yet,
+  // subtract one year from the age.
+  if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+
+  return age;
+};
+
+// Example usage:
+const dateOfBirth = "2001-10-05";
+const age = calculateAge(dateOfBirth);
+console.log("Age:", age); // Output will be the person's age in years
+
+export { capitalizeFirstLetter, generateUniqueUid, replaceNameInString, getReferralLink, calculateAge };

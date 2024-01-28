@@ -10,7 +10,7 @@ export const InviteFriends = ({ handleUpdateProfile }) => {
       onboardingStep: 15
     });
   };
-
+  //TODO: fix this/ask paul
   return (
     <>
       <p>Invite Friends using this link {referralLink}</p>

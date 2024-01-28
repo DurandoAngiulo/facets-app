@@ -36,6 +36,7 @@ const createProfile = async (userUID, isGuest) => {
       ageRange: "",
       location: "",
       occupation: "",
+      bio: "",
       moreDetails: {
         sexuality: "",
         jobTitle: "",
@@ -210,6 +211,36 @@ const getUserByReferralId = async (referralId) => {
   }
 };
 
+const getProfiles = async (referralId) => {
+  try {
+    const collectionRef = collection(db, FIREBASE.COLLECTIONS.PROFILES);
+    const q = query(collectionRef, where("referralID", "!=", referralId), where("role", "==", "member"));
+
+    // Execute the query
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      console.log("No profile found");
+      return [];
+    }
+
+    // Extract data from each document in the querySnapshot
+    const profiles = [];
+    querySnapshot.forEach((doc) => {
+      profiles.push({
+        id: doc.id,
+        ...doc.data()
+      });
+    });
+
+    return profiles;
+  } catch (error) {
+    console.error("Error fetching profiles:", error);
+    // You might want to handle the error in a more appropriate way for your application
+    throw error;
+  }
+};
+
 export {
   createProfile,
   getProfileById,
@@ -217,5 +248,6 @@ export {
   referralIdValidation,
   createGuestProfile,
   getUserByReferralId,
-  updateFacet
+  updateFacet,
+  getProfiles
 };

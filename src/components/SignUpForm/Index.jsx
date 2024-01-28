@@ -12,7 +12,7 @@ import styles from "./styles.module.css";
 
 const SignUpForm = () => {
   const { registerAndLogin, currentUser } = useAuth();
-  const [phoneNumber, setPhoneNumber] = useState("+12676256168");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [error, setError] = useState(null);
 
   const auth = getAuth();
