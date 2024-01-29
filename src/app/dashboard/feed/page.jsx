@@ -31,6 +31,7 @@ const Index = () => {
 
   return (
     <div>
+      <DashboardLayout />
       <Navbar activePage={"Feed"} />
 
       <div>

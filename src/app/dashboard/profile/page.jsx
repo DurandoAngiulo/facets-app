@@ -9,6 +9,7 @@ const Index = () => {
   // console.log(currentUser)
   return (
     <div>
+      <DashboardLayout />
       <Navbar activePage={"Profile"} />
       <div>profile</div>
     </div>
