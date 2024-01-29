@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import DashboardLayout from "@/components/layouts/DashboardLayout";
+import Navbar from "@/components/Navbar/Index";
 import SummaryCard from "@/components/SummaryCard/Index.jsx";
 import { getProfiles } from "@/services/profile-service"; // Import getProfiles function
 
@@ -29,7 +30,9 @@ const Index = () => {
   }, [currentUser]);
 
   return (
-    <DashboardLayout>
+    <div>
+      <Navbar activePage={"Feed"} />
+
       <div>
         {profiles.map((profile) => (
           <SummaryCard
@@ -42,7 +45,7 @@ const Index = () => {
           />
         ))}
       </div>
-    </DashboardLayout>
+    </div>
   );
 };
 
