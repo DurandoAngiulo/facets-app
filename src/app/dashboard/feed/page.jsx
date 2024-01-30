@@ -19,6 +19,7 @@ const Index = () => {
           setProfiles(profilesData);
           //TODO: add prompt population
           // const prompt = currentUser.profile.personalfacet;
+          console.log(profiles, "profiles!");
         } catch (error) {
           console.error("Error fetching profiles:", error);
         }
@@ -33,12 +34,13 @@ const Index = () => {
       <div>
         {profiles.map((profile) => (
           <SummaryCard
-            key={currentUser.uid} // Assuming each profile has a unique ID
+            key={profile.id} // Assuming each profile has a unique ID
             name={profile.firstName}
             pronouns={profile.pronouns}
             birthday={profile.birthday}
             occupation={profile.occupation}
             location={profile.location}
+            profileId={profile.id}
           />
         ))}
       </div>

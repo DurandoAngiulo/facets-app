@@ -232,7 +232,7 @@ const getProfiles = async (referralId) => {
         ...doc.data()
       });
     });
-
+    // console.log(profiles);
     return profiles;
   } catch (error) {
     console.error("Error fetching profiles:", error);

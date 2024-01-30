@@ -1,6 +1,5 @@
 import "firebase/auth";
 
-import { createProfile, getProfileById } from "@/services/profile-service";
 import { RecaptchaVerifier, getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
 
