@@ -30,23 +30,24 @@ const Index = () => {
   }, [currentUser]);
 
   return (
-    <div>
-      <DashboardLayout />
-      <Navbar activePage={"Feed"} />
-
+    <DashboardLayout>
       <div>
-        {profiles.map((profile) => (
-          <SummaryCard
-            key={currentUser.uid} // Assuming each profile has a unique ID
-            name={profile.firstName}
-            pronouns={profile.pronouns}
-            birthday={profile.birthday}
-            occupation={profile.occupation}
-            location={profile.location}
-          />
-        ))}
+        <Navbar activePage={"Feed"} />
+
+        <div>
+          {profiles.map((profile) => (
+            <SummaryCard
+              key={currentUser.uid} // Assuming each profile has a unique ID
+              name={profile.firstName}
+              pronouns={profile.pronouns}
+              birthday={profile.birthday}
+              occupation={profile.occupation}
+              location={profile.location}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+    </DashboardLayout>
   );
 };
 
