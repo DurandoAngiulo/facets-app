@@ -39,7 +39,7 @@ const Navbar = ({ activePage }) => {
               </Link>
             </li>
             <li>
-              <Link href="/dashboard/profile" className={activePage === "Profile" ? "active" : ""}>
+              <Link href="/dashboard/feed" className={activePage === "Profile" ? "active" : ""}>
                 {activePage === "Profile" ? (
                   <ActiveIcon />
                 ) : (

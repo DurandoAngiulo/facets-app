@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { extractIdFromUrl } from "@/utils/util-functions";
 import { getProfileById } from "@/services/profile-service";
 import { calculateAge } from "@/utils/util-functions.js";
+import Navbar from "@/components/Navbar/Index";
 
 const Index = () => {
   const { currentUser } = useAuth();
