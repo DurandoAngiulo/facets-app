@@ -1,6 +1,5 @@
 import "firebase/auth";
 
-// import { createGuestProfile, getProfileById } from "@/services/profile-service";
 import { RecaptchaVerifier, getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
 
@@ -41,26 +40,6 @@ const ReferralPageVerifcation = ({ pageReferralId, setVerificationState }) => {
       const profileData = user?.profile;
       profileData.uid = user.uid;
       setGuestProfile(profileData);
-
-      // if (profileData) {
-      //   if (profileData.referralID === pageReferralId) {
-      //     return <p>You cannot edit your own facet</p>;
-      //   }
-      //   console.log(facetOwner.friendFacets, "facet owner");
-      //   console.log(user.uid, "guestUser");
-      //   if (
-      //     facetOwner?.friendFacets?.some((facet) => {
-      //       // facet.respondantUserId === user.uid;
-      //       console.log(facet.respondantUserId, "facet respondant id");
-      //       console.log(user.uid, "guestUser");
-      //     })
-      //   ) {
-      //     return <p>You already inputted a respond for this friend`&apos;`s facet</p>;
-      //   }
-      //   //otherwise route them/render friend facet creation screen
-      //   setVerificationState(true);
-      //   return;
-      // }
 
       //redirect to profile creation flow
     } catch (error) {

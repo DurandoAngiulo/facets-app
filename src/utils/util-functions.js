@@ -40,9 +40,17 @@ const calculateAge = (dateString) => {
   return age;
 };
 
-// Example usage:
-const dateOfBirth = "2001-10-05";
-const age = calculateAge(dateOfBirth);
-console.log("Age:", age); // Output will be the person's age in years
+const extractIdFromUrl = (url) => {
+  const parts = url.split("/");
+  const idIndex = parts.indexOf("profile") + 1; // Get the index of 'profile' and add 1 to get the index of ID
+  return parts[idIndex];
+};
 
-export { capitalizeFirstLetter, generateUniqueUid, replaceNameInString, getReferralLink, calculateAge };
+export {
+  capitalizeFirstLetter,
+  generateUniqueUid,
+  replaceNameInString,
+  getReferralLink,
+  calculateAge,
+  extractIdFromUrl
+};
