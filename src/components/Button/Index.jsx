@@ -8,7 +8,7 @@ const PrimaryButton = ({ label, active, disabled, icon, iconleft }) => {
         background: active ? "var(--button-gradient) " : "radial-gradient(circle, #F0EFEF, var(--background))",
         opacity: disabled ? "0.5" : "1"
       }}
-      className="w-72 h-9 p-2 rounded border flex items-center justify-center gap-2"
+      className="w-full h-12 rounded border flex items-center justify-center gap-2"
     >
       {iconleft && icon && (
         <div
@@ -44,10 +44,9 @@ const SecondaryButton = ({ label, active, disabled, icon, iconleft }) => {
     <div
       style={{
         borderColor: active ? "var(--text)" : "var(--element-subtle)",
-        background: "var(--background);",
         opacity: disabled ? "0.5" : "1"
       }}
-      className="w-72 h-9 p-2 rounded border border-solid justify-center items-center gap-2.5 inline-flex"
+      className="w-full h-12 rounded border border-solid justify-center items-center gap-2.5 inline-flex"
     >
       {iconleft && icon && (
         <div

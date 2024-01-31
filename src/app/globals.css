@@ -86,6 +86,12 @@ p {
   font-weight: var(--weight-normal);
 }
 
+.page {
+  max-width: 480px;
+  margin: auto;
+  height: 100vh;
+  padding: 0 24px;
+}
 .semibold {
   font-family: var(--font-body-semibold);
 }
