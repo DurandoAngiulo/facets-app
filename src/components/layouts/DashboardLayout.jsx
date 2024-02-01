@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 const DashboardLayout = ({ children }) => {
   const pathname = usePathname();
   const isFeed = pathname.includes("/feed");
-  const isProfile = pathname.includes("/profile");
+  const isProfile = pathname.includes("/userProfile");
   const isMessage = pathname.includes("/messages");
   console.log(isFeed, isProfile, isMessage, "data");
   return (
