@@ -11,9 +11,9 @@ const Navbar = ({ activePage }) => {
     if (isFeed) {
       return <Icon iconName="diamondFilled" className="w-9 h-9" />;
     } else if (isProfile) {
-      return <Icon iconName="messageFilled" className="w-9 h-9" />;
-    } else if (isMessage) {
       return <Icon iconName="profileFilled" className="w-9 h-9" />;
+    } else if (isMessage) {
+      return <Icon iconName="messageFilled" className="w-9 h-9" />;
     } else {
       return null; // Handle other cases if needed
     }
@@ -26,22 +26,22 @@ const Navbar = ({ activePage }) => {
         <div className="w-full h-20 bg-white shadow-[0_4px_13.9px_0px_rgba(0,0,0,0.3)] flex-col justify-center items-center pt-2 pb-6 inline-flex">
           <ul className="justify-start items-center gap-10 pt-2 inline-flex">
             <li>
-              <Link href="/dashboard/feed" className={activePage === "Feed" ? "active" : ""}>
-                {activePage === "Feed" ? (
+              <Link href="/dashboard/feed" className={isFeed ? "active" : ""}>
+                {isFeed ? <ActiveIcon /> : <Icon style={{ fill: "none" }} iconName="diamondLine" className="w-9 h-9" />}
+              </Link>
+            </li>
+            <li>
+              <Link href="/dashboard/messages" className={isMessage ? "active" : ""}>
+                {isMessage ? (
                   <ActiveIcon />
                 ) : (
-                  <Icon style={{ fill: "none" }} iconName="diamondLine" className="w-9 h-9" />
+                  <Icon style={{ fill: "none" }} iconName="messageLine" className="w-9 h-9" />
                 )}
               </Link>
             </li>
             <li>
-              <Link href="/dashboard/messages" className={activePage === "Messages" ? "active" : ""}>
-                <Icon iconName="messageLine" className="w-9 h-9" />
-              </Link>
-            </li>
-            <li>
-              <Link href="/dashboard/userProfile" className={activePage === "Profile" ? "active" : ""}>
-                {activePage === "Profile" ? (
+              <Link href="/dashboard/userProfile" className={isProfile ? "active" : ""}>
+                {isProfile ? (
                   <ActiveIcon />
                 ) : (
                   <Icon style={{ fill: "none" }} iconName="profileLine" className="w-9 h-9" />
