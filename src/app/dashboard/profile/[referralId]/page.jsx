@@ -22,8 +22,9 @@ const Index = () => {
     const FacetCard = ({ response }) => {
       return (
         <li key={response.id} className="border border-green">
-          <p>{response.prompt}</p>
-          <p>{response.response}</p>
+          <img src="https://placehold.co/50x50" />
+          <p className="text-s">{response.prompt}</p>
+          <p className="bold text-m text-purple-600">{response.response}</p>
         </li>
       );
     };
@@ -58,11 +59,19 @@ const Index = () => {
 
     const transformFriendsFacets = async () => {
       const personalFacets = profileInformation.personalFacet || [];
-      const uniquePersonalPromptIds = new Set(personalFacets.map((response) => response.prompt_id));
+      const uniquePersonalPromptIds = new Set(
+        personalFacets
+          .flatMap((facet) => facet.responses)
+          .map((response) => response.prompt_id)
+          .filter((id) => id) // Filter out falsy values, including empty strings
+      );
 
       const friendFacets = profileInformation.friendFacets || [];
       const uniqueFriendPromptIds = new Set(
-        friendFacets.flatMap((facet) => facet.responses.map((response) => response.prompt_id))
+        friendFacets
+          .flatMap((facet) => facet.responses)
+          .map((response) => response.prompt_id)
+          .filter((id) => id) // Filter out falsy values, including empty strings
       );
 
       const combinedUniquePromptIds = new Set([...uniqueFriendPromptIds, ...uniquePersonalPromptIds]);
@@ -71,16 +80,20 @@ const Index = () => {
       const friendPrompts = await getPrompts(FIREBASE.COLLECTIONS.FRIENDPROMPTS, uniquePromptIdsArray);
       const userPrompts = await getPrompts(FIREBASE.COLLECTIONS.USERPROMPTS, uniquePromptIdsArray);
 
-      friendFacets.map((facet) => {
+      friendFacets?.map((facet) => {
         facet.responses.map((response) => {
+          if (!response.prompt_id || !response.prompt_id) return;
           const prompt = friendPrompts.data.find((prompt) => prompt.id === response.prompt_id);
           response.prompt = prompt.prompt;
         });
       });
 
-      personalFacets.map((response) => {
-        const prompt = userPrompts.data.find((prompt) => prompt.id === response.prompt_id);
-        response.prompt = prompt.prompt;
+      personalFacets?.map((facet) => {
+        facet.responses.map((response) => {
+          if (!response.prompt_id || !response.prompt_id) return;
+          const prompt = userPrompts.data.find((prompt) => prompt.id === response.prompt_id);
+          response.prompt = prompt.prompt;
+        });
       });
 
       // modified personalFacets to match friend Facets

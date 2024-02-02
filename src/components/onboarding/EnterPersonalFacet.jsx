@@ -67,7 +67,7 @@ export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
       ];
 
       handleUpdateProfile({
-        personalFacet: [{ response: updatedFacetResponses }],
+        personalFacet: [{ responses: updatedFacetResponses }],
         onboardingStep: 11
       });
 

@@ -52,9 +52,13 @@ const createProfile = async (userUID, isGuest) => {
         politicalAffiliation: ""
       },
       personalFacet: [
-        { prompt_id: "", response: "" },
-        { prompt_id: "", response: "" },
-        { prompt_id: "", response: "" }
+        {
+          responses: [
+            { prompt_id: "", response: "" },
+            { prompt_id: "", response: "" },
+            { prompt_id: "", response: "" }
+          ]
+        }
       ],
       friendFacets: [
         {
