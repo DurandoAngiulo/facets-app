@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { capitalizeFirstLetter } from "@/utils/util-functions";
-import { getRandomPrompts } from "@/services/prompt.service";
+import { useEffect, useState } from "react";
+
 import FIREBASE from "@/constants/firebase";
+import { getRandomPrompts } from "@/services/prompt.service";
+import { capitalizeFirstLetter } from "@/utils/util-functions";
 
 export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
   const [promptArray, setPromptArray] = useState([]);
@@ -66,7 +67,7 @@ export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
       ];
 
       handleUpdateProfile({
-        personalFacet: updatedFacetResponses,
+        personalFacet: [{ response: updatedFacetResponses }],
         onboardingStep: 11
       });
 

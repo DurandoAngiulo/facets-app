@@ -84,7 +84,7 @@ const Index = () => {
       });
 
       // modified personalFacets to match friend Facets
-      setFacetGroups({ friendFacets, personalFacets: [{ responses: personalFacets }] });
+      setFacetGroups({ friendFacets, personalFacets });
     };
 
     transformFriendsFacets();
