@@ -1,15 +1,25 @@
-import { doc, getDoc, getDocs, setDoc, updateDoc, collection, where, query, limit } from "firebase/firestore";
-import FIREBASE from "@/constants/firebase";
+import { collection, getDocs } from "firebase/firestore";
+
 import { db } from "@/lib/firebase";
 
-async function getPrompts(promptTable) {
+/**
+ *
+ * @param {*} promptTable
+ * @param {*} [filteredPromptIds=[]] - Array of prompt ids (Strings) to filteredPromptIds
+ * @return {*}
+ */
+async function getPrompts(promptTable, filteredPromptIds = []) {
   const collectionRef = collection(db, promptTable);
   const querySnapshot = await getDocs(collectionRef);
 
   let prompts = [];
 
   querySnapshot.forEach((doc) => {
-    prompts.push({ id: doc.id, ...doc.data() });
+    if (filteredPromptIds.length > 0) {
+      prompts = filteredPromptIds.includes(doc.id) ? [...prompts, { id: doc.id, ...doc.data() }] : prompts;
+    } else {
+      prompts.push({ id: doc.id, ...doc.data() });
+    }
   });
 
   return {
@@ -34,4 +44,4 @@ async function getRandomPrompts(promptTable, limit = 3) {
   return randomPrompts;
 }
 
-export { getRandomPrompts };
+export { getPrompts, getRandomPrompts };

@@ -58,20 +58,28 @@ export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
       const capInputTwo = capitalizeFirstLetter(inputTwo);
       const capInputThree = capitalizeFirstLetter(inputThree);
 
-      setPersonalFacet({
-        ...personalFacet,
-        facetResponseOne: capInputOne,
-        facetResponseTwo: capInputTwo,
-        facetResponseThree: capInputThree
+      // Use the state values for prompt IDs
+      const updatedFacetResponses = [
+        { prompt_id: personalFacet.facetPromptOneID, response: capInputOne },
+        { prompt_id: personalFacet.facetPromptTwoID, response: capInputTwo },
+        { prompt_id: personalFacet.facetPromptThreeID, response: capInputThree }
+      ];
+
+      handleUpdateProfile({
+        personalFacet: updatedFacetResponses,
+        onboardingStep: 11
       });
 
+      // Don't think we need to reset the facets, just update the responses
+      // setPersonalFacet(updatedFacetResponses);
+
       // Call handleUpdateProfile in the callback of setPersonalFacet to ensure the state is updated
-      setPersonalFacet((updatedFacet) => {
-        handleUpdateProfile({
-          personalFacet: updatedFacet,
-          onboardingStep: 11
-        });
-      });
+      // setPersonalFacet((updatedFacet) => {
+      //   handleUpdateProfile({
+      //     personalFacet: updatedFacet,
+      //     onboardingStep: 11
+      //   });
+      // });
     }
   };
 
