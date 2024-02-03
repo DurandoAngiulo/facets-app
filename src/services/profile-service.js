@@ -1,8 +1,9 @@
-import { doc, getDoc, getDocs, setDoc, updateDoc, collection, where, query, limit } from "firebase/firestore";
-import { generateUniqueUid } from "@/utils/util-functions";
+import { collection, doc, getDoc, getDocs, limit, query, setDoc, updateDoc, where } from "firebase/firestore";
+
 import FIREBASE from "@/constants/firebase";
 import { PROFILE_MODEL } from "@/constants/model";
 import { db } from "@/lib/firebase";
+import { generateUniqueUid } from "@/utils/util-functions";
 
 const getProfileById = async (userUID) => {
   const docRef = doc(db, FIREBASE.COLLECTIONS.PROFILES, userUID);
@@ -50,27 +51,16 @@ const createProfile = async (userUID, isGuest) => {
         religion: "",
         politicalAffiliation: ""
       },
-      personalFacet: {
-        facetPromptOneID: "",
-        facetPromptTwoID: "",
-        facetPromptThreeID: "",
-        facetResponseOne: "",
-        facetResponseTwo: "",
-        facetResponseThree: ""
-      },
-      friendFacets: [
+      personalFacet: [
         {
           responses: [
             { prompt_id: "", response: "" },
             { prompt_id: "", response: "" },
             { prompt_id: "", response: "" }
-          ],
-          friendshipPeriod: "",
-          last_updated: "",
-          createdAt: "",
-          respondantUserId: ""
+          ]
         }
-      ]
+      ],
+      friendFacets: []
     };
     await setDoc(doc(db, FIREBASE.COLLECTIONS.PROFILES, userUID), profileFields);
     return {
@@ -242,12 +232,12 @@ const getProfiles = async (referralId) => {
 };
 
 export {
+  createGuestProfile,
   createProfile,
   getProfileById,
-  updateProfile,
-  referralIdValidation,
-  createGuestProfile,
+  getProfiles,
   getUserByReferralId,
+  referralIdValidation,
   updateFacet,
-  getProfiles
+  updateProfile
 };

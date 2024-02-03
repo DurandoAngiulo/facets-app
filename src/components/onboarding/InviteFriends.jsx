@@ -3,15 +3,15 @@ import { useAuth } from "@/context/AuthContext";
 import { getReferralLink } from "@/utils/util-functions";
 
 export const InviteFriends = ({ handleUpdateProfile }) => {
-  const { currentUser } = useAuth();
+  const { currentUser, currentUserProfile } = useAuth();
   const [referralLink, setReferralLink] = useState(null);
-  console.log(currentUser);
+  console.log(currentUser, currentUserProfile);
   useEffect(() => {
     if (currentUser?.profile?.referralID) {
       const link = getReferralLink(currentUser?.profile?.referralID);
       setReferralLink(link);
     }
-  }, [currentUser]);
+  }, [currentUser?.profile]);
 
   const handleClick = () => {
     handleUpdateProfile({

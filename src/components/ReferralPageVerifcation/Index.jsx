@@ -88,7 +88,7 @@ const ReferralPageVerifcation = ({ pageReferralId, setVerificationState }) => {
           until the continue button is pressed
         </p>
         <p>Then the rest of the verifcation page will translate in and the header will translate out</p>
-        {/* //TODO: talk to paul about name insertion */}
+        <p>{facetOwner?.firstName}</p>
         <h3></h3>
         <p>verify you are human</p>
         <label>
@@ -122,6 +122,7 @@ const ReferralPageVerifcation = ({ pageReferralId, setVerificationState }) => {
         const userFacet = await getUserByReferralId(pageReferralId); // Replace 'yourReferralId' with the actual value
         // console.log(userFacet); // Log the fetched data
         setFacetOwner(userFacet); // Update the state with the fetched data
+        console.log(facetOwner);
       } catch (error) {
         console.error("Error fetching facet owner:", error);
       }

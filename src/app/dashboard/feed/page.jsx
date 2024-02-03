@@ -12,13 +12,13 @@ const Index = () => {
   console.log(currentUser);
 
   useEffect(() => {
+    console.log(currentUser, "useefect");
     const fetchProfiles = async () => {
       if (currentUser?.profile?.referralID) {
         try {
           const profilesData = await getProfiles(currentUser.profile.referralID);
           setProfiles(profilesData);
-          //TODO: add prompt population
-          // const prompt = currentUser.profile.personalfacet;
+
           console.log(profiles, "profiles!");
         } catch (error) {
           console.error("Error fetching profiles:", error);

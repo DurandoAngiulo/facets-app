@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { capitalizeFirstLetter } from "@/utils/util-functions";
-import { getRandomPrompts } from "@/services/prompt.service";
+import { useEffect, useState } from "react";
+
 import FIREBASE from "@/constants/firebase";
+import { getRandomPrompts } from "@/services/prompt.service";
+import { capitalizeFirstLetter } from "@/utils/util-functions";
 
 export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
   const [promptArray, setPromptArray] = useState([]);
@@ -58,20 +59,28 @@ export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
       const capInputTwo = capitalizeFirstLetter(inputTwo);
       const capInputThree = capitalizeFirstLetter(inputThree);
 
-      setPersonalFacet({
-        ...personalFacet,
-        facetResponseOne: capInputOne,
-        facetResponseTwo: capInputTwo,
-        facetResponseThree: capInputThree
+      // Use the state values for prompt IDs
+      const updatedFacetResponses = [
+        { prompt_id: personalFacet.facetPromptOneID, response: capInputOne },
+        { prompt_id: personalFacet.facetPromptTwoID, response: capInputTwo },
+        { prompt_id: personalFacet.facetPromptThreeID, response: capInputThree }
+      ];
+
+      handleUpdateProfile({
+        personalFacet: [{ responses: updatedFacetResponses }],
+        onboardingStep: 11
       });
 
+      // Don't think we need to reset the facets, just update the responses
+      // setPersonalFacet(updatedFacetResponses);
+
       // Call handleUpdateProfile in the callback of setPersonalFacet to ensure the state is updated
-      setPersonalFacet((updatedFacet) => {
-        handleUpdateProfile({
-          personalFacet: updatedFacet,
-          onboardingStep: 11
-        });
-      });
+      // setPersonalFacet((updatedFacet) => {
+      //   handleUpdateProfile({
+      //     personalFacet: updatedFacet,
+      //     onboardingStep: 11
+      //   });
+      // });
     }
   };
 
