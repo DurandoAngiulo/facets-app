@@ -18,12 +18,12 @@ const UngatedNavbar = () => {
         <div className="mx-auto flex flex-col gap-2 justify-center">
           <li className="mx-auto w-full">
             <Link href="/loginAndSignup">
-              <SecondaryButton label="Create account" active="true" />
+              <SecondaryButton label="Create account" active="true" onDark="true" />
             </Link>
           </li>
           <li className="mx-auto w-full">
             <Link href="/loginAndSignup">
-              <PrimaryButton label="Sign in" active="true" />
+              <PrimaryButton label="Sign in" active="true" onDark="true" />
             </Link>
           </li>
         </div>
