@@ -79,15 +79,20 @@ const createProfile = async (userUID, isGuest) => {
 
 const updateProfile = async (user, profileFields) => {
   const userProfile = user.profile;
+  const mergedProfileFields = {
+    ...userProfile,
+    ...profileFields
+  };
   try {
-    await updateDoc(doc(db, FIREBASE.COLLECTIONS.PROFILES, user.uid), {
-      ...userProfile,
-      ...profileFields
-    });
+    await updateDoc(
+      doc(db, FIREBASE.COLLECTIONS.PROFILES, user.uid),
+
+      mergedProfileFields
+    );
     return {
       data: {
         message: `profile successfully updated`,
-        profile: profileFields
+        profile: mergedProfileFields
       },
       loading: false,
       error: false
@@ -102,16 +107,16 @@ const updateProfile = async (user, profileFields) => {
 };
 
 const updateFacet = async (profile, profileFields) => {
-  const newFields = {
+  const mergedProfileFields = {
     ...profile,
     ...profileFields
   };
   try {
-    await updateDoc(doc(db, FIREBASE.COLLECTIONS.PROFILES, profile.uid), newFields);
+    await updateDoc(doc(db, FIREBASE.COLLECTIONS.PROFILES, profile.uid), mergedProfileFields);
     return {
       data: {
         message: `profile successfully updated`,
-        profile: profileFields
+        profile: mergedProfileFields
       },
       loading: false,
       error: false
@@ -205,7 +210,7 @@ const getProfiles = async (referralId) => {
   try {
     const collectionRef = collection(db, FIREBASE.COLLECTIONS.PROFILES);
     const q = query(collectionRef, where("referralID", "!=", referralId), where("role", "==", "member"));
-
+    //TODO add no incompelte profiles logic
     // Execute the query
     const querySnapshot = await getDocs(q);
 
