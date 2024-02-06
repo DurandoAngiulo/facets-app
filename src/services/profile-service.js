@@ -66,13 +66,10 @@ const createProfile = async (userUID, isGuest) => {
             { prompt_id: "", response: "" },
             { prompt_id: "", response: "" },
             { prompt_id: "", response: "" }
-          ],
-          friendshipPeriod: "",
-          last_updated: "",
-          createdAt: "",
-          respondantUserId: ""
+          ]
         }
-      ]
+      ],
+      friendFacets: []
     };
     await setDoc(doc(db, FIREBASE.COLLECTIONS.PROFILES, userUID), profileFields);
     return {
@@ -99,7 +96,8 @@ const updateProfile = async (user, profileFields) => {
     return {
       data: {
         message: `profile successfully updated`,
-        profile: profileFields
+        profile: { ...userProfile, ...profileFields },
+        user: { ...user, profile: { ...userProfile, ...profileFields } }
       },
       loading: false,
       error: false

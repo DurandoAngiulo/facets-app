@@ -1,13 +1,12 @@
 "use client";
 
+import { extractIdFromUrl, replaceNameInString } from "@/utils/util-functions";
 import { useEffect, useState } from "react";
 
-import DashboardLayout from "@/components/layouts/DashboardLayout";
 import FIREBASE from "@/constants/firebase";
 import { useAuth } from "@/context/AuthContext";
 import { getProfileById } from "@/services/profile-service";
 import { getPrompts } from "@/services/prompt.service";
-import { extractIdFromUrl } from "@/utils/util-functions";
 import { calculateAge } from "@/utils/util-functions.js";
 import { usePathname } from "next/navigation";
 
@@ -23,7 +22,7 @@ const Index = () => {
       return (
         <li key={response.id} className="border border-green">
           <img src="https://placehold.co/50x50" />
-          <p className="text-s">{response.prompt}</p>
+          <p className="text-s">{replaceNameInString(response.prompt, profileInformation?.firstName)}</p>
           <p className="bold text-m text-purple-600">{response.response}</p>
         </li>
       );
@@ -105,7 +104,7 @@ const Index = () => {
 
   // console.log(facetGroups, "facetGroups");
   return (
-    <DashboardLayout>
+    <>
       <div>
         <h2>all unstyled profile data</h2>
         <p>{profileInformation?.firstName}</p>
@@ -114,7 +113,6 @@ const Index = () => {
         <p>{profileInformation?.location}</p>
         <p>{profileInformation?.occupation}</p>
         <p>{profileInformation?.pronouns}</p>
-        <p>personalFacetprompts placeholder TBD</p>
         <div className="ml-4">
           {facetGroups.friendFacets.map((facet) => (
             <FacetGroupCard key={facet.id} facet={facet} />
@@ -125,9 +123,9 @@ const Index = () => {
             <FacetGroupCard key={facet.id} facet={facet} />
           ))}
         </div>
-        <p>image palcehodler TBD</p>
+        <p>image placeholder TBD</p>
       </div>
-    </DashboardLayout>
+    </>
   );
 };
 
