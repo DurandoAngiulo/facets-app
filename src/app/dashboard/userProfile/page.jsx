@@ -11,6 +11,7 @@ import { extractIdFromUrl } from "@/utils/util-functions";
 import { calculateAge } from "@/utils/util-functions.js";
 import { usePathname } from "next/navigation";
 import { replaceNameInString } from "@/utils/util-functions";
+import Link from "next/link";
 
 const Index = () => {
   const { currentUser } = useAuth();
@@ -108,6 +109,10 @@ const Index = () => {
   return (
     <DashboardLayout>
       <div>
+        <Link href="/dashboard/userProfile/edit">
+          <h2>edit profile</h2>
+        </Link>
+
         <h2>all unstyled profile data</h2>
         <p>{profileInformation?.firstName}</p>
         <p>{calculateAge(profileInformation?.birthday)}</p>
