@@ -46,11 +46,20 @@ const extractIdFromUrl = (url) => {
   return parts[idIndex];
 };
 
+const extractFieldFromUrl = (url) => {
+  const parts = url.split("/");
+
+  const name = parts[parts.length - 1];
+
+  return name;
+};
+
 export {
   capitalizeFirstLetter,
   generateUniqueUid,
   replaceNameInString,
   getReferralLink,
   calculateAge,
-  extractIdFromUrl
+  extractIdFromUrl,
+  extractFieldFromUrl
 };
