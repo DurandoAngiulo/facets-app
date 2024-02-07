@@ -11,8 +11,9 @@ const DashboardLayout = ({ children }) => {
   console.log(isFeed, isProfile, isMessage, "data");
   return (
     <div className="page">
-      {children}
       <Navbar activePage={[isFeed, isProfile, isMessage]} />
+      {children}
+
       {/* <MarketingFooter /> */}
     </div>
   );
