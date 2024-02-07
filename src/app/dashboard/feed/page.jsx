@@ -5,7 +5,7 @@ import { useAuth } from "@/context/AuthContext";
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 import SummaryCard from "@/components/SummaryCard/Index.jsx";
 import { getProfiles } from "@/services/profile-service"; // Import getProfiles function
-import BeveledContainer from "@/components/BeveledContainer";
+import BeveledContainer from "@/components/BeveledContainer/Index";
 
 const Index = () => {
   const { currentUser } = useAuth();
