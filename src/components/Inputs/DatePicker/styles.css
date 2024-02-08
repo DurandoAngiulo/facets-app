@@ -2,14 +2,14 @@ input {
   fill: var(--brand);
 }
 
-input:checked {
+input:active {
   accent-color: var(--brand);
 }
 label {
   border-color: var(--border);
   color: var(--text);
 }
-label:has(input:checked) {
+label:has(input:active) {
   border-color: var(--brand);
   color: var(--brand);
 }
