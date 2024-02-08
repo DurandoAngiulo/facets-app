@@ -20,6 +20,7 @@ export const EnterBirthday = ({ handleUpdateProfile }) => {
 
   return (
     <div className="page">
+      <div></div>
       <ProgressBar width="20%" step="2"></ProgressBar>
       <form onSubmit={handleSubmit}>
         {/* TODO: make birthday formatting */}
