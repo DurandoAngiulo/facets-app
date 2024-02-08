@@ -40,7 +40,9 @@ const Index = () => {
 
     return (
       <div key={facet.id} className="mt-2 border rounded border-black">
-        <h3>{facet.group_name}</h3>
+        <h3>
+          Facet By {facet.friendshipPeriod ? `A friend of ${facet.friendshipPeriod}` : profileInformation?.firstName} {}
+        </h3>
         <ul>
           {facet.responses.map((response) => (
             <FacetCard key={response.prompt_id} response={response} />
@@ -110,6 +112,7 @@ const Index = () => {
     };
 
     transformFriendsFacets();
+    console.log(profileInformation);
   }, [JSON.stringify(profileInformation)]);
 
   // console.log(facetGroups, "facetGroups");
