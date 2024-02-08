@@ -48,10 +48,6 @@
   --weight-semibold: 500;
 }
 
-body {
-  background-color: var(--background-gradient);
-}
-
 h1 {
   font-family: var(--font-header);
   font-variation-settings: "wght" var(--weight-bold);

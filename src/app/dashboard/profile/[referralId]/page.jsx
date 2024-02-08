@@ -3,11 +3,12 @@
 import { extractIdFromUrl, replaceNameInString } from "@/utils/util-functions";
 import { useEffect, useState } from "react";
 
-import FIREBASE from "@/constants/firebase";
+import BeveledContainer from "@/components/BeveledContainer";
+import Icon from "@/components/Icon";
 import { useAuth } from "@/context/AuthContext";
+import { transformUserFacets } from "@/services/facet-services";
 import { getProfileById } from "@/services/profile-service";
-import { getPrompts } from "@/services/prompt.service";
-import { calculateAge } from "@/utils/util-functions.js";
+import { calculateAge } from "@/utils/util-functions";
 import { usePathname } from "next/navigation";
 
 const Index = () => {
@@ -15,22 +16,32 @@ const Index = () => {
   const pathname = usePathname();
   const profileId = extractIdFromUrl(pathname);
   const [profileInformation, setProfileInformation] = useState("");
-  const [facetGroups, setFacetGroups] = useState({ friendFacets: [], personalFacets: [] });
 
   const FacetGroupCard = ({ facet }) => {
     const FacetCard = ({ response }) => {
       return (
         <li key={response.id} className="border border-green">
           <img src="https://placehold.co/50x50" />
-          <p className="text-s">{replaceNameInString(response.prompt, profileInformation?.firstName)}</p>
-          <p className="bold text-m text-purple-600">{response.response}</p>
+          <BeveledContainer>
+            <p style={{ color: "var(--text)" }}>
+              <i>{replaceNameInString(response.prompt, profileInformation?.firstName)}</i>
+            </p>
+            <p className="semibold" style={{ fontSize: "var(--font-size-p-md)", color: "var(--brand)" }}>
+              {response.response}
+            </p>
+            <div className="absolute bottom-4 right-4">
+              <Icon className="h-7 w-7" iconName="messageDots" />
+            </div>
+          </BeveledContainer>
         </li>
       );
     };
 
     return (
-      <div key={facet.id} className="mt-2 border rounded border-black">
-        <h3>{facet.group_name}</h3>
+      <div className="mt-2 border rounded border-black">
+        <h3>
+          Facet By {facet.friendshipPeriod ? `A friend of ${facet.friendshipPeriod}` : profileInformation?.firstName} {}
+        </h3>
         <ul>
           {facet.responses.map((response) => (
             <FacetCard key={response.prompt_id} response={response} />
@@ -56,53 +67,14 @@ const Index = () => {
   useEffect(() => {
     if (!profileInformation) return;
 
-    const transformFriendsFacets = async () => {
-      const personalFacets = profileInformation.personalFacet || [];
-      const uniquePersonalPromptIds = new Set(
-        personalFacets
-          .flatMap((facet) => facet.responses)
-          .map((response) => response.prompt_id)
-          .filter((id) => id) // Filter out falsy values, including empty strings
-      );
-
-      const friendFacets = profileInformation.friendFacets || [];
-      const uniqueFriendPromptIds = new Set(
-        friendFacets
-          .flatMap((facet) => facet.responses)
-          .map((response) => response.prompt_id)
-          .filter((id) => id) // Filter out falsy values, including empty strings
-      );
-
-      const combinedUniquePromptIds = new Set([...uniqueFriendPromptIds, ...uniquePersonalPromptIds]);
-      const uniquePromptIdsArray = Array.from(combinedUniquePromptIds);
-
-      const friendPrompts = await getPrompts(FIREBASE.COLLECTIONS.FRIENDPROMPTS, uniquePromptIdsArray);
-      const userPrompts = await getPrompts(FIREBASE.COLLECTIONS.USERPROMPTS, uniquePromptIdsArray);
-
-      friendFacets?.map((facet) => {
-        facet.responses.map((response) => {
-          if (!response.prompt_id || !response.prompt_id) return;
-          const prompt = friendPrompts.data.find((prompt) => prompt.id === response.prompt_id);
-          response.prompt = prompt.prompt;
-        });
-      });
-
-      personalFacets?.map((facet) => {
-        facet.responses.map((response) => {
-          if (!response.prompt_id || !response.prompt_id) return;
-          const prompt = userPrompts.data.find((prompt) => prompt.id === response.prompt_id);
-          response.prompt = prompt.prompt;
-        });
-      });
-
-      // modified personalFacets to match friend Facets
-      setFacetGroups({ friendFacets, personalFacets });
+    const transformFacetData = async () => {
+      const newProfile = await transformUserFacets(profileInformation);
+      setProfileInformation({ ...profileInformation, ...newProfile });
     };
 
-    transformFriendsFacets();
+    transformFacetData();
   }, [JSON.stringify(profileInformation)]);
 
-  // console.log(facetGroups, "facetGroups");
   return (
     <>
       <div>
@@ -114,12 +86,13 @@ const Index = () => {
         <p>{profileInformation?.occupation}</p>
         <p>{profileInformation?.pronouns}</p>
         <div className="ml-4">
-          {facetGroups.friendFacets.map((facet) => (
+          {profileInformation?.friendFacets?.map((facet) => (
             <FacetGroupCard key={facet.id} facet={facet} />
           ))}
         </div>
+
         <div className="ml-4">
-          {facetGroups.personalFacets.map((facet) => (
+          {profileInformation?.personalFacet?.map((facet) => (
             <FacetGroupCard key={facet.id} facet={facet} />
           ))}
         </div>

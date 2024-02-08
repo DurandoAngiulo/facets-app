@@ -1,3 +1,5 @@
+import bevelBottom from "@/svg/bevel-bottom.svg";
+import bevelTop from "@/svg/bevel-top.svg";
 import closeX from "@/svg/close-x.svg"; //top right of profile
 import diamondFilled from "@/svg/diamond-filled.svg";
 import diamondLine from "@/svg/diamond-line.svg";
@@ -37,7 +39,9 @@ export const iconRegistry = {
   profileFilled,
   profileLine,
   refresh,
-  shuffle
+  shuffle,
+  bevelTop,
+  bevelBottom
 };
 
 type IconNames = keyof typeof iconRegistry;

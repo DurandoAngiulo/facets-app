@@ -2,12 +2,14 @@
 
 import { useEffect, useState } from "react";
 
+import BeveledContainer from "@/components/BeveledContainer";
 import FIREBASE from "@/constants/firebase";
 import { useAuth } from "@/context/AuthContext";
 import { getProfileById } from "@/services/profile-service";
 import { getPrompts } from "@/services/prompt.service";
 import { replaceNameInString } from "@/utils/util-functions";
 import { calculateAge } from "@/utils/util-functions.js";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Index = () => {
@@ -22,15 +24,23 @@ const Index = () => {
       return (
         <li key={response.id} className="border border-green">
           <img src="https://placehold.co/50x50" />
-          <p className="text-s">{replaceNameInString(response.prompt, profileInformation?.firstName)}</p>
-          <p className="bold text-m text-purple-600">{response.response}</p>
+          <BeveledContainer>
+            <p style={{ color: "var(--text)" }}>
+              <i>{replaceNameInString(response.prompt, profileInformation?.firstName)}</i>
+            </p>
+            <p className="semibold" style={{ fontSize: "var(--font-size-p-md)", color: "var(--brand)" }}>
+              {response.response}
+            </p>
+          </BeveledContainer>
         </li>
       );
     };
 
     return (
       <div key={facet.id} className="mt-2 border rounded border-black">
-        <h3>{facet.group_name}</h3>
+        <h3>
+          Facet By {facet.friendshipPeriod ? `A friend of ${facet.friendshipPeriod}` : profileInformation?.firstName} {}
+        </h3>
         <ul>
           {facet.responses.map((response) => (
             <FacetCard key={response.prompt_id} response={response} />
@@ -100,12 +110,17 @@ const Index = () => {
     };
 
     transformFriendsFacets();
+    // console.log(profileInformation);
   }, [JSON.stringify(profileInformation)]);
 
   // console.log(facetGroups, "facetGroups");
   return (
     <>
       <div>
+        <Link href="/dashboard/userProfile/edit">
+          <h2>edit profile</h2>
+        </Link>
+
         <h2>all unstyled profile data</h2>
         <p>{profileInformation?.firstName}</p>
         <p>{calculateAge(profileInformation?.birthday)}</p>

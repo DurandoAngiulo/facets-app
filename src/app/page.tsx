@@ -9,7 +9,7 @@ export default function Index() {
     <MarketingLayout>
       <div
         className=" bg-cover bg-center flex flex-col page justify-center"
-        style={{ backgroundImage: "url('/dist/images/hands.png')" }}
+        style={{ backgroundImage: "url('/dist/images/hands.jpg')" }}
       >
         <div className="mt-40 h-full">
           <Icon iconName="logoWord" className="w-full mx-auto px-20" />
@@ -23,7 +23,6 @@ export default function Index() {
           </div>
         </div>
         <div className="items-end flex mb-16">
-          {" "}
           <UngatedNavbar />
         </div>
       </div>

@@ -8,6 +8,7 @@ const ROUTES = {
   THANKYOU: { path: "/thank-you", name: "Thank You" },
   FEED: { path: "/dashboard/feed", name: "Feed" },
   MESSAGES: { path: "/dashboard/messages", name: "Messages" },
-  USERPROFILE: { path: "/dashboard/userProfile", name: "Profile" }
+  USERPROFILE: { path: "/dashboard/userProfile", name: "Profile" },
+  PROFILE: { path: "/dashboard/profile", name: "Profile" }
 };
 export default ROUTES;

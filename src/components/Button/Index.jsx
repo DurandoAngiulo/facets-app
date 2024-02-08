@@ -1,6 +1,6 @@
 "use client";
 
-const PrimaryButton = ({ label, active, disabled, icon, iconleft }) => {
+const PrimaryButton = ({ label, active, disabled, icon, iconleft, onDark }) => {
   return (
     <div
       style={{
@@ -21,7 +21,7 @@ const PrimaryButton = ({ label, active, disabled, icon, iconleft }) => {
       )}
       <div
         style={{
-          color: active ? "var(--brand)" : "var(--element-subtle)"
+          color: active ? (onDark ? "white" : "var(--brand)") : "var(--element-subtle)"
         }}
       >
         <p className="semibold">{label}</p>
@@ -39,11 +39,11 @@ const PrimaryButton = ({ label, active, disabled, icon, iconleft }) => {
   );
 };
 
-const SecondaryButton = ({ label, active, disabled, icon, iconleft }) => {
+const SecondaryButton = ({ label, active, disabled, icon, iconleft, onDark }) => {
   return (
     <div
       style={{
-        borderColor: active ? "var(--text)" : "var(--element-subtle)",
+        borderColor: active ? (onDark ? "var(--brand)" : "var(--text)") : "var(--element-subtle)",
         opacity: disabled ? "0.5" : "1"
       }}
       className="w-full h-12 rounded border border-solid justify-center items-center gap-2.5 inline-flex"
@@ -59,7 +59,7 @@ const SecondaryButton = ({ label, active, disabled, icon, iconleft }) => {
       )}
       <div
         style={{
-          color: active ? "var(--text)" : "var(--element-subtle)"
+          color: active ? (onDark ? "white" : "var(--text)") : "var(--element-subtle)"
         }}
       >
         <p className="semibold">{label}</p>
