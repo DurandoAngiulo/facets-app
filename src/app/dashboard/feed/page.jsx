@@ -1,16 +1,33 @@
 "use client";
-//TODO: check this code with paul
 import React, { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 import SummaryCard from "@/components/SummaryCard/Index.jsx";
-import { getProfiles } from "@/services/profile-service"; // Import getProfiles function
+import { getProfiles } from "@/services/profile-service";
 import BeveledContainer from "@/components/BeveledContainer/Index";
+import { getPrompts, fetchPromptById } from "@/services/prompt.service";
+import FIREBASE from "@/constants/firebase";
 
 const Index = () => {
   const { currentUser } = useAuth();
   const [profiles, setProfiles] = useState([]);
+  const [prompts, setPrompts] = useState([]);
   console.log(currentUser);
+
+  useEffect(() => {
+    const fetchPrompts = async () => {
+      try {
+        const { data: promptTable } = await getPrompts(FIREBASE.COLLECTIONS.USERPROMPTS);
+        console.log(promptTable, "promptTable");
+        setPrompts(promptTable);
+        console.log(prompts, "prompts!");
+      } catch (error) {
+        console.error("Error fetching prompts:", error);
+      }
+    };
+
+    fetchPrompts();
+  }, []);
 
   useEffect(() => {
     console.log(currentUser, "useefect");
@@ -29,7 +46,7 @@ const Index = () => {
 
     fetchProfiles();
   }, [currentUser]);
-
+  console.log(prompts);
   return (
     <DashboardLayout>
       <div>
@@ -42,6 +59,8 @@ const Index = () => {
               birthday={profile.birthday}
               occupation={profile.occupation}
               location={profile.location}
+              facetPrompt={fetchPromptById(profile.personalFacet[0].responses[0].prompt_id, prompts)}
+              facetResponse={profile.personalFacet[0].responses[0].response}
               profileId={profile.id}
             />
           </BeveledContainer>

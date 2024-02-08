@@ -21,7 +21,7 @@ async function getPrompts(promptTable, filteredPromptIds = []) {
       prompts.push({ id: doc.id, ...doc.data() });
     }
   });
-
+  // console.log(prompts);
   return {
     data: prompts,
     loading: false,
@@ -44,4 +44,10 @@ async function getRandomPrompts(promptTable, limit = 3) {
   return randomPrompts;
 }
 
-export { getPrompts, getRandomPrompts };
+const fetchPromptById = (promptId, promptTable) => {
+  const promptObject = promptTable.find((obj) => obj.id === promptId);
+  console.log(promptObject);
+  return promptObject ? promptObject.prompt : null;
+};
+
+export { getPrompts, getRandomPrompts, fetchPromptById };

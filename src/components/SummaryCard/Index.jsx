@@ -3,7 +3,7 @@ import { calculateAge } from "@/utils/util-functions.js";
 import Link from "next/link";
 import { PrimaryButton } from "@/components/Button/Index";
 
-const SummaryCard = ({ profileId, name, pronouns, birthday, occupation, location }) => {
+const SummaryCard = ({ profileId, name, pronouns, birthday, occupation, location, facetPrompt, facetResponse }) => {
   const age = calculateAge(birthday);
   return (
     <div>
@@ -12,6 +12,8 @@ const SummaryCard = ({ profileId, name, pronouns, birthday, occupation, location
       <p style={{ color: "var(--text)" }}>{age}</p>
       <p style={{ color: "var(--text)" }}>{occupation}</p>
       <p style={{ color: "var(--text)" }}>{location}</p>
+      <p style={{ color: "var(--text)" }}>{facetPrompt}</p>
+      <p style={{ color: "var(--text)" }}>{facetResponse}</p>
       <Link href={`/dashboard/profile/${profileId}`}>
         <PrimaryButton label="View full Facet" active="true" />
       </Link>
