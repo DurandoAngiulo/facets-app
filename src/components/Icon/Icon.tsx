@@ -18,6 +18,7 @@ import profileFilled from "@/svg/profile-filled.svg";
 import profileLine from "@/svg/profile-line.svg";
 import refresh from "@/svg/refresh.svg";
 import shuffle from "@/svg/shuffle.svg";
+import cake from "@/svg/cake.svg";
 
 import bevelTop from "@/svg/bevel-top.svg";
 import bevelBottom from "@/svg/bevel-bottom.svg";
@@ -44,7 +45,8 @@ export const iconRegistry = {
   refresh,
   shuffle,
   bevelTop,
-  bevelBottom
+  bevelBottom,
+  cake
 };
 
 type IconNames = keyof typeof iconRegistry;
