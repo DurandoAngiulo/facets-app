@@ -10,11 +10,12 @@ const DashboardLayout = ({ children }) => {
   const isMessage = pathname.includes("/messages");
   console.log(isFeed, isProfile, isMessage, "data");
   return (
-    <>
+    <div className="page">
       <Navbar activePage={[isFeed, isProfile, isMessage]} />
       {children}
-      <MarketingFooter />
-    </>
+
+      {/* <MarketingFooter /> */}
+    </div>
   );
 };
 

@@ -19,6 +19,9 @@ import profileLine from "@/svg/profile-line.svg";
 import refresh from "@/svg/refresh.svg";
 import shuffle from "@/svg/shuffle.svg";
 
+import bevelTop from "@/svg/bevel-top.svg";
+import bevelBottom from "@/svg/bevel-bottom.svg";
+
 import styles from "./Icon.module.css";
 
 export const iconRegistry = {
@@ -39,7 +42,9 @@ export const iconRegistry = {
   profileFilled,
   profileLine,
   refresh,
-  shuffle
+  shuffle,
+  bevelTop,
+  bevelBottom
 };
 
 type IconNames = keyof typeof iconRegistry;

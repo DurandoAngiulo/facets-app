@@ -12,6 +12,7 @@ import { calculateAge } from "@/utils/util-functions.js";
 import { usePathname } from "next/navigation";
 import { replaceNameInString } from "@/utils/util-functions";
 import Link from "next/link";
+import BeveledContainer from "@/components/BeveledContainer/Index";
 
 const Index = () => {
   const { currentUser } = useAuth();
@@ -25,8 +26,14 @@ const Index = () => {
       return (
         <li key={response.id} className="border border-green">
           <img src="https://placehold.co/50x50" />
-          <p className="text-s">{replaceNameInString(response.prompt, profileInformation?.firstName)}</p>
-          <p className="bold text-m text-purple-600">{response.response}</p>
+          <BeveledContainer>
+            <p style={{ color: "var(--text)" }}>
+              <i>{replaceNameInString(response.prompt, profileInformation?.firstName)}</i>
+            </p>
+            <p className="semibold" style={{ fontSize: "var(--font-size-p-md)", color: "var(--brand)" }}>
+              {response.response}
+            </p>
+          </BeveledContainer>
         </li>
       );
     };
