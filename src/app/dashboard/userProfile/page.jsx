@@ -112,7 +112,7 @@ const Index = () => {
     };
 
     transformFriendsFacets();
-    console.log(profileInformation);
+    // console.log(profileInformation);
   }, [JSON.stringify(profileInformation)]);
 
   // console.log(facetGroups, "facetGroups");

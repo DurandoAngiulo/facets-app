@@ -46,7 +46,7 @@ async function getRandomPrompts(promptTable, limit = 3) {
 
 const fetchPromptById = (promptId, promptTable) => {
   const promptObject = promptTable.find((obj) => obj.id === promptId);
-  console.log(promptObject);
+  // console.log(promptObject);
   return promptObject ? promptObject.prompt : null;
 };
 

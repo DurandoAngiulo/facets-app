@@ -18,9 +18,9 @@ const Index = () => {
     const fetchPrompts = async () => {
       try {
         const { data: promptTable } = await getPrompts(FIREBASE.COLLECTIONS.USERPROMPTS);
-        console.log(promptTable, "promptTable");
+        // console.log(promptTable, "promptTable");
         setPrompts(promptTable);
-        console.log(prompts, "prompts!");
+        // console.log(prompts, "prompts!");
       } catch (error) {
         console.error("Error fetching prompts:", error);
       }
@@ -46,7 +46,7 @@ const Index = () => {
 
     fetchProfiles();
   }, [currentUser]);
-  console.log(prompts);
+  // console.log(prompts);
   return (
     <DashboardLayout>
       <div>
