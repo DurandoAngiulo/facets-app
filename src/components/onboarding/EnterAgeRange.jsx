@@ -1,5 +1,8 @@
 "use client";
 import React, { useState } from "react";
+import Icon from "@/components/Icon";
+import { PrimaryButton } from "@/components/Button/Index";
+import ProgressBar from "../ProgressBar/Index";
 
 export const EnterAgeRange = ({ handleUpdateProfile }) => {
   const [lowerBound, setLowerBound] = useState(18);
@@ -37,9 +40,13 @@ export const EnterAgeRange = ({ handleUpdateProfile }) => {
     <form onSubmit={handleSubmit}>
       <label>
         Select your age range:
+        {/* <Slider> */}
         <div>
-          <label>Lower Bound: {lowerBound}</label>
+          {/* <label>Lower Bound: {lowerBound}</label> */}
+          <label>{lowerBound}</label>
+
           <input
+            className=""
             type="range"
             name="lowerBound"
             min={18}
@@ -49,7 +56,8 @@ export const EnterAgeRange = ({ handleUpdateProfile }) => {
           />
         </div>
         <div>
-          <label>Upper Bound: {upperBound}</label>
+          {/* <label>Upper Bound: {upperBound}</label> */}
+          {upperBound}
           <input
             type="range"
             name="upperBound"
@@ -59,6 +67,7 @@ export const EnterAgeRange = ({ handleUpdateProfile }) => {
             onChange={handleUpperBoundChange}
           />
         </div>
+        {/* </Slider> */}
       </label>
       <button type="submit">Submit</button>
     </form>
