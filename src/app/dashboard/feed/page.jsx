@@ -1,12 +1,13 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useAuth } from "@/context/AuthContext";
-import DashboardLayout from "@/components/layouts/DashboardLayout";
+
+import { fetchPromptById, getPrompts } from "@/services/prompt.service";
+import { useEffect, useState } from "react";
+
+import BeveledContainer from "@/components/BeveledContainer";
 import SummaryCard from "@/components/SummaryCard/Index.jsx";
-import { getProfiles } from "@/services/profile-service";
-import BeveledContainer from "@/components/BeveledContainer/Index";
-import { getPrompts, fetchPromptById } from "@/services/prompt.service";
 import FIREBASE from "@/constants/firebase";
+import { useAuth } from "@/context/AuthContext";
+import { getProfiles } from "@/services/profile-service";
 
 const Index = () => {
   const { currentUser } = useAuth();
@@ -48,7 +49,7 @@ const Index = () => {
   }, [currentUser]);
   // console.log(prompts);
   return (
-    <DashboardLayout>
+    <>
       <div>
         {profiles.map((profile) => (
           <BeveledContainer key={profile.id}>
@@ -66,7 +67,7 @@ const Index = () => {
           </BeveledContainer>
         ))}
       </div>
-    </DashboardLayout>
+    </>
   );
 };
 

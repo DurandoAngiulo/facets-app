@@ -1,7 +1,7 @@
-import React from "react";
+import { PrimaryButton } from "@/components/Button/Index";
+import ROUTES from "@/constants/routes";
 import { calculateAge } from "@/utils/util-functions.js";
 import Link from "next/link";
-import { PrimaryButton } from "@/components/Button/Index";
 
 const SummaryCard = ({ profileId, name, pronouns, birthday, occupation, location, facetPrompt, facetResponse }) => {
   const age = calculateAge(birthday);
@@ -14,7 +14,8 @@ const SummaryCard = ({ profileId, name, pronouns, birthday, occupation, location
       <p style={{ color: "var(--text)" }}>{location}</p>
       <p style={{ color: "var(--text)" }}>{facetPrompt}</p>
       <p style={{ color: "var(--text)" }}>{facetResponse}</p>
-      <Link href={`/dashboard/profile/${profileId}`}>
+
+      <Link href={`${ROUTES.PROFILE.path}/${profileId}`}>
         <PrimaryButton label="View full Facet" active="true" />
       </Link>
     </div>

@@ -1,58 +1,37 @@
 "use client";
 
+import Icon from "@/components/Icon";
+import ROUTES from "@/constants/routes";
 import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
-import Icon from "@/components/Icon";
+import { usePathname } from "next/navigation";
 
-const Navbar = ({ activePage }) => {
-  // Define the ActiveIcon component for the active page
-  const [isFeed, isProfile, isMessage] = activePage;
-  const ActiveIcon = () => {
-    if (isFeed) {
-      return <Icon iconName="diamondFilled" className="w-9 h-9" />;
-    } else if (isProfile) {
-      return <Icon iconName="profileFilled" className="w-9 h-9" />;
-    } else if (isMessage) {
-      return <Icon iconName="messageFilled" className="w-9 h-9" />;
-    } else {
-      return null; // Handle other cases if needed
-    }
-  };
+const navigationItems = [
+  { href: ROUTES.FEED.path, iconName: "diamond", label: ROUTES.FEED.name },
+  { href: ROUTES.MESSAGES.path, iconName: "message", label: ROUTES.MESSAGES.name },
+  { href: ROUTES.USERPROFILE.path, iconName: "profile", label: ROUTES.USERPROFILE.name }
+];
 
+const Navbar = () => {
+  const pathname = usePathname();
   const { logout } = useAuth();
+  const isActive = (href) => pathname.includes(href);
   return (
     <div>
       <div className="fixed bottom-0 w-full z-50">
         <div className="w-full h-20 bg-white shadow-[0_4px_13.9px_0px_rgba(0,0,0,0.3)] flex-col justify-center items-center pt-2 pb-6 inline-flex">
           <ul className="justify-start items-center gap-10 pt-2 inline-flex">
+            {navigationItems.map(({ href, iconName, label }) => (
+              <li key={href}>
+                <Link href={href} className={isActive(href) ? "active" : ""}>
+                  <Icon iconName={`${iconName}${isActive(href) ? "Filled" : "Line"}`} className="w-9 h-9" />
+                </Link>
+              </li>
+            ))}
             <li>
-              <Link href="/dashboard/feed" className={isFeed ? "active" : ""}>
-                {isFeed ? <ActiveIcon /> : <Icon style={{ fill: "none" }} iconName="diamondLine" className="w-9 h-9" />}
-              </Link>
-            </li>
-            <li>
-              <Link href="/dashboard/messages" className={isMessage ? "active" : ""}>
-                {isMessage ? (
-                  <ActiveIcon />
-                ) : (
-                  <Icon style={{ fill: "none" }} iconName="messageLine" className="w-9 h-9" />
-                )}
-              </Link>
-            </li>
-            <li>
-              <Link href="/dashboard/userProfile" className={isProfile ? "active" : ""}>
-                {isProfile ? (
-                  <ActiveIcon />
-                ) : (
-                  <Icon style={{ fill: "none" }} iconName="profileLine" className="w-9 h-9" />
-                )}
-              </Link>
-            </li>
-
-            <li>
-              <Link className="border-solid border-2 border-red-500" href="/" onClick={() => logout()}>
-                logout
-              </Link>
+              <button onClick={logout} className="border-solid border-2 border-red-500">
+                Logout
+              </button>
             </li>
           </ul>
           <div className="w-9 h-9 relative" />

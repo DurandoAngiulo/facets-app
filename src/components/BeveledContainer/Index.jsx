@@ -1,4 +1,3 @@
-import React from "react";
 import Icon from "@/components/Icon";
 
 /* TODO: Add icon to corner (but entire container will be clickable)
@@ -10,7 +9,7 @@ const BeveledContainer = ({ children }) => {
   return (
     <div className="w-full flex-col justify-start items-start inline-flex drop-shadow-lg mb-4">
       <div className="w-full justify-center inline-flex">
-        <Icon className="w-full" iconName="bevelTop"></Icon>
+        <Icon className="w-full" iconName="bevelTop" />
       </div>
 
       {/* container for content */}
@@ -29,7 +28,7 @@ const BeveledContainer = ({ children }) => {
       </div>
 
       <div className="w-full justify-center inline-flex">
-        <Icon className="w-full" iconName="bevelBottom"></Icon>
+        <Icon className="w-full" iconName="bevelBottom" />
       </div>
     </div>
   );
