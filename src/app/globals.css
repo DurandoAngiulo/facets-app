@@ -20,6 +20,7 @@
   --text: #4f4d5e;
   --element-subtle: #848484;
   --element-subtle-secondary: #cdd5f7;
+  --border: #c1c1c1;
   --gradient-stroke: radial-gradient(circle, #614b91, #a888ee);
   --button-gradient: radial-gradient(circle, rgba(209, 205, 253, 0.4), rgba(255, 255, 255, 0.3));
 

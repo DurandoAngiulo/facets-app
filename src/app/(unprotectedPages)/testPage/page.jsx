@@ -8,8 +8,8 @@ const Index = () => {
     <div>
       <h1>Test page</h1>
       <p>use this as a playground to test components/styling</p>
-      <div>
-        <Icon iconName="next" className="w-full fill-slate-900" />
+      <div className="flex flex-col gap-2 px-10">
+        {/* <Icon iconName="next" className="w-full fill-slate-900" /> */}
       </div>
     </div>
   );

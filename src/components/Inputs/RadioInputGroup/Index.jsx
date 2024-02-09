@@ -1,6 +1,6 @@
 // RadioInputGroup.js
 import React from "react";
-import RadioInput from "@/components/RadioInput/Index";
+import RadioInput from "@/components/Inputs/RadioInput/Index";
 const RadioInputGroup = ({ radioInputs }) => {
   return (
     <div>
