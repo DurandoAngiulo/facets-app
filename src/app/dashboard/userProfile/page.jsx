@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import BeveledContainer from "@/components/BeveledContainer";
+import BeveledContainer from "@/components/BeveledContainer/Index.jsx";
 import FIREBASE from "@/constants/firebase";
 import { useAuth } from "@/context/AuthContext";
 import { getProfileById } from "@/services/profile-service";

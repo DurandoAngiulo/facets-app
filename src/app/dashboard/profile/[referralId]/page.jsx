@@ -3,7 +3,7 @@
 import { extractIdFromUrl, replaceNameInString } from "@/utils/util-functions";
 import { useEffect, useState } from "react";
 
-import BeveledContainer from "@/components/BeveledContainer";
+import BeveledContainer from "@/components/BeveledContainer/Index.jsx";
 import Icon from "@/components/Icon";
 import { useAuth } from "@/context/AuthContext";
 import { transformUserFacets } from "@/services/facet-services";

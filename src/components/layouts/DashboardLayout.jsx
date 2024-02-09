@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbar/Index.jsx";
 import withProtectedRoutes from "@/components/layouts/withProtectedRoutes";
 import { usePathname } from "next/navigation";
 

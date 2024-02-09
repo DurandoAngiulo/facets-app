@@ -3,7 +3,7 @@
 import { fetchPromptById, getPrompts } from "@/services/prompt.service";
 import { useEffect, useState } from "react";
 
-import BeveledContainer from "@/components/BeveledContainer";
+import BeveledContainer from "@/components/BeveledContainer/Index.jsx";
 import SummaryCard from "@/components/SummaryCard/Index.jsx";
 import FIREBASE from "@/constants/firebase";
 import { useAuth } from "@/context/AuthContext";
