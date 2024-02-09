@@ -1,7 +1,7 @@
 // EnterOccupation.js
 "use client";
 import React, { useState } from "react";
-import RadioInput from "@/components/Inputs/RadioInput/index";
+import RadioInput from "@/components/Inputs/RadioInput/Index";
 
 export const EnterOccupation = ({ handleUpdateProfile }) => {
   const [occupation, setOccupation] = useState("");
