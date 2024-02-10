@@ -3,6 +3,11 @@ import { usePathname, useRouter } from "next/navigation";
 import ROUTES from "@/constants/routes";
 import { useAuth } from "@/context/AuthContext";
 
+/**
+ * withProtectedRoutes HOC for route protection
+ * @param {React.ComponentType<any>} ComponentToWrap - Component to wrap
+ * @returns {React.FC} - Wrapped component
+ */
 const withProtectedRoutes = (ComponentToWrap) => {
   const WrappedWithProtectedRoutes = ({ ...props }) => {
     const { currentUser, loading } = useAuth();

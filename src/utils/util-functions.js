@@ -1,5 +1,3 @@
-import { serverTimestamp } from "firebase/firestore";
-
 const capitalizeFirstLetter = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
@@ -14,6 +12,8 @@ const generateUniqueUid = () => {
 };
 
 function replaceNameInString(inputString, userName) {
+  if (!inputString) return inputString;
+
   const replacedString = inputString.replace(/\[Name\]/g, userName);
   return replacedString;
 }
@@ -55,11 +55,11 @@ const extractFieldFromUrl = (url) => {
 };
 
 export {
-  capitalizeFirstLetter,
-  generateUniqueUid,
-  replaceNameInString,
-  getReferralLink,
   calculateAge,
+  capitalizeFirstLetter,
+  extractFieldFromUrl,
   extractIdFromUrl,
-  extractFieldFromUrl
+  generateUniqueUid,
+  getReferralLink,
+  replaceNameInString
 };

@@ -1,9 +1,9 @@
 "use client";
 
+import { createProfile, getProfileById } from "@/services/profile-service";
 import { createContext, useContext, useEffect, useState } from "react";
 
 import { auth } from "@/lib/firebase";
-import { getProfileById, createProfile } from "@/services/profile-service";
 import { signInWithPhoneNumber } from "firebase/auth";
 
 const AuthContext = createContext();
@@ -19,7 +19,6 @@ export const useAuth = () => {
  */
 export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [currentUserProfile, setCurrentUserProfile] = useState(null);
   const [loading, setLoading] = useState(true);
 
   /**
@@ -116,7 +115,7 @@ export const AuthContextProvider = ({ children }) => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       setLoading(true);
       if (user) {
-        setCurrentUser(user); // Set the user
+        await setCurrentUser(user); // Set the user
         await fetchAndSetUserProfile(user); // Fetch and set user profile
       } else {
         setCurrentUser(null); // Set current user to null if not authenticated
