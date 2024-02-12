@@ -4,7 +4,11 @@ const ROUTES = {
   UNAUTHORIZED: { path: "/unauthorized", name: "Unauthorized" },
   DASHBOARD: { path: "/dashboard", name: "Dashboard" },
   ONBOARDING: { path: "/dashboard/onboarding", name: "Onboarding" },
-  FRIENDFACETCREATION: { path: "/friendFacetCreation", name: "FriendFacetCreation" },
-  THANKYOU: { path: "/thank-you", name: "Thank You" }
+  FRIEND_FACET_CREATION: { path: "/friendFacetCreation", name: "FriendFacetCreation" },
+  THANKYOU: { path: "/thank-you", name: "Thank You" },
+  FEED: { path: "/dashboard/feed", name: "Feed" },
+  MESSAGES: { path: "/dashboard/messages", name: "Messages" },
+  USERPROFILE: { path: "/dashboard/userProfile", name: "Profile" },
+  PROFILE: { path: "/dashboard/profile", name: "Profile" }
 };
 export default ROUTES;

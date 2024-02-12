@@ -2,17 +2,15 @@
 
 import { useEffect, useState } from "react";
 
-import DashboardLayout from "@/components/layouts/DashboardLayout";
+import BeveledContainer from "@/components/BeveledContainer/Index.jsx";
 import FIREBASE from "@/constants/firebase";
 import { useAuth } from "@/context/AuthContext";
 import { getProfileById } from "@/services/profile-service";
 import { getPrompts } from "@/services/prompt.service";
-import { extractIdFromUrl } from "@/utils/util-functions";
-import { calculateAge } from "@/utils/util-functions.js";
-import { usePathname } from "next/navigation";
 import { replaceNameInString } from "@/utils/util-functions";
+import { calculateAge } from "@/utils/util-functions.js";
 import Link from "next/link";
-import BeveledContainer from "@/components/BeveledContainer/Index";
+import { usePathname } from "next/navigation";
 
 const Index = () => {
   const { currentUser } = useAuth();
@@ -117,7 +115,7 @@ const Index = () => {
 
   // console.log(facetGroups, "facetGroups");
   return (
-    <DashboardLayout>
+    <>
       <div>
         <Link href="/dashboard/userProfile/edit">
           <h2>edit profile</h2>
@@ -142,7 +140,7 @@ const Index = () => {
         </div>
         <p>image palcehodler TBD</p>
       </div>
-    </DashboardLayout>
+    </>
   );
 };
 

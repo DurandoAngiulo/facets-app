@@ -8,7 +8,8 @@ const nextConfig = {
     titleProp: true,
     icon: true,
     svgProps: {
-      height: "auto"
+      height: "100%",
+      width: "100%"
     }
   }
 };

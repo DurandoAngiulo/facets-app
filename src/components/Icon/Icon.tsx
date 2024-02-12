@@ -1,5 +1,5 @@
-import { forwardRef } from "react";
-
+import bevelBottom from "@/svg/bevel-bottom.svg";
+import bevelTop from "@/svg/bevel-top.svg";
 import closeX from "@/svg/close-x.svg"; //top right of profile
 import diamondFilled from "@/svg/diamond-filled.svg";
 import diamondLine from "@/svg/diamond-line.svg";
@@ -19,14 +19,10 @@ import profileLine from "@/svg/profile-line.svg";
 import refresh from "@/svg/refresh.svg";
 import shuffle from "@/svg/shuffle.svg";
 import cake from "@/svg/cake.svg";
-
-import bevelTop from "@/svg/bevel-top.svg";
-import bevelBottom from "@/svg/bevel-bottom.svg";
-
+import { forwardRef } from "react";
 import styles from "./Icon.module.css";
 
 export const iconRegistry = {
-  next,
   closeX,
   diamondFilled,
   diamondLine,
@@ -39,6 +35,7 @@ export const iconRegistry = {
   messageDots,
   messageFilled,
   messageLine,
+  next,
   plus,
   profileFilled,
   profileLine,
@@ -79,7 +76,7 @@ const Icon = forwardRef<SVGSVGElement, IconProps>(function IconComponent(
   }
 
   return (
-    <span className={`${styles.icon} ${className || ""}`}>
+    <span className={`${styles.icon} ${className || ""}`} data-icon={iconName}>
       <SvgComponent className={styles.svgIcon} ref={ref} {...accessibilityProps} {...rest} />
     </span>
   );

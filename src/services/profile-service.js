@@ -60,6 +60,15 @@ const createProfile = async (userUID, isGuest) => {
           ]
         }
       ],
+      friendFacets: [
+        {
+          responses: [
+            { prompt_id: "", response: "" },
+            { prompt_id: "", response: "" },
+            { prompt_id: "", response: "" }
+          ]
+        }
+      ],
       friendFacets: []
     };
     await setDoc(doc(db, FIREBASE.COLLECTIONS.PROFILES, userUID), profileFields);

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import TextInput from "@/components/TextInput/Index";
-import RadioInputGroup from "@/components/RadioInputGroup/Index";
+import TextInput from "@/components/Inputs/TextInput/Index";
+import RadioInputGroup from "@/components/Inputs/RadioInputGroup/Index";
 
 export const EnterMoreDetails = ({ handleUpdateProfile }) => {
   const [moreDetails, setMoreDetails] = useState({
