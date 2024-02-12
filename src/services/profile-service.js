@@ -53,6 +53,24 @@ const createProfile = async (userUID, isGuest) => {
       },
       personalFacet: [
         {
+          photos: [
+            {
+              level: 1,
+              path: "lsjlajfla;jf"
+            },
+            {
+              level: 2,
+              path: "lsjlajfla;jf"
+            },
+            {
+              level: 3,
+              path: "lsjlajfla;jf"
+            },
+            {
+              level: 4,
+              path: "lsjlajfla;jf"
+            }
+          ],
           responses: [
             { prompt_id: "", response: "" },
             { prompt_id: "", response: "" },
@@ -86,6 +104,14 @@ const createProfile = async (userUID, isGuest) => {
   }
 };
 
+/**
+ * Asynchronously updates the user's profile with the given fields.
+ *
+ * @param {Object} user - The user object containing the profile to be updated.
+ * @param {Object} profileFields - An object containing the fields to update in the profile.
+ * @returns {Promise<Object>} A promise that resolves to an object containing the result of the update operation.
+ * @throws Will throw an error if the update operation fails.
+ */
 const updateProfile = async (user, profileFields) => {
   const userProfile = user.profile;
   const mergedProfileFields = {
@@ -93,11 +119,7 @@ const updateProfile = async (user, profileFields) => {
     ...profileFields
   };
   try {
-    await updateDoc(
-      doc(db, FIREBASE.COLLECTIONS.PROFILES, user.uid),
-
-      mergedProfileFields
-    );
+    await updateDoc(doc(db, FIREBASE.COLLECTIONS.PROFILES, user.uid), mergedProfileFields);
     return {
       data: {
         message: `profile successfully updated`,
