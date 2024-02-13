@@ -22,7 +22,6 @@ export const AuthContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   /**
-   *
    * This function is designed to be used when there's a need to reflect changes
    * made to the user's profile data immediately within the application's context.
    * For instance, it can be utilized after a user updates their profile
