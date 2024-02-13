@@ -13,7 +13,6 @@ const Index = () => {
   const { currentUser } = useAuth();
   const [profiles, setProfiles] = useState([]);
   const [prompts, setPrompts] = useState([]);
-  console.log(currentUser);
 
   useEffect(() => {
     const fetchPrompts = async () => {

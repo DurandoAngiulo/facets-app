@@ -20,6 +20,13 @@ export const useAuth = () => {
 export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  if (currentUser?.uid && currentUser?.profile) {
+    console.log(
+      `You are logged in as ${currentUser?.profile?.firstName} ${currentUser?.profile?.lastName} with id ${currentUser?.uid}`
+    );
+  } else {
+    console.log("No user info atm");
+  }
 
   /**
    * This function is designed to be used when there's a need to reflect changes
