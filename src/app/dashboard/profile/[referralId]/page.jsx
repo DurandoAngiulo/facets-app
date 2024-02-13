@@ -10,7 +10,7 @@ import { transformUserFacets } from "@/services/facet-services";
 import { getProfileById } from "@/services/profile-service";
 import { calculateAge } from "@/utils/util-functions";
 import { usePathname } from "next/navigation";
-import MaskedImage from "@/components/MaskedImage";
+import MaskedImage from "@/components/MaskedImage/Index";
 
 const Index = () => {
   const { currentUser } = useAuth();
