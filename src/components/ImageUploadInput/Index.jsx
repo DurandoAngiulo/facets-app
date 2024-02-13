@@ -55,11 +55,9 @@ const ImageUploadInput = () => {
     console.log(updatedPersonalFacets, "updatedPersonalFacets");
 
     // Update the profile with the new personalFacets
-    const test = await updateProfile(currentUser, {
+    await updateProfile(currentUser, {
       personalFacet: updatedPersonalFacets
     });
-
-    console.log(test, "test");
   };
 
   //   const imagesListRef = ref(storage, `userPhotos/${currentUser?.uid}/personalFacetPhotos/john.png`);
