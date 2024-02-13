@@ -10,6 +10,7 @@ import { transformUserFacets } from "@/services/facet-services";
 import { getProfileById } from "@/services/profile-service";
 import { calculateAge } from "@/utils/util-functions";
 import { usePathname } from "next/navigation";
+import MaskedImage from "@/components/MaskedImage";
 
 const Index = () => {
   const { currentUser } = useAuth();
@@ -21,7 +22,7 @@ const Index = () => {
     const FacetCard = ({ response }) => {
       return (
         <li key={response.id} className="border border-green">
-          <img src="https://placehold.co/50x50" />
+          <MaskedImage height={298} width={298} />
           <BeveledContainer>
             <p style={{ color: "var(--text)" }}>
               <i>{replaceNameInString(response.prompt, profileInformation?.firstName)}</i>
@@ -77,7 +78,7 @@ const Index = () => {
 
   return (
     <>
-      <div>
+      <div className="page">
         <h2>all unstyled profile data</h2>
         <p>{profileInformation?.firstName}</p>
         <p>{calculateAge(profileInformation?.birthday)}</p>

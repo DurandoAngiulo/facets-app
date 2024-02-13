@@ -50,7 +50,7 @@ const Index = () => {
   // console.log(prompts);
   return (
     <>
-      <div>
+      <div className="page">
         {profiles.map((profile) => (
           <BeveledContainer key={profile.id}>
             <SummaryCard
