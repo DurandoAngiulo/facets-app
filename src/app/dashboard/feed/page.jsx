@@ -52,8 +52,8 @@ const Index = () => {
   // console.log(prompts);
   return (
     <>
-      <div className="page">
-        <div className="flex flex-col gap-4">
+      <div className="page flex flex-col items-center pb-8">
+        <div className="flex flex-col gap-4 w-full">
           <div className="flex flex-col gap-0">
             <h1 className="text-center leading-tight mt-6" style={{ color: "var(--brand)" }}>
               We&apos;ve curated 5 gems
@@ -77,19 +77,21 @@ const Index = () => {
           </p>
           <hr className="mb-4" style={{ borderColor: "var(--border)" }}></hr>
         </div>
-        {profiles.map((profile) => (
-          <SummaryCard
-            key={profile.id} // Assuming each profile has a unique ID
-            name={profile.firstName}
-            pronouns={profile.pronouns}
-            birthday={profile.birthday}
-            occupation={profile.occupation}
-            location={profile.location}
-            facetPrompt={fetchPromptById(profile.personalFacet[0].responses[0].prompt_id, prompts)}
-            facetResponse={profile.personalFacet[0].responses[0].response}
-            profileId={profile.id}
-          />
-        ))}
+        <div className="pb-24">
+          {profiles.map((profile) => (
+            <SummaryCard
+              key={profile.id} // Assuming each profile has a unique ID
+              name={profile.firstName}
+              pronouns={profile.pronouns}
+              birthday={profile.birthday}
+              occupation={profile.occupation}
+              location={profile.location}
+              facetPrompt={fetchPromptById(profile.personalFacet[0].responses[0].prompt_id, prompts)}
+              facetResponse={profile.personalFacet[0].responses[0].response}
+              profileId={profile.id}
+            />
+          ))}
+        </div>
       </div>
     </>
   );
