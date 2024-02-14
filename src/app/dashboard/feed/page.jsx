@@ -1,5 +1,5 @@
 "use client";
-
+import "./styles.css";
 import { fetchPromptById, getPrompts } from "@/services/prompt.service";
 import { useEffect, useState } from "react";
 
@@ -31,8 +31,6 @@ const Index = () => {
 
     fetchPrompts();
   }, []);
-
-  document.body.style = "background: var(--background-gradient)";
 
   useEffect(() => {
     console.log(currentUser, "useefect");
