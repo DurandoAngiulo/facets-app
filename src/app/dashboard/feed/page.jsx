@@ -8,6 +8,8 @@ import SummaryCard from "@/components/SummaryCard/Index.jsx";
 import FIREBASE from "@/constants/firebase";
 import { useAuth } from "@/context/AuthContext";
 import { getProfiles } from "@/services/profile-service";
+import { PrimaryButton } from "@/components/Button/Index";
+import Icon from "@/components/Icon";
 
 const Index = () => {
   const { currentUser } = useAuth();
@@ -30,6 +32,8 @@ const Index = () => {
     fetchPrompts();
   }, []);
 
+  document.body.style = "background: var(--background-gradient)";
+
   useEffect(() => {
     console.log(currentUser, "useefect");
     const fetchProfiles = async () => {
@@ -51,6 +55,30 @@ const Index = () => {
   return (
     <>
       <div className="page">
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-0">
+            <h1 className="text-center leading-tight mt-6" style={{ color: "var(--brand)" }}>
+              We&apos;ve curated 5 gems
+            </h1>
+            <div className="flex flex-row gap-3 self-center">
+              <h1 className="text-center leading-tight" style={{ color: "var(--brand)" }}>
+                <i>for you!</i>
+              </h1>
+              <Icon className="h-5 self-center mb-1" iconName="diamondFilled" />
+            </div>
+          </div>
+          <PrimaryButton
+            label="Refresh"
+            icon={<Icon iconName="refresh" className="h-3" />}
+            iconRight
+            active="true"
+            small
+          ></PrimaryButton>
+          <p className="text-center" style={{ color: "var(--element-subtle)" }}>
+            2 remaining today
+          </p>
+          <hr className="mb-4" style={{ borderColor: "var(--border)" }}></hr>
+        </div>
         {profiles.map((profile) => (
           <BeveledContainer key={profile.id}>
             <SummaryCard
