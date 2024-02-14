@@ -53,24 +53,7 @@ const createProfile = async (userUID, isGuest) => {
       },
       personalFacet: [
         {
-          photos: [
-            {
-              level: 1,
-              path: "lsjlajfla;jf"
-            },
-            {
-              level: 2,
-              path: "lsjlajfla;jf"
-            },
-            {
-              level: 3,
-              path: "lsjlajfla;jf"
-            },
-            {
-              level: 4,
-              path: "lsjlajfla;jf"
-            }
-          ],
+          photos: [],
           responses: [
             { prompt_id: "", response: "" },
             { prompt_id: "", response: "" },
