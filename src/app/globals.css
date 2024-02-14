@@ -15,6 +15,15 @@
     #ebedf9 78.99%,
     #fafafa 103.18%
   );
+
+  --background-gradient-lr: linear-gradient(
+    to right,
+    #fafafa 12.08%,
+    #edf6f7 36.86%,
+    #fef6f4 48.01%,
+    #ebedf9 78.99%,
+    #fafafa 103.18%
+  );
   --surface-card: #ffffff;
   --brand: #734498;
   --berry-linear: linear-gradient(to right, rgba(111, 116, 207, 1), rgba(130, 104, 201, 1), rgba(149, 91, 195, 1));
@@ -85,10 +94,10 @@ p {
 }
 
 .page {
-  max-width: 480px;
+  max-width: 420px;
   margin: auto;
   height: 100vh;
-  padding: 0 24px;
+  /* padding: 0 24px; */
 }
 .semibold {
   font-family: var(--font-body-semibold);
