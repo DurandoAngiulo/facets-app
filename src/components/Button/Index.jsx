@@ -1,14 +1,16 @@
 "use client";
 
-const PrimaryButton = ({ label, active, disabled, icon, iconleft, onDark }) => {
+const PrimaryButton = ({ label, active, disabled, icon, iconleft, onDark, small }) => {
   return (
     <div
       style={{
         borderColor: active ? "var(--brand)" : "var(--element-subtle)",
         background: active ? "var(--button-gradient) " : "radial-gradient(circle, #F0EFEF, var(--background))",
-        opacity: disabled ? "0.5" : "1"
+        opacity: disabled ? "0.5" : "1",
+        height: small ? "auto" : "48px",
+        padding: small ? "6px" : "auto"
       }}
-      className="w-full h-12 rounded border flex items-center justify-center gap-2"
+      className="w-full rounded border flex items-center justify-center gap-2"
     >
       {iconleft && icon && (
         <div
