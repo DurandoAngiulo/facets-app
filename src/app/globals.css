@@ -17,6 +17,7 @@
   );
   --surface-card: #ffffff;
   --brand: #734498;
+  --berry-linear: linear-gradient(to right, rgba(111, 116, 207, 1), rgba(130, 104, 201, 1), rgba(149, 91, 195, 1));
   --text: #4f4d5e;
   --element-subtle: #848484;
   --element-subtle-secondary: #cdd5f7;
@@ -95,4 +96,10 @@ p {
 
 .bold {
   font-family: var(--font-body-bold);
+}
+
+.gradient-text {
+  background: var(--berry-linear);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

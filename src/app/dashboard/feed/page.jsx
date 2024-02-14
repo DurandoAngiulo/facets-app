@@ -52,19 +52,17 @@ const Index = () => {
     <>
       <div className="page">
         {profiles.map((profile) => (
-          <BeveledContainer key={profile.id}>
-            <SummaryCard
-              key={profile.id} // Assuming each profile has a unique ID
-              name={profile.firstName}
-              pronouns={profile.pronouns}
-              birthday={profile.birthday}
-              occupation={profile.occupation}
-              location={profile.location}
-              facetPrompt={fetchPromptById(profile.personalFacet[0].responses[0].prompt_id, prompts)}
-              facetResponse={profile.personalFacet[0].responses[0].response}
-              profileId={profile.id}
-            />
-          </BeveledContainer>
+          <SummaryCard
+            key={profile.id} // Assuming each profile has a unique ID
+            name={profile.firstName}
+            pronouns={profile.pronouns}
+            birthday={profile.birthday}
+            occupation={profile.occupation}
+            location={profile.location}
+            facetPrompt={fetchPromptById(profile.personalFacet[0].responses[0].prompt_id, prompts)}
+            facetResponse={profile.personalFacet[0].responses[0].response}
+            profileId={profile.id}
+          />
         ))}
       </div>
     </>
