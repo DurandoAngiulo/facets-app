@@ -90,16 +90,16 @@ const Index = () => {
         </div>
 
         <div
-          className="flex flex-row overflow-hidden gap-5 px-8"
+          className="flex flex-row overflow-auto gap-5 px-8 snap-proximity snap-x"
           style={{ background: "var(--background-gradient-lr" }}
         >
-          <div className="mb-24">
+          <div className="mb-24 snap-center">
             {profileInformation?.personalFacet?.map((facet) => (
               <FacetGroupCard key={facet.id} facet={facet} />
             ))}
           </div>
 
-          <div>
+          <div className="snap-center">
             {profileInformation?.friendFacets?.map((facet) => (
               <FacetGroupCard key={facet.id} facet={facet} />
             ))}
