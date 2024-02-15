@@ -19,6 +19,15 @@ import profileLine from "@/svg/profile-line.svg";
 import refresh from "@/svg/refresh.svg";
 import shuffle from "@/svg/shuffle.svg";
 import cake from "@/svg/cake.svg";
+import emojiPeople from "@/svg/emoji_people.svg";
+import familyStar from "@/svg/family_star.svg";
+import pronouns from "@/svg/pronouns.svg";
+import preference from "@/svg/preference.svg";
+import ageRange from "@/svg/age_range.svg";
+import location from "@/svg/location.svg";
+import employment from "@/svg/employment.svg";
+import occupation from "@/svg/occupation.svg";
+
 import { forwardRef } from "react";
 import styles from "./Icon.module.css";
 
@@ -43,7 +52,15 @@ export const iconRegistry = {
   shuffle,
   bevelTop,
   bevelBottom,
-  cake
+  cake,
+  emojiPeople,
+  familyStar,
+  pronouns,
+  preference,
+  ageRange,
+  location,
+  employment,
+  occupation
 };
 
 type IconNames = keyof typeof iconRegistry;

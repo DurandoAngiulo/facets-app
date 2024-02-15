@@ -1,6 +1,8 @@
 "use client";
-
 import React, { useState } from "react";
+import Icon from "@/components/Icon";
+import { PrimaryButton } from "@/components/Button/Index";
+import ProgressBar from "../ProgressBar/Index";
 import { capitalizeFirstLetter } from "@/utils/util-functions";
 
 export const EnterLocation = ({ handleUpdateProfile }) => {
@@ -19,22 +21,42 @@ export const EnterLocation = ({ handleUpdateProfile }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="">
-        <label>
-          Where do you live?
-          <input
-            type="text"
-            className="text-black border-solid border-2 border-red-500"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-          />
-        </label>
-        <button id="location-continue" type="submit">
-          Continue
-        </button>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+    // border for testing purposes
+    <div className="page border border-yellow-950">
+      <ProgressBar width="85.5%" step="7"></ProgressBar>
+      <div className="w-full h-4 relative mt-12">
+        <Icon iconName="location" className="w-full h-8 left-0 mb-4 absolute" />
       </div>
-    </form>
+
+      <h1 style={{ color: "var(--brand)" }} className="my-8 w-full text-center">
+        Where do you currently live?
+      </h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>
+            <div className="w-full p-3 rounded border border-zinc-500 border-opacity-50 flex-col justify-center items-start gap-2.5 inline-flex">
+              <p>
+                <input
+                  type="text"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  // fix character limit to actually work
+                  maxLength={16}
+                  className="focus:outline-none"
+                />
+              </p>
+            </div>
+          </label>
+
+          <div className="w-full items-end flex mt-16 ">
+            <button className="w-full" id="location-continue" type="submit">
+              <PrimaryButton active="true" label="Continue"></PrimaryButton>
+            </button>
+          </div>
+
+          {error && <p style={{ color: "red" }}>{error}</p>}
+        </div>
+      </form>
+    </div>
   );
 };
