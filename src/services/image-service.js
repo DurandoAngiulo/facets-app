@@ -1,3 +1,5 @@
+import { getStorage, ref, getDownloadURL, listAll } from "firebase/storage";
+
 const updatePhotoOrder = (photos, currentOrder, newOrder) => {
   // Check if the current order and new order are within the bounds of the photos array
   if (currentOrder <= 0 || currentOrder > photos.length || newOrder <= 0 || newOrder > photos.length) {
@@ -28,4 +30,19 @@ const updatePhotoOrder = (photos, currentOrder, newOrder) => {
   return newSortedPhotos;
 };
 
-export { updatePhotoOrder };
+/**
+ * Retrive an image url by it's file path
+ * @param {String} photoPath - The path of the image in firebase storage
+ * @link https://firebase.google.com/docs/storage/web/download-files#download_data_via_url
+ * @returns {String} Returns downloadable url
+ */
+const getPhoto = async (photoPath) => {
+  if (!photoPath) return;
+
+  const storage = getStorage();
+  const photoUrl = await getDownloadURL(ref(storage, photoPath));
+  console.log("success");
+  return photoUrl;
+};
+
+export { updatePhotoOrder, getPhoto };

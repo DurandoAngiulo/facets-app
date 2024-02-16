@@ -7,6 +7,7 @@ import { getUserByReferralId, updateFacet } from "@/services/profile-service";
 import { useRouter } from "next/navigation";
 import ROUTES from "@/constants/routes";
 import FIREBASE from "@/constants/firebase";
+import ImageUploadInput from "@/components/ImageUploadInput/Index.jsx";
 
 const FriendFacetCreation = ({ pageReferralId }) => {
   const router = useRouter();
@@ -110,40 +111,44 @@ const FriendFacetCreation = ({ pageReferralId }) => {
     return <div>Loading...</div>;
   }
   // console.log(friendFacet, "friendFacet");
-
+  console.log(facetOwnerProfile.uid);
   return (
-    <form onSubmit={handleSubmit}>
-      {friendFacet.responses.map((response, index) => (
-        <div key={response.prompt_id}>
-          <label htmlFor={`prompt-${response.prompt_id}`}>
-            {replaceNameInString(response.prompt, facetOwnerProfile.firstName)}
-          </label>
-          {
-            //TODO logic here to slot name into promot variables renderPrompt()
-          }
+    <>
+      <ImageUploadInput refPath={"friend"} mainProfile={facetOwnerProfile.uid} />
+
+      <form onSubmit={handleSubmit}>
+        {friendFacet.responses.map((response, index) => (
+          <div key={response.prompt_id}>
+            <label htmlFor={`prompt-${response.prompt_id}`}>
+              {replaceNameInString(response.prompt, facetOwnerProfile.firstName)}
+            </label>
+            {
+              //TODO logic here to slot name into promot variables renderPrompt()
+            }
+            <input
+              id={`prompt-${response.prompt_id}`}
+              className="text-black border-solid border-2 border-red-500"
+              type="text"
+              onChange={(e) => handleInputChange(response.prompt_id, e.target.value)}
+            />
+          </div>
+        ))}
+        <div>
+          <label>{"friendship period"}</label>
           <input
-            id={`prompt-${response.prompt_id}`}
             className="text-black border-solid border-2 border-red-500"
             type="text"
-            onChange={(e) => handleInputChange(response.prompt_id, e.target.value)}
+            onChange={(e) =>
+              setFriendFacet((prev) => ({
+                ...prev,
+                friendshipPeriod: e.target.value
+              }))
+            }
           />
         </div>
-      ))}
-      <div>
-        <label>{"friendship period"}</label>
-        <input
-          className="text-black border-solid border-2 border-red-500"
-          type="text"
-          onChange={(e) =>
-            setFriendFacet((prev) => ({
-              ...prev,
-              friendshipPeriod: e.target.value
-            }))
-          }
-        />
-      </div>
-      <button type="submit">Submit</button>
-    </form>
+        <button type="submit">Submit</button>
+      </form>
+    </>
   );
 };
 
