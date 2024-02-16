@@ -8,7 +8,7 @@ import MaskedImage from "@/components/MaskedImage/Index";
 const SummaryCard = ({ profileId, name, pronouns, birthday, occupation, location, facetPrompt, facetResponse }) => {
   const age = calculateAge(birthday);
   return (
-    <div className="max-w-sm">
+    <div className="max-w-sm w-full">
       <BeveledContainer>
         <div className="flex flex-col gap-4">
           <div>
