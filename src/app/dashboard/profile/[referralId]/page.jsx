@@ -21,8 +21,8 @@ const Index = () => {
   const FacetGroupCard = ({ facet }) => {
     const FacetCard = ({ response }) => {
       return (
-        <li key={response.id} className="border border-green">
-          <MaskedImage height={298} width={298} />
+        <li key={response.id} className="flex flex-col gap-4">
+          <MaskedImage height={292} width={292} />
           <BeveledContainer>
             <p style={{ color: "var(--text)" }}>
               <i>{replaceNameInString(response.prompt, profileInformation?.firstName)}</i>
@@ -39,11 +39,12 @@ const Index = () => {
     };
 
     return (
-      <div className="mt-2 border rounded border-black">
-        <h3>
-          Facet By {facet.friendshipPeriod ? `A friend of ${facet.friendshipPeriod}` : profileInformation?.firstName} {}
-        </h3>
-        <ul>
+      <div className="mt-3 flex flex-col gap-2">
+        <p className="text-center" style={{ fontSize: "var(--font-size-p-md)", color: "var(--text)" }}>
+          Facet by{" "}
+          <b>{facet.friendshipPeriod ? `a friend of ${facet.friendshipPeriod}` : profileInformation?.firstName}</b> {}
+        </p>
+        <ul className="flex flex-col gap-2">
           {facet.responses.map((response) => (
             <FacetCard key={response.prompt_id} response={response} />
           ))}
@@ -79,25 +80,31 @@ const Index = () => {
   return (
     <>
       <div className="page">
-        <h2>all unstyled profile data</h2>
-        <p>{profileInformation?.firstName}</p>
-        <p>{calculateAge(profileInformation?.birthday)}</p>
-        <p>{profileInformation?.bio}</p>
-        <p>{profileInformation?.location}</p>
-        <p>{profileInformation?.occupation}</p>
-        <p>{profileInformation?.pronouns}</p>
-        <div className="ml-4">
-          {profileInformation?.friendFacets?.map((facet) => (
-            <FacetGroupCard key={facet.id} facet={facet} />
-          ))}
+        <div className="shadow-xl w-full z-50 relative bg-white">
+          <p>{profileInformation?.firstName}</p>
+          <p>{calculateAge(profileInformation?.birthday)}</p>
+          <p>{profileInformation?.bio}</p>
+          <p>{profileInformation?.location}</p>
+          <p>{profileInformation?.occupation}</p>
+          <p>{profileInformation?.pronouns}</p>
         </div>
 
-        <div className="ml-4">
-          {profileInformation?.personalFacet?.map((facet) => (
-            <FacetGroupCard key={facet.id} facet={facet} />
-          ))}
+        <div
+          className="flex flex-row overflow-hidden gap-5 px-8"
+          style={{ background: "var(--background-gradient-lr" }}
+        >
+          <div className="mb-24">
+            {profileInformation?.personalFacet?.map((facet) => (
+              <FacetGroupCard key={facet.id} facet={facet} />
+            ))}
+          </div>
+
+          <div>
+            {profileInformation?.friendFacets?.map((facet) => (
+              <FacetGroupCard key={facet.id} facet={facet} />
+            ))}
+          </div>
         </div>
-        <p>image placeholder TBD</p>
       </div>
     </>
   );
