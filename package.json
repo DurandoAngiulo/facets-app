@@ -15,6 +15,10 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.9",
+    "@next/font": "^14.0.4",
     "firebase": "^10.5.2",
     "firebase-tools": "^12.8.0",
     "framer-motion": "^10.18.0",
@@ -23,7 +27,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-firebase-hooks": "^5.1.1",
-    "react-phone-number-input": "^3.3.9"
+    "react-phone-number-input": "^3.3.9",
+    "react-slider": "^2.0.6"
   },
   "devDependencies": {
     "@types/node": "^20",

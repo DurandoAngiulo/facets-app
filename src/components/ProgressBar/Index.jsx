@@ -6,7 +6,7 @@ const ProgressBar = ({ width, step }) => {
       <div className="w-full rounded-full h-3 border" style={{ borderColor: "var(--brand)" }}>
         <div className="h-2.5 rounded-full flex" style={{ width, background: "var(--brand)" }}></div>
       </div>
-      <p className="semibold ml-2 w-full" style={{ color: "var(--element-subtle)" }}>
+      <p className="semibold ml-2 p-2" style={{ color: "var(--element-subtle)" }}>
         {step} of 8
       </p>
     </div>
