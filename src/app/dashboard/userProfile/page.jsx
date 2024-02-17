@@ -11,6 +11,7 @@ import { replaceNameInString } from "@/utils/util-functions";
 import { calculateAge } from "@/utils/util-functions.js";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import MoreDetailsPillGroup from "@/components/MoreDetailsPillGroup/Index.jsx";
 
 const Index = () => {
   const { currentUser } = useAuth();
@@ -114,6 +115,7 @@ const Index = () => {
   }, [JSON.stringify(profileInformation)]);
 
   // console.log(facetGroups, "facetGroups");
+  console.log(profileInformation);
   return (
     <>
       <div>
@@ -128,6 +130,7 @@ const Index = () => {
         <p>{profileInformation?.location}</p>
         <p>{profileInformation?.occupation}</p>
         <p>{profileInformation?.pronouns}</p>
+        <MoreDetailsPillGroup moreDetails={profileInformation?.moreDetails} />
         <div className="ml-4">
           {facetGroups.friendFacets.map((facet) => (
             <FacetGroupCard key={facet.id} facet={facet} />

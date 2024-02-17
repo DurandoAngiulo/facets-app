@@ -11,6 +11,7 @@ import { getProfileById } from "@/services/profile-service";
 import { calculateAge } from "@/utils/util-functions";
 import { usePathname } from "next/navigation";
 import MaskedImage from "@/components/MaskedImage/Index";
+import MoreDetailsPillGroup from "@/components/MoreDetailsPillGroup/Index.jsx";
 
 const Index = () => {
   const { currentUser } = useAuth();
@@ -88,6 +89,7 @@ const Index = () => {
           <p>{profileInformation?.occupation}</p>
           <p>{profileInformation?.pronouns}</p>
         </div>
+        <MoreDetailsPillGroup moreDetails={profileInformation?.moreDetails} />
 
         <div
           className="flex flex-row overflow-auto gap-5 px-8 snap-proximity snap-x"
