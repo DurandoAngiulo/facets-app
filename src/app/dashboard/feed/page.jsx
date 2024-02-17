@@ -89,6 +89,7 @@ const Index = () => {
               facetPrompt={fetchPromptById(profile.personalFacet[0].responses[0].prompt_id, prompts)}
               facetResponse={profile.personalFacet[0].responses[0].response}
               profileId={profile.id}
+              profilePhoto={profile?.personalFacet[0]?.photos?.[0]?.path}
             />
           ))}
         </div>

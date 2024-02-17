@@ -5,7 +5,17 @@ import Link from "next/link";
 import BeveledContainer from "@/components/BeveledContainer/Index.jsx";
 import MaskedImage from "@/components/MaskedImage/Index";
 
-const SummaryCard = ({ profileId, name, pronouns, birthday, occupation, location, facetPrompt, facetResponse }) => {
+const SummaryCard = ({
+  profileId,
+  name,
+  pronouns,
+  birthday,
+  occupation,
+  location,
+  facetPrompt,
+  facetResponse,
+  profilePhoto
+}) => {
   const age = calculateAge(birthday);
   return (
     <div className="max-w-sm w-full">
@@ -16,7 +26,7 @@ const SummaryCard = ({ profileId, name, pronouns, birthday, occupation, location
               {name}
             </h2>
             <div className="flex flex-row gap-4 ">
-              <MaskedImage height={140} width={140} />
+              <MaskedImage height={140} width={140} src={`${profilePhoto}`} />
               <div className="flex flex-col justify-center">
                 <p style={{ color: "var(--text)" }}>{pronouns}</p>
                 <p style={{ color: "var(--text)" }}>{age}</p>
