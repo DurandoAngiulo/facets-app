@@ -46,7 +46,7 @@ const Index = () => {
         </p>
         <ul className="flex flex-col gap-2">
           {facet.responses.map((response) => (
-            <FacetCard key={response.prompt_id} response={response} />
+            <FacetCard key={response.prompt_id} response={response} photos={""} />
           ))}
         </ul>
       </div>
@@ -76,7 +76,7 @@ const Index = () => {
 
     transformFacetData();
   }, [JSON.stringify(profileInformation)]);
-
+  console.log(profileInformation);
   return (
     <>
       <div className="page">

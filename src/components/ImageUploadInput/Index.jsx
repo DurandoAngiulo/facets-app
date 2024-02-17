@@ -35,7 +35,7 @@ const ImageUploadInput = ({ refPath, mainProfile }) => {
     if (imageUploads.length === 0) return;
 
     const uploadPromises = imageUploads.map((file, index) => {
-      const imageRef = ref(storage, `userPhotos/${photoPath}${file.name}`);
+      const imageRef = ref(storage, `userPhotos${photoPath}${file.name}`);
       return uploadBytes(imageRef, file).then(() => {
         setUploadedCount((prevCount) => prevCount + 1); // Increment uploaded count
         return { order: index + 1, path: imageRef._location.path_ }; // Return image data

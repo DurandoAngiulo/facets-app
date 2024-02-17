@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 import { getPhoto } from "@/services/image-service.js";
 
 const MaskedImage = ({ height, width, src }) => {
-  console.log(src);
+  // console.log(src);
   let imageSrc = src;
   const [image, setImage] = useState();
-  console.log("test");
+  // console.log("test");
   useEffect(() => {
     const fetchPhoto = async (media) => {
-      console.log("testtest");
+      // console.log("testtest");
       try {
         const photo = await getPhoto(media);
         let photoResult = photo;
