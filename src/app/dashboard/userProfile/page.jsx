@@ -12,6 +12,8 @@ import { calculateAge } from "@/utils/util-functions.js";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import MoreDetailsPillGroup from "@/components/MoreDetailsPillGroup/Index.jsx";
+import { getPhoto } from "@/services/image-service";
+import FacetGroupCard from "@/components/FacetGroupCard";
 
 const Index = () => {
   const { currentUser } = useAuth();
@@ -19,37 +21,6 @@ const Index = () => {
   const profileId = currentUser?.uid;
   const [profileInformation, setProfileInformation] = useState("");
   const [facetGroups, setFacetGroups] = useState({ friendFacets: [], personalFacets: [] });
-
-  const FacetGroupCard = ({ facet }) => {
-    const FacetCard = ({ response }) => {
-      return (
-        <li key={response.id} className="border border-green">
-          <img src="https://placehold.co/50x50" />
-          <BeveledContainer>
-            <p style={{ color: "var(--text)" }}>
-              <i>{replaceNameInString(response.prompt, profileInformation?.firstName)}</i>
-            </p>
-            <p className="semibold" style={{ fontSize: "var(--font-size-p-md)", color: "var(--brand)" }}>
-              {response.response}
-            </p>
-          </BeveledContainer>
-        </li>
-      );
-    };
-
-    return (
-      <div key={facet.id} className="mt-2 border rounded border-black">
-        <h3>
-          Facet By {facet.friendshipPeriod ? `A friend of ${facet.friendshipPeriod}` : profileInformation?.firstName} {}
-        </h3>
-        <ul>
-          {facet.responses.map((response) => (
-            <FacetCard key={response.prompt_id} response={response} />
-          ))}
-        </ul>
-      </div>
-    );
-  };
 
   useEffect(() => {
     const fetchProfile = async (profileId) => {
@@ -116,6 +87,7 @@ const Index = () => {
 
   // console.log(facetGroups, "facetGroups");
   console.log(profileInformation);
+
   return (
     <>
       <div>
@@ -132,14 +104,12 @@ const Index = () => {
         <p>{profileInformation?.pronouns}</p>
         <MoreDetailsPillGroup moreDetails={profileInformation?.moreDetails} />
         <div className="ml-4">
-          {facetGroups.friendFacets.map((facet) => (
-            <FacetGroupCard key={facet.id} facet={facet} />
-          ))}
+          {/* {profileInformation &&
+            facetGroups.friendFacets.map((facet) => <FacetGroupCard key={facet.id} facet={facet} />)} */}
         </div>
         <div className="ml-4">
-          {facetGroups.personalFacets.map((facet) => (
-            <FacetGroupCard key={facet.id} facet={facet} />
-          ))}
+          {profileInformation &&
+            facetGroups.personalFacets.map((facet) => <FacetGroupCard key={facet.id} facet={facet} />)}
         </div>
         <p>image palcehodler TBD</p>
       </div>

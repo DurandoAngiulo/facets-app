@@ -1,6 +1,7 @@
 import React from "react";
 
 const MoreDetailsPillGroup = ({ moreDetails }) => {
+  if (!moreDetails) return;
   return (
     <div>
       {Object.entries(moreDetails).map(

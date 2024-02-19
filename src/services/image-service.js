@@ -41,7 +41,7 @@ const getPhoto = async (photoPath) => {
 
   const storage = getStorage();
   const photoUrl = await getDownloadURL(ref(storage, photoPath));
-  console.log("success");
+  console.log("success", photoUrl);
   return photoUrl;
 };
 

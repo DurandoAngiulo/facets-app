@@ -41,6 +41,7 @@ const FriendFacetCreation = ({ pageReferralId }) => {
         setFriendFacet(() => ({
           respondantUserId: userId,
           createdAt: getTimeStamp(),
+          photos: [],
           responses: prompts.map((prompt) => ({
             prompt_id: prompt.id,
             prompt: prompt.prompt
@@ -156,7 +157,7 @@ const FriendFacetCreation = ({ pageReferralId }) => {
   if (step === 1) {
     return (
       <>
-        <ImageUploadInput refPath={"friend"} mainProfile={facetOwnerProfile.uid} />
+        <ImageUploadInput refPath={"friend"} mainProfile={facetOwnerProfile} />
         <button onClick={submitFacet}>continue</button>
       </>
     );
