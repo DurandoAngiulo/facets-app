@@ -21,7 +21,7 @@ const Index = () => {
   const FacetGroupCard = ({ facet }) => {
     const FacetCard = ({ response }) => {
       return (
-        <li key={response.id} className="flex flex-col gap-4">
+        <li key={response.id} className="flex flex-col gap-4 snap-center">
           <MaskedImage height={292} width={292} />
           <BeveledContainer>
             <p style={{ color: "var(--text)" }}>
@@ -39,7 +39,7 @@ const Index = () => {
     };
 
     return (
-      <div className="mt-3 flex flex-col gap-2">
+      <div className="mt-3 flex flex-col gap-2 snap-center">
         <p className="text-center" style={{ fontSize: "var(--font-size-p-md)", color: "var(--text)" }}>
           Facet by{" "}
           <b>{facet.friendshipPeriod ? `a friend of ${facet.friendshipPeriod}` : profileInformation?.firstName}</b> {}
@@ -93,17 +93,15 @@ const Index = () => {
           className="flex flex-row overflow-auto gap-5 px-8 snap-proximity snap-x"
           style={{ background: "var(--background-gradient-lr" }}
         >
-          <div className="mb-24 snap-center">
+          <div className="mb-24 ">
             {profileInformation?.personalFacet?.map((facet) => (
               <FacetGroupCard key={facet.id} facet={facet} />
             ))}
           </div>
 
-          <div className="snap-center">
-            {profileInformation?.friendFacets?.map((facet) => (
-              <FacetGroupCard key={facet.id} facet={facet} />
-            ))}
-          </div>
+          {profileInformation?.friendFacets?.map((facet) => (
+            <FacetGroupCard key={facet.id} facet={facet} />
+          ))}
         </div>
       </div>
     </>
