@@ -79,4 +79,43 @@ const SecondaryButton = ({ label, active, disabled, icon, iconleft, onDark }) =>
   );
 };
 
-export { PrimaryButton, SecondaryButton };
+const TertiaryButton = ({ label, active, disabled, icon, iconleft, onDark }) => {
+  return (
+    <div
+      style={{
+        borderColor: "var(--element-subtle)",
+        opacity: disabled ? "0.5" : "1"
+      }}
+      className=" border-b border-solid justify-center items-center inline-flex"
+    >
+      {iconleft && icon && (
+        <div
+          style={{
+            color: "var(--element-subtle)"
+          }}
+        >
+          {icon}
+        </div>
+      )}
+      <div
+        style={{
+          color: "var(--element-subtle)"
+        }}
+      >
+        <p className="semibold">{label}</p>
+      </div>
+      {!iconleft && icon && (
+        <div
+          className="ml-1"
+          style={{
+            color: "var(--element-subtle)"
+          }}
+        >
+          {icon}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export { PrimaryButton, SecondaryButton, TertiaryButton };
