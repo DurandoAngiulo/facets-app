@@ -11,12 +11,19 @@ import { getProfileById } from "@/services/profile-service";
 import { calculateAge } from "@/utils/util-functions";
 import { usePathname } from "next/navigation";
 import MaskedImage from "@/components/MaskedImage/Index";
+import { PillContainer } from "@/components/PillContainer/Index";
 
 const Index = () => {
   const { currentUser } = useAuth();
   const pathname = usePathname();
   const profileId = extractIdFromUrl(pathname);
   const [profileInformation, setProfileInformation] = useState("");
+
+  const newBerryGradient = {
+    background: "linear-gradient(to right, rgba(111, 116, 207, 1), rgba(130, 104, 201, 1), rgba(149, 91, 195, 1))",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent"
+  };
 
   const FacetGroupCard = ({ facet }) => {
     const FacetCard = ({ response }) => {
@@ -80,30 +87,48 @@ const Index = () => {
   return (
     <>
       <div className="page">
-        <div className="shadow-xl w-full z-50 relative bg-white">
-          <p>{profileInformation?.firstName}</p>
-          <p>{calculateAge(profileInformation?.birthday)}</p>
+        {/* main info */}
+        <div>
+          <h2 style={newBerryGradient} className="text-center mt-6">
+            {profileInformation?.firstName}
+          </h2>
+
+          <p style={{ color: "var(--text)" }} className="text-center italic">
+            {profileInformation?.pronouns}
+          </p>
+
+          <div className="w-full justify-center items-center gap-1 inline-flex my-1">
+            <p style={{ color: "var(--text)" }}>{calculateAge(profileInformation?.birthday)}</p>
+            <Icon iconName="diamondBio" className="w-[12px] h-[12px]" />
+            <p style={{ color: "var(--text)" }}>{profileInformation?.occupation}</p>
+            <Icon iconName="diamondBio" className="w-[12px] h-[12px]" />
+            <p style={{ color: "var(--text)" }}>{profileInformation?.location}</p>
+          </div>
+
+          {/* pills with extra info 
+          to add: gradient on name, capitalize content in pills, white bg, text bio (and expand button), back button, kabob*/}
+
+          <div className="w-full justify-center items-center gap-2 inline-flex flex-wrap my-2">
+            <PillContainer>Libra</PillContainer>
+            <PillContainer>Gay</PillContainer>
+            <PillContainer>from Red Bank, NJ</PillContainer>
+            {/* <PillContainer>Doesn't Smoke</PillContainer> */}
+            <PillContainer>Atheist</PillContainer>
+          </div>
+
           <p>{profileInformation?.bio}</p>
-          <p>{profileInformation?.location}</p>
-          <p>{profileInformation?.occupation}</p>
-          <p>{profileInformation?.pronouns}</p>
         </div>
 
-        <div
-          className="flex flex-row overflow-auto gap-5 px-8 snap-proximity snap-x"
-          style={{ background: "var(--background-gradient-lr" }}
-        >
-          <div className="mb-24 snap-center">
-            {profileInformation?.personalFacet?.map((facet) => (
-              <FacetGroupCard key={facet.id} facet={facet} />
-            ))}
-          </div>
+        <div className="ml-4">
+          {profileInformation?.friendFacets?.map((facet) => (
+            <FacetGroupCard key={facet.id} facet={facet} />
+          ))}
+        </div>
 
-          <div className="snap-center">
-            {profileInformation?.friendFacets?.map((facet) => (
-              <FacetGroupCard key={facet.id} facet={facet} />
-            ))}
-          </div>
+        <div className="snap-center">
+          {profileInformation?.friendFacets?.map((facet) => (
+            <FacetGroupCard key={facet.id} facet={facet} />
+          ))}
         </div>
       </div>
     </>

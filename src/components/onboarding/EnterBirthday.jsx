@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Icon from "@/components/Icon";
 import { PrimaryButton } from "@/components/Button/Index";
+import { PillContainer } from "@/components/PillContainer/Index";
 import ProgressBar from "../ProgressBar/Index";
 
 export const EnterBirthday = ({ handleUpdateProfile }) => {
@@ -46,8 +47,15 @@ export const EnterBirthday = ({ handleUpdateProfile }) => {
             </div>
           </label>
 
-          <div className="w-full items-end flex mt-16 ">
-            <button className="w-full" id="birthday-continue" type="submit">
+          {/* testing pill component, remove this section when finished! */}
+          {/* <div className="justify-start items-start gap-2 inline-flex">
+            <PillContainer>virgo</PillContainer>
+            <PillContainer>Straight</PillContainer>
+            <PillContainer>from Montclair, NJ</PillContainer>
+          </div> */}
+
+          <div className="absolute bottom-16 left-0 right-0 flex justify-center ">
+            <button className="w-full mx-6" id="birthday-continue" type="submit">
               <PrimaryButton active="true" label="Continue"></PrimaryButton>
             </button>
           </div>

@@ -128,8 +128,9 @@ export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
         <button id="location-continue" type="submit">
           Continue
         </button>
+        </div>
         {error && <p style={{ color: "red" }}>{error}</p>}
-      </div>
+      
     </form>
   );
 };

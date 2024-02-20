@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import TextInput from "@/components/Inputs/TextInput/Index";
 import RadioInputGroup from "@/components/Inputs/RadioInputGroup/Index";
+import { PrimaryButton } from "@/components/Button/Index";
 
 export const EnterMoreDetails = ({ handleUpdateProfile }) => {
   const [moreDetails, setMoreDetails] = useState({
@@ -175,9 +176,9 @@ export const EnterMoreDetails = ({ handleUpdateProfile }) => {
         ]}
       />
 
-      <div className="">
-        <button id="details-continue" type="submit">
-          Continue
+      <div className="absolute bottom-16 left-0 right-0 flex justify-center ">
+        <button className="w-full mx-6" id="details-continue" type="submit">
+          <PrimaryButton active="true" label="Continue"></PrimaryButton>
         </button>
       </div>
     </form>

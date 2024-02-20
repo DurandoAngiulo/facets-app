@@ -48,8 +48,8 @@ export const EnterLocation = ({ handleUpdateProfile }) => {
             </div>
           </label>
 
-          <div className="w-full items-end flex mt-16 ">
-            <button className="w-full" id="location-continue" type="submit">
+          <div className="absolute bottom-16 left-0 right-0 flex justify-center ">
+            <button className="w-full mx-6" id="location-continue" type="submit">
               <PrimaryButton active="true" label="Continue"></PrimaryButton>
             </button>
           </div>

@@ -27,6 +27,7 @@ import ageRange from "@/svg/age_range.svg";
 import location from "@/svg/location.svg";
 import employment from "@/svg/employment.svg";
 import occupation from "@/svg/occupation.svg";
+import diamondBio from "@/svg/diamond-bio.svg";
 
 import { forwardRef } from "react";
 import styles from "./Icon.module.css";
@@ -60,7 +61,8 @@ export const iconRegistry = {
   ageRange,
   location,
   employment,
-  occupation
+  occupation,
+  diamondBio
 };
 
 type IconNames = keyof typeof iconRegistry;

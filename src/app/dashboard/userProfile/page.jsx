@@ -12,6 +12,7 @@ import { calculateAge } from "@/utils/util-functions.js";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+
 const Index = () => {
   const { currentUser } = useAuth();
   const pathname = usePathname();

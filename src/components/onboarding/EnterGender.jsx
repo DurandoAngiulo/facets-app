@@ -6,12 +6,14 @@ import ProgressBar from "../ProgressBar/Index";
 
 export const EnterGender = ({ handleUpdateProfile }) => {
   const [gender, setGender] = useState("");
+  const [error, setError] = useState(null);
   const handleGenderChange = (event) => {
     setGender(event.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (gender.trim() === "") {
       setError("Please select your gender.");
     } else {
@@ -92,11 +94,12 @@ export const EnterGender = ({ handleUpdateProfile }) => {
           </div>
         </div>
 
-        <div className="w-full items-end flex mt-10 ">
-          <button className="w-full" id="gender-continue" type="submit">
+        <div className="absolute bottom-16 left-0 right-0 flex justify-center ">
+          <button className="w-full mx-6" id="gender-continue" type="submit">
             <PrimaryButton active="true" label="Continue"></PrimaryButton>
           </button>
         </div>
+        {error && <p style={{ color: "red" }}>{error}</p>}
       </form>
     </div>
   );

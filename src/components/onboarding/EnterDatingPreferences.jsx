@@ -22,8 +22,8 @@ export const EnterDatingPreferences = ({ handleUpdateProfile }) => {
     }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
     if (selectedDatingPreferences.length === 0) {
       setError("Please select dating preferences.");
@@ -111,12 +111,12 @@ export const EnterDatingPreferences = ({ handleUpdateProfile }) => {
             </label>
           </div>
         </div>
+        <div className="absolute bottom-16 left-0 right-0 flex justify-center ">
+          <button className="w-full mx-6" id="preferences-continue" type="submit">
+            <PrimaryButton active="true" label="Continue"></PrimaryButton>
+          </button>
+        </div>
       </form>
-      <div className="w-full items-end flex mb-16 ">
-        <button className="w-full" id="preferences-continue" type="submit">
-          <PrimaryButton active="true" label="Continue"></PrimaryButton>
-        </button>
-      </div>
     </div>
   );
 };

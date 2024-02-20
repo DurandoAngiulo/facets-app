@@ -80,8 +80,8 @@ export const EnterAgeRange = ({ handleUpdateProfile }) => {
           </div>
         </div>
 
-        <div className="w-full bottom-0 items-end flex mt-14 ">
-          <button className="w-full" id="ageRange-continue" type="submit">
+        <div className="absolute bottom-16 left-0 right-0 flex justify-center ">
+          <button className="w-full mx-6" id="ageRange-continue" type="submit">
             <PrimaryButton active="true" label="Continue"></PrimaryButton>
           </button>
         </div>

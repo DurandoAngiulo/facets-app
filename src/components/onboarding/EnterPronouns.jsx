@@ -74,8 +74,8 @@ export const EnterPronouns = ({ handleUpdateProfile }) => {
           </div>
         </label>
 
-        <div className="w-full items-end flex mt-20 ">
-          <button className="w-full" id="pronouns-continue" type="submit">
+        <div className="absolute bottom-16 left-0 right-0 flex justify-center ">
+          <button className="w-full mx-6" id="pronouns-continue" type="submit">
             <PrimaryButton active="true" label="Continue"></PrimaryButton>
           </button>
         </div>
