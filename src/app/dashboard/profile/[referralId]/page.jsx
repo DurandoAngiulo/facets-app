@@ -22,7 +22,11 @@ const Index = () => {
     const FacetCard = ({ response }) => {
       return (
         <li key={response.id} className="flex flex-col gap-4">
-          <MaskedImage height={292} width={292} />
+          <MaskedImage
+            height={292}
+            width={292}
+            image="https://imgv3.fotor.com/images/blog-richtext-image/take-a-selfie-with-friends.jpg"
+          />
           <BeveledContainer>
             <p style={{ color: "var(--text)" }}>
               <i>{replaceNameInString(response.prompt, profileInformation?.firstName)}</i>
