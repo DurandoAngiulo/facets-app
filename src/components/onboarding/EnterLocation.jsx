@@ -22,7 +22,7 @@ export const EnterLocation = ({ handleUpdateProfile }) => {
 
   return (
     // border for testing purposes
-    <div className="page border border-yellow-950">
+    <div className="page padding border border-yellow-950">
       <ProgressBar width="85.5%" step="7"></ProgressBar>
       <div className="w-full h-4 relative mt-12">
         <Icon iconName="location" className="w-full h-8 left-0 mb-4 absolute" />

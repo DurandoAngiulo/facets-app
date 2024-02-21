@@ -36,7 +36,7 @@ export const EnterDatingPreferences = ({ handleUpdateProfile }) => {
   };
 
   return (
-    <div className="page border border-yellow-950">
+    <div className="page padding border border-yellow-950">
       <ProgressBar width="62.5%" step="5"></ProgressBar>
 
       <div className="w-full h-4 relative mt-12">

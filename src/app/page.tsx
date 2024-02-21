@@ -8,7 +8,7 @@ export default function Index() {
   return (
     <MarketingLayout>
       <div
-        className=" bg-cover bg-center flex flex-col page justify-center"
+        className=" bg-cover bg-center flex flex-col page padding justify-center"
         style={{ backgroundImage: "url('/dist/images/hands.jpg')" }}
       >
         <div className="mt-40 h-full">

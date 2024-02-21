@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import Icon from "@/components/Icon";
 
-const MaskedImage = ({ height, width }) => {
+const MaskedImage = ({ height, width, image }) => {
   if (height > 140) {
     return (
       <svg
@@ -23,12 +23,12 @@ const MaskedImage = ({ height, width }) => {
         </defs>
         <image
           mask="url(#shape)"
-          preserveAspectRatio="xMidYMid meet"
-          x="0"
-          y="0"
-          xlinkHref="https://placehold.co/300x300"
-          width="100%"
-          height="100%"
+          preserveAspectRatio="xMidYMin"
+          x="-150"
+          y="-100"
+          xlinkHref={image}
+          width="200%"
+          height="200%"
         />
       </svg>
     );
@@ -53,12 +53,12 @@ const MaskedImage = ({ height, width }) => {
         </defs>
         <image
           mask="url(#shape)"
-          preserveAspectRatio="xMidYMid meet"
-          x="0"
-          y="0"
-          xlinkHref="https://placehold.co/300x300"
-          width="100%"
-          height="100%"
+          preserveAspectRatio="xMidYMin"
+          x="-70"
+          y="-50"
+          xlinkHref={image}
+          width="200%"
+          height="200%"
         />
       </svg>
     );

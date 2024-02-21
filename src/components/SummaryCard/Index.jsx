@@ -16,7 +16,11 @@ const SummaryCard = ({ profileId, name, pronouns, birthday, occupation, location
               {name}
             </h2>
             <div className="flex flex-row gap-4 ">
-              <MaskedImage height={140} width={140} />
+              <MaskedImage
+                height={140}
+                width={140}
+                image="https://www.gemsociety.org/wp-content/uploads/2023/07/round-purple-fancy-sapphire-brian-gavin.jpg"
+              />
               <div className="flex flex-col justify-center">
                 <p style={{ color: "var(--text)" }}>{pronouns}</p>
                 <p style={{ color: "var(--text)" }}>{age}</p>

@@ -22,7 +22,7 @@ export const EnterBirthday = ({ handleUpdateProfile }) => {
 
   return (
     // border for testing purposes
-    <div className="page border border-yellow-950">
+    <div className="page padding border border-yellow-950">
       <ProgressBar width="20%" step="2"></ProgressBar>
       <div className="w-full h-4 relative mt-12">
         <Icon iconName="cake" className="w-full h-8 left-0 mb-4 absolute" />
