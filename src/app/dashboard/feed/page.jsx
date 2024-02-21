@@ -52,7 +52,7 @@ const Index = () => {
   // console.log(prompts);
   return (
     <>
-      <div className="page flex flex-col items-center pb-8">
+      <div className="page padding flex flex-col items-center pb-8">
         <div className="flex flex-col gap-4 w-full">
           <div className="flex flex-col gap-0">
             <h1 className="text-center leading-tight mt-6" style={{ color: "var(--brand)" }}>
