@@ -27,6 +27,9 @@ import ageRange from "@/svg/age_range.svg";
 import location from "@/svg/location.svg";
 import employment from "@/svg/employment.svg";
 import occupation from "@/svg/occupation.svg";
+import letter from "@/svg/letter.svg";
+import copy from "@/svg/copy.svg";
+import editGradient from "@/svg/edit-gradient.svg";
 
 import { forwardRef } from "react";
 import styles from "./Icon.module.css";
@@ -60,7 +63,10 @@ export const iconRegistry = {
   ageRange,
   location,
   employment,
-  occupation
+  occupation,
+  letter,
+  copy,
+  editGradient
 };
 
 type IconNames = keyof typeof iconRegistry;
