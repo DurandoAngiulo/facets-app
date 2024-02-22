@@ -1,15 +1,16 @@
 "use client";
+
 import "./styles.css";
+
 import { fetchPromptById, getPrompts } from "@/services/prompt.service";
 import { useEffect, useState } from "react";
 
-import BeveledContainer from "@/components/BeveledContainer/Index.jsx";
+import { PrimaryButton } from "@/components/Button/Index";
+import Icon from "@/components/Icon";
 import SummaryCard from "@/components/SummaryCard/Index.jsx";
 import FIREBASE from "@/constants/firebase";
 import { useAuth } from "@/context/AuthContext";
 import { getProfiles } from "@/services/profile-service";
-import { PrimaryButton } from "@/components/Button/Index";
-import Icon from "@/components/Icon";
 
 const Index = () => {
   const { currentUser } = useAuth();
@@ -86,8 +87,8 @@ const Index = () => {
               birthday={profile.birthday}
               occupation={profile.occupation}
               location={profile.location}
-              facetPrompt={fetchPromptById(profile.personalFacet[0].responses[0].prompt_id, prompts)}
-              facetResponse={profile.personalFacet[0].responses[0].response}
+              facetPrompt={fetchPromptById(profile?.personalFacet?.[0]?.responses?.[0]?.prompt_id, prompts)}
+              facetResponse={profile?.personalFacet?.[0]?.responses?.[0]?.response}
               profileId={profile.id}
             />
           ))}

@@ -3,14 +3,14 @@
 import { extractIdFromUrl, replaceNameInString } from "@/utils/util-functions";
 import { useEffect, useState } from "react";
 
-import BeveledContainer from "@/components/BeveledContainer/Index.jsx";
+import BeveledContainer from "@/components/BeveledContainer";
 import Icon from "@/components/Icon";
+import MaskedImage from "@/components/MaskedImage/Index";
 import { useAuth } from "@/context/AuthContext";
 import { transformUserFacets } from "@/services/facet-services";
 import { getProfileById } from "@/services/profile-service";
 import { calculateAge } from "@/utils/util-functions";
 import { usePathname } from "next/navigation";
-import MaskedImage from "@/components/MaskedImage/Index";
 
 const Index = () => {
   const { currentUser } = useAuth();

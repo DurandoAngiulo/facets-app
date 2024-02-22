@@ -2,146 +2,72 @@
 
 import { useEffect, useState } from "react";
 
-import BeveledContainer from "@/components/BeveledContainer/Index.jsx";
-import FIREBASE from "@/constants/firebase";
+import FacetsList from "@/components/FacetsList";
+import ROUTES from "@/constants/routes";
 import { useAuth } from "@/context/AuthContext";
-import { getProfileById } from "@/services/profile-service";
-import { getPrompts } from "@/services/prompt.service";
-import { replaceNameInString } from "@/utils/util-functions";
+import { transformUserFacets } from "@/services/facet-services";
 import { calculateAge } from "@/utils/util-functions.js";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
-const Index = () => {
+const Page = () => {
   const { currentUser } = useAuth();
-  const pathname = usePathname();
-  const profileId = currentUser?.uid;
-  const [profileInformation, setProfileInformation] = useState("");
+  const profileInformation = currentUser?.profile;
   const [facetGroups, setFacetGroups] = useState({ friendFacets: [], personalFacets: [] });
-
-  const FacetGroupCard = ({ facet }) => {
-    const FacetCard = ({ response }) => {
-      return (
-        <li key={response.id} className="border border-green">
-          <img src="https://placehold.co/50x50" />
-          <BeveledContainer>
-            <p style={{ color: "var(--text)" }}>
-              <i>{replaceNameInString(response.prompt, profileInformation?.firstName)}</i>
-            </p>
-            <p className="semibold" style={{ fontSize: "var(--font-size-p-md)", color: "var(--brand)" }}>
-              {response.response}
-            </p>
-          </BeveledContainer>
-        </li>
-      );
-    };
-
-    return (
-      <div key={facet.id} className="mt-2 border rounded border-black">
-        <h3>
-          Facet By {facet.friendshipPeriod ? `A friend of ${facet.friendshipPeriod}` : profileInformation?.firstName} {}
-        </h3>
-        <ul>
-          {facet.responses.map((response) => (
-            <FacetCard key={response.prompt_id} response={response} />
-          ))}
-        </ul>
-      </div>
-    );
-  };
-
-  useEffect(() => {
-    const fetchProfile = async (profileId) => {
-      try {
-        const profileResult = await getProfileById(profileId);
-        let profileData = profileResult?.data?.data;
-        setProfileInformation(profileData);
-      } catch (error) {
-        console.error("Failed to fetch user profile:", error);
-      }
-    };
-    fetchProfile(profileId);
-  }, []);
+  const friendFacetsExist = facetGroups?.friendFacets.length > 0;
+  const profileFacetsExist = facetGroups?.personalFacets[0] !== undefined;
 
   useEffect(() => {
     if (!profileInformation) return;
 
-    const transformFriendsFacets = async () => {
-      const personalFacets = profileInformation.personalFacet || [];
-      const uniquePersonalPromptIds = new Set(
-        personalFacets
-          .flatMap((facet) => facet.responses)
-          .map((response) => response.prompt_id)
-          .filter((id) => id) // Filter out falsy values, including empty strings
-      );
-
-      const friendFacets = profileInformation.friendFacets || [];
-      const uniqueFriendPromptIds = new Set(
-        friendFacets
-          .flatMap((facet) => facet.responses)
-          .map((response) => response.prompt_id)
-          .filter((id) => id) // Filter out falsy values, including empty strings
-      );
-
-      const combinedUniquePromptIds = new Set([...uniqueFriendPromptIds, ...uniquePersonalPromptIds]);
-      const uniquePromptIdsArray = Array.from(combinedUniquePromptIds);
-
-      const friendPrompts = await getPrompts(FIREBASE.COLLECTIONS.FRIENDPROMPTS, uniquePromptIdsArray);
-      const userPrompts = await getPrompts(FIREBASE.COLLECTIONS.USERPROMPTS, uniquePromptIdsArray);
-
-      friendFacets?.map((facet) => {
-        facet.responses.map((response) => {
-          if (!response.prompt_id || !response.prompt_id) return;
-          const prompt = friendPrompts.data.find((prompt) => prompt.id === response.prompt_id);
-          response.prompt = prompt.prompt;
-        });
-      });
-
-      personalFacets?.map((facet) => {
-        facet.responses.map((response) => {
-          if (!response.prompt_id || !response.prompt_id) return;
-          const prompt = userPrompts.data.find((prompt) => prompt.id === response.prompt_id);
-          response.prompt = prompt.prompt;
-        });
-      });
-
-      // modified personalFacets to match friend Facets
-      setFacetGroups({ friendFacets, personalFacets });
+    const transformFacetData = async () => {
+      const newProfile = await transformUserFacets(profileInformation);
+      setFacetGroups({ ...profileInformation, ...newProfile });
     };
 
-    transformFriendsFacets();
-    // console.log(profileInformation);
+    transformFacetData();
   }, [JSON.stringify(profileInformation)]);
 
-  // console.log(facetGroups, "facetGroups");
+  if (!profileInformation) {
+    return <h1>loading...</h1>;
+  }
+
   return (
     <>
       <div>
-        <Link href="/dashboard/userProfile/edit">
-          <h2>edit profile</h2>
-        </Link>
+        <header>
+          <Link href={ROUTES.EDIT_PROFILE.path}>
+            <h2>edit profile</h2>
+          </Link>
 
-        <h2>all unstyled profile data</h2>
-        <p>{profileInformation?.firstName}</p>
-        <p>{calculateAge(profileInformation?.birthday)}</p>
-        <p>{profileInformation?.bio}</p>
-        <p>{profileInformation?.location}</p>
-        <p>{profileInformation?.occupation}</p>
-        <p>{profileInformation?.pronouns}</p>
-        <div className="ml-4">
-          {facetGroups.friendFacets.map((facet) => (
-            <FacetGroupCard key={facet.id} facet={facet} />
-          ))}
-        </div>
-        <div className="ml-4">
-          {facetGroups.personalFacets.map((facet) => (
-            <FacetGroupCard key={facet.id} facet={facet} />
-          ))}
-        </div>
-        <p>image palcehodler TBD</p>
+          <h2>all unstyled profile data</h2>
+          <p>{profileInformation?.firstName}</p>
+          <p>{calculateAge(profileInformation?.birthday)}</p>
+          <p>{profileInformation?.bio}</p>
+          <p>{profileInformation?.location}</p>
+          <p>{profileInformation?.occupation}</p>
+          <p>{profileInformation?.pronouns}</p>
+        </header>
+        <section className="bg-green-400">
+          {profileFacetsExist && (
+            <div>
+              <h3>Facet By {profileInformation?.firstName}</h3>
+              <ul>
+                <FacetsList facet={facetGroups.personalFacets[0]} />
+              </ul>
+            </div>
+          )}
+
+          {friendFacetsExist &&
+            facetGroups.friendFacets.map((facet) => (
+              <div key={facet.respondantUserId}>
+                <h3>Facet By A friend of {facet.friendshipPeriod}</h3>
+                <FacetsList facet={facet} currentProfile={profileInformation} />
+              </div>
+            ))}
+        </section>
       </div>
     </>
   );
 };
 
-export default Index;
+export default Page;

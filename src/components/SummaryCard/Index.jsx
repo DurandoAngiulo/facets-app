@@ -1,9 +1,9 @@
+import BeveledContainer from "@/components/BeveledContainer/index.jsx";
 import { PrimaryButton } from "@/components/Button/Index";
+import MaskedImage from "@/components/MaskedImage/Index";
 import ROUTES from "@/constants/routes";
 import { calculateAge } from "@/utils/util-functions.js";
 import Link from "next/link";
-import BeveledContainer from "@/components/BeveledContainer/Index.jsx";
-import MaskedImage from "@/components/MaskedImage/Index";
 
 const SummaryCard = ({ profileId, name, pronouns, birthday, occupation, location, facetPrompt, facetResponse }) => {
   const age = calculateAge(birthday);
