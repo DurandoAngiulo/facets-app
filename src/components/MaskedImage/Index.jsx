@@ -2,7 +2,7 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import Icon from "@/components/Icon";
 import { useEffect, useState } from "react";
-import { getPhoto } from "@/services/image-service.js";
+import { getPhotoURL } from "@/services/image-service.js";
 
 const MaskedImage = ({ height, width, src }) => {
   // console.log(src);
@@ -13,11 +13,11 @@ const MaskedImage = ({ height, width, src }) => {
     const fetchPhoto = async (media) => {
       // console.log("testtest");
       try {
-        const photo = await getPhoto(media);
+        const photo = await getPhotoURL(media);
         let photoResult = photo;
         setImage(photoResult);
       } catch (error) {
-        setImage("https://placehold.co/300x300");
+        setImage("https://www.gemsociety.org/wp-content/uploads/2023/07/round-purple-fancy-sapphire-brian-gavin.jpg");
         console.error("Failed to fetch photo", error);
       }
     };
@@ -47,7 +47,7 @@ const MaskedImage = ({ height, width, src }) => {
           preserveAspectRatio="xMidYMid meet"
           x="0"
           y="0"
-          xlinkHref="https://placehold.co/300x300"
+          xlinkHref={image}
           width="100%"
           height="100%"
         />
