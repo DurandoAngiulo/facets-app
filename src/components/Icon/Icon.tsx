@@ -28,6 +28,8 @@ import location from "@/svg/location.svg";
 import employment from "@/svg/employment.svg";
 import occupation from "@/svg/occupation.svg";
 import diamondBio from "@/svg/diamond-bio.svg";
+import backArrow from "@/svg/back-arrow.svg";
+import kabob from "@/svg/kabob.svg";
 
 import { forwardRef } from "react";
 import styles from "./Icon.module.css";
@@ -62,7 +64,9 @@ export const iconRegistry = {
   location,
   employment,
   occupation,
-  diamondBio
+  diamondBio,
+  backArrow,
+  kabob
 };
 
 type IconNames = keyof typeof iconRegistry;

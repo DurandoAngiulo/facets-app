@@ -12,6 +12,9 @@ import { calculateAge } from "@/utils/util-functions";
 import { usePathname } from "next/navigation";
 import MaskedImage from "@/components/MaskedImage/Index";
 import { PillContainer } from "@/components/PillContainer/Index";
+// import { BackButton } from "@/components/BackButton/Index";
+import Link from "next/link";
+import ROUTES from "@/constants/routes";
 
 const Index = () => {
   const { currentUser } = useAuth();
@@ -90,38 +93,53 @@ const Index = () => {
 
   return (
     <>
-      <div className="page">
-        {/* main info */}
-        <div>
-          <h2 style={newBerryGradient} className="text-center mt-6">
-            {profileInformation?.firstName}
-          </h2>
-
-          <p style={{ color: "var(--text)" }} className="text-center italic">
-            {profileInformation?.pronouns}
-          </p>
-
-          <div className="w-full justify-center items-center gap-1 inline-flex my-1">
-            <p style={{ color: "var(--text)" }}>{calculateAge(profileInformation?.birthday)}</p>
-            <Icon iconName="diamondBio" className="w-[12px] h-[12px]" />
-            <p style={{ color: "var(--text)" }}>{profileInformation?.occupation}</p>
-            <Icon iconName="diamondBio" className="w-[12px] h-[12px]" />
-            <p style={{ color: "var(--text)" }}>{profileInformation?.location}</p>
+      <div className="bg-white pb-4 style={{ maxWidth: '420px' }}">
+        <div className="w-full justify-center items-center gap-2 inline-flex flex-wrap my-2 mb-2">
+          {/* header with back button, name, and kabob with modal options */}
+          <div className="flex inline-flex w-full mx-auto ">
+            {/* <Link href={`${ROUTES.FEED.path}`}> */}
+            <Icon className="w-6 h-6 w-1/6 align-middle fill-none" iconName="backArrow"></Icon>
+            {/* </Link> */}
+            <h2 style={newBerryGradient} className="text-center pt-6 w-4/6">
+              {profileInformation?.firstName}
+            </h2>
+            <Icon className="w-6 h-6 w-1/6 align-middle" iconName="kabob"></Icon>
           </div>
+        </div>
 
-          {/* pills with extra info 
+        <p style={{ color: "var(--text)" }} className="text-center italic">
+          {profileInformation?.pronouns}
+        </p>
+
+        <div className="w-full justify-center items-center gap-1 inline-flex my-1">
+          <p style={{ color: "var(--text)" }}>{calculateAge(profileInformation?.birthday)}</p>
+          <Icon iconName="diamondBio" className="w-[12px] h-[12px]" />
+          <p style={{ color: "var(--text)" }}>{profileInformation?.occupation}</p>
+          <Icon iconName="diamondBio" className="w-[12px] h-[12px]" />
+          <p style={{ color: "var(--text)" }}>{profileInformation?.location}</p>
+        </div>
+
+        {/* pills with extra info 
           to add: gradient on name, capitalize content in pills, white bg, text bio (and expand button), back button, kabob*/}
 
-          <div className="w-full justify-center items-center gap-2 inline-flex flex-wrap my-2">
-            <PillContainer>Libra</PillContainer>
-            <PillContainer>Gay</PillContainer>
-            <PillContainer>from Red Bank, NJ</PillContainer>
-            {/* <PillContainer>Doesn't Smoke</PillContainer> */}
-            <PillContainer>Atheist</PillContainer>
-          </div>
+        <div className="w-full justify-center items-center gap-2 inline-flex flex-wrap my-2 mb-2">
+          <PillContainer>Libra</PillContainer>
+          <PillContainer>Gay</PillContainer>
+          <PillContainer>from Red Bank, NJ</PillContainer>
+          <PillContainer>from Red Bank, NJ</PillContainer>
+          <PillContainer>from Red Bank, NJ</PillContainer>
+          <PillContainer>from Red Bank, NJ</PillContainer>
+          <PillContainer>from Red Bank, NJ</PillContainer>
 
-          <p>{profileInformation?.bio}</p>
+          {/* <PillContainer>Doesn't Smoke</PillContainer> */}
+          <PillContainer>Atheist</PillContainer>
         </div>
+
+        <p className="mx-6">{profileInformation?.bio}</p>
+      </div>
+
+      <div className="page">
+        {/* main info */}
 
         <div className="ml-4">
           {profileInformation?.friendFacets?.map((facet) => (
