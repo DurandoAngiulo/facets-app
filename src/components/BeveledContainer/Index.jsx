@@ -5,9 +5,9 @@ Figure best way to handle Summary data
 How do I test if it's receiving a Summary or Response?
 And should photos even be in here or would it be separate, bc the photo is just a mask */
 
-const BeveledContainer = ({ children }) => {
+const BeveledContainer = ({ children, className }) => {
   return (
-    <div className="w-full flex-col justify-start items-start inline-flex drop-shadow-lg mb-4">
+    <div className={`${className} w-full flex-col justify-start items-start inline-flex drop-shadow-lg mb-4`}>
       <div className="w-full justify-center inline-flex">
         <Icon className="w-full" iconName="bevelTop" />
       </div>

@@ -1,9 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import SignUpForm from "@/components/SignUpForm/Index";
 import MarketingLayout from "@/components/layouts/MarketingLayout";
-
+import SignUpForm from "@/components/SignUpForm/Index";
 const Signup = () => {
   return (
     <MarketingLayout>
