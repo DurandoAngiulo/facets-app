@@ -23,7 +23,7 @@ export const AuthContextProvider = ({ children }) => {
   if (currentUser?.uid && currentUser?.profile) {
     console.log(`You are logged in as ${currentUser?.profile?.firstName} with id ${currentUser?.uid}`);
   } else {
-    console.log("No user info atm");
+    console.log("currently no user logged in");
   }
 
   /**

@@ -11,8 +11,8 @@ const generateUniqueUid = () => {
   return uniqueUid;
 };
 
-function replaceNameInString(inputString, userName) {
-  if (!inputString) return inputString;
+function replaceNameInString(inputString, userName = null) {
+  if (!inputString || !userName) return inputString;
 
   const replacedString = inputString.replace(/\[Name\]/g, userName);
   return replacedString;

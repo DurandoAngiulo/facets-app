@@ -1,7 +1,28 @@
+"use client";
 import { renderToStaticMarkup } from "react-dom/server";
 import Icon from "@/components/Icon";
+import { useEffect, useState } from "react";
+import { getPhotoURL } from "@/services/image-service.js";
 
-const MaskedImage = ({ height, width, image }) => {
+const MaskedImage = ({ height, width, src }) => {
+  // console.log(src);
+  let imageSrc = src;
+  const [image, setImage] = useState();
+  // console.log("test");
+  useEffect(() => {
+    const fetchPhoto = async (media) => {
+      // console.log("testtest");
+      try {
+        const photo = await getPhotoURL(media);
+        let photoResult = photo;
+        setImage(photoResult);
+      } catch (error) {
+        setImage("https://www.gemsociety.org/wp-content/uploads/2023/07/round-purple-fancy-sapphire-brian-gavin.jpg");
+        console.error("Failed to fetch photo", error);
+      }
+    };
+    fetchPhoto(imageSrc);
+  }, []);
   if (height > 140) {
     return (
       <svg
@@ -23,12 +44,12 @@ const MaskedImage = ({ height, width, image }) => {
         </defs>
         <image
           mask="url(#shape)"
-          preserveAspectRatio="xMidYMin"
-          x="-150"
-          y="-100"
+          preserveAspectRatio="xMidYMid meet"
+          x="0"
+          y="0"
           xlinkHref={image}
-          width="200%"
-          height="200%"
+          width="100%"
+          height="100%"
         />
       </svg>
     );
@@ -53,12 +74,12 @@ const MaskedImage = ({ height, width, image }) => {
         </defs>
         <image
           mask="url(#shape)"
-          preserveAspectRatio="xMidYMin"
-          x="-70"
-          y="-50"
+          preserveAspectRatio="xMidYMid meet"
+          x="0"
+          y="0"
           xlinkHref={image}
-          width="200%"
-          height="200%"
+          width="100%"
+          height="100%"
         />
       </svg>
     );

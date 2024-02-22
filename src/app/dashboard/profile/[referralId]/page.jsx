@@ -3,14 +3,15 @@
 import { extractIdFromUrl, replaceNameInString } from "@/utils/util-functions";
 import { useEffect, useState } from "react";
 
-import BeveledContainer from "@/components/BeveledContainer/Index.jsx";
+import BeveledContainer from "@/components/BeveledContainer/Index";
 import Icon from "@/components/Icon";
+import MaskedImage from "@/components/MaskedImage/Index";
 import { useAuth } from "@/context/AuthContext";
 import { transformUserFacets } from "@/services/facet-services";
 import { getProfileById } from "@/services/profile-service";
 import { calculateAge } from "@/utils/util-functions";
 import { usePathname } from "next/navigation";
-import MaskedImage from "@/components/MaskedImage/Index";
+import MoreDetailsPillGroup from "@/components/MoreDetailsPillGroup/Index.jsx";
 
 const Index = () => {
   const { currentUser } = useAuth();
@@ -21,7 +22,7 @@ const Index = () => {
   const FacetGroupCard = ({ facet }) => {
     const FacetCard = ({ response }) => {
       return (
-        <li key={response.id} className="flex flex-col gap-4">
+        <li key={response.id} className="flex flex-col gap-4 snap-center">
           <MaskedImage
             height={292}
             width={292}
@@ -43,7 +44,7 @@ const Index = () => {
     };
 
     return (
-      <div className="mt-3 flex flex-col gap-2">
+      <div className="mt-3 flex flex-col gap-2 snap-center">
         <p className="text-center" style={{ fontSize: "var(--font-size-p-md)", color: "var(--text)" }}>
           Facet by{" "}
           <b>{facet.friendshipPeriod ? `a friend of ${facet.friendshipPeriod}` : profileInformation?.firstName}</b> {}
@@ -92,22 +93,21 @@ const Index = () => {
           <p>{profileInformation?.occupation}</p>
           <p>{profileInformation?.pronouns}</p>
         </div>
+        <MoreDetailsPillGroup moreDetails={profileInformation?.moreDetails} />
 
         <div
           className="flex flex-row overflow-auto gap-5 px-8 snap-proximity snap-x"
           style={{ background: "var(--background-gradient-lr" }}
         >
-          <div className="mb-24 snap-center">
+          <div className="mb-24 ">
             {profileInformation?.personalFacet?.map((facet) => (
               <FacetGroupCard key={facet.id} facet={facet} />
             ))}
           </div>
 
-          <div className="snap-center">
-            {profileInformation?.friendFacets?.map((facet) => (
-              <FacetGroupCard key={facet.id} facet={facet} />
-            ))}
-          </div>
+          {profileInformation?.friendFacets?.map((facet) => (
+            <FacetGroupCard key={facet.id} facet={facet} />
+          ))}
         </div>
       </div>
     </>

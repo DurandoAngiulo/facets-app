@@ -31,32 +31,50 @@ const updateFacetResponses = (facets, promptsData) => {
 
 /**
  * Transforms user facets by updating the prompt details from the database.
- * @param {Object} userProfile - The user profile containing facets to transform.
+ * @param {Object} profileInformation - The user profile containing facets to transform.
  * @returns {Promise} The updated user profile with transformed facets.
  */
-const transformUserFacets = async (userProfile) => {
-  const personalFacet = userProfile.personalFacet || [];
-  const friendFacets = userProfile.friendFacets || [];
+const transformUserFacets = async (profileInformation) => {
+  const personalFacets = profileInformation.personalFacet || [];
+  const uniquePersonalPromptIds = new Set(
+    personalFacets
+      .flatMap((facet) => facet.responses)
+      .map((response) => response.prompt_id)
+      .filter((id) => id) // Filter out falsy values, including empty strings
+  );
 
-  const uniquePersonalPromptIds = extractUniquePromptIds(personalFacet);
-  const uniqueFriendPromptIds = extractUniquePromptIds(friendFacets);
+  const friendFacets = profileInformation.friendFacets || [];
+  const uniqueFriendPromptIds = new Set(
+    friendFacets
+      .flatMap((facet) => facet.responses)
+      .map((response) => response.prompt_id)
+      .filter((id) => id) // Filter out falsy values, including empty strings
+  );
 
   const combinedUniquePromptIds = new Set([...uniqueFriendPromptIds, ...uniquePersonalPromptIds]);
+  const uniquePromptIdsArray = Array.from(combinedUniquePromptIds);
 
-  try {
-    const [friendPrompts, userPrompts] = await Promise.all([
-      getPrompts(FIREBASE.COLLECTIONS.FRIENDPROMPTS, Array.from(combinedUniquePromptIds)),
-      getPrompts(FIREBASE.COLLECTIONS.USERPROMPTS, Array.from(combinedUniquePromptIds))
-    ]);
+  const friendPrompts = await getPrompts(FIREBASE.COLLECTIONS.FRIENDPROMPTS, uniquePromptIdsArray);
+  const userPrompts = await getPrompts(FIREBASE.COLLECTIONS.USERPROMPTS, uniquePromptIdsArray);
 
-    updateFacetResponses(friendFacets, friendPrompts.data);
-    updateFacetResponses(personalFacet, userPrompts.data);
+  friendFacets?.map((facet) => {
+    facet.responses.map((response) => {
+      if (!response.prompt_id || !response.prompt_id) return;
+      const prompt = friendPrompts.data.find((prompt) => prompt.id === response.prompt_id);
+      response.prompt = prompt.prompt;
+    });
+  });
 
-    return { ...userProfile, personalFacet, friendFacets };
-  } catch (error) {
-    console.error("Error transforming user facets:", error);
-    throw error; // Rethrow the error for upstream handling.
-  }
+  personalFacets?.map((facet) => {
+    facet.responses.map((response) => {
+      if (!response.prompt_id || !response.prompt_id) return;
+      const prompt = userPrompts.data.find((prompt) => prompt.id === response.prompt_id);
+      response.prompt = prompt.prompt;
+    });
+  });
+
+  console.log({ friendFacets, personalFacets });
+  return { friendFacets, personalFacets };
 };
 
 export { transformUserFacets };
