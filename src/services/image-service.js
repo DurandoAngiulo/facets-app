@@ -1,4 +1,4 @@
-import { getStorage, ref, getDownloadURL, listAll } from "firebase/storage";
+import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 const updatePhotoOrder = (photos, currentOrder, newOrder) => {
   // Check if the current order and new order are within the bounds of the photos array
@@ -31,18 +31,35 @@ const updatePhotoOrder = (photos, currentOrder, newOrder) => {
 };
 
 /**
- * Retrive an image url by it's file path
- * @param {String} photoPath - The path of the image in firebase storage
- * @link https://firebase.google.com/docs/storage/web/download-files#download_data_via_url
- * @returns {String} Returns downloadable url
+ * Retrieves a download URL for a single photo from Firebase storage.
+ * @param {string} path - The path to the photo in Firebase storage.
+ * @returns {Promise<string>} A promise that resolves to the download URL.
  */
-const getPhoto = async (photoPath) => {
-  if (!photoPath) return;
-
+const getPhotoURL = async (path) => {
   const storage = getStorage();
-  const photoUrl = await getDownloadURL(ref(storage, photoPath));
-  console.log("success", photoUrl);
-  return photoUrl;
+  const photoRef = ref(storage, path);
+
+  try {
+    const url = await getDownloadURL(photoRef);
+    return url;
+  } catch (error) {
+    console.error("Failed to get download URL", error);
+    throw error;
+  }
 };
 
-export { updatePhotoOrder, getPhoto };
+/**
+ * Retrieves download URLs for an array of photos from Firebase storage.
+ * @param {Array<{ order: number; path: string; }>} photos - An array of objects with order and path to the photos in Firebase storage.
+ * @returns {Promise<Array<{ order: number; url: string; }>>} A promise that resolves to an array of objects with order and download URLs.
+ */
+const getFacetPhotoUrls = async (photos) => {
+  return Promise.all(
+    photos.map(async (photo) => {
+      const url = await getPhotoURL(photo.path);
+      return { order: photo.order, url };
+    })
+  );
+};
+
+export { getFacetPhotoUrls, getPhotoURL, updatePhotoOrder };

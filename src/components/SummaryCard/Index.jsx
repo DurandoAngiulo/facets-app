@@ -1,9 +1,9 @@
+import BeveledContainer from "@/components/BeveledContainer/Index.jsx";
 import { PrimaryButton } from "@/components/Button/Index";
+import MaskedImage from "@/components/MaskedImage/Index";
 import ROUTES from "@/constants/routes";
 import { calculateAge } from "@/utils/util-functions.js";
 import Link from "next/link";
-import BeveledContainer from "@/components/BeveledContainer/Index.jsx";
-import MaskedImage from "@/components/MaskedImage/Index";
 
 const SummaryCard = ({
   profileId,
@@ -14,9 +14,10 @@ const SummaryCard = ({
   location,
   facetPrompt,
   facetResponse,
-  profilePhoto
+  src
 }) => {
   const age = calculateAge(birthday);
+  console.log(src, "source!!!");
   return (
     <div className="max-w-sm w-full">
       <BeveledContainer>
@@ -26,7 +27,7 @@ const SummaryCard = ({
               {name}
             </h2>
             <div className="flex flex-row gap-4 ">
-              <MaskedImage height={140} width={140} src={`${profilePhoto}`} />
+              <MaskedImage height={140} width={140} src={src} />
               <div className="flex flex-col justify-center">
                 <p style={{ color: "var(--text)" }}>{pronouns}</p>
                 <p style={{ color: "var(--text)" }}>{age}</p>

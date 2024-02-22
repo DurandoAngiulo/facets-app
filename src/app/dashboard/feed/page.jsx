@@ -1,15 +1,16 @@
 "use client";
+
 import "./styles.css";
+
 import { fetchPromptById, getPrompts } from "@/services/prompt.service";
 import { useEffect, useState } from "react";
 
-import BeveledContainer from "@/components/BeveledContainer/Index.jsx";
+import { PrimaryButton } from "@/components/Button/Index";
+import Icon from "@/components/Icon";
 import SummaryCard from "@/components/SummaryCard/Index.jsx";
 import FIREBASE from "@/constants/firebase";
 import { useAuth } from "@/context/AuthContext";
 import { getProfiles } from "@/services/profile-service";
-import { PrimaryButton } from "@/components/Button/Index";
-import Icon from "@/components/Icon";
 
 const Index = () => {
   const { currentUser } = useAuth();
@@ -49,10 +50,10 @@ const Index = () => {
 
     fetchProfiles();
   }, [currentUser]);
-  // console.log(prompts);
+  console.log(profiles);
   return (
     <>
-      <div className="page flex flex-col items-center pb-8">
+      <div className="page padding flex flex-col items-center pb-8">
         <div className="flex flex-col gap-4 w-full">
           <div className="flex flex-col gap-0">
             <h1 className="text-center leading-tight mt-6" style={{ color: "var(--brand)" }}>
@@ -86,10 +87,10 @@ const Index = () => {
               birthday={profile.birthday}
               occupation={profile.occupation}
               location={profile.location}
-              facetPrompt={fetchPromptById(profile.personalFacet[0].responses[0].prompt_id, prompts)}
-              facetResponse={profile.personalFacet[0].responses[0].response}
+              facetPrompt={fetchPromptById(profile?.personalFacet?.[0]?.responses?.[0]?.prompt_id, prompts)}
+              facetResponse={profile?.personalFacet?.[0]?.responses?.[0]?.response}
               profileId={profile.id}
-              profilePhoto={profile?.personalFacet[0]?.photos?.[0]?.path}
+              src={profile?.personalFacet?.[0]?.photos?.[0]?.path}
             />
           ))}
         </div>
