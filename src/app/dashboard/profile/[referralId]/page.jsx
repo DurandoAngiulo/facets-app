@@ -91,19 +91,26 @@ const Index = () => {
     transformFacetData();
   }, [JSON.stringify(profileInformation)]);
 
+  /* const Pills = ({ astrologicalSign, drinking, height, hometown, mbti, politicalAffiliation, religion, school, sexuality, smoking, occupation}) => {
+    return (
+      <PillContainer>{astrologicalSign}</PillContainer>);
+    
+
+}; */
+
   return (
     <>
-      <div className="bg-white pb-4 style={{ maxWidth: '420px' }}">
+      <div className="bg-white pb-4 px-6 style={{ maxWidth: '420px' }}">
         <div className="w-full justify-center items-center gap-2 inline-flex flex-wrap my-2 mb-2">
           {/* header with back button, name, and kabob with modal options */}
-          <div className="flex inline-flex w-full mx-auto ">
+          <div className="inline-flex page-container pt-8">
             {/* <Link href={`${ROUTES.FEED.path}`}> */}
-            <Icon className="w-6 h-6 w-1/6 align-middle fill-none" iconName="backArrow"></Icon>
+            <Icon className="w-6 h-6 justify-between items-center flex" iconName="backArrow"></Icon>
             {/* </Link> */}
-            <h2 style={newBerryGradient} className="text-center pt-6 w-4/6">
+            <h2 className="w-48 flex-col justify-start items-center inline-flex gradient-text">
               {profileInformation?.firstName}
             </h2>
-            <Icon className="w-6 h-6 w-1/6 align-middle" iconName="kabob"></Icon>
+            <Icon className="w-6 h-6 origin-top-left justify-between items-center flex" iconName="kabob"></Icon>
           </div>
         </div>
 
@@ -119,23 +126,13 @@ const Index = () => {
           <p style={{ color: "var(--text)" }}>{profileInformation?.location}</p>
         </div>
 
-        {/* pills with extra info 
-          to add: gradient on name, capitalize content in pills, white bg, text bio (and expand button), back button, kabob*/}
-
-        <div className="w-full justify-center items-center gap-2 inline-flex flex-wrap my-2 mb-2">
-          <PillContainer>Libra</PillContainer>
-          <PillContainer>Gay</PillContainer>
-          <PillContainer>from Red Bank, NJ</PillContainer>
-          <PillContainer>from Red Bank, NJ</PillContainer>
-          <PillContainer>from Red Bank, NJ</PillContainer>
-          <PillContainer>from Red Bank, NJ</PillContainer>
-          <PillContainer>from Red Bank, NJ</PillContainer>
-
-          {/* <PillContainer>Doesn't Smoke</PillContainer> */}
-          <PillContainer>Atheist</PillContainer>
+        <div className="page-container justify-center items-center gap-2 inline-flex flex-wrap py-2">
+          <PillContainer>{profileInformation?.occupation}</PillContainer>
+          <PillContainer>{profileInformation?.drinking}</PillContainer>
+          <PillContainer>{profileInformation?.occupation}</PillContainer>
         </div>
 
-        <p className="mx-6">{profileInformation?.bio}</p>
+        <p className="mx-6 page-container py-2">{profileInformation?.bio}</p>
       </div>
 
       <div className="page">

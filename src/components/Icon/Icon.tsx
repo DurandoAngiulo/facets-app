@@ -28,7 +28,7 @@ import location from "@/svg/location.svg";
 import employment from "@/svg/employment.svg";
 import occupation from "@/svg/occupation.svg";
 import diamondBio from "@/svg/diamond-bio.svg";
-import backArrow from "@/svg/back-arrow.svg";
+import backArrow from "@/svg/back-button.svg";
 import kabob from "@/svg/kabob.svg";
 
 import { forwardRef } from "react";
