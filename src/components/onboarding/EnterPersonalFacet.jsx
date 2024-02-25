@@ -10,14 +10,8 @@ import { PrimaryButton, TertiaryButton } from "@/components/Button/Index";
 
 export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
   const [promptArray, setPromptArray] = useState([]);
-  const [promptOne, setPromptOne] = useState("loading");
-  const [promptTwo, setPromptTwo] = useState("loading");
-  const [promptThree, setPromptThree] = useState("loading");
   const [currentPromptIndex, setCurrentPromptIndex] = useState(0);
   const [inputs, setInputs] = useState(["", "", ""]);
-  const [inputOne, setInputOne] = useState("");
-  const [inputTwo, setInputTwo] = useState("");
-  const [inputThree, setInputThree] = useState("");
   const [personalFacet, setPersonalFacet] = useState({
     facetPromptOneID: 0,
     facetPromptTwoID: 1,
@@ -27,67 +21,26 @@ export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
     facetResponseThree: ""
   });
   const [error, setError] = useState(null);
-
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const prompts = await getRandomPrompts(FIREBASE.COLLECTIONS.USERPROMPTS);
-        setPromptArray(prompts);
-
-        // Assuming prompts is an array with three prompt objects
-        setPersonalFacet((prevFacet) => ({
-          ...prevFacet,
-          facetPromptOneID: prompts[0].id,
-          facetPromptTwoID: prompts[1].id,
-          facetPromptThreeID: prompts[2].id
-        }));
-        setPromptOne(prompts[0].prompt);
-        setPromptTwo(prompts[1].prompt);
-        setPromptThree(prompts[2].prompt);
-      } catch (error) {
-        console.error("Error fetching prompts:", error);
-        // Handle error if needed
-      }
-    };
-
-    fetchData();
+    fetchRandomPrompts();
   }, []);
 
-  /* const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (inputOne.trim() === "" || inputTwo.trim() === "" || inputThree.trim() === "") {
-      setError("Please answer all prompts");
-    } else {
-      const capInputOne = capitalizeFirstLetter(inputOne);
-      const capInputTwo = capitalizeFirstLetter(inputTwo);
-      const capInputThree = capitalizeFirstLetter(inputThree);
-
-      // Use the state values for prompt IDs
-      const updatedFacetResponses = [
-        { prompt_id: personalFacet.facetPromptOneID, response: capInputOne },
-        { prompt_id: personalFacet.facetPromptTwoID, response: capInputTwo },
-        { prompt_id: personalFacet.facetPromptThreeID, response: capInputThree }
-      ];
-
-      handleUpdateProfile({
-        personalFacet: [{ responses: updatedFacetResponses }],
-        onboardingStep: 11
-      });
-
-      // Don't think we need to reset the facets, just update the responses
-      // setPersonalFacet(updatedFacetResponses);
-
-      // Call handleUpdateProfile in the callback of setPersonalFacet to ensure the state is updated
-      // setPersonalFacet((updatedFacet) => {
-      //   handleUpdateProfile({
-      //     personalFacet: updatedFacet,
-      //     onboardingStep: 11
-      //   });
-      // });
+  const fetchRandomPrompts = async () => {
+    try {
+      const prompts = await getRandomPrompts(FIREBASE.COLLECTIONS.USERPROMPTS);
+      setPromptArray(prompts);
+    } catch (error) {
+      console.error("Error fetching prompts:", error);
+      // Handle error if needed
     }
   };
- */
+
+  const handleNewPrompt = () => {
+    fetchRandomPrompts();
+    setCurrentPromptIndex(0);
+    setInputs(["", "", ""]);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -133,7 +86,7 @@ export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="page h-full flex flex-col gap-y-16">
+      <div className="page padding h-full flex flex-col gap-y-16">
         <div className="flex flex-col gap-4 mt-24">
           <Icon iconName="diamondFilled" className="h-5" />
           <h1 style={{ color: "var(--brand)" }} className="w-full text-center">
@@ -168,7 +121,7 @@ export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
             </label>
           </div>
 
-          <button className="w-full mt-3" type="reset">
+          <button className="w-full mt-3" type="reset" onClick={handleNewPrompt}>
             <TertiaryButton
               active="true"
               label="New prompt"
@@ -178,7 +131,7 @@ export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
           </button>
         </div>
 
-        <div className="absolute bottom-16 left-0 right-0 flex justify-center ">
+        <div className="absolute bottom-32 left-0 right-0 flex justify-center ">
           <button className="w-full mx-6" type="submit" style={{ maxWidth: "420px" }}>
             <PrimaryButton active="true" label="Continue"></PrimaryButton>
           </button>
