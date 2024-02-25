@@ -30,6 +30,18 @@ import occupation from "@/svg/occupation.svg";
 import letter from "@/svg/letter.svg";
 import copy from "@/svg/copy.svg";
 import editGradient from "@/svg/edit-gradient.svg";
+import back from "@/svg/back.svg";
+import bio from "@/svg/bio.svg";
+import sexuality from "@/svg/sexuality.svg";
+import school from "@/svg/school.svg";
+import hometown from "@/svg/hometown.svg";
+import height from "@/svg/height.svg";
+import religion from "@/svg/religion.svg";
+import smokes from "@/svg/smokes.svg";
+import drinking from "@/svg/drinking.svg";
+import mbti from "@/svg/mbti.svg";
+import astrological from "@/svg/astrological.svg";
+import political from "@/svg/political.svg";
 
 import { forwardRef } from "react";
 import styles from "./Icon.module.css";
@@ -66,7 +78,19 @@ export const iconRegistry = {
   occupation,
   letter,
   copy,
-  editGradient
+  editGradient,
+  back,
+  bio,
+  sexuality,
+  school,
+  hometown,
+  height,
+  religion,
+  smokes,
+  drinking,
+  mbti,
+  astrological,
+  political
 };
 
 type IconNames = keyof typeof iconRegistry;

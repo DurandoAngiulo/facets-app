@@ -88,12 +88,7 @@ const Index = () => {
       break;
   }
 
-  return (
-    <DashboardLayout>
-      <div>update field</div>
-      {componentToRender}
-    </DashboardLayout>
-  );
+  return <DashboardLayout>{componentToRender}</DashboardLayout>;
 };
 
 export default Index;

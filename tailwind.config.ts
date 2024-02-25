@@ -17,7 +17,7 @@ const config: Config = {
       },
       colors: {
         primary: "var(--brand)",
-        body: "var(--body)",
+        body: "var(--text)",
         border: "var(--border)"
       }
     }

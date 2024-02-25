@@ -3,7 +3,7 @@ import React from "react";
 import RadioInput from "@/components/Inputs/RadioInput/Index";
 const RadioInputGroup = ({ radioInputs }) => {
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       {radioInputs.map((radio, index) => (
         <RadioInput
           key={index}

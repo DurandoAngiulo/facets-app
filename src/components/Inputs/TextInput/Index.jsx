@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.css";
 
-const TextInput = ({ label, value, placeholder, onChange }) => {
+const TextInput = ({ label, value, placeholder, onChange, maxlength }) => {
   return (
     <div>
       <label
@@ -12,8 +12,9 @@ const TextInput = ({ label, value, placeholder, onChange }) => {
           type="text"
           value={value}
           placeholder={placeholder}
+          maxlength={maxlength}
           onChange={onChange}
-          style={{ color: "var(--text)" }}
+          style={{ color: "var(--text)", backgroundColor: "transparent" }}
         />
         {label}
       </label>
