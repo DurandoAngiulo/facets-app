@@ -24,7 +24,11 @@ const Navbar = () => {
             {navigationItems.map(({ href, iconName, label }) => (
               <li key={href}>
                 <Link href={href} className={isActive(href) ? "active" : ""}>
-                  <Icon iconName={`${iconName}${isActive(href) ? "Filled" : "Line"}`} className="w-9 h-9" />
+                  <Icon
+                    iconName={`${iconName}${isActive(href) ? "Filled" : "Line"}`}
+                    className="w-9 h-9"
+                    style={{ fill: isActive(href) ? "" : "none" }}
+                  />
                 </Link>
               </li>
             ))}

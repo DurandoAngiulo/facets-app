@@ -1,3 +1,5 @@
+import { getDownloadURL, getStorage, ref } from "firebase/storage";
+
 const updatePhotoOrder = (photos, currentOrder, newOrder) => {
   // Check if the current order and new order are within the bounds of the photos array
   if (currentOrder <= 0 || currentOrder > photos.length || newOrder <= 0 || newOrder > photos.length) {
@@ -28,4 +30,36 @@ const updatePhotoOrder = (photos, currentOrder, newOrder) => {
   return newSortedPhotos;
 };
 
-export { updatePhotoOrder };
+/**
+ * Retrieves a download URL for a single photo from Firebase storage.
+ * @param {string} path - The path to the photo in Firebase storage.
+ * @returns {Promise<string>} A promise that resolves to the download URL.
+ */
+const getPhotoURL = async (path) => {
+  const storage = getStorage();
+  const photoRef = ref(storage, path);
+
+  try {
+    const url = await getDownloadURL(photoRef);
+    return url;
+  } catch (error) {
+    console.error("Failed to get download URL", error);
+    throw error;
+  }
+};
+
+/**
+ * Retrieves download URLs for an array of photos from Firebase storage.
+ * @param {Array<{ order: number; path: string; }>} photos - An array of objects with order and path to the photos in Firebase storage.
+ * @returns {Promise<Array<{ order: number; url: string; }>>} A promise that resolves to an array of objects with order and download URLs.
+ */
+const getFacetPhotoUrls = async (photos) => {
+  return Promise.all(
+    photos.map(async (photo) => {
+      const url = await getPhotoURL(photo.path);
+      return { order: photo.order, url };
+    })
+  );
+};
+
+export { getFacetPhotoUrls, getPhotoURL, updatePhotoOrder };

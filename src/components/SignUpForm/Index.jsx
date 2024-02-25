@@ -1,23 +1,27 @@
+"use client";
+
 import "firebase/auth";
 
 import { RecaptchaVerifier, getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
 
-import ROUTES from "@/constants/routes";
+import { PhoneInputGroup } from "@/components/Inputs";
 import { PROFILE_MODEL } from "@/constants/model";
+import ROUTES from "@/constants/routes";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import styles from "./styles.module.css";
 
 const SignUpForm = () => {
   const { registerAndLogin, currentUser } = useAuth();
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState();
   const [error, setError] = useState(null);
 
   const auth = getAuth();
   const recaptchaButtonId = "sign-in-button";
   const router = useRouter();
 
+  // https://firebase.google.com/docs/auth/web/phone-auth
   useEffect(() => {
     // Create a new RecaptchaVerifier with invisible size
     window.recaptchaVerifier = new RecaptchaVerifier(auth, recaptchaButtonId, {
@@ -37,7 +41,7 @@ const SignUpForm = () => {
         return;
       }
 
-      const { data, loading, error } = await registerAndLogin(auth, phoneNumber, window.recaptchaVerifier);
+      const { data, error } = await registerAndLogin(auth, phoneNumber, window.recaptchaVerifier);
 
       if (error) {
         console.log(data.message);
@@ -45,15 +49,14 @@ const SignUpForm = () => {
       }
 
       const user = data?.user;
-      console.log(data, user, "user");
       if (!user?.profile) return;
 
       if (user.profile.onboardingStatus === PROFILE_MODEL.onboardingStatus[1]) {
-        router.push(`${ROUTES.DASHBOARD.path}/feed`);
+        router.push(`${ROUTES.FEED.path}`);
         return;
       }
 
-      router.push(`${ROUTES.ONBOARDING.path}/profile-creation`);
+      router.push(`${ROUTES.PROFILE_CREATION.path}`);
 
       //redirect to profile creation flow
     } catch (error) {
@@ -66,20 +69,20 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className={`border-4 border-opacity-100 ${styles.testBorderColor}`}>
-      <label>
-        Phone Number:
-        <input
-          type="tel"
-          className="text-black border-solid border-2 border-red-500 "
-          value={phoneNumber}
-          onChange={(e) => setPhoneNumber(e.target.value)}
-        />
-      </label>
-      <button id={recaptchaButtonId} onClick={() => handleSignInRegisterAuth()}>
+    <div className={`p-5 border-4 border-opacity-100 text-center ${styles.testBorderColor}`}>
+      <h2 className="text-primary">First, enter your phone number.</h2>
+      <p>Facets will text you a verification code.</p>
+      <div className="mt-5">
+        <PhoneInputGroup value={phoneNumber} onChange={setPhoneNumber} />
+      </div>
+      <button
+        className="mt-5 rounded bg-indigo-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-indigo-600"
+        id={recaptchaButtonId}
+        onClick={() => handleSignInRegisterAuth()}
+      >
         Sign In
       </button>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p className="text-red-700">{error}</p>}
     </div>
   );
 };

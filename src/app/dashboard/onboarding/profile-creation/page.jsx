@@ -80,7 +80,7 @@ const Index = () => {
 
   return (
     <OnboardingLayout>
-      <div>profile Creation</div>
+      <div></div>
       {CurrentComponent && <CurrentComponent handleUpdateProfile={handleUpdateProfile} />}
     </OnboardingLayout>
   );

@@ -27,6 +27,9 @@ import ageRange from "@/svg/age_range.svg";
 import location from "@/svg/location.svg";
 import employment from "@/svg/employment.svg";
 import occupation from "@/svg/occupation.svg";
+import letter from "@/svg/letter.svg";
+import copy from "@/svg/copy.svg";
+import editGradient from "@/svg/edit-gradient.svg";
 import diamondBio from "@/svg/diamond-bio.svg";
 import backArrow from "@/svg/back-button.svg";
 import kabob from "@/svg/kabob.svg";
@@ -64,6 +67,9 @@ export const iconRegistry = {
   location,
   employment,
   occupation,
+  letter,
+  copy,
+  editGradient,
   diamondBio,
   backArrow,
   kabob
