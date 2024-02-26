@@ -12,23 +12,13 @@ import { getProfileById } from "@/services/profile-service";
 import { calculateAge } from "@/utils/util-functions";
 import { usePathname } from "next/navigation";
 import MoreDetailsPillGroup from "@/components/MoreDetailsPillGroup/Index.jsx";
-
-import { PillContainer } from "@/components/PillContainer/Index";
-// import { BackButton } from "@/components/BackButton/Index";
-import Link from "next/link";
-import ROUTES from "@/constants/routes";
+// import { PillContainer } from "@/components/PillContainer/Index.jsx";
 
 const Index = () => {
   const { currentUser } = useAuth();
   const pathname = usePathname();
   const profileId = extractIdFromUrl(pathname);
   const [profileInformation, setProfileInformation] = useState("");
-
-  const newBerryGradient = {
-    background: "linear-gradient(to right, rgba(111, 116, 207, 1), rgba(130, 104, 201, 1), rgba(149, 91, 195, 1))",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent"
-  };
 
   const FacetGroupCard = ({ facet }) => {
     const FacetCard = ({ response }) => {
@@ -93,16 +83,9 @@ const Index = () => {
     transformFacetData();
   }, [JSON.stringify(profileInformation)]);
 
-  /* const Pills = ({ astrologicalSign, drinking, height, hometown, mbti, politicalAffiliation, religion, school, sexuality, smoking, occupation}) => {
-    return (
-      <PillContainer>{astrologicalSign}</PillContainer>);
-    
-
-}; */
-
   return (
     <>
-      <div className="bg-white pb-4 px-6 style={{ maxWidth: '420px' }}">
+      <div className="page">
         <div className="w-full justify-center items-center gap-2 inline-flex flex-wrap my-2 mb-2">
           {/* header with back button, name, and kabob with modal options */}
           <div className="inline-flex page-container pt-8">
@@ -128,13 +111,14 @@ const Index = () => {
           <p style={{ color: "var(--text)" }}>{profileInformation?.location}</p>
         </div>
 
-        <div className="page-container justify-center items-center gap-2 inline-flex flex-wrap py-2">
+        {/* <div className="page-container justify-center items-center gap-2 inline-flex flex-wrap py-2">
           <PillContainer>{profileInformation?.occupation}</PillContainer>
           <PillContainer>{profileInformation?.drinking}</PillContainer>
           <PillContainer>{profileInformation?.occupation}</PillContainer>
-        </div>
-        <MoreDetailsPillGroup moreDetails={profileInformation?.moreDetails} />
+        </div> */}
 
+        <MoreDetailsPillGroup moreDetails={profileInformation?.moreDetails} />
+      
         <div
           className="flex flex-row overflow-auto gap-5 px-8 snap-proximity snap-x"
           style={{ background: "var(--background-gradient-lr" }}
@@ -144,17 +128,6 @@ const Index = () => {
               <FacetGroupCard key={facet.id} facet={facet} />
             ))}
           </div>
-        <p className="mx-6 page-container py-2">{profileInformation?.bio}</p>
-      </div>
-
-      <div className="page">
-        {/* main info */}
-
-        <div className="ml-4">
-          {profileInformation?.friendFacets?.map((facet) => (
-            <FacetGroupCard key={facet.id} facet={facet} />
-          ))}
-        </div>
 
           {profileInformation?.friendFacets?.map((facet) => (
             <FacetGroupCard key={facet.id} facet={facet} />
