@@ -42,6 +42,9 @@ import drinking from "@/svg/drinking.svg";
 import mbti from "@/svg/mbti.svg";
 import astrological from "@/svg/astrological.svg";
 import political from "@/svg/political.svg";
+import diamondBio from "@/svg/diamond-bio.svg";
+import backArrow from "@/svg/back-arrow.svg";
+import kabob from "@/svg/kabob.svg";
 
 import { forwardRef } from "react";
 import styles from "./Icon.module.css";
@@ -79,6 +82,9 @@ export const iconRegistry = {
   letter,
   copy,
   editGradient,
+  diamondBio,
+  backArrow,
+  kabob,
   back,
   bio,
   sexuality,
