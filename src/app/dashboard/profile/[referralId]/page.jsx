@@ -86,13 +86,13 @@ const Index = () => {
     <>
       <div className="page">
         <div style={{ background: "#fff" }} className="pb-8">
-          <div className="w-full justify-center items-center gap-2 inline-flex flex-wrap my-2 mb-2">
+          <div className="w-full justify-center items-center gap-2 inline-flex flex-wrap px-8">
             {/* header with back button, name, and kabob with modal options */}
-            <div className="inline-flex page-container pt-8">
+            <div className="w-full inline-flex pt-8">
               {/* <Link href={`${ROUTES.FEED.path}`}> */}
               <Icon className="w-6 h-6 justify-between items-center flex" iconName="backArrow"></Icon>
               {/* </Link> */}
-              <h2 className="w-48 flex-col justify-start items-center inline-flex gradient-text">
+              <h2 className="w-full flex-col justify-start items-center inline-flex gradient-text">
                 {profileInformation?.firstName}
               </h2>
               <Icon className="w-6 h-6 origin-top-left justify-between items-center flex" iconName="kabob"></Icon>
@@ -113,7 +113,7 @@ const Index = () => {
 
           <MoreDetailsPillGroup moreDetails={profileInformation?.moreDetails} />
 
-          <p className="pt-2"> {profileInformation?.bio} </p>
+          <p className="pt-2 px-8"> {profileInformation?.bio} </p>
         </div>
 
         <div
