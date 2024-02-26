@@ -44,12 +44,12 @@ const MaskedImage = ({ height, width, src }) => {
         </defs>
         <image
           mask="url(#shape)"
-          preserveAspectRatio="xMidYMid meet"
-          x="0"
-          y="0"
           xlinkHref={image}
-          width="100%"
-          height="100%"
+          preserveAspectRatio="xMidYMin"
+          x="-150"
+          y="-100"
+          width="200%"
+          height="200%"
         />
       </svg>
     );
@@ -74,12 +74,12 @@ const MaskedImage = ({ height, width, src }) => {
         </defs>
         <image
           mask="url(#shape)"
-          preserveAspectRatio="xMidYMid meet"
-          x="0"
-          y="0"
+          preserveAspectRatio="xMidYMin"
+          x="-70"
+          y="-50"
           xlinkHref={image}
-          width="100%"
-          height="100%"
+          width="200%"
+          height="200%"
         />
       </svg>
     );
