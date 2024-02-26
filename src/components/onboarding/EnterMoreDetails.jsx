@@ -2,6 +2,9 @@
 import React, { useState } from "react";
 import TextInput from "@/components/Inputs/TextInput/Index";
 import RadioInputGroup from "@/components/Inputs/RadioInputGroup/Index";
+import Checkbox from "@/components/Inputs/Checkbox/Index";
+import { PrimaryButton } from "@/components/Button/Index";
+import Icon from "@/components/Icon/index";
 
 export const EnterMoreDetails = ({ handleUpdateProfile }) => {
   const [moreDetails, setMoreDetails] = useState({
@@ -46,139 +49,199 @@ export const EnterMoreDetails = ({ handleUpdateProfile }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="page padding">
-        <TextInput
-          label="School:"
-          value={moreDetails.school}
-          onChange={(e) => handleTextInputChange("school", e.target.value)}
-        />
-        <TextInput
-          label="Hometown:"
-          value={moreDetails.hometown}
-          onChange={(e) => handleTextInputChange("hometown", e.target.value)}
-        />
-        <TextInput
-          label="Sexuality:"
-          value={moreDetails.sexuality}
-          onChange={(e) => handleTextInputChange("sexuality", e.target.value)}
-        />
+      <div className="page padding ">
+        <Icon iconName="back" className="h-5 mt-8" style={{ fill: "none" }} />
+        <h1 style={{ color: "var(--brand)" }} className="w-full text-center">
+          Add more details.
+        </h1>
+        <p className="text-center leading-snug" style={{ color: "var(--text)" }}>
+          Customize your Facets profile by choosing what you would like to share – skip any fields you&apos;d rather
+          keep blank.
+        </p>
+        <hr className="my-4" style={{ borderColor: "var(--border)" }}></hr>
+        <div className="flex flex-col gap-5">
+          <div>
+            <div className="flex flex-row gap-1 items-center">
+              <Icon iconName="bio" className="h-4" />
+              <p className="semibold" style={{ color: "var(--element-subtle)" }}>
+                Bio
+              </p>
+            </div>
+            <p className="py-1" style={{ color: "var(--element-subtle)" }}>
+              Craft your bio and let your true self shine through to attract your perfect match!
+            </p>
+            <TextInput
+              value={moreDetails.school}
+              placeholder="None"
+              onChange={(e) => handleTextInputChange("school", e.target.value)}
+            />
+          </div>
+          <div>
+            <div className="flex flex-row gap-1 pb-1 items-center">
+              <Icon iconName="sexuality" className="h-4" />
+              <p className="semibold" style={{ color: "var(--element-subtle)" }}>
+                Sexuality
+              </p>
+            </div>
+            <TextInput
+              value={moreDetails.sexuality}
+              placeholder="None"
+              onChange={(e) => handleTextInputChange("sexuality", e.target.value)}
+            />
+          </div>
+          <div>
+            <div className="flex flex-row gap-1 pb-1 items-center">
+              <Icon iconName="school" className="h-4" />
+              <p className="semibold" style={{ color: "var(--element-subtle)" }}>
+                School
+              </p>
+            </div>
+            <TextInput
+              value={moreDetails.school}
+              placeholder="None"
+              onChange={(e) => handleTextInputChange("school", e.target.value)}
+            />
+          </div>
+          <div>
+            <div className="flex flex-row gap-1 pb-1 items-center">
+              <Icon iconName="hometown" className="h-4" />
+              <p className="semibold" style={{ color: "var(--element-subtle)" }}>
+                Hometown
+              </p>
+            </div>
+            <TextInput
+              value={moreDetails.hometown}
+              placeholder="ex: Philadelphia, PA"
+              onChange={(e) => handleTextInputChange("hometown", e.target.value)}
+            />
+          </div>
+          <div>
+            <div className="flex flex-row gap-1 pb-1 items-center">
+              <Icon iconName="height" className="h-4" />
+              <p className="semibold" style={{ color: "var(--element-subtle)" }}>
+                Height
+              </p>
+            </div>
+            <TextInput
+              value={moreDetails.height}
+              placeholder="None"
+              onChange={(e) => handleTextInputChange("height", e.target.value)}
+            />
+          </div>
+          <div>
+            <div className="flex flex-row gap-1 pb-1 items-center">
+              <Icon iconName="religion" className="h-4" />
+              <p className="semibold" style={{ color: "var(--element-subtle)" }}>
+                Religion
+              </p>
+            </div>
+            <TextInput
+              value={moreDetails.religion}
+              placeholder="None"
+              onChange={(e) => handleTextInputChange("religion", e.target.value)}
+            />
+          </div>
+          <div>
+            <div className="flex flex-row gap-1 pb-1 items-center">
+              <Icon iconName="smokes" className="h-4" />
+              <p className="semibold" style={{ color: "var(--element-subtle)" }}>
+                Smoking
+              </p>
+            </div>
+            <select
+              id="smoking"
+              name="smoking"
+              value={moreDetails.smoking}
+              onChange={(e) => handleRadioInputChange("smoking", e.target.value)}
+              className="w-full p-3 text-body rounded border border-border flex-row justify-start items-center inline-flex semibold font-['Arboria']"
+            >
+              <option value="">None</option>
+              <option value="Smokes">Smokes</option>
+              <option value="Doesn't smoke">Doesn&apos;t smoke</option>
+              <option value="Sometimes smokes">Sometimes Smokes</option>
+            </select>
+          </div>
 
-        <RadioInputGroup
-          radioInputs={[
-            {
-              name: "smoking",
-              label: "Smokes",
-              value: "smokes",
-              checked: moreDetails.smoking === "smokes",
-              onChange: () => handleRadioInputChange("smoking", "smokes")
-            },
-            {
-              name: "smoking",
-              label: "Doesn't Smoke",
-              value: "doesn't smoke",
-              checked: moreDetails.smoking === "doesn't smoke",
-              onChange: () => handleRadioInputChange("smoking", "doesn't smoke")
-            },
-            {
-              name: "smoking",
-              label: "Sometimes Smokes",
-              value: "sometimes smokes",
-              checked: moreDetails.smoking === "sometimes smokes",
-              onChange: () => handleRadioInputChange("smoking", "sometimes smokes")
-            }
-          ]}
-        />
+          <div>
+            <div className="flex flex-row gap-1 pb-1 items-center">
+              <Icon iconName="drinking" className="h-4" />
+              <p className="semibold" style={{ color: "var(--element-subtle)" }}>
+                Drinking
+              </p>
+            </div>
 
-        <RadioInputGroup
-          radioInputs={[
-            {
-              name: "drinking",
-              label: "Does Drink",
-              value: "does drink",
-              checked: moreDetails.drinking === "does drink",
-              onChange: () => handleRadioInputChange("drinking", "does drink")
-            },
-            {
-              name: "drinking",
-              label: "Doesn't Drink",
-              value: "doesn't drink",
-              checked: moreDetails.drinking === "doesn't drink",
-              onChange: () => handleRadioInputChange("drinking", "doesn't drink")
-            },
-            {
-              name: "drinking",
-              label: "Sometimes Drinks",
-              value: "sometimes drinks",
-              checked: moreDetails.drinking === "sometimes drinks",
-              onChange: () => handleRadioInputChange("drinking", "sometimes drinks")
-            }
-          ]}
-        />
+            <select
+              id="drinking"
+              name="drinking"
+              value={moreDetails.drinking}
+              onChange={(e) => handleRadioInputChange("drinking", e.target.value)}
+              className="w-full p-3 text-body rounded border border-border flex-row justify-start items-center inline-flex semibold font-['Arboria']"
+            >
+              <option value="">None</option>
+              <option value="Drinks">Drinks</option>
+              <option value="Doesn't dmoke">Doesn&apos;t drink</option>
+              <option value="Sometimes drinks">Sometimes drinks</option>
+            </select>
+          </div>
 
-        <TextInput
-          label="MTBI:"
-          value={moreDetails.mtbi}
-          onChange={(e) => handleTextInputChange("mtbi", e.target.value)}
-        />
-        <TextInput
-          label="Astrological Sign:"
-          value={moreDetails.astrologicalSign}
-          onChange={(e) => handleTextInputChange("astrologicalSign", e.target.value)}
-        />
-        <TextInput
-          label="Height:"
-          value={moreDetails.height}
-          onChange={(e) => handleTextInputChange("height", e.target.value)}
-        />
-        <TextInput
-          label="Religion:"
-          value={moreDetails.religion}
-          onChange={(e) => handleTextInputChange("religion", e.target.value)}
-        />
+          <div>
+            <div className="flex flex-row gap-1 pb-1 items-center">
+              <Icon iconName="mbti" className="h-4" />
+              <p className="semibold" style={{ color: "var(--element-subtle)" }}>
+                MBTI
+              </p>
+            </div>
 
-        <RadioInputGroup
-          radioInputs={[
-            {
-              name: "politicalAffiliation",
-              label: "Liberal",
-              value: "liberal",
-              checked: moreDetails.politicalAffiliation === "liberal",
-              onChange: () => handleRadioInputChange("politicalAffiliation", "liberal")
-            },
-            {
-              name: "politicalAffiliation",
-              label: "Moderate",
-              value: "moderate",
-              checked: moreDetails.politicalAffiliation === "moderate",
-              onChange: () => handleRadioInputChange("politicalAffiliation", "moderate")
-            },
-            {
-              name: "politicalAffiliation",
-              label: "Conservative",
-              value: "conservative",
-              checked: moreDetails.politicalAffiliation === "conservative",
-              onChange: () => handleRadioInputChange("politicalAffiliation", "conservative")
-            },
-            {
-              name: "politicalAffiliation",
-              label: "Not Political",
-              value: "not political",
-              checked: moreDetails.politicalAffiliation === "not political",
-              onChange: () => handleRadioInputChange("politicalAffiliation", "not political")
-            },
-            {
-              name: "politicalAffiliation",
-              label: "Other",
-              value: "other",
-              checked: moreDetails.politicalAffiliation === "other",
-              onChange: () => handleRadioInputChange("politicalAffiliation", "other")
-            }
-          ]}
-        />
+            <TextInput
+              value={moreDetails.mtbi}
+              maxlength="4"
+              placeholder="None"
+              onChange={(e) => handleTextInputChange("mtbi", e.target.value)}
+            />
+          </div>
 
-        <div className="">
-          <button id="details-continue" type="submit">
-            Continue
+          <div>
+            <div className="flex flex-row gap-1 pb-1 items-center">
+              <Icon iconName="astrological" className="h-4" />
+              <p className="semibold" style={{ color: "var(--element-subtle)" }}>
+                Astrological sign
+              </p>
+            </div>
+            <Checkbox
+              label={"Show on profile"}
+              value={moreDetails.astrologicalSign}
+              onChange={(e) => handleTextInputChange("astrologicalSign", e.target.value)}
+            />
+          </div>
+
+          <div className="mb-32">
+            <div className="flex flex-row gap-1 pb-1 items-center">
+              <Icon iconName="political" className="h-4" />
+              <p className="semibold" style={{ color: "var(--element-subtle)" }}>
+                Political affiliation
+              </p>
+            </div>
+
+            <select
+              id="politicalAffiliation"
+              name="politicalAffiliation"
+              value={moreDetails.politicalAffiliation}
+              onChange={(e) => handleRadioInputChange("politicalAffiliation", e.target.value)}
+              className="w-full p-3 text-body rounded border border-border flex-row justify-start items-center inline-flex semibold font-['Arboria']"
+            >
+              <option value="">None</option>
+              <option value="Liberal">Liberal</option>
+              <option value="Moderate">Moderate</option>
+              <option value="Conservative">Conservative</option>
+              <option value="Not political">Not political</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="w-96 h-32 fixed bottom-0 bg-gradient-to-t from-white from-70% to-transparent"></div>
+        <div className="fixed bottom-8 w-full z-50 " style={{ maxWidth: "372px" }}>
+          <button className="w-full" id="details-continue" type="submit">
+            <PrimaryButton active="true" label="Save changes"></PrimaryButton>
           </button>
         </div>
       </div>
