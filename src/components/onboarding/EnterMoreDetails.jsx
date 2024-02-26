@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import TextInput from "@/components/Inputs/TextInput/Index";
 import RadioInputGroup from "@/components/Inputs/RadioInputGroup/Index";
-import Checkbox from "@/components/Inputs/Checkbox";
+import Checkbox from "@/components/Inputs/Checkbox/Index";
 import { PrimaryButton } from "@/components/Button/Index";
 import Icon from "@/components/Icon/index";
 
