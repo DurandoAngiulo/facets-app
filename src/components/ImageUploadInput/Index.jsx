@@ -33,7 +33,9 @@ const ImageUploadInput = ({ refPath, mainProfile = null }) => {
 
   const uploadToFirebase = async () => {
     const uploadPromises = imageUploads.map((file, index) => {
-      const imageRef = ref(storage, `userPhotos${photoPath}${file.name}`);
+      const imageRef = ref(storage, `userPhotos/${photoPath}${file.name}`);
+      // console.log("imageRef", imageRef);
+
       return uploadBytes(imageRef, file).then(() => {
         setUploadedCount((prevCount) => prevCount + 1); // Increment uploaded count
         return { order: index + 1, path: imageRef._location.path_ }; // Return image data
@@ -49,9 +51,6 @@ const ImageUploadInput = ({ refPath, mainProfile = null }) => {
     if (imageUploads.length === 0) return;
 
     const imageArray = await uploadToFirebase();
-
-    // alert("images uploaded");
-    // console.log(imageArray, "imageArray");
 
     //////
     if (!mainProfile) {
@@ -70,18 +69,31 @@ const ImageUploadInput = ({ refPath, mainProfile = null }) => {
         personalFacet: updatedPersonalFacets
       });
     } else {
-      // Clone the current personalFacets
-      // mainProfile.friendFacet  .find respondantUserId
-      // {
-      // ... remaining shit
-      // photos:
-      // }
-      // new tranformed data
-      //
+      const updatedFriendFacets = [...mainProfile.friendFacets];
+      // Find the friend facet whose respondantUserId matches mainProfile.uid
+      console.log(updatedFriendFacets, "updated friendFactes");
+      const friendFacetToUpdate = updatedFriendFacets.find(
+        (friendFacet) => friendFacet.respondantUserId === currentUser.uid
+      );
+      if (friendFacetToUpdate) {
+        // Update the photos array of the found friend facet
+        friendFacetToUpdate.photos = imageArray;
+
+        // Update the profile with the new friendFacets
+        await updateProfile(mainProfile, {
+          friendFacets: updatedFriendFacets
+        });
+        console.log("succcesfully uplaoded photos to firestore");
+      } else {
+        // Handle the case where no friend facet matches mainProfile.uid
+        console.log("No friend facet found with matching respondantUserId.");
+      }
     }
   };
 
   const canSubmit = uploadedCount + imageUploads.length >= 4; // Check if 4 photos are uploaded or selected
+  console.log(mainProfile, "mainProfile");
+  console.log(currentUser);
 
   return (
     <div>

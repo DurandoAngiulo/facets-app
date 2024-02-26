@@ -102,8 +102,14 @@ const FriendFacetCreation = ({ pageReferralId }) => {
     const newProfileData = {
       friendFacets: [...currentFriendFacets, newFacetData]
     };
+    const newUpdatedOwnerProfile = {
+      ...facetOwnerProfile,
+      ...newProfileData
+    };
 
     await updateFacet(facetOwnerProfile, newProfileData);
+
+    await setFacetOwnerProfile(newUpdatedOwnerProfile);
     setStep(1);
   };
   const submitFacet = () => {
