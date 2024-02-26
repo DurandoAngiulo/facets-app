@@ -33,7 +33,9 @@ const ImageUploadInput = ({ refPath, mainProfile = null }) => {
 
   const uploadToFirebase = async () => {
     const uploadPromises = imageUploads.map((file, index) => {
-      const imageRef = ref(storage, `userPhotos${photoPath}${file.name}`);
+      const imageRef = ref(storage, `userPhotos/${photoPath}${file.name}`);
+      // console.log("imageRef", imageRef);
+
       return uploadBytes(imageRef, file).then(() => {
         setUploadedCount((prevCount) => prevCount + 1); // Increment uploaded count
         return { order: index + 1, path: imageRef._location.path_ }; // Return image data
@@ -49,9 +51,6 @@ const ImageUploadInput = ({ refPath, mainProfile = null }) => {
     if (imageUploads.length === 0) return;
 
     const imageArray = await uploadToFirebase();
-
-    // alert("images uploaded");
-    // console.log(imageArray, "imageArray");
 
     //////
     if (!mainProfile) {
@@ -93,7 +92,7 @@ const ImageUploadInput = ({ refPath, mainProfile = null }) => {
   };
 
   const canSubmit = uploadedCount + imageUploads.length >= 4; // Check if 4 photos are uploaded or selected
-  console.log(mainProfile);
+  console.log(mainProfile, "mainProfile");
   console.log(currentUser);
 
   return (
