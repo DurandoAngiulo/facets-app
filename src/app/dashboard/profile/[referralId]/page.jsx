@@ -2,16 +2,12 @@
 
 import { useEffect, useState } from "react";
 
-import BeveledContainer from "@/components/BeveledContainer/Index";
-import Icon from "@/components/Icon";
-import MaskedImage from "@/components/MaskedImage/Index";
 import { useAuth } from "@/context/AuthContext";
 import { transformUserFacets } from "@/services/facet-services";
 import { calculateAge, replaceNameInString, extractIdFromUrl } from "@/utils/util-functions";
 import { usePathname } from "next/navigation";
 import MoreDetailsPillGroup from "@/components/MoreDetailsPillGroup/Index.jsx";
-import Link from "next/link";
-import ROUTES from "@/constants/routes";
+
 import FacetsList from "@/components/FacetsList";
 import { getProfileById } from "@/services/profile-service";
 
@@ -55,10 +51,6 @@ const Index = () => {
     <>
       <div>
         <header>
-          <Link href={ROUTES.EDIT_PROFILE.path}>
-            <h2>edit profile</h2>
-          </Link>
-
           <h2>all unstyled profile data</h2>
           <p>{profileInformation?.firstName}</p>
           <p>{calculateAge(profileInformation?.birthday)}</p>

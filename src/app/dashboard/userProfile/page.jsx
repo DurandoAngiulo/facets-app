@@ -36,6 +36,10 @@ const Page = () => {
     <>
       <div>
         <header>
+          <Link href={ROUTES.EDIT_PROFILE.path}>
+            <h2>edit profile</h2>
+          </Link>
+
           <h2>all unstyled profile data</h2>
           <p>{profileInformation?.firstName}</p>
           <p>{calculateAge(profileInformation?.birthday)}</p>
