@@ -50,6 +50,11 @@ const FacetsList = ({ facet, currentProfile = null }) => {
               </BeveledContainer>
             </li>
           ))}
+          <img
+            src={photoUrls[3]?.url || "https://placehold.co/50x50"}
+            alt={`Facet Photo #${4}`}
+            data-image-order={photoUrls[3]?.order || 3}
+          />
         </ul>
       </div>
     </>
