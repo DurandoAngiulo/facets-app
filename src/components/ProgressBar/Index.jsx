@@ -9,7 +9,7 @@ const ProgressBar = ({ width, step }) => {
         </div>
       </div>
 
-      <p className="w-1/6 semibold ml-2 p-2" style={{ color: "var(--element-subtle)" }}>
+      <p className="w-1/6 semibold ml-2 p-2 whitespace-nowrap" style={{ color: "var(--element-subtle)" }}>
         {step} of 8
       </p>
     </div>
