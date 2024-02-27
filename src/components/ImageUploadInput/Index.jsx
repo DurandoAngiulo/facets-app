@@ -1,4 +1,4 @@
-import { ref, uploadBytes } from "firebase/storage";
+import { ref, deleteObject, uploadBytes, listAll } from "firebase/storage";
 
 import { useAuth } from "@/context/AuthContext";
 import { storage } from "@/lib/firebase";
@@ -30,19 +30,36 @@ const ImageUploadInput = ({ refPath, mainProfile = null }) => {
       reader.readAsDataURL(file);
     });
   };
+  const deleteFolderContents = async (folderRef) => {
+    const listResult = await listAll(folderRef);
+
+    const deletePromises = listResult.items.map(async (item) => {
+      if (item.isDirectory) {
+        await deleteFolderContents(item);
+      } else {
+        await deleteObject(item);
+      }
+    });
+
+    await Promise.all(deletePromises);
+  };
 
   const uploadToFirebase = async () => {
+    const folderRef = ref(storage, `userPhotos/${photoPath}`);
+
+    // Delete the entire folder and its contents
+    await deleteFolderContents(folderRef);
+
+    // Upload new images
     const uploadPromises = imageUploads.map((file, index) => {
       const imageRef = ref(storage, `userPhotos/${photoPath}${file.name}`);
-      // console.log("imageRef", imageRef);
-
       return uploadBytes(imageRef, file).then(() => {
-        setUploadedCount((prevCount) => prevCount + 1); // Increment uploaded count
-        return { order: index + 1, path: imageRef._location.path_ }; // Return image data
+        setUploadedCount((prevCount) => prevCount + 1);
+        return { order: index + 1, path: imageRef._location.path_ };
       });
     });
 
-    // Wait for all images to be uploaded
+    // Wait for all new images to be uploaded
     const imageArray = await Promise.all(uploadPromises);
     return imageArray;
   };
@@ -74,7 +91,7 @@ const ImageUploadInput = ({ refPath, mainProfile = null }) => {
     } else {
       const updatedFriendFacets = [...mainProfile.friendFacets];
       // Find the friend facet whose respondantUserId matches mainProfile.uid
-      console.log(updatedFriendFacets, "updated friendFactes");
+
       const friendFacetToUpdate = updatedFriendFacets.find(
         (friendFacet) => friendFacet.respondantUserId === currentUser.uid
       );
@@ -95,8 +112,6 @@ const ImageUploadInput = ({ refPath, mainProfile = null }) => {
   };
 
   const canSubmit = uploadedCount + imageUploads.length >= 4; // Check if 4 photos are uploaded or selected
-  console.log(mainProfile, "mainProfile");
-  console.log(currentUser);
 
   return (
     <div>
