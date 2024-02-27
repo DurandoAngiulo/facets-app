@@ -44,7 +44,7 @@ const MaskedImage = ({ height, width, src }) => {
         </defs>
         <image
           mask="url(#shape)"
-          xlinkHref={image}
+          xlinkHref={src}
           preserveAspectRatio="xMidYMin"
           x="-150"
           y="-100"
@@ -77,7 +77,7 @@ const MaskedImage = ({ height, width, src }) => {
           preserveAspectRatio="xMidYMin"
           x="-70"
           y="-50"
-          xlinkHref={image}
+          xlinkHref={src}
           width="200%"
           height="200%"
         />
