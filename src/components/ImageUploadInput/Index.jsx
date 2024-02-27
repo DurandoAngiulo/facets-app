@@ -32,6 +32,11 @@ const ImageUploadInput = ({ refPath, mainProfile = null }) => {
   };
   const deleteFolderContents = async (folderRef) => {
     const listResult = await listAll(folderRef);
+    console.log(listResult);
+
+    if (listResult.length == 0) {
+      return;
+    }
 
     const deletePromises = listResult.items.map(async (item) => {
       if (item.isDirectory) {
