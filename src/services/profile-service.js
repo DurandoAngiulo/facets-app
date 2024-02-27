@@ -101,8 +101,11 @@ const updateProfile = async (user, profileFields) => {
     ...userProfile,
     ...profileFields
   };
+  console.log(profileFields, "profileFields");
+  console.log(mergedProfileFields, "before");
   try {
     await updateDoc(doc(db, FIREBASE.COLLECTIONS.PROFILES, user.uid), mergedProfileFields);
+    console.log("profile updated after", mergedProfileFields);
     return {
       data: {
         message: `profile successfully updated`,

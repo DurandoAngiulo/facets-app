@@ -59,15 +59,15 @@ const Index = () => {
       console.log(data.message);
       return;
     }
-
     await updateUserProfile(data?.user?.profile);
+
     await setProgress(data?.profile?.onboardingStep);
 
     const complete_status = PROFILE_MODEL.onboardingStatus[1];
 
     if (data?.profile?.onboardingStatus === complete_status) {
       console.log("about to reroute");
-      router.push(`${ROUTES.DASHBOARD.path}/feed`);
+      router.push(`${ROUTES.FEED.path}`);
       console.log("routed");
     }
     console.groupEnd();
