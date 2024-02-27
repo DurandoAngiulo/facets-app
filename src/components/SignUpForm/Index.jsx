@@ -11,6 +11,8 @@ import ROUTES from "@/constants/routes";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import styles from "./styles.module.css";
+import { PrimaryButton } from "@/components/Button/Index";
+import Icon from "@/components/Icon";
 
 const SignUpForm = () => {
   const { registerAndLogin, currentUser } = useAuth();
@@ -69,19 +71,26 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className={`p-5 border-4 border-opacity-100 text-center ${styles.testBorderColor}`}>
-      <h2 className="text-primary">First, enter your phone number.</h2>
-      <p>Facets will text you a verification code.</p>
-      <div className="mt-5">
+    <div className={`p-5 border-opacity-100 text-center page padding`}>
+      <div className="w-full h-4 relative mt-12">
+        <Icon iconName="phone" className="w-full h-8 left-0 mb-4 absolute" />
+      </div>
+      <h1 className="text-primary my-8 ">First, enter your phone number.</h1>
+      <p className="text-body">Facets will text you a verification code.</p>
+      <div className="mt-5 font-['Arboria']">
         <PhoneInputGroup value={phoneNumber} onChange={setPhoneNumber} />
       </div>
-      <button
-        className="mt-5 rounded bg-indigo-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-indigo-600"
-        id={recaptchaButtonId}
-        onClick={() => handleSignInRegisterAuth()}
-      >
-        Sign In
-      </button>
+
+      <div className="absolute px-1 bottom-16 left-0 right-0 flex justify-center ">
+        <button
+          className="w-full px-1"
+          id={recaptchaButtonId}
+          onClick={() => handleSignInRegisterAuth()}
+          style={{ maxWidth: "420px" }}
+        >
+          <PrimaryButton active="true" label="Continue"></PrimaryButton>
+        </button>
+      </div>
       {error && <p className="text-red-700">{error}</p>}
     </div>
   );
