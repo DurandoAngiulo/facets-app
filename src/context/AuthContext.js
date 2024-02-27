@@ -46,7 +46,7 @@ export const AuthContextProvider = ({ children }) => {
    */
   const updateUserProfile = async (profileData) => {
     if (currentUser && profileData) {
-      const updatedUser = { ...currentUser, profile: profileData };
+      const updatedUser = { ...currentUser, profile: { ...currentUser.profile, ...profileData } };
       await setCurrentUser(updatedUser);
     }
   };
