@@ -16,8 +16,9 @@ const Index = () => {
   const pathname = usePathname();
   const profileId = extractIdFromUrl(pathname); // You need to define this function
   const [profileInformation, setProfileInformation] = useState(null);
-  const friendFacetsExist = profileInformation?.friendFacets && profileInformation.friendFacets.length > 0;
-  const profileFacetsExist = profileInformation?.personalFacets && profileInformation.personalFacets[0] !== undefined;
+  const [facetGroups, setFacetGroups] = useState({ friendFacets: [], personalFacets: [] });
+  const friendFacetsExist = facetGroups?.friendFacets.length > 0;
+  const profileFacetsExist = facetGroups?.personalFacets[0] !== undefined;
 
   useEffect(() => {
     const fetchProfile = async (profileId) => {
@@ -37,11 +38,11 @@ const Index = () => {
 
     const transformFacetData = async () => {
       const newProfile = await transformUserFacets(profileInformation);
-      setProfileInformation({ ...profileInformation, ...newProfile });
+      setFacetGroups({ ...profileInformation, ...newProfile });
     };
 
     transformFacetData();
-  }, [profileInformation]);
+  }, [JSON.stringify(profileInformation)]);
 
   if (!profileInformation) {
     return <h1>Loading...</h1>;
@@ -66,13 +67,13 @@ const Index = () => {
             <div>
               <h3>Facet By {profileInformation?.firstName}</h3>
               <ul>
-                <FacetsList facet={profileInformation.personalFacets[0]} />
+                <FacetsList facet={facetGroups.personalFacets[0]} />
               </ul>
             </div>
           )}
 
           {friendFacetsExist &&
-            profileInformation.friendFacets.map((facet) => (
+            facetGroups.friendFacets.map((facet) => (
               <div key={facet.respondantUserId}>
                 <h3>Facet By A friend of {facet.friendshipPeriod}</h3>
                 <FacetsList facet={facet} currentProfile={profileInformation} />
