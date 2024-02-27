@@ -7,7 +7,7 @@ import PhoneInput from "react-phone-number-input";
 export const PhoneInputGroup = ({ value, onChange }) => {
   return (
     <PhoneInput
-      className="rounded border-body border p-3 "
+      className="rounded border-border border p-3 "
       defaultCountry="US"
       countries={["US"]}
       addInternationalOption={false}

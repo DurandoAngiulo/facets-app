@@ -45,6 +45,7 @@ import political from "@/svg/political.svg";
 import diamondBio from "@/svg/diamond-bio.svg";
 import backArrow from "@/svg/back-arrow.svg";
 import kabob from "@/svg/kabob.svg";
+import phone from "@/svg/smartphone.svg";
 
 import { forwardRef } from "react";
 import styles from "./Icon.module.css";
@@ -96,7 +97,8 @@ export const iconRegistry = {
   drinking,
   mbti,
   astrological,
-  political
+  political,
+  phone
 };
 
 type IconNames = keyof typeof iconRegistry;
