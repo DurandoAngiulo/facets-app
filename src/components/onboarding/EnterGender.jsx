@@ -92,8 +92,8 @@ export const EnterGender = ({ handleUpdateProfile }) => {
           </div>
         </div>
 
-        <div className="w-full items-end flex mt-10 ">
-          <button className="w-full" id="gender-continue" type="submit">
+        <div className="absolute px-1 bottom-16 left-0 right-0 flex justify-center ">
+          <button className="w-full px-6" id="gender-continue" type="submit" style={{ maxWidth: "420px" }}>
             <PrimaryButton active="true" label="Continue"></PrimaryButton>
           </button>
         </div>

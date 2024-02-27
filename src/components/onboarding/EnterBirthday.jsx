@@ -46,8 +46,8 @@ export const EnterBirthday = ({ handleUpdateProfile }) => {
             </div>
           </label>
 
-          <div className="w-full items-end flex mt-16 ">
-            <button className="w-full" id="birthday-continue" type="submit">
+          <div className="absolute px-1 bottom-16 left-0 right-0 flex justify-center ">
+            <button className="w-full px-6" id="birthday-continue" type="submit" style={{ maxWidth: "420px" }}>
               <PrimaryButton active="true" label="Continue"></PrimaryButton>
             </button>
           </div>
