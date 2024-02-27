@@ -20,39 +20,30 @@ const withProtectedRoutes = (ComponentToWrap) => {
     const profileCreationRoute = ROUTES.PROFILE_CREATION.path;
 
     useEffect(() => {
-      if (loading && !currentUser) {
-        return <div>Loading...</div>;
-      }
-
-      if (!currentUser) {
-        router.push(`${ROUTES.LOGIN.path}?redirectTo=${pathname}`);
-        return;
-      }
-
-      if (isAdminRoute && userRole !== "admin") {
-        router.push(`${ROUTES.UNAUTHORIZED.path}`);
-        return;
-      }
-
-      if (
-        currentUser?.profile?.onboardingStatus === "inProgress" &&
-        !isOnboardingRoute &&
-        profileCreationRoute !== pathname
-      ) {
-        router.push(ROUTES.PROFILE_CREATION.path);
-        return;
-      }
-
-      if (currentUser?.profile?.onboardingStatus === "complete" && isOnboardingRoute) {
-        router.push(ROUTES.FEED.path);
-        return;
+      // Ensure all conditions are checked after the loading state is resolved
+      if (!loading) {
+        if (!currentUser) {
+          router.push(`${ROUTES.LOGIN.path}?redirectTo=${pathname}`);
+        } else if (isAdminRoute && userRole !== "admin") {
+          router.push(`${ROUTES.UNAUTHORIZED.path}`);
+        } else if (
+          currentUser?.profile?.onboardingStatus === "inProgress" &&
+          !isOnboardingRoute &&
+          profileCreationRoute !== pathname
+        ) {
+          router.push(ROUTES.PROFILE_CREATION.path);
+        } else if (currentUser?.profile?.onboardingStatus === "complete" && isOnboardingRoute) {
+          router.push(ROUTES.FEED.path);
+        }
       }
     }, [currentUser, loading, pathname, router, userRole, isAdminRoute, isOnboardingRoute, profileCreationRoute]);
 
+    // Render loading state outside of useEffect
     if (loading) {
       return <div>Loading...</div>;
     }
 
+    // Render the wrapped component if not loading
     return <ComponentToWrap {...props} />;
   };
 

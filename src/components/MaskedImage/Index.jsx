@@ -1,7 +1,7 @@
 "use client";
-import { renderToStaticMarkup } from "react-dom/server";
-import Icon from "@/components/Icon";
+
 import { useEffect, useState } from "react";
+
 import { getPhotoURL } from "@/services/image-service.js";
 
 const MaskedImage = ({ height, width, src }) => {
@@ -11,7 +11,11 @@ const MaskedImage = ({ height, width, src }) => {
   // console.log("test");
   useEffect(() => {
     const fetchPhoto = async (media) => {
-      // console.log("testtest");
+      if (!media) {
+        setImage("https://www.gemsociety.org/wp-content/uploads/2023/07/round-purple-fancy-sapphire-brian-gavin.jpg");
+        return;
+      }
+
       try {
         const photo = await getPhotoURL(media);
         let photoResult = photo;
