@@ -2,6 +2,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 import ROUTES from "@/constants/routes";
 import { useAuth } from "@/context/AuthContext";
+import { useEffect } from "react";
 
 /**
  * withProtectedRoutes HOC for route protection
@@ -16,38 +17,33 @@ const withProtectedRoutes = (ComponentToWrap) => {
     const pathname = usePathname();
     const isAdminRoute = pathname.startsWith("/admin");
     const isOnboardingRoute = pathname.includes("/onboarding");
-    const profileCreationRoute = `${ROUTES.ONBOARDING.path}/profile-creation`;
+    const profileCreationRoute = ROUTES.PROFILE_CREATION.path;
 
-    if (loading && !currentUser) {
+    useEffect(() => {
+      // Ensure all conditions are checked after the loading state is resolved
+      if (!loading) {
+        if (!currentUser) {
+          router.push(`${ROUTES.LOGIN.path}?redirectTo=${pathname}`);
+        } else if (isAdminRoute && userRole !== "admin") {
+          router.push(`${ROUTES.UNAUTHORIZED.path}`);
+        } else if (
+          currentUser?.profile?.onboardingStatus === "inProgress" &&
+          !isOnboardingRoute &&
+          profileCreationRoute !== pathname
+        ) {
+          router.push(ROUTES.PROFILE_CREATION.path);
+        } else if (currentUser?.profile?.onboardingStatus === "complete" && isOnboardingRoute) {
+          router.push(ROUTES.FEED.path);
+        }
+      }
+    }, [currentUser, loading, pathname, router, userRole, isAdminRoute, isOnboardingRoute, profileCreationRoute]);
+
+    // Render loading state outside of useEffect
+    if (loading) {
       return <div>Loading...</div>;
     }
 
-    if (!currentUser) {
-      router.push(`${ROUTES.LOGIN.path}?redirectTo=${pathname}`);
-      return;
-    }
-
-    if (isAdminRoute && userRole !== "admin") {
-      router.push(`${ROUTES.UNAUTHORIZED.path}`);
-      return;
-    }
-
-    if (
-      currentUser?.profile?.onboardingStatus === "inProgress" &&
-      !isOnboardingRoute &&
-      profileCreationRoute !== pathname
-    ) {
-      router.push(`${ROUTES.ONBOARDING.path}/profile-creation`);
-      // redirect to onboarding screen
-      // router.push(`${ROUTES.UNAUTHORIZED.path}`);
-      return;
-    }
-
-    if (currentUser?.profile?.onboardingStatus === "complete" && isOnboardingRoute) {
-      router.push(`${ROUTES.DASHBOARD.path}/feed`);
-    }
-    // redirect to dashboard main page
-
+    // Render the wrapped component if not loading
     return <ComponentToWrap {...props} />;
   };
 

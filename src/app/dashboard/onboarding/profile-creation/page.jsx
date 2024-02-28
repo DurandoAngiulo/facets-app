@@ -21,16 +21,10 @@ import {
 import { useEffect, useState } from "react";
 
 import OnboardingLayout from "@/components/layouts/OnboardingLayout";
-import { PROFILE_MODEL } from "@/constants/model";
-import ROUTES from "@/constants/routes";
 import { useAuth } from "@/context/AuthContext";
 import { updateProfile } from "@/services/profile-service";
-import { useRouter } from "next/navigation";
 
 const Index = () => {
-  const { currentUser, updateUserProfile } = useAuth();
-  const [progress, setProgress] = useState(0);
-  const router = useRouter();
   const componentMap = [
     LearnAboutYou,
     EnterName,
@@ -49,28 +43,20 @@ const Index = () => {
     InviteFriends,
     ProfileComplete
   ];
-
+  const { currentUser, updateUserProfile } = useAuth();
+  const [progress, setProgress] = useState(0);
   const CurrentComponent = componentMap[progress];
 
   const handleUpdateProfile = async (profileData) => {
     const { data, error } = await updateProfile(currentUser, profileData);
 
     if (error) {
-      console.log(data.message);
+      console.error(data.message);
       return;
     }
-    await updateUserProfile(data?.user?.profile);
 
+    await updateUserProfile(data?.profile);
     await setProgress(data?.profile?.onboardingStep);
-
-    const complete_status = PROFILE_MODEL.onboardingStatus[1];
-
-    if (data?.profile?.onboardingStatus === complete_status) {
-      console.log("about to reroute");
-      router.push(`${ROUTES.FEED.path}`);
-      console.log("routed");
-    }
-    console.groupEnd();
   };
 
   useEffect(() => {
@@ -80,7 +66,6 @@ const Index = () => {
 
   return (
     <OnboardingLayout>
-      <div></div>
       {CurrentComponent && <CurrentComponent handleUpdateProfile={handleUpdateProfile} />}
     </OnboardingLayout>
   );

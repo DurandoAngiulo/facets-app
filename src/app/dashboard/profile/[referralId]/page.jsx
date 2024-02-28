@@ -8,7 +8,7 @@ import { calculateAge, replaceNameInString, extractIdFromUrl } from "@/utils/uti
 import { usePathname } from "next/navigation";
 import MoreDetailsPillGroup from "@/components/MoreDetailsPillGroup/Index.jsx";
 import Icon from "@/components/Icon";
-
+import BeveledContainer from "@/components/BeveledContainer/Index";
 import FacetsList from "@/components/FacetsList";
 import { getProfileById } from "@/services/profile-service";
 
@@ -51,66 +51,60 @@ const Index = () => {
 
   return (
     <>
-      <div>
-        <div className="page-container pb-6">
-          <header>
-            {/* <h2>all unstyled profile data</h2> */}
-            {/* <p>{profileInformation?.firstName}</p>
-          <p>{calculateAge(profileInformation?.birthday)}</p>
-          <p>{profileInformation?.bio}</p>
-          <p>{profileInformation?.location}</p>
-          <p>{profileInformation?.occupation}</p>
-          <p>{profileInformation?.pronouns}</p> */}
-
-            {/* Header with name and icons */}
-            <div className="w-full justify-center items-center gap-2 inline-flex flex-wrap px-8">
-              {/* header with back button, name, and kabob with modal options */}
-              <div className="w-full inline-flex pt-8">
-                {/* <Link href={`${ROUTES.FEED.path}`}> */}
-                <Icon className="w-6 h-6 justify-between items-center flex" iconName="backArrow"></Icon>
-                {/* </Link> */}
-                <h2 className="w-full flex-col justify-start items-center inline-flex gradient-text">
-                  {profileInformation?.firstName}
-                </h2>
-                <Icon className="w-6 h-6 origin-top-left justify-between items-center flex" iconName="kabob"></Icon>
-              </div>
+      <div className="page">
+        <div className="shadow-lg w-full z-50 px-4 pb-2 relative bg-white">
+          <div className="w-full justify-center items-center gap-2 inline-flex flex-wrap">
+            {/* header with back button, name, and kabob with modal options */}
+            <div className="w-full inline-flex pt-8">
+              {/* <Link href={`${ROUTES.FEED.path}`}> */}
+              <Icon className="w-6 h-6 justify-between items-center flex" iconName="backArrow"></Icon>
+              {/* </Link> */}
+              <h2 className="w-full flex-col justify-start items-center inline-flex gradient-text">
+                {profileInformation?.firstName}
+              </h2>
+              <Icon className="w-6 h-6 origin-top-left justify-between items-center flex" iconName="kabob"></Icon>
             </div>
+          </div>
 
-            {/* Pronouns */}
-            <p style={{ color: "var(--text)" }} className="text-center italic">
-              {profileInformation?.pronouns}
-            </p>
+          <p style={{ color: "var(--text)" }} className="text-center italic">
+            {profileInformation?.pronouns}
+          </p>
 
-            {/* Basic Info */}
-            <div className="w-full justify-center items-center gap-1 inline-flex my-1">
-              <p style={{ color: "var(--text)" }}>{calculateAge(profileInformation?.birthday)}</p>
-              <Icon iconName="diamondBio" className="w-[12px] h-[12px]" />
-              <p style={{ color: "var(--text)" }}>{profileInformation?.occupation}</p>
-              <Icon iconName="diamondBio" className="w-[12px] h-[12px]" />
-              <p style={{ color: "var(--text)" }}>{profileInformation?.location}</p>
-            </div>
-          </header>
+          <div className="w-full justify-center items-center gap-1 inline-flex my-1">
+            <p style={{ color: "var(--text)" }}>{calculateAge(profileInformation?.birthday)}</p>
+            <Icon iconName="diamondBio" className="w-[12px] h-[12px]" />
+            <p style={{ color: "var(--text)" }}>{profileInformation?.occupation}</p>
+            <Icon iconName="diamondBio" className="w-[12px] h-[12px]" />
+            <p style={{ color: "var(--text)" }}>{profileInformation?.location}</p>
+          </div>
 
-          {/* Pills with more details */}
           <MoreDetailsPillGroup moreDetails={profileInformation?.moreDetails} />
 
-          <p className="pt-2 px-8"> {profileInformation?.bio} </p>
+          <p className="pl-2 py-2" style={{ color: "var(--text)" }}>
+            {" "}
+            {profileInformation?.moreDetails.bio}{" "}
+          </p>
         </div>
 
-        <section className="bg-green-400 page">
+        <section
+          className="flex flex-row overflow-auto gap-5 px-8 pt-3 snap-proximity snap-x"
+          style={{ background: "var(--background-gradient-lr" }}
+        >
           {profileFacetsExist && (
-            <div>
-              <h3>Facet By {profileInformation?.firstName}</h3>
-              <ul>
-                <FacetsList facet={facetGroups.personalFacets[0]} />
-              </ul>
+            <div className="mb-32">
+              <p className="text-center mb-1" style={{ fontSize: "var(--font-size-p-md)", color: "var(--text)" }}>
+                Facet by <b>{profileInformation?.firstName}</b>
+              </p>
+              <FacetsList facet={facetGroups.personalFacets[0]} />
             </div>
           )}
 
           {friendFacetsExist &&
             facetGroups.friendFacets.map((facet) => (
               <div key={facet.respondantUserId}>
-                <h3>Facet By A friend of {facet.friendshipPeriod}</h3>
+                <p className="text-center mb-1" style={{ fontSize: "var(--font-size-p-md)", color: "var(--text)" }}>
+                  Facet by a friend of <b>{facet.friendshipPeriod}</b>
+                </p>
                 <FacetsList facet={facet} currentProfile={profileInformation} />
               </div>
             ))}
