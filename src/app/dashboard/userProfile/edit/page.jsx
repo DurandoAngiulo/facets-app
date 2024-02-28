@@ -1,14 +1,55 @@
 "use client";
 import DashboardLayout from "@/components/layouts/DashboardLayout";
-
+import Icon from "@/components/Icon";
+import Divider from "@mui/material/Divider";
 import Link from "next/link";
+import { PrimaryButton } from "@/components/Button/Index";
 
 const Index = () => {
   return (
     <DashboardLayout>
       <div>
-        <h2>edit</h2>
-        <Link href="/dashboard/userProfile">go back</Link>
+        {/* <h2>edit</h2> */}
+        <Link href="/dashboard/userProfile">
+          <Icon iconName="backArrow" className="w-[40px] h-[40px]" />
+        </Link>
+        <h2 className="text-center" style={{ color: "var(--brand)" }}>
+          My details
+        </h2>
+        <p className="text-center">Copy the link to invite friends to Facets!</p>
+        <div className="inline-flex w-full p-3 my-2 rounded border border-zinc-500 border-opacity-50">
+          {/* add function for generated link */}
+          <p>generated link</p>
+          {/* change icon to copy icon */}
+          <Icon iconName="diamondBio" className="w-[40px] h-[40px]" />
+        </div>
+
+        <Divider className="py-1"></Divider>
+
+        <div className="inline-flex w-full p-3 my-2 rounded border border-zinc-500 border-opacity-50">
+          <p>Account Information</p>
+          {/* change backarrow to forwardarrow or smn idk */}
+          <Icon iconName="backArrow" className="w-[40px] h-[40px]" />
+        </div>
+
+        <div className="inline-flex w-full p-3 my-2 rounded border border-zinc-500 border-opacity-50">
+          <p>Facets Management</p>
+          {/* change backarrow to forwardarrow or smn idk */}
+          <Icon iconName="backArrow" className="w-[40px] h-[40px]" />
+        </div>
+
+        <div className="inline-flex w-full p-3 my-2 rounded border border-zinc-500 border-opacity-50">
+          <p>Edit Facets Summary</p>
+          {/* change backarrow to forwardarrow or smn idk */}
+          <Icon iconName="backArrow" className="w-[40px] h-[40px]" />
+        </div>
+
+        <div className="inline-flex w-full p-3 my-2 rounded border border-zinc-500 border-opacity-50">
+          <p>Add More Details</p>
+          {/* change backarrow to forwardarrow or smn idk */}
+          <Icon iconName="backArrow" className="w-[40px] h-[40px]" />
+        </div>
+        {/* 
         <h3>primary info</h3>
         <div>
           <Link href="/dashboard/editAction/name">
@@ -51,7 +92,7 @@ const Index = () => {
         <h3>summary card section?</h3>
         <div>
           <p>not sure how this looks</p>
-        </div>
+        </div> */}
       </div>
     </DashboardLayout>
   );

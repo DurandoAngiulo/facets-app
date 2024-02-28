@@ -36,8 +36,8 @@ const Page = () => {
 
   return (
     <>
-      <div>
-        <div className="page-container pb-6">
+      <div className="page-container pb-6">
+        <div className="pb-6">
           <header>
             {/* Header with name and icons */}
             <div className="w-full justify-center items-center gap-2 inline-flex flex-wrap px-8">
