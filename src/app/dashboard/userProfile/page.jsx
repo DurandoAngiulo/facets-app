@@ -9,6 +9,8 @@ import { transformUserFacets } from "@/services/facet-services";
 import { calculateAge } from "@/utils/util-functions.js";
 import Link from "next/link";
 import MoreDetailsPillGroup from "@/components/MoreDetailsPillGroup/Index.jsx";
+import Icon from "@/components/Icon";
+import { PrimaryButton } from "@/components/Button/Index";
 
 const Page = () => {
   const { currentUser } = useAuth();
@@ -35,20 +37,43 @@ const Page = () => {
   return (
     <>
       <div>
-        <header>
-          <Link href={ROUTES.EDIT_PROFILE.path}>
-            <h2>edit profile</h2>
-          </Link>
+        <div className="page-container pb-6">
+          <header>
+            {/* Header with name and icons */}
+            <div className="w-full justify-center items-center gap-2 inline-flex flex-wrap px-8">
+              {/* header with back button, name, and kabob with modal options */}
+              <div className="w-full inline-flex pt-8">
+                {/* <Link href={`${ROUTES.FEED.path}`}> */}
+                {/* </Link> */}
+                <h2 className="w-full flex-col justify-start items-center inline-flex gradient-text">
+                  {profileInformation?.firstName}
+                </h2>
+              </div>
+            </div>
 
-          <h2>all unstyled profile data</h2>
-          <p>{profileInformation?.firstName}</p>
-          <p>{calculateAge(profileInformation?.birthday)}</p>
-          <p>{profileInformation?.bio}</p>
-          <p>{profileInformation?.location}</p>
-          <p>{profileInformation?.occupation}</p>
-          <p>{profileInformation?.pronouns}</p>
-        </header>
-        <MoreDetailsPillGroup moreDetails={profileInformation?.moreDetails} />
+            {/* Pronouns */}
+            <p style={{ color: "var(--text)" }} className="text-center italic">
+              {profileInformation?.pronouns}
+            </p>
+
+            {/* Basic Info */}
+            <div className="w-full justify-center items-center gap-1 inline-flex my-1">
+              <p style={{ color: "var(--text)" }}>{calculateAge(profileInformation?.birthday)}</p>
+              <Icon iconName="diamondBio" className="w-[12px] h-[12px]" />
+              <p style={{ color: "var(--text)" }}>{profileInformation?.occupation}</p>
+              <Icon iconName="diamondBio" className="w-[12px] h-[12px]" />
+              <p style={{ color: "var(--text)" }}>{profileInformation?.location}</p>
+            </div>
+          </header>
+          <MoreDetailsPillGroup moreDetails={profileInformation?.moreDetails} />
+          <p className="pt-2 px-8"> {profileInformation?.bio} </p>
+
+          <Link href={ROUTES.EDIT_PROFILE.path}>
+            <PrimaryButton active="true" label="Edit Profile">
+              Edit Profile
+            </PrimaryButton>
+          </Link>
+        </div>
 
         <section className="bg-green-400">
           {profileFacetsExist && (
