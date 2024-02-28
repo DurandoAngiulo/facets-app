@@ -63,7 +63,7 @@ export const EnterMoreDetails = ({ handleUpdateProfile }) => {
           <div>
             <div className="flex flex-row gap-1 items-center">
               <Icon iconName="bio" className="h-4" />
-              <p className="semibold" style={{ color: "var(--element-subtle)" }}>
+              <p className="font-medium" style={{ color: "var(--element-subtle)" }}>
                 Bio
               </p>
             </div>
@@ -79,7 +79,7 @@ export const EnterMoreDetails = ({ handleUpdateProfile }) => {
           <div>
             <div className="flex flex-row gap-1 pb-1 items-center">
               <Icon iconName="sexuality" className="h-4" />
-              <p className="semibold" style={{ color: "var(--element-subtle)" }}>
+              <p className="font-medium" style={{ color: "var(--element-subtle)" }}>
                 Sexuality
               </p>
             </div>
@@ -92,7 +92,7 @@ export const EnterMoreDetails = ({ handleUpdateProfile }) => {
           <div>
             <div className="flex flex-row gap-1 pb-1 items-center">
               <Icon iconName="school" className="h-4" />
-              <p className="semibold" style={{ color: "var(--element-subtle)" }}>
+              <p className="font-medium" style={{ color: "var(--element-subtle)" }}>
                 School
               </p>
             </div>
@@ -105,7 +105,7 @@ export const EnterMoreDetails = ({ handleUpdateProfile }) => {
           <div>
             <div className="flex flex-row gap-1 pb-1 items-center">
               <Icon iconName="hometown" className="h-4" />
-              <p className="semibold" style={{ color: "var(--element-subtle)" }}>
+              <p className="font-medium" style={{ color: "var(--element-subtle)" }}>
                 Hometown
               </p>
             </div>
@@ -118,7 +118,7 @@ export const EnterMoreDetails = ({ handleUpdateProfile }) => {
           <div>
             <div className="flex flex-row gap-1 pb-1 items-center">
               <Icon iconName="height" className="h-4" />
-              <p className="semibold" style={{ color: "var(--element-subtle)" }}>
+              <p className="font-medium" style={{ color: "var(--element-subtle)" }}>
                 Height
               </p>
             </div>
@@ -131,7 +131,7 @@ export const EnterMoreDetails = ({ handleUpdateProfile }) => {
           <div>
             <div className="flex flex-row gap-1 pb-1 items-center">
               <Icon iconName="religion" className="h-4" />
-              <p className="semibold" style={{ color: "var(--element-subtle)" }}>
+              <p className="font-medium" style={{ color: "var(--element-subtle)" }}>
                 Religion
               </p>
             </div>
@@ -144,7 +144,7 @@ export const EnterMoreDetails = ({ handleUpdateProfile }) => {
           <div>
             <div className="flex flex-row gap-1 pb-1 items-center">
               <Icon iconName="smokes" className="h-4" />
-              <p className="semibold" style={{ color: "var(--element-subtle)" }}>
+              <p className="font-medium" style={{ color: "var(--element-subtle)" }}>
                 Smoking
               </p>
             </div>
@@ -153,7 +153,7 @@ export const EnterMoreDetails = ({ handleUpdateProfile }) => {
               name="smoking"
               value={moreDetails.smoking}
               onChange={(e) => handleRadioInputChange("smoking", e.target.value)}
-              className="w-full p-3 text-body rounded border border-border flex-row justify-start items-center inline-flex semibold font-['Arboria']"
+              className="w-full p-3 text-body rounded border border-border flex-row justify-start items-center inline-flex font-medium font-['Arboria']"
             >
               <option value="">None</option>
               <option value="Smokes">Smokes</option>
@@ -165,7 +165,7 @@ export const EnterMoreDetails = ({ handleUpdateProfile }) => {
           <div>
             <div className="flex flex-row gap-1 pb-1 items-center">
               <Icon iconName="drinking" className="h-4" />
-              <p className="semibold" style={{ color: "var(--element-subtle)" }}>
+              <p className="font-medium" style={{ color: "var(--element-subtle)" }}>
                 Drinking
               </p>
             </div>
@@ -175,7 +175,7 @@ export const EnterMoreDetails = ({ handleUpdateProfile }) => {
               name="drinking"
               value={moreDetails.drinking}
               onChange={(e) => handleRadioInputChange("drinking", e.target.value)}
-              className="w-full p-3 text-body rounded border border-border flex-row justify-start items-center inline-flex semibold font-['Arboria']"
+              className="w-full p-3 text-body rounded border border-border flex-row justify-start items-center inline-flex font-medium font-['Arboria']"
             >
               <option value="">None</option>
               <option value="Drinks">Drinks</option>
@@ -187,7 +187,7 @@ export const EnterMoreDetails = ({ handleUpdateProfile }) => {
           <div>
             <div className="flex flex-row gap-1 pb-1 items-center">
               <Icon iconName="mbti" className="h-4" />
-              <p className="semibold" style={{ color: "var(--element-subtle)" }}>
+              <p className="font-medium" style={{ color: "var(--element-subtle)" }}>
                 MBTI
               </p>
             </div>
@@ -203,7 +203,7 @@ export const EnterMoreDetails = ({ handleUpdateProfile }) => {
           <div>
             <div className="flex flex-row gap-1 pb-1 items-center">
               <Icon iconName="astrological" className="h-4" />
-              <p className="semibold" style={{ color: "var(--element-subtle)" }}>
+              <p className="font-medium" style={{ color: "var(--element-subtle)" }}>
                 Astrological sign
               </p>
             </div>
@@ -217,7 +217,7 @@ export const EnterMoreDetails = ({ handleUpdateProfile }) => {
           <div className="mb-32">
             <div className="flex flex-row gap-1 pb-1 items-center">
               <Icon iconName="political" className="h-4" />
-              <p className="semibold" style={{ color: "var(--element-subtle)" }}>
+              <p className="font-medium" style={{ color: "var(--element-subtle)" }}>
                 Political affiliation
               </p>
             </div>
@@ -227,7 +227,7 @@ export const EnterMoreDetails = ({ handleUpdateProfile }) => {
               name="politicalAffiliation"
               value={moreDetails.politicalAffiliation}
               onChange={(e) => handleRadioInputChange("politicalAffiliation", e.target.value)}
-              className="w-full p-3 text-body rounded border border-border flex-row justify-start items-center inline-flex semibold font-['Arboria']"
+              className="w-full p-3 text-body rounded border border-border flex-row justify-start items-center inline-flex font-medium font-['Arboria']"
             >
               <option value="">None</option>
               <option value="Liberal">Liberal</option>

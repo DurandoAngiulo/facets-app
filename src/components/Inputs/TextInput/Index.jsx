@@ -5,7 +5,7 @@ const TextInput = ({ label, value, placeholder, onChange, maxlength }) => {
   return (
     <div>
       <label
-        className=" w-full p-3 rounded border flex-row justify-start items-center inline-flex semibold font-['Arboria']"
+        className=" w-full p-3 rounded border flex-row justify-start items-center inline-flex font-medium font-['Arboria']"
         style={{ color: "var(--text)", borderColor: "var(--border" }}
       >
         <input
