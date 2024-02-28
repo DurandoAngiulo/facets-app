@@ -46,6 +46,9 @@ import diamondBio from "@/svg/diamond-bio.svg";
 import backArrow from "@/svg/back-arrow.svg";
 import kabob from "@/svg/kabob.svg";
 import phone from "@/svg/smartphone.svg";
+import search from "@/svg/search.svg";
+import mining from "@/svg/mining.svg";
+import shine from "@/svg/shine.svg";
 import contentCopy from "@/svg/content_copy.svg";
 
 import { forwardRef } from "react";
@@ -100,6 +103,9 @@ export const iconRegistry = {
   astrological,
   political,
   phone,
+  search,
+  mining,
+  shine,
   contentCopy
 };
 
