@@ -46,6 +46,9 @@ import diamondBio from "@/svg/diamond-bio.svg";
 import backArrow from "@/svg/back-arrow.svg";
 import kabob from "@/svg/kabob.svg";
 import phone from "@/svg/smartphone.svg";
+import search from "@/svg/search.svg";
+import mining from "@/svg/mining.svg";
+import shine from "@/svg/shine.svg";
 
 import { forwardRef } from "react";
 import styles from "./Icon.module.css";
@@ -98,7 +101,10 @@ export const iconRegistry = {
   mbti,
   astrological,
   political,
-  phone
+  phone,
+  search,
+  mining,
+  shine
 };
 
 type IconNames = keyof typeof iconRegistry;
