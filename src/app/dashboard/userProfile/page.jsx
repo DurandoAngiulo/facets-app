@@ -66,7 +66,7 @@ const Page = () => {
             </div>
           </header>
           <MoreDetailsPillGroup moreDetails={profileInformation?.moreDetails} />
-          <p className="pt-2 px-8"> {profileInformation?.bio} </p>
+          <p className="py-2 px-2"> {profileInformation?.bio} </p>
 
           <Link href={ROUTES.EDIT_PROFILE.path}>
             <PrimaryButton active="true" label="Edit Profile">

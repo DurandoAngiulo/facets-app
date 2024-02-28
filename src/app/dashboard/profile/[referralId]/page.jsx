@@ -80,10 +80,7 @@ const Index = () => {
 
           <MoreDetailsPillGroup moreDetails={profileInformation?.moreDetails} />
 
-          <p className="pl-2 py-2" style={{ color: "var(--text)" }}>
-            {" "}
-            {profileInformation?.moreDetails.bio}{" "}
-          </p>
+          <p className="py-2 px-2"> {profileInformation?.bio} </p>
         </div>
 
         <section
