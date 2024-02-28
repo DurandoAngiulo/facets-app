@@ -1,13 +1,9 @@
-import React from "react";
 import { PROFILE_MODEL } from "@/constants/model";
-import { useRouter } from "next/navigation";
-import ROUTES from "@/constants/routes";
 import Icon from "@/components/Icon";
 import { PrimaryButton, SecondaryButton } from "@/components/Button/Index";
 import Link from "next/link"; // Import Link from Next.js
 
 export const ProfileComplete = ({ handleUpdateProfile }) => {
-  const router = useRouter();
   const handleClick = async () => {
     await handleUpdateProfile({
       onboardingStep: 15,

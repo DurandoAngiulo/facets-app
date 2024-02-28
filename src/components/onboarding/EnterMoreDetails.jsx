@@ -43,7 +43,7 @@ export const EnterMoreDetails = ({ handleUpdateProfile }) => {
         religion: moreDetails.religion,
         politicalAffiliation: moreDetails.politicalAffiliation
       },
-      onboardingStep: 14
+      onboardingStep: 13
     });
   };
 

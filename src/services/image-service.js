@@ -37,6 +37,12 @@ const updatePhotoOrder = (photos, currentOrder, newOrder) => {
  */
 const getPhotoURL = async (path) => {
   const storage = getStorage();
+
+  // Ensure the path is not pointing to the root
+  if (!path || path.trim() === "") {
+    throw new Error("The path to the photo is not specified.");
+  }
+
   const photoRef = ref(storage, path);
 
   try {
