@@ -8,7 +8,7 @@ import { PrimaryButton } from "@/components/Button/Index";
 const Index = () => {
   return (
     <DashboardLayout>
-      <div>
+      <div className="px-8">
         {/* <h2>edit</h2> */}
         <Link href="/dashboard/userProfile">
           <Icon iconName="backArrow" className="w-[40px] h-[40px]" />
@@ -19,35 +19,35 @@ const Index = () => {
         <p className="text-center">Copy the link to invite friends to Facets!</p>
         <div className="inline-flex w-full p-3 my-2 rounded border border-zinc-500 border-opacity-50">
           {/* add function for generated link */}
-          <p>generated link</p>
+          <p className="w-5/6">generated link</p>
           {/* change icon to copy icon */}
-          <Icon iconName="diamondBio" className="w-[40px] h-[40px]" />
+          <Icon iconName="diamondBio" className="w-[30px] h-[30px] m-auto" />
         </div>
 
         <Divider className="py-1"></Divider>
 
         <div className="inline-flex w-full p-3 my-2 rounded border border-zinc-500 border-opacity-50">
-          <p>Account Information</p>
+          <p className="w-5/6">Account Information</p>
           {/* change backarrow to forwardarrow or smn idk */}
-          <Icon iconName="backArrow" className="w-[40px] h-[40px]" />
+          <Icon iconName="backArrow" className="w-[30px] h-[30px] rotate-180 m-auto" />
         </div>
 
         <div className="inline-flex w-full p-3 my-2 rounded border border-zinc-500 border-opacity-50">
-          <p>Facets Management</p>
+          <p className="w-5/6">Facets Management</p>
           {/* change backarrow to forwardarrow or smn idk */}
-          <Icon iconName="backArrow" className="w-[40px] h-[40px]" />
+          <Icon iconName="backArrow" className="w-[30px] h-[30px] rotate-180 m-auto" />
         </div>
 
         <div className="inline-flex w-full p-3 my-2 rounded border border-zinc-500 border-opacity-50">
-          <p>Edit Facets Summary</p>
+          <p className="w-5/6">Edit Facets Summary</p>
           {/* change backarrow to forwardarrow or smn idk */}
-          <Icon iconName="backArrow" className="w-[40px] h-[40px]" />
+          <Icon iconName="backArrow" className="w-[30px] h-[30px] rotate-180 m-auto" />
         </div>
 
         <div className="inline-flex w-full p-3 my-2 rounded border border-zinc-500 border-opacity-50">
-          <p>Add More Details</p>
+          <p className="w-5/6">Add More Details</p>
           {/* change backarrow to forwardarrow or smn idk */}
-          <Icon iconName="backArrow" className="w-[40px] h-[40px]" />
+          <Icon iconName="backArrow" className="w-[30px] h-[30px] rotate-180 m-auto" />
         </div>
         {/* 
         <h3>primary info</h3>
