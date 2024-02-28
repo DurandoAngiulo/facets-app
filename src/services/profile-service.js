@@ -96,16 +96,13 @@ const createProfile = async (userUID, isGuest) => {
  * @throws Will throw an error if the update operation fails.
  */
 const updateProfile = async (user, profileFields) => {
-  const userProfile = user.profile;
   const mergedProfileFields = {
-    ...userProfile,
+    ...user?.profile,
     ...profileFields
   };
-  console.log(profileFields, "profileFields");
-  console.log(mergedProfileFields, "before");
+
   try {
     await updateDoc(doc(db, FIREBASE.COLLECTIONS.PROFILES, user.uid), mergedProfileFields);
-    console.log("profile updated after", mergedProfileFields);
     return {
       data: {
         message: `profile successfully updated`,

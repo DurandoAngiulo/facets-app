@@ -1,10 +1,6 @@
-import React from "react";
 import { PROFILE_MODEL } from "@/constants/model";
-import { useRouter } from "next/navigation";
-import ROUTES from "@/constants/routes";
 
 export const ProfileComplete = ({ handleUpdateProfile }) => {
-  const router = useRouter();
   const handleClick = async () => {
     await handleUpdateProfile({
       onboardingStep: 16,
