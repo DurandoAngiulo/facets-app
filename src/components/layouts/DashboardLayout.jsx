@@ -7,7 +7,6 @@ const DashboardLayout = ({ children }) => {
 
   return (
     <div className="page">
-      <Navbar />
       {children}
       {/* <MarketingFooter /> */}
     </div>
