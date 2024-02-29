@@ -27,30 +27,61 @@ const Index = () => {
 
         <h3 style={{ color: "var(--brand)" }}>Primary Information</h3>
         <div>
-          <Link href="/dashboard/editAction/name">
-            <p>Name</p>
-          </Link>
-          <Link href="/dashboard/editAction/birthday">
-            <p>Birthday</p>
-          </Link>
-          <Link href="/dashboard/editAction/pronouns">
-            <p>pronouns</p>
-          </Link>
-          <Link href="/dashboard/editAction/gender">
-            <p>Gender</p>
-          </Link>
-          <Link href="/dashboard/editAction/datingPreferences">
-            <p>Dating preferences</p>
-          </Link>
-          <Link href="dashboard/editAction/ageRange">
-            <p>age range</p>
-          </Link>
-          <Link href="/dashboard/editAction/occupation">
-            <p>Occupation</p>
-          </Link>
-          <Link href="/dashboard/editAction/location">
-            <p>Location</p>
-          </Link>
+          <div className="inline-flex w-full p-3 my-2 rounded border border-zinc-500 border-opacity-50">
+            <p className="w-5/6 font-medium my-auto">Name</p>
+            <Link href="/dashboard/editAction/name" className="m-auto flex">
+              <Icon iconName="backArrow" className="w-[30px] h-[30px] rotate-180 m-auto" />
+            </Link>
+          </div>
+
+          <div className="inline-flex w-full p-3 my-2 rounded border border-zinc-500 border-opacity-50">
+            <p className="w-5/6 font-medium my-auto">Birthday</p>
+            <Link href="/dashboard/editAction/birthday" className="m-auto flex">
+              <Icon iconName="backArrow" className="w-[30px] h-[30px] rotate-180 m-auto" />
+            </Link>
+          </div>
+
+          <div className="inline-flex w-full p-3 my-2 rounded border border-zinc-500 border-opacity-50">
+            <p className="w-5/6 font-medium my-auto">Pronouns</p>
+            <Link href="/dashboard/editAction/pronouns" className="m-auto flex">
+              <Icon iconName="backArrow" className="w-[30px] h-[30px] rotate-180 m-auto" />
+            </Link>
+          </div>
+
+          <div className="inline-flex w-full p-3 my-2 rounded border border-zinc-500 border-opacity-50">
+            <p className="w-5/6 font-medium my-auto">Gender</p>
+            <Link href="/dashboard/editAction/gender" className="m-auto flex">
+              <Icon iconName="backArrow" className="w-[30px] h-[30px] rotate-180 m-auto" />
+            </Link>
+          </div>
+
+          <div className="inline-flex w-full p-3 my-2 rounded border border-zinc-500 border-opacity-50">
+            <p className="w-5/6 font-medium my-auto">Dating Preferences</p>
+            <Link href="/dashboard/editAction/datingPreferences" className="m-auto flex">
+              <Icon iconName="backArrow" className="w-[30px] h-[30px] rotate-180 m-auto" />
+            </Link>
+          </div>
+
+          <div className="inline-flex w-full p-3 my-2 rounded border border-zinc-500 border-opacity-50">
+            <p className="w-5/6 font-medium my-auto">Age Range</p>
+            <Link href="dashboard/editAction/ageRange" className="m-auto flex">
+              <Icon iconName="backArrow" className="w-[30px] h-[30px] rotate-180 m-auto" />
+            </Link>
+          </div>
+
+          <div className="inline-flex w-full p-3 my-2 rounded border border-zinc-500 border-opacity-50">
+            <p className="w-5/6 font-medium my-auto">Occupation</p>
+            <Link href="/dashboard/editAction/occupation" className="m-auto flex">
+              <Icon iconName="backArrow" className="w-[30px] h-[30px] rotate-180 m-auto" />
+            </Link>
+          </div>
+
+          <div className="inline-flex w-full p-3 my-2 rounded border border-zinc-500 border-opacity-50">
+            <p className="w-5/6 font-medium my-auto">Location</p>
+            <Link href="/dashboard/editAction/location" className="m-auto flex">
+              <Icon iconName="backArrow" className="w-[30px] h-[30px] rotate-180 m-auto" />
+            </Link>
+          </div>
         </div>
 
         <h3 style={{ color: "var(--brand)" }}>More Details</h3>
