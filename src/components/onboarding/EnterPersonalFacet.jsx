@@ -58,12 +58,13 @@ export const EnterPersonalFacet = ({ handleUpdateProfile }) => {
         setCurrentPromptIndex(currentPromptIndex + 1);
       } else {
         // If all prompts are answered, proceed to the next page
+        const updatedFacetResponses = [
+          { prompt_id: promptArray[0].id, response: updatedInputs[0] },
+          { prompt_id: promptArray[1].id, response: updatedInputs[1] },
+          { prompt_id: promptArray[2].id, response: updatedInputs[2] }
+        ];
         handleUpdateProfile({
-          personalFacet: [
-            { prompt_id: promptArray[0].id, response: updatedInputs[0] },
-            { prompt_id: promptArray[1].id, response: updatedInputs[1] },
-            { prompt_id: promptArray[2].id, response: updatedInputs[2] }
-          ],
+          personalFacet: [{ responses: updatedFacetResponses }],
           onboardingStep: 11
         });
       }
