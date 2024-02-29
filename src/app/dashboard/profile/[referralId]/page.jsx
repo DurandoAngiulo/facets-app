@@ -16,11 +16,12 @@ import { getProfileById } from "@/services/profile-service";
 const Index = () => {
   const { currentUser } = useAuth();
   const pathname = usePathname();
-  const profileId = extractIdFromUrl(pathname); // You need to define this function
+  const profileId = extractIdFromUrl(pathname);
   const [profileInformation, setProfileInformation] = useState(null);
   const [facetGroups, setFacetGroups] = useState({ friendFacets: [], personalFacets: [] });
   const friendFacetsExist = facetGroups?.friendFacets.length > 0;
   const profileFacetsExist = facetGroups?.personalFacets[0] !== undefined;
+  const [profileUID, setProfileUID] = useState("");
 
   useEffect(() => {
     const fetchProfile = async (profileId) => {
@@ -28,10 +29,12 @@ const Index = () => {
         const profileResult = await getProfileById(profileId);
         let profileData = profileResult?.data?.data;
         setProfileInformation(profileData);
+        setProfileUID(profileId);
       } catch (error) {
         console.error("Failed to fetch user profile:", error);
       }
     };
+
     fetchProfile(profileId);
   }, [profileId]);
 
@@ -106,7 +109,7 @@ const Index = () => {
                 <p className="text-center mb-1" style={{ fontSize: "var(--font-size-p-md)", color: "var(--text)" }}>
                   Facet by a friend of <b>{facet.friendshipPeriod}</b>
                 </p>
-                <FacetsList facet={facet} currentProfile={profileInformation} />
+                <FacetsList userId={profileUID} facet={facet} currentProfile={profileInformation} />
               </div>
             ))}
         </section>
