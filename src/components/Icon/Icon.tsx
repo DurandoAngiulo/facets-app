@@ -50,6 +50,7 @@ import search from "@/svg/search.svg";
 import mining from "@/svg/mining.svg";
 import shine from "@/svg/shine.svg";
 import photoupload from "@/svg/photoupload.svg";
+import crown from "@/svg/crown.svg";
 
 import { forwardRef } from "react";
 import styles from "./Icon.module.css";
@@ -106,7 +107,8 @@ export const iconRegistry = {
   search,
   mining,
   shine,
-  photoupload
+  photoupload,
+  crown
 };
 
 type IconNames = keyof typeof iconRegistry;

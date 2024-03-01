@@ -5,7 +5,7 @@ import { PrimaryButton } from "@/components/Button/Index";
 export const AddMoreDetails = ({ handleUpdateProfile }) => {
   const handleClick = () => {
     handleUpdateProfile({
-      onboardingStep: 14
+      onboardingStep: 15
     });
   };
 

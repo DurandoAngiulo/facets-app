@@ -17,7 +17,7 @@ export const InviteFriends = ({ handleUpdateProfile }) => {
 
   const handleClick = () => {
     handleUpdateProfile({
-      onboardingStep: 15
+      onboardingStep: 16
     });
   };
 

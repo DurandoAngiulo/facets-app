@@ -14,3 +14,4 @@ export * from "@/components/onboarding/InviteFriends";
 export * from "@/components/onboarding/ProfileComplete";
 export * from "@/components/onboarding/EnterOccupation";
 export * from "@/components/onboarding/EnterMoreDetails";
+export * from "@/components/onboarding/EditSummary";
