@@ -8,18 +8,12 @@ import Icon from "@/components/Icon";
 import { updateProfile } from "@/services/profile-service";
 import { useAuth } from "@/context/AuthContext";
 
-const FacetsList = ({ userId, facet, currentProfile = null }) => {
+const FacetsList = ({ facet, currentProfile = null }) => {
   const { currentUser, updateUserProfile } = useAuth();
   const [photoUrls, setPhotoUrls] = useState([]);
-  const [uid, setUid] = useState(userId); // Set initial uid from props
+  const uid = currentProfile?.uid;
   const currentMessageData = currentProfile?.messageData || [];
-  console.log(currentProfile, "curent profile");
-
-  useEffect(() => {
-    if (currentProfile && currentProfile.uid) {
-      setUid(currentProfile.uid); // Update uid when currentProfile changes
-    }
-  }, [currentProfile]);
+  console.log(currentProfile, "current profile");
 
   useEffect(() => {
     const fetchPhotoURLs = async () => {

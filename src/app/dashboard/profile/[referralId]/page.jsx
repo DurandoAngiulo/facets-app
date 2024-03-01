@@ -22,7 +22,6 @@ const Index = () => {
   const friendFacetsExist = facetGroups?.friendFacets.length > 0;
   const profileFacetsExist = facetGroups?.personalFacets[0] !== undefined;
   const [profileUID, setProfileUID] = useState("");
-
   useEffect(() => {
     const fetchProfile = async (profileId) => {
       try {
@@ -99,7 +98,9 @@ const Index = () => {
               <p className="text-center mb-1" style={{ fontSize: "var(--font-size-p-md)", color: "var(--text)" }}>
                 Facet by <b>{profileInformation?.firstName}</b>
               </p>
-              <FacetsList facet={facetGroups.personalFacets[0]} />
+              {facetGroups.personalFacets[0] && profileInformation && (
+                <FacetsList facet={facetGroups.personalFacets[0]} currentProfile={profileInformation} />
+              )}
             </div>
           )}
 
@@ -109,7 +110,7 @@ const Index = () => {
                 <p className="text-center mb-1" style={{ fontSize: "var(--font-size-p-md)", color: "var(--text)" }}>
                   Facet by a friend of <b>{facet.friendshipPeriod}</b>
                 </p>
-                <FacetsList userId={profileUID} facet={facet} currentProfile={profileInformation} />
+                {facet && profileInformation && <FacetsList facet={facet} currentProfile={profileInformation} />}
               </div>
             ))}
         </section>
