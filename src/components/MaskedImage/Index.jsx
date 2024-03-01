@@ -25,7 +25,7 @@ const MaskedImage = ({ height, width, src }) => {
       }
     };
     fetchPhoto(imageSrc);
-  }, []);
+  }, [imageSrc]);
   if (height > 140) {
     return (
       <svg
