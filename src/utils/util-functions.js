@@ -42,8 +42,9 @@ const calculateAge = (dateString) => {
 
 const extractIdFromUrl = (url) => {
   const parts = url.split("/");
-  const idIndex = parts.indexOf("profile") + 1; // Get the index of 'profile' and add 1 to get the index of ID
-  return parts[idIndex];
+  // Get the last part of the URL
+  const id = parts[parts.length - 1];
+  return id;
 };
 
 const extractFieldFromUrl = (url) => {

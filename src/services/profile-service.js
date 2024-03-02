@@ -38,6 +38,7 @@ const createProfile = async (userUID, isGuest) => {
       location: "",
       occupation: "",
       bio: "",
+      messageData: [],
       moreDetails: {
         sexuality: "",
         jobTitle: "",
@@ -55,21 +56,21 @@ const createProfile = async (userUID, isGuest) => {
         {
           photos: [],
           responses: [
-            { prompt_id: "", response: "" },
-            { prompt_id: "", response: "" },
-            { prompt_id: "", response: "" }
+            // { prompt_id: "", response: "" },
+            // { prompt_id: "", response: "" },
+            // { prompt_id: "", response: "" }
           ]
         }
       ],
-      friendFacets: [
-        {
-          responses: [
-            { prompt_id: "", response: "" },
-            { prompt_id: "", response: "" },
-            { prompt_id: "", response: "" }
-          ]
-        }
-      ],
+      // friendFacets: [
+      //   {
+      //     responses: [
+      //       { prompt_id: "", response: "" },
+      //       { prompt_id: "", response: "" },
+      //       { prompt_id: "", response: "" }
+      //     ]
+      //   }
+      // ],
       friendFacets: []
     };
     await setDoc(doc(db, FIREBASE.COLLECTIONS.PROFILES, userUID), profileFields);

@@ -10,7 +10,7 @@ import { calculateAge } from "@/utils/util-functions.js";
 import Link from "next/link";
 import MoreDetailsPillGroup from "@/components/MoreDetailsPillGroup/Index.jsx";
 
-const Page = () => {
+const Page = ({ params }) => {
   const { currentUser } = useAuth();
   const profileInformation = currentUser?.profile;
   const [facetGroups, setFacetGroups] = useState({ friendFacets: [], personalFacets: [] });
@@ -24,7 +24,6 @@ const Page = () => {
       const newProfile = await transformUserFacets(profileInformation);
       setFacetGroups({ ...profileInformation, ...newProfile });
     };
-
     transformFacetData();
   }, [JSON.stringify(profileInformation)]);
 
@@ -55,7 +54,7 @@ const Page = () => {
             <div>
               <h3>Facet By {profileInformation?.firstName}</h3>
               <ul>
-                <FacetsList facet={facetGroups.personalFacets[0]} />
+                <FacetsList facet={facetGroups.personalFacets[0]} currentProfile={profileInformation} />{" "}
               </ul>
             </div>
           )}
@@ -64,7 +63,7 @@ const Page = () => {
             facetGroups.friendFacets.map((facet) => (
               <div key={facet.respondantUserId}>
                 <h3>Facet By A friend of {facet.friendshipPeriod}</h3>
-                <FacetsList facet={facet} currentProfile={profileInformation} />
+                {facet && profileInformation && <FacetsList facet={facet} currentProfile={profileInformation} />}
               </div>
             ))}
         </section>
