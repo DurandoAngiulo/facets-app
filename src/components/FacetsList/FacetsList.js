@@ -7,13 +7,16 @@ import MaskedImage from "@/components/MaskedImage/Index";
 import Icon from "@/components/Icon";
 import { updateProfile } from "@/services/profile-service";
 import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
+import ROUTES from "@/constants/routes";
 
 const FacetsList = ({ facet, currentProfile = null }) => {
   const { currentUser, updateUserProfile } = useAuth();
   const [photoUrls, setPhotoUrls] = useState([]);
   const uid = currentProfile?.uid;
-  const currentMessageData = currentProfile?.messageData || [];
-  console.log(currentProfile, "current profile");
+  const currentMessageData = currentUser?.profile?.messageData || [];
+  const router = useRouter();
+  // console.log(currentProfile, "current profile");
 
   useEffect(() => {
     const fetchPhotoURLs = async () => {
@@ -32,13 +35,12 @@ const FacetsList = ({ facet, currentProfile = null }) => {
   }, [facet?.photos]);
 
   const handleMessageUser = async (prompt, response) => {
-    console.log(uid, "uid is here!");
-    return;
-    const newMessageData = { userId: uid, prompt: prompt, response: response };
+    const newMessageData = { userId: uid, userName: currentProfile?.firstName, prompt: prompt, response: response };
     console.log(newMessageData, "NEW");
+    console.log(currentMessageData, "old");
     const updatedMessageData = { messageData: [...currentMessageData, newMessageData] };
     console.log(updatedMessageData, "UPDATED");
-    const { data, error } = await updateProfile(currentProfile, updatedMessageData);
+    const { data, error } = await updateProfile(currentUser, updatedMessageData);
     console.log(data, "DATA!!!");
     if (error) {
       console.error(data.message);
@@ -46,6 +48,7 @@ const FacetsList = ({ facet, currentProfile = null }) => {
     }
 
     await updateUserProfile(data?.profile);
+    router.push(`${ROUTES.MESSAGES.path}/${uid}`);
   };
 
   if (!facet?.responses) {

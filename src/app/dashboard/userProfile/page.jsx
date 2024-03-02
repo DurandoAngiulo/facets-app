@@ -16,7 +16,6 @@ const Page = ({ params }) => {
   const [facetGroups, setFacetGroups] = useState({ friendFacets: [], personalFacets: [] });
   const friendFacetsExist = facetGroups?.friendFacets.length > 0;
   const profileFacetsExist = facetGroups?.personalFacets[0] !== undefined;
-  console.log(params);
 
   useEffect(() => {
     if (!profileInformation) return;
@@ -55,7 +54,7 @@ const Page = ({ params }) => {
             <div>
               <h3>Facet By {profileInformation?.firstName}</h3>
               <ul>
-                <FacetsList facet={facetGroups.personalFacets[0]} />
+                <FacetsList facet={facetGroups.personalFacets[0]} currentProfile={profileInformation} />{" "}
               </ul>
             </div>
           )}
@@ -64,7 +63,7 @@ const Page = ({ params }) => {
             facetGroups.friendFacets.map((facet) => (
               <div key={facet.respondantUserId}>
                 <h3>Facet By A friend of {facet.friendshipPeriod}</h3>
-                <FacetsList userId={params} facet={facet} currentProfile={profileInformation} />
+                {facet && profileInformation && <FacetsList facet={facet} currentProfile={profileInformation} />}
               </div>
             ))}
         </section>
