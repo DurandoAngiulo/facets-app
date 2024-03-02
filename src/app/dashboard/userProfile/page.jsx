@@ -75,7 +75,31 @@ const Page = () => {
           </Link>
         </div>
 
-        <section className="bg-green-400">
+        <section
+          className="flex flex-row overflow-auto gap-5 px-8 pt-3 snap-proximity snap-x"
+          style={{ background: "var(--background-gradient-lr" }}
+        >
+          {profileFacetsExist && (
+            <div className="mb-32">
+              <p className="text-center mb-1" style={{ fontSize: "var(--font-size-p-md)", color: "var(--text)" }}>
+                Facet by <b>{profileInformation?.firstName}</b>
+              </p>
+              <FacetsList facet={facetGroups.personalFacets[0]} />
+            </div>
+          )}
+
+          {friendFacetsExist &&
+            facetGroups.friendFacets.map((facet) => (
+              <div key={facet.respondantUserId}>
+                <p className="text-center mb-1" style={{ fontSize: "var(--font-size-p-md)", color: "var(--text)" }}>
+                  Facet by a friend of <b>{facet.friendshipPeriod}</b>
+                </p>
+                <FacetsList facet={facet} currentProfile={profileInformation} />
+              </div>
+            ))}
+        </section>
+
+        {/* <section className="bg-green-400">
           {profileFacetsExist && (
             <div>
               <h3>Facet By {profileInformation?.firstName}</h3>
@@ -92,7 +116,7 @@ const Page = () => {
                 <FacetsList facet={facet} currentProfile={profileInformation} />
               </div>
             ))}
-        </section>
+        </section> */}
       </div>
     </>
   );
