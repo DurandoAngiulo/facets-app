@@ -41,14 +41,16 @@ const PrimaryButton = ({ label, active, disabled, icon, iconleft, onDark, small 
   );
 };
 
-const SecondaryButton = ({ label, active, disabled, icon, iconleft, onDark }) => {
+const SecondaryButton = ({ label, active, disabled, icon, iconleft, onDark, small }) => {
   return (
     <div
       style={{
         borderColor: active ? (onDark ? "var(--brand)" : "var(--text)") : "var(--element-subtle)",
-        opacity: disabled ? "0.5" : "1"
+        opacity: disabled ? "0.5" : "1",
+        height: small ? "auto" : "48px",
+        padding: small ? "6px" : "auto"
       }}
-      className="w-full h-12 rounded border border-solid justify-center items-center gap-2.5 inline-flex"
+      className="w-full rounded border border-solid justify-center items-center gap-2.5 inline-flex"
     >
       {iconleft && icon && (
         <div
