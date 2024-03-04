@@ -13,19 +13,36 @@ import { useAuth } from "@/context/AuthContext";
 import { getProfiles } from "@/services/profile-service";
 import Modal from "@/components/Modal/Index.jsx";
 
+// Shuffle function to shuffle the array
+const shuffleArray = (array) => {
+  const shuffledArray = [...array];
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+  }
+  return shuffledArray;
+};
+
 const Index = () => {
   const { currentUser } = useAuth();
   const [profiles, setProfiles] = useState([]);
   const [prompts, setPrompts] = useState([]);
-  console.log(currentUser);
+  const [randomProfiles, setRandomProfiles] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     const fetchPrompts = async () => {
       try {
         const { data: promptTable } = await getPrompts(FIREBASE.COLLECTIONS.USERPROMPTS);
-        // console.log(promptTable, "promptTable");
         setPrompts(promptTable);
-        // console.log(prompts, "prompts!");
       } catch (error) {
         console.error("Error fetching prompts:", error);
       }
@@ -35,14 +52,12 @@ const Index = () => {
   }, []);
 
   useEffect(() => {
-    console.log(currentUser, "useefect");
     const fetchProfiles = async () => {
       if (currentUser?.profile?.referralID) {
         try {
           const profilesData = await getProfiles(currentUser.profile.referralID);
           setProfiles(profilesData);
-
-          console.log(profiles, "profiles!");
+          setRandomProfiles(shuffleArray(profilesData).slice(0, 5)); // Set randomProfiles after fetching profiles
         } catch (error) {
           console.error("Error fetching profiles:", error);
         }
@@ -51,7 +66,12 @@ const Index = () => {
 
     fetchProfiles();
   }, [currentUser]);
-  console.log(profiles);
+
+  const refreshProfiles = () => {
+    setRandomProfiles(shuffleArray(profiles).slice(0, 5)); // Set randomProfiles after fetching profiles
+    closeModal();
+  };
+  console.log(isModalOpen);
   return (
     <>
       <div className="page padding flex flex-col items-center pb-8">
@@ -67,20 +87,22 @@ const Index = () => {
               <Icon className="h-5 self-center mb-1" iconName="diamondFilled" />
             </div>
           </div>
-          <PrimaryButton
-            label="Refresh"
-            icon={<Icon iconName="refresh" className="h-3" />}
-            iconRight
-            active="true"
-            small
-          ></PrimaryButton>
+          <button onClick={openModal}>
+            <PrimaryButton
+              label="Refresh"
+              icon={<Icon iconName="refresh" className="h-3" />}
+              iconRight
+              active="true"
+              small
+            ></PrimaryButton>
+          </button>
           <p className="text-center" style={{ color: "var(--element-subtle)" }}>
             2 remaining today
           </p>
           <hr className="mb-4" style={{ borderColor: "var(--border)" }}></hr>
         </div>
         <div className="pb-24">
-          {profiles.map((profile) => (
+          {randomProfiles.map((profile) => (
             <SummaryCard
               key={profile.id} // Assuming each profile has a unique ID
               name={profile.firstName}
@@ -96,6 +118,8 @@ const Index = () => {
           ))}
         </div>
       </div>
+      {/* Render modal conditionally */}
+      <Modal isOpen={isModalOpen} isClosed={closeModal} onRefresh={refreshProfiles} />
     </>
   );
 };
