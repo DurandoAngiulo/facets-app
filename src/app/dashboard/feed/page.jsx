@@ -11,6 +11,7 @@ import SummaryCard from "@/components/SummaryCard/Index.jsx";
 import FIREBASE from "@/constants/firebase";
 import { useAuth } from "@/context/AuthContext";
 import { getProfiles } from "@/services/profile-service";
+import Modal from "@/components/Modal/Index.jsx";
 
 const Index = () => {
   const { currentUser } = useAuth();
