@@ -48,7 +48,10 @@ const Page = ({ params }) => {
           <p>{profileInformation?.pronouns}</p>
         </header>
         <MoreDetailsPillGroup moreDetails={profileInformation?.moreDetails} />
-
+        <p className="pl-2 py-2" style={{ color: "var(--text)" }}>
+          {" "}
+          {profileInformation?.moreDetails.bio}{" "}
+        </p>
         <section className="bg-green-400">
           {profileFacetsExist && (
             <div>

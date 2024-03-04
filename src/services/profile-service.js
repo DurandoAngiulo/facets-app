@@ -37,9 +37,10 @@ const createProfile = async (userUID, isGuest) => {
       ageRange: "",
       location: "",
       occupation: "",
-      bio: "",
+
       messageData: [],
       moreDetails: {
+        bio: "",
         sexuality: "",
         jobTitle: "",
         school: "",
