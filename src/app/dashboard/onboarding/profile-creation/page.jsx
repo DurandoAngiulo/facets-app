@@ -2,6 +2,7 @@
 
 import {
   AddMoreDetails,
+  EditSummary,
   EnterAgeRange,
   EnterBirthday,
   EnterDatingPreferences,
@@ -38,6 +39,7 @@ const Index = () => {
     TimeToMakeFacet,
     EnterPersonalFacet,
     UploadPhotos,
+    EditSummary,
     AddMoreDetails,
     EnterMoreDetails,
     InviteFriends,
