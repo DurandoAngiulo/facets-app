@@ -5,7 +5,7 @@ const Modal = ({ isOpen, isClosed, onRefresh }) => {
   return (
     <>
       {isOpen && (
-        <div className="fixed inset-0 z-40 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
+        <div className="fixed inset-4 z-40 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
           <div className="relative w-auto max-w-lg mx-auto my-6">
             {/*content*/}
             <div className="py-5 px-3 relative flex flex-col w-full bg-white border-0 rounded-lg shadow-lg outline-none focus:outline-none">
@@ -21,10 +21,10 @@ const Modal = ({ isOpen, isClosed, onRefresh }) => {
               </div>
               {/*footer*/}
               <div className="flex flex-col gap-2 items-center justify-end">
-                <button onClick={isClosed}>
+                <button className="w-full" onClick={isClosed}>
                   <SecondaryButton active="true" label="Go back" small />
                 </button>
-                <button onClick={onRefresh}>
+                <button className="w-full" onClick={onRefresh}>
                   <PrimaryButton active="true" label="Refresh" small />
                 </button>
               </div>
