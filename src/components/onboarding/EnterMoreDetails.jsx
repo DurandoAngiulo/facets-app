@@ -8,6 +8,7 @@ import Icon from "@/components/Icon/index";
 
 export const EnterMoreDetails = ({ handleUpdateProfile }) => {
   const [moreDetails, setMoreDetails] = useState({
+    bio: "",
     school: "",
     hometown: "",
     sexuality: "",
@@ -32,6 +33,7 @@ export const EnterMoreDetails = ({ handleUpdateProfile }) => {
     e.preventDefault();
     handleUpdateProfile({
       moreDetails: {
+        bio: moreDetails.bio,
         school: moreDetails.school,
         hometown: moreDetails.hometown,
         sexuality: moreDetails.sexuality,
@@ -71,9 +73,9 @@ export const EnterMoreDetails = ({ handleUpdateProfile }) => {
               Craft your bio and let your true self shine through to attract your perfect match!
             </p>
             <TextInput
-              value={moreDetails.school}
+              value={moreDetails.bio}
               placeholder="None"
-              onChange={(e) => handleTextInputChange("school", e.target.value)}
+              onChange={(e) => handleTextInputChange("bio", e.target.value)}
             />
           </div>
           <div>
