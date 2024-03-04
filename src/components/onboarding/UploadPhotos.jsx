@@ -22,7 +22,7 @@ export const UploadPhotos = ({ handleUpdateProfile, currentUser }) => {
           will include those!
         </p>
       </div>
-      <ImageUploadInput refPath={"personal"} />
+      <ImageUploadInput refPath={"personal"} submitFunction={handleUpdateProfile} />
       <p className="text-center leading-snug mt-2" style={{ color: "var(--text)" }}>
         Upload <b>4 photos.</b>
       </p>

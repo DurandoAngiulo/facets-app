@@ -5,7 +5,7 @@ import { storage } from "@/lib/firebase";
 import { updateProfile } from "@/services/profile-service";
 import { useState } from "react";
 
-const ImageUploadInput = ({ refPath, mainProfile = null }) => {
+const ImageUploadInput = ({ refPath, submitFunction, mainProfile = null }) => {
   const { currentUser, updateUserProfile } = useAuth();
   const [imageUploads, setImageUploads] = useState([]); // State to hold multiple uploaded files
   const [imageUrls, setImageUrls] = useState([]);
@@ -92,7 +92,8 @@ const ImageUploadInput = ({ refPath, mainProfile = null }) => {
       });
       await updateUserProfile({ personalFacet: updatedPersonalFacets });
 
-      console.log("successfuly upldoaded images to personal facet");
+      console.log("successfuly uploaded images to personal facet");
+      // submitFunction();
     } else {
       const updatedFriendFacets = [...mainProfile.friendFacets];
       // Find the friend facet whose respondantUserId matches mainProfile.uid
@@ -108,7 +109,8 @@ const ImageUploadInput = ({ refPath, mainProfile = null }) => {
         await updateProfile(mainProfile, {
           friendFacets: updatedFriendFacets
         });
-        console.log("succcesfully uplaoded photos to friend Facet firestore");
+        console.log("succcesfully uploaded photos to friend Facet firestore");
+        // submitFunction();
       } else {
         // Handle the case where no friend facet matches mainProfile.uid
         console.log("No friend facet found with matching respondantUserId.");
