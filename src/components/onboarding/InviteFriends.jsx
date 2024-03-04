@@ -38,7 +38,7 @@ export const InviteFriends = ({ handleUpdateProfile }) => {
         </p>
       </div>
       <div
-        className="flex justify-between items-center p-3 rounded border semibold font-['Arboria']"
+        className="flex justify-between items-center p-3 rounded border font-medium font-['Arboria']"
         style={{ color: "var(--text)", borderColor: "var(--border" }}
       >
         <p className="">{referralLink}</p>

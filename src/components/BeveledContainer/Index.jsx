@@ -14,17 +14,7 @@ const BeveledContainer = ({ children, className }) => {
 
       {/* container for content */}
       <div className=" w-full  px-4 bg-white  border-white flex-col justify-center items-start gap-1.5 flex ">
-        <div className="self-stretch ">
-          {children}
-          {/* <p style={{ color: "var(--text)" }}>
-            <i>My dream destination is.. lorem ipsum dolor sit amet aaifd...</i>
-          </p>
-        </div>
-        <div className="self-stretch">
-          <p className="semibold" style={{ fontSize: "var(--font-size-p-md)", color: "var(--brand)" }}>
-            A long walk on the beach with lots of lorem ipsum
-          </p> */}
-        </div>
+        <div className="self-stretch ">{children}</div>
       </div>
 
       <div className="w-full justify-center inline-flex">

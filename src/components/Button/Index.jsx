@@ -26,7 +26,7 @@ const PrimaryButton = ({ label, active, disabled, icon, iconleft, onDark, small 
           color: active ? (onDark ? "white" : "var(--brand)") : "var(--element-subtle)"
         }}
       >
-        <p className="semibold">{label}</p>
+        <p className="font-medium">{label}</p>
       </div>
       {!iconleft && icon && (
         <div
@@ -64,7 +64,7 @@ const SecondaryButton = ({ label, active, disabled, icon, iconleft, onDark }) =>
           color: active ? (onDark ? "white" : "var(--text)") : "var(--element-subtle)"
         }}
       >
-        <p className="semibold">{label}</p>
+        <p className="font-medium">{label}</p>
       </div>
       {!iconleft && icon && (
         <div
@@ -102,7 +102,7 @@ const TertiaryButton = ({ label, active, disabled, icon, iconleft, onDark }) => 
           color: "var(--element-subtle)"
         }}
       >
-        <p className="semibold">{label}</p>
+        <p className="font-medium">{label}</p>
       </div>
       {!iconleft && icon && (
         <div

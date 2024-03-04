@@ -72,7 +72,7 @@ const FacetsList = ({ facet, currentProfile = null }) => {
                 <p style={{ color: "var(--text)" }}>
                   {replaceNameInString(response.prompt, currentProfile?.firstName)}
                 </p>
-                <p className="semibold pr-2" style={{ fontSize: "var(--font-size-p-md)", color: "var(--brand)" }}>
+                <p className="font-medium pr-2" style={{ fontSize: "var(--font-size-p-md)", color: "var(--brand)" }}>
                   {response.response}
                 </p>
 
