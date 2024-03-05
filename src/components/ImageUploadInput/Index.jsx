@@ -3,12 +3,13 @@ import { ref, deleteObject, uploadBytes, listAll } from "firebase/storage";
 import { useAuth } from "@/context/AuthContext";
 import { storage } from "@/lib/firebase";
 import { updateProfile } from "@/services/profile-service";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const ImageUploadInput = ({ refPath, mainProfile = null }) => {
+const ImageUploadInput = ({ refPath, submitFunction, mainProfile = null }) => {
   const { currentUser, updateUserProfile } = useAuth();
   const [imageUploads, setImageUploads] = useState([]); // State to hold multiple uploaded files
   const [imageUrls, setImageUrls] = useState([]);
+  const [fileSaved, setFileSaved] = useState(false);
   const [uploadedCount, setUploadedCount] = useState(0); // Track the number of uploaded photos
   const [previewUrls, setPreviewUrls] = useState(Array.from({ length: 4 })); // Initialize with 4 empty placeholders
   const photoPath =
@@ -92,7 +93,8 @@ const ImageUploadInput = ({ refPath, mainProfile = null }) => {
       });
       await updateUserProfile({ personalFacet: updatedPersonalFacets });
 
-      console.log("successfuly upldoaded images to personal facet");
+      console.log("successfuly uploaded images to personal facet");
+      setFileSaved(true);
     } else {
       const updatedFriendFacets = [...mainProfile.friendFacets];
       // Find the friend facet whose respondantUserId matches mainProfile.uid
@@ -108,7 +110,8 @@ const ImageUploadInput = ({ refPath, mainProfile = null }) => {
         await updateProfile(mainProfile, {
           friendFacets: updatedFriendFacets
         });
-        console.log("succcesfully uplaoded photos to friend Facet firestore");
+        console.log("succcesfully uploaded photos to friend Facet firestore");
+        setFileSaved(true);
       } else {
         // Handle the case where no friend facet matches mainProfile.uid
         console.log("No friend facet found with matching respondantUserId.");
@@ -118,6 +121,10 @@ const ImageUploadInput = ({ refPath, mainProfile = null }) => {
 
   const canSubmit = uploadedCount + imageUploads.length >= 4; // Check if 4 photos are uploaded or selected
 
+  useEffect(() => {
+    if (!fileSaved) return;
+    submitFunction();
+  }, [fileSaved]);
   return (
     <div className="flex flex-col justify-center self-center">
       <div style={{ display: "flex", flexWrap: "wrap", maxWidth: "300px" }} className="justify-center">
@@ -153,7 +160,7 @@ const ImageUploadInput = ({ refPath, mainProfile = null }) => {
         style={{ fontFamily: "var(--font-body)" }}
       />
       <button disabled={!canSubmit} onClick={uploadImages}>
-        Upload Images
+        continue
       </button>
     </div>
   );
