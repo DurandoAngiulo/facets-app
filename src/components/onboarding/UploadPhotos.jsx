@@ -5,6 +5,7 @@ import { PrimaryButton } from "@/components/Button/Index";
 
 export const UploadPhotos = ({ handleUpdateProfile, currentUser }) => {
   const handleClick = () => {
+    console.log("handclick hit!");
     handleUpdateProfile({
       onboardingStep: 12
     });
@@ -22,7 +23,7 @@ export const UploadPhotos = ({ handleUpdateProfile, currentUser }) => {
           will include those!
         </p>
       </div>
-      <ImageUploadInput refPath={"personal"} submitFunction={handleUpdateProfile} />
+      <ImageUploadInput refPath={"personal"} submitFunction={handleClick} />
       <p className="text-center leading-snug mt-2" style={{ color: "var(--text)" }}>
         Upload <b>4 photos.</b>
       </p>

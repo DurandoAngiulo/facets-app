@@ -122,6 +122,7 @@ const ImageUploadInput = ({ refPath, submitFunction, mainProfile = null }) => {
   const canSubmit = uploadedCount + imageUploads.length >= 4; // Check if 4 photos are uploaded or selected
 
   useEffect(() => {
+    console.log(fileSaved, "fileSaved");
     if (!fileSaved) return;
     submitFunction();
   }, [fileSaved]);
