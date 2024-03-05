@@ -119,13 +119,8 @@ const ImageUploadInput = ({ refPath, mainProfile = null }) => {
   const canSubmit = uploadedCount + imageUploads.length >= 4; // Check if 4 photos are uploaded or selected
 
   return (
-    <div>
-      <input
-        type="file"
-        multiple // Allow multiple file selection
-        onChange={handleFileChange}
-      />
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
+    <div className="flex flex-col justify-center self-center">
+      <div style={{ display: "flex", flexWrap: "wrap", maxWidth: "300px" }} className="justify-center">
         {previewUrls.map((url, index) => (
           <div
             key={index}
@@ -133,7 +128,7 @@ const ImageUploadInput = ({ refPath, mainProfile = null }) => {
               width: "100px",
               height: "100px",
               margin: "5px",
-              backgroundColor: url ? "white" : "lightgrey",
+              backgroundColor: "white",
               display: "flex",
               alignItems: "center",
               justifyContent: "center"
@@ -142,11 +137,21 @@ const ImageUploadInput = ({ refPath, mainProfile = null }) => {
             {url ? (
               <img src={url} alt={`Uploaded ${index}`} style={{ maxWidth: "100%", maxHeight: "100%" }} />
             ) : (
-              "Empty"
+              <img
+                src="/dist/images/placeholder.png"
+                alt="Placeholder"
+                style={{ maxWidth: "100%", maxHeight: "100%" }}
+              />
             )}
           </div>
         ))}
       </div>
+      <input
+        type="file"
+        multiple // Allow multiple file selection
+        onChange={handleFileChange}
+        style={{ fontFamily: "var(--font-body)" }}
+      />
       <button disabled={!canSubmit} onClick={uploadImages}>
         Upload Images
       </button>

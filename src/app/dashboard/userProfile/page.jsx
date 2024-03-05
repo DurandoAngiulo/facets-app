@@ -12,7 +12,7 @@ import MoreDetailsPillGroup from "@/components/MoreDetailsPillGroup/Index.jsx";
 import Icon from "@/components/Icon";
 import { PrimaryButton } from "@/components/Button/Index";
 
-const Page = () => {
+const Page = ({ params }) => {
   const { currentUser } = useAuth();
   const profileInformation = currentUser?.profile;
   const [facetGroups, setFacetGroups] = useState({ friendFacets: [], personalFacets: [] });
@@ -26,7 +26,6 @@ const Page = () => {
       const newProfile = await transformUserFacets(profileInformation);
       setFacetGroups({ ...profileInformation, ...newProfile });
     };
-
     transformFacetData();
   }, [JSON.stringify(profileInformation)]);
 
@@ -66,8 +65,10 @@ const Page = () => {
             </div>
           </header>
           <MoreDetailsPillGroup moreDetails={profileInformation?.moreDetails} />
-          <p className="py-2 px-2"> {profileInformation?.bio} </p>
-
+          <p className="pl-2 py-2" style={{ color: "var(--text)" }}>
+            {" "}
+            {profileInformation?.moreDetails.bio}{" "}
+          </p>
           <Link href={ROUTES.EDIT_PROFILE.path}>
             <PrimaryButton active="true" label="Edit Profile">
               Edit Profile
@@ -104,7 +105,7 @@ const Page = () => {
             <div>
               <h3>Facet By {profileInformation?.firstName}</h3>
               <ul>
-                <FacetsList facet={facetGroups.personalFacets[0]} />
+                <FacetsList facet={facetGroups.personalFacets[0]} currentProfile={profileInformation} />{" "}
               </ul>
             </div>
           )}
@@ -113,7 +114,7 @@ const Page = () => {
             facetGroups.friendFacets.map((facet) => (
               <div key={facet.respondantUserId}>
                 <h3>Facet By A friend of {facet.friendshipPeriod}</h3>
-                <FacetsList facet={facet} currentProfile={profileInformation} />
+                {facet && profileInformation && <FacetsList facet={facet} currentProfile={profileInformation} />}
               </div>
             ))}
         </section> */}

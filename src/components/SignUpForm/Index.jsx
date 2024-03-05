@@ -39,7 +39,7 @@ const SignUpForm = () => {
     try {
       // Validate phone number
       if (!phoneNumber) {
-        setError("Please enter a valid phone number.");
+        // setError("Please enter a valid phone number.");
         return;
       }
 

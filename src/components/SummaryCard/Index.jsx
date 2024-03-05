@@ -41,7 +41,7 @@ const SummaryCard = ({
             <p style={{ color: "var(--text)" }}>
               <i>{facetPrompt}</i>
             </p>
-            <p className="semibold" style={{ fontSize: "var(--font-size-p-md)", color: "var(--brand)" }}>
+            <p className="font-medium" style={{ fontSize: "var(--font-size-p-md)", color: "var(--brand)" }}>
               {facetResponse}
             </p>
           </div>

@@ -18,7 +18,7 @@ const Navbar = () => {
   const isActive = (href) => pathname.includes(href);
   return (
     <div>
-      <div className="fixed bottom-0 w-full z-50">
+      <div className="fixed bottom-0 w-full z-20">
         <div className="w-full h-20 bg-white shadow-[0_4px_13.9px_0px_rgba(0,0,0,0.3)] flex-col justify-center items-center pt-2 pb-6 inline-flex">
           <ul className="justify-start items-center gap-10 pt-2 inline-flex">
             {navigationItems.map(({ href, iconName, label }) => (

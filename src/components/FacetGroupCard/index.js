@@ -33,7 +33,7 @@ const FacetGroupCard = ({ facet }) => {
               <p style={{ color: "var(--text)" }}>
                 {/* <i>{replaceNameInString(response.prompt, profileInformation?.firstName)}</i> */}
               </p>
-              <p className="semibold" style={{ fontSize: "var(--font-size-p-md)", color: "var(--brand)" }}>
+              <p className="font-medium" style={{ fontSize: "var(--font-size-p-md)", color: "var(--brand)" }}>
                 {response.response}
               </p>
             </BeveledContainer>
