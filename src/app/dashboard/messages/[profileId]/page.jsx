@@ -53,7 +53,7 @@ const Index = () => {
   };
 
   return (
-    <div>
+    <div className="page padding bg-white">
       {messageInfo ? (
         <div>
           <p>Name: {messageInfo.userName}</p>

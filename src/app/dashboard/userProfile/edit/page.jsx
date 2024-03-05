@@ -25,7 +25,7 @@ const Index = () => {
 
   return (
     <DashboardLayout>
-      <div className="page padding gap-y-16">
+      <div className="page padding bg-white gap-y-16">
         {/* <h2>edit</h2> */}
         <Link href="/dashboard/userProfile">
           <Icon iconName="back" className="h-5 mt-8" style={{ fill: "none" }} />

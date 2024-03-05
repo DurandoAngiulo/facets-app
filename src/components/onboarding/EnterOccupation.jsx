@@ -25,7 +25,7 @@ export const EnterOccupation = ({ handleUpdateProfile }) => {
 
   return (
     <>
-      <div className="page padding border border-yellow-950 h-screen">
+      <div className="page padding bg-white h-screen">
         <ProgressBar width="100%" step="8"></ProgressBar>
 
         <div className="w-full h-4 relative mt-12">

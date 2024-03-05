@@ -10,7 +10,7 @@ export const EditSummary = ({ handleUpdateProfile, currentUser }) => {
   };
   return (
     <>
-      <div className="page padding h-full flex flex-col gap-y-4">
+      <div className="page padding h-full flex flex-col gap-y-4 bg-white">
         <div className="flex flex-col gap-4 mt-16">
           <Icon iconName="crown" className="h-5" />
           <h1 style={{ color: "var(--brand)" }} className="w-full text-center">

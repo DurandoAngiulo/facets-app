@@ -7,7 +7,7 @@ const Index = () => {
   const profileInformation = currentUser?.profile;
 
   return (
-    <>
+    <div className="page padding bg-white">
       {profileInformation?.messageData.map((message, index) => (
         <MessageCard
           key={index}
@@ -16,7 +16,7 @@ const Index = () => {
           userName={message.userName}
         />
       ))}
-    </>
+    </div>
   );
 };
 

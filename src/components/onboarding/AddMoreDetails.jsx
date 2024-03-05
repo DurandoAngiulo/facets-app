@@ -11,7 +11,7 @@ export const AddMoreDetails = ({ handleUpdateProfile }) => {
 
   return (
     <>
-      <div className="page padding h-full flex flex-col gap-y-16">
+      <div className="page padding h-full flex flex-col gap-y-16 bg-white">
         <div className="flex flex-col gap-4 mt-24">
           <Icon iconName="editGradient" className="h-5" />
           <h1 style={{ color: "var(--brand)" }} className="w-full text-center">

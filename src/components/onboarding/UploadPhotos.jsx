@@ -11,7 +11,7 @@ export const UploadPhotos = ({ handleUpdateProfile, currentUser }) => {
   };
 
   return (
-    <div className="page padding h-full flex flex-col ">
+    <div className="page padding h-full flex flex-col bg-white ">
       <div className="flex flex-col gap-4 mt-24 mb-4">
         <Icon iconName="photoupload" className="h-5" />
         <h1 style={{ color: "var(--brand)" }} className="w-full text-center">
