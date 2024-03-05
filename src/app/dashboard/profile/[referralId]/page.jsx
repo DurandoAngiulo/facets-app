@@ -7,9 +7,8 @@ import { transformUserFacets } from "@/services/facet-services";
 import { calculateAge, replaceNameInString, extractIdFromUrl } from "@/utils/util-functions";
 import { usePathname } from "next/navigation";
 import MoreDetailsPillGroup from "@/components/MoreDetailsPillGroup/Index.jsx";
-import BeveledContainer from "@/components/BeveledContainer/Index";
 import Icon from "@/components/Icon";
-
+import BeveledContainer from "@/components/BeveledContainer/Index";
 import FacetsList from "@/components/FacetsList";
 import { getProfileById } from "@/services/profile-service";
 
@@ -83,10 +82,7 @@ const Index = () => {
 
           <MoreDetailsPillGroup moreDetails={profileInformation?.moreDetails} />
 
-          <p className="pl-2 py-2" style={{ color: "var(--text)" }}>
-            {" "}
-            {profileInformation?.moreDetails.bio}{" "}
-          </p>
+          <p className="py-2 px-2"> {profileInformation?.bio} </p>
         </div>
 
         <section

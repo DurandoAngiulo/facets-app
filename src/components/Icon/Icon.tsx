@@ -49,6 +49,7 @@ import phone from "@/svg/smartphone.svg";
 import search from "@/svg/search.svg";
 import mining from "@/svg/mining.svg";
 import shine from "@/svg/shine.svg";
+import contentCopy from "@/svg/content_copy.svg";
 import photoupload from "@/svg/photoupload.svg";
 import crown from "@/svg/crown.svg";
 
@@ -107,6 +108,7 @@ export const iconRegistry = {
   search,
   mining,
   shine,
+  contentCopy,
   photoupload,
   crown
 };

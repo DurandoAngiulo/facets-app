@@ -9,6 +9,8 @@ import { transformUserFacets } from "@/services/facet-services";
 import { calculateAge } from "@/utils/util-functions.js";
 import Link from "next/link";
 import MoreDetailsPillGroup from "@/components/MoreDetailsPillGroup/Index.jsx";
+import Icon from "@/components/Icon";
+import { PrimaryButton } from "@/components/Button/Index";
 
 const Page = ({ params }) => {
   const { currentUser } = useAuth();
@@ -33,26 +35,72 @@ const Page = ({ params }) => {
 
   return (
     <>
-      <div>
-        <header>
-          <Link href={ROUTES.EDIT_PROFILE.path}>
-            <h2>edit profile</h2>
-          </Link>
+      <div className="page-container pb-6">
+        <div className="pb-6">
+          <header>
+            {/* Header with name and icons */}
+            <div className="w-full justify-center items-center gap-2 inline-flex flex-wrap px-8">
+              {/* header with back button, name, and kabob with modal options */}
+              <div className="w-full inline-flex pt-8">
+                {/* <Link href={`${ROUTES.FEED.path}`}> */}
+                {/* </Link> */}
+                <h2 className="w-full flex-col justify-start items-center inline-flex gradient-text">
+                  {profileInformation?.firstName}
+                </h2>
+              </div>
+            </div>
 
-          <h2>all unstyled profile data</h2>
-          <p>{profileInformation?.firstName}</p>
-          <p>{calculateAge(profileInformation?.birthday)}</p>
-          <p>{profileInformation?.bio}</p>
-          <p>{profileInformation?.location}</p>
-          <p>{profileInformation?.occupation}</p>
-          <p>{profileInformation?.pronouns}</p>
-        </header>
-        <MoreDetailsPillGroup moreDetails={profileInformation?.moreDetails} />
-        <p className="pl-2 py-2" style={{ color: "var(--text)" }}>
-          {" "}
-          {profileInformation?.moreDetails.bio}{" "}
-        </p>
-        <section className="bg-green-400">
+            {/* Pronouns */}
+            <p style={{ color: "var(--text)" }} className="text-center italic">
+              {profileInformation?.pronouns}
+            </p>
+
+            {/* Basic Info */}
+            <div className="w-full justify-center items-center gap-1 inline-flex my-1">
+              <p style={{ color: "var(--text)" }}>{calculateAge(profileInformation?.birthday)}</p>
+              <Icon iconName="diamondBio" className="w-[12px] h-[12px]" />
+              <p style={{ color: "var(--text)" }}>{profileInformation?.occupation}</p>
+              <Icon iconName="diamondBio" className="w-[12px] h-[12px]" />
+              <p style={{ color: "var(--text)" }}>{profileInformation?.location}</p>
+            </div>
+          </header>
+          <MoreDetailsPillGroup moreDetails={profileInformation?.moreDetails} />
+          <p className="pl-2 py-2" style={{ color: "var(--text)" }}>
+            {" "}
+            {profileInformation?.moreDetails.bio}{" "}
+          </p>
+          <Link href={ROUTES.EDIT_PROFILE.path}>
+            <PrimaryButton active="true" label="Edit Profile">
+              Edit Profile
+            </PrimaryButton>
+          </Link>
+        </div>
+
+        <section
+          className="flex flex-row overflow-auto gap-5 px-8 pt-3 snap-proximity snap-x"
+          style={{ background: "var(--background-gradient-lr" }}
+        >
+          {profileFacetsExist && (
+            <div className="mb-32">
+              <p className="text-center mb-1" style={{ fontSize: "var(--font-size-p-md)", color: "var(--text)" }}>
+                Facet by <b>{profileInformation?.firstName}</b>
+              </p>
+              <FacetsList facet={facetGroups.personalFacets[0]} />
+            </div>
+          )}
+
+          {friendFacetsExist &&
+            facetGroups.friendFacets.map((facet) => (
+              <div key={facet.respondantUserId}>
+                <p className="text-center mb-1" style={{ fontSize: "var(--font-size-p-md)", color: "var(--text)" }}>
+                  Facet by a friend of <b>{facet.friendshipPeriod}</b>
+                </p>
+                <FacetsList facet={facet} currentProfile={profileInformation} />
+              </div>
+            ))}
+        </section>
+
+        {/* <section className="bg-green-400">
           {profileFacetsExist && (
             <div>
               <h3>Facet By {profileInformation?.firstName}</h3>
@@ -69,7 +117,7 @@ const Page = ({ params }) => {
                 {facet && profileInformation && <FacetsList facet={facet} currentProfile={profileInformation} />}
               </div>
             ))}
-        </section>
+        </section> */}
       </div>
     </>
   );
