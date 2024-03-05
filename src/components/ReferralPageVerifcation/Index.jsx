@@ -2,6 +2,8 @@ import "firebase/auth";
 
 import { RecaptchaVerifier, getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
+import { PrimaryButton } from "@/components/Button/Index";
+import Icon from "@/components/Icon";
 
 import ROUTES from "@/constants/routes";
 import { getUserByReferralId } from "@/services/profile-service";
@@ -82,14 +84,29 @@ const ReferralPageVerifcation = ({ pageReferralId, setVerificationState }) => {
     // check state to see which markup to render
     return (
       <div className="">
-        <h1>Text explaining facets and whats gonna happen</h1>
-        <p>
-          the rest of this page below will be hidden until the continue button is pressehis page below will be hidden
-          until the continue button is pressed
-        </p>
-        <p>Then the rest of the verifcation page will translate in and the header will translate out</p>
-        <p>{facetOwner?.firstName}</p>
-        <h3></h3>
+        <div
+          className="page bg-center flex flex-col padding bg-cover justify-center"
+          style={{ backgroundImage: "url('/dist/images/makeown.jpg')" }}
+        >
+          <div className="h-full flex flex-col justify-center items-center">
+            <Icon iconName="shine" className="h-16 mb-4" />
+            <div className=" flex flex-row gap-2 mx-5 justify-center ">
+              <h1 className="align-middle text-center leading-snug text-white ">
+                Welcome to
+                <i> Facets!</i>
+              </h1>
+            </div>
+            <p className="text-center text-white">
+              Craft <b>{facetOwner?.firstName}&apos;s</b> profile by answering prompts and uploading photos to showcase
+              their personality. Let&apos;s make their profile shine!
+            </p>
+          </div>
+          <div className="items-end flex mb-16  flex-col gap-2 justify-center">
+            <button className="w-full">
+              <PrimaryButton active="true" onDark="true" label="Let's go!"></PrimaryButton>
+            </button>
+          </div>
+        </div>
         <p>verify you are human</p>
         <label>
           Phone Number:
