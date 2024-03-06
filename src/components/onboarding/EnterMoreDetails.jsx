@@ -51,7 +51,7 @@ export const EnterMoreDetails = ({ handleUpdateProfile }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="page padding ">
+      <div className="page padding bg-white">
         <Icon iconName="back" className="h-5 mt-8" style={{ fill: "none" }} />
         <h1 style={{ color: "var(--brand)" }} className="w-full text-center">
           Add more details.

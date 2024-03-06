@@ -29,7 +29,7 @@ export const EnterPronouns = ({ handleUpdateProfile }) => {
   };
 
   return (
-    <div className="page padding border border-yellow-950">
+    <div className="page padding bg-white">
       <ProgressBar width="50%" step="4"></ProgressBar>
 
       <div className="w-full h-4 relative mt-12">

@@ -21,7 +21,7 @@ export const EnterGender = ({ handleUpdateProfile }) => {
 
   return (
     // border for testing purposes
-    <div className="page padding border border-yellow-950">
+    <div className="page padding bg-white">
       <ProgressBar width="37.5%" step="3"></ProgressBar>
 
       <div className="w-full h-4 relative mt-12">
