@@ -4,6 +4,7 @@ import { useAuth } from "@/context/AuthContext";
 import { storage } from "@/lib/firebase";
 import { updateProfile } from "@/services/profile-service";
 import { useState, useEffect } from "react";
+import { PrimaryButton } from "../Button/Index";
 
 const ImageUploadInput = ({ refPath, submitFunction, mainProfile = null }) => {
   const { currentUser, updateUserProfile } = useAuth();
@@ -160,9 +161,11 @@ const ImageUploadInput = ({ refPath, submitFunction, mainProfile = null }) => {
         onChange={handleFileChange}
         style={{ fontFamily: "var(--font-body)" }}
       />
-      <button disabled={!canSubmit} onClick={uploadImages}>
-        continue
-      </button>
+      <div className="absolute px-1 bottom-16 left-0 right-0 flex justify-center ">
+        <button className="w-full px-6" disabled={!canSubmit} onClick={uploadImages} style={{ maxWidth: "420px" }}>
+          <PrimaryButton active label="Continue" />
+        </button>
+      </div>
     </div>
   );
 };

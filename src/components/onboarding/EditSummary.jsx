@@ -40,8 +40,7 @@ export const EditSummary = ({ handleUpdateProfile }) => {
             Edit your Summary.
           </h1>
           <p className="text-center leading-snug" style={{ color: "var(--text)" }}>
-            This is how you will first appear to other Facets users. Think of it as your first impression! Choose a
-            photo and prompt that highlights who you are.
+            This is your first impression to other users! Choose a photo and prompt that highlights who you are.
           </p>
         </div>
         {/* <img
