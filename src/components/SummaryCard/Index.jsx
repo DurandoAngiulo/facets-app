@@ -14,8 +14,10 @@ const SummaryCard = ({
   location,
   facetPrompt,
   facetResponse,
-  src
+  src,
+  disabledState = false
 }) => {
+  console.log(disabledState);
   const age = calculateAge(birthday);
   console.log(src, "source!!!");
   return (
@@ -46,9 +48,13 @@ const SummaryCard = ({
             </p>
           </div>
 
-          <Link href={`${ROUTES.PROFILE.path}/${profileId}`}>
-            <PrimaryButton label="View full Facet" active="true" />
-          </Link>
+          {disabledState == true ? (
+            <PrimaryButton label="View full Facet" active={false} />
+          ) : (
+            <Link href={`${ROUTES.PROFILE.path}/${profileId}`}>
+              <PrimaryButton label="View full Facet" active="true" />
+            </Link>
+          )}
         </div>
       </BeveledContainer>
     </div>
