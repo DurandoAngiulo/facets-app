@@ -163,8 +163,8 @@ const FriendFacetCreation = ({ pageReferralId }) => {
   if (step === 1) {
     return (
       <>
-        <ImageUploadInput refPath={"friend"} mainProfile={facetOwnerProfile} />
-        <button onClick={submitFacet}>continue</button>
+        <ImageUploadInput refPath={"friend"} mainProfile={facetOwnerProfile} submitFunction={submitFacet} />
+        {/* <button onClick={submitFacet}>continue</button> */}
       </>
     );
   }
