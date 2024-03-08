@@ -1,7 +1,5 @@
 "use client";
-
-import { useEffect, useState } from "react";
-
+import { useEffect, useState, useRef } from "react";
 import FacetsList from "@/components/FacetsList";
 import ROUTES from "@/constants/routes";
 import { useAuth } from "@/context/AuthContext";
@@ -19,6 +17,11 @@ const Page = ({ params }) => {
   const friendFacetsExist = facetGroups?.friendFacets.length > 0;
   const profileFacetsExist = facetGroups?.personalFacets[0] !== undefined;
 
+  // Ref to the container
+  const containerRef = useRef(null);
+  // State to store the currently visible column
+  const [visibleColumn, setVisibleColumn] = useState(0);
+
   useEffect(() => {
     if (!profileInformation) return;
 
@@ -27,11 +30,51 @@ const Page = ({ params }) => {
       setFacetGroups({ ...profileInformation, ...newProfile });
     };
     transformFacetData();
-  }, [JSON.stringify(profileInformation)]);
+  }, [profileInformation]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const container = containerRef.current;
+      const scrollLeft = container.scrollLeft;
+      const containerWidth = container.clientWidth;
+      const totalWidth = container.scrollWidth;
+
+      // Calculate the scroll percentage
+      const scrollPercentage = scrollLeft / (totalWidth - containerWidth);
+
+      // Determine which column is currently visible
+      const totalColumns = 1 + (friendFacetsExist ? facetGroups.friendFacets.length : 0);
+      const visibleColumnIndex = Math.floor(scrollPercentage * totalColumns);
+
+      // Set the visible column index
+      setVisibleColumn(visibleColumnIndex);
+    };
+
+    if (containerRef.current) {
+      containerRef.current.addEventListener("scroll", handleScroll);
+    }
+
+    // Cleanup
+    return () => {
+      if (containerRef.current) {
+        containerRef.current.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [profileFacetsExist, friendFacetsExist, facetGroups]);
 
   if (!profileInformation) {
     return <h1>loading...</h1>;
   }
+
+  // Function to handle dot click
+  const handleDotClick = (index) => {
+    const container = containerRef.current;
+    const containerWidth = container.clientWidth;
+    const totalWidth = container.scrollWidth;
+    const scrollPercentage = index / (1 + (friendFacetsExist ? facetGroups.friendFacets.length : 0));
+    const scrollLeft = scrollPercentage * (totalWidth - containerWidth);
+    container.scrollTo({ left: scrollLeft, behavior: "smooth" });
+  };
 
   return (
     <>
@@ -77,9 +120,11 @@ const Page = ({ params }) => {
         </div>
 
         <section
-          className="flex flex-row overflow-auto gap-5 px-8 pt-3 snap-proximity snap-x"
-          style={{ background: "var(--background-gradient-lr" }}
+          ref={containerRef}
+          className="flex flex-row overflow-auto gap-5 px-8 pt-3 snap-proximity snap-x relative"
+          style={{ background: "var(--background-gradient-lr)" }}
         >
+          {/* Your existing code */}
           {profileFacetsExist && (
             <div className="mb-32">
               <p className="text-center mb-1" style={{ fontSize: "var(--font-size-p-md)", color: "var(--text)" }}>
@@ -100,24 +145,16 @@ const Page = ({ params }) => {
             ))}
         </section>
 
-        {/* <section className="bg-green-400">
-          {profileFacetsExist && (
-            <div>
-              <h3>Facet By {profileInformation?.firstName}</h3>
-              <ul>
-                <FacetsList facet={facetGroups.personalFacets[0]} currentProfile={profileInformation} />{" "}
-              </ul>
-            </div>
-          )}
-
-          {friendFacetsExist &&
-            facetGroups.friendFacets.map((facet) => (
-              <div key={facet.respondantUserId}>
-                <h3>Facet By A friend of {facet.friendshipPeriod}</h3>
-                {facet && profileInformation && <FacetsList facet={facet} currentProfile={profileInformation} />}
-              </div>
-            ))}
-        </section> */}
+        {/* Carousel Slider Dots */}
+        <div className="absolute bottom-0 left-0 w-full flex justify-center mt-4">
+          {[...Array(1 + (friendFacetsExist ? facetGroups.friendFacets.length : 0))].map((_, index) => (
+            <button
+              key={index}
+              className={`h-4 w-4 mx-1 rounded-full ${index === visibleColumn ? "bg-blue-500" : "bg-gray-300"}`}
+              onClick={() => handleDotClick(index)}
+            />
+          ))}
+        </div>
       </div>
     </>
   );
