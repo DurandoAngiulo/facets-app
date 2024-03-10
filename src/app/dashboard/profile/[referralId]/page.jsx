@@ -153,14 +153,23 @@ const Index = () => {
               </div>
             ))}
         </section>
-        <div className="absolute bottom-0 left-0 w-full flex justify-center mt-4">
-          {[...Array(1 + (friendFacetsExist ? facetGroups.friendFacets.length : 0))].map((_, index) => (
-            <button
-              key={index}
-              className={`h-4 w-4 mx-1 rounded-full ${index === visibleColumn ? "bg-blue-500" : "bg-gray-300"}`}
-              onClick={() => handleDotClick(index)}
-            />
-          ))}
+        <div className="fixed bottom-20 pb-3 left-0 w-full">
+          <div className="flex justify-center w-max mx-auto">
+            <div className="bg-black opacity-60  px-2  pt-1 rounded-full">
+              {[...Array(1 + (friendFacetsExist ? facetGroups.friendFacets.length : 0))].map((_, index) => (
+                <button
+                  key={index}
+                  className={`h-2 w-2 rounded-full ${index === visibleColumn ? "" : "bg-gray-300"}
+                  ${index === visibleColumn ? "mx-2 mr-3" : "mx-1"}`}
+                  onClick={() => handleDotClick(index)}
+                >
+                  <div className="mb-3">
+                    {index === visibleColumn ? <Icon className="w-4" iconName="diamondWhite" /> : null}
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </>
