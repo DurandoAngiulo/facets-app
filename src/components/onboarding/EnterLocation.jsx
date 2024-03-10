@@ -6,7 +6,7 @@ import ProgressBar from "../ProgressBar/Index";
 import { capitalizeFirstLetter } from "@/utils/util-functions";
 
 export const EnterLocation = ({ handleUpdateProfile }) => {
-  const [location, setLocation] = useState("home");
+  const [location, setLocation] = useState(null);
   const [error, setError] = useState(null);
 
   const handleSubmit = (e) => {
@@ -39,6 +39,7 @@ export const EnterLocation = ({ handleUpdateProfile }) => {
                 <input
                   type="text"
                   value={location}
+                  placeholder="ex: Philadelphia, PA"
                   onChange={(e) => setLocation(e.target.value)}
                   // fix character limit to actually work
                   maxLength={16}
