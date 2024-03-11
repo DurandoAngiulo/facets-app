@@ -8,6 +8,7 @@ import Icon from "@/components/Icon";
 import Link from "next/link";
 import BeveledContainer from "@/components/BeveledContainer/Index.jsx";
 import MaskedImage from "@/components/MaskedImage/Index";
+import { PrimaryButton, SecondaryButton, TertiaryButton } from "@/components/Button/Index";
 
 const Index = ({ facet = null }) => {
   const { currentUser, updateUserProfile } = useAuth();
@@ -77,12 +78,12 @@ const Index = ({ facet = null }) => {
     <div className="page padding bg-white">
       {messageInfo ? (
         <div>
-          <div className="w-full justify-center items-center gap-1 inline-flex mt-8 mb-4">
+          <div className="w-full justify-center items-center gap-1 inline-flex mt-8">
             <Link href="/dashboard/feed" className="w-1/6">
               <Icon iconName="back" className="h-5" style={{ fill: "none" }} />
             </Link>
             <div className="inline-flex w-4/6">
-              <MaskedImage height={100} width={130} src={photoUrls[0]?.url} />
+              <MaskedImage height={100} width={100} src={photoUrls[0]?.url} />
               <div className="my-auto">
                 <h3 className="gradient-text">{messageInfo.userName}</h3>
                 <div className="inline-flex align-middle">
@@ -96,24 +97,33 @@ const Index = ({ facet = null }) => {
             <Icon iconName="kabob" className="h-7 w-1/6" />
           </div>
 
-          <div className="w-2/3 justify-end">
-            <p style={{ color: "var(--text)" }} className="italic">
-              {" "}
-              replying to
-            </p>
-            <p className="italic">{messageInfo.prompt}</p>
-            <p style={{ color: "var(--brand)" }}>{messageInfo.response}</p>
+          <hr className="my-2" style={{ borderColor: "var(--border)" }}></hr>
+
+          <div className="w-full inline-flex">
+            <div className="w-1/3"> </div>
+            <div className="w-2/3 justify-end">
+              <p style={{ color: "var(--text)" }} className="italic">
+                {" "}
+                replying to
+              </p>
+              <p className="italic">{messageInfo.prompt}</p>
+              <p style={{ color: "var(--brand)" }}>{messageInfo.response}</p>
+            </div>
           </div>
 
-          <div className="absolute px-1 bottom-16 left-0 right-0 flex justify-center ">
+          <div className="absolute px-1 bottom-20 left-0 right-0 flex justify-center page-container">
             <input
               type="text"
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
-              placeholder="Type your message..."
-              className="w-full"
+              placeholder="Send a message..."
+              className="w-5/6 my-8 p-3 rounded border border-zinc-500 border-opacity-50 justify-start items-center gap-2.5 inline-flex"
             />
-            <button onClick={handleMessageSubmit}>Submit</button>
+            <div className="w-1/6 my-auto m-2">
+              <PrimaryButton onClick={handleMessageSubmit} active="true" label="Send">
+                Send
+              </PrimaryButton>
+            </div>
           </div>
 
           <div>
