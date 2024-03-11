@@ -83,7 +83,7 @@ const Index = ({ facet = null }) => {
               <Icon iconName="back" className="h-5" style={{ fill: "none" }} />
             </Link>
             <div className="inline-flex w-4/6">
-              <MaskedImage height={100} width={100} src={photoUrls[0]?.url} />
+              <MaskedImage height={100} width={100} src={photoUrls[Index]?.url} />
               <div className="my-auto">
                 <h3 className="gradient-text">{messageInfo.userName}</h3>
                 <div className="inline-flex align-middle">
@@ -117,7 +117,7 @@ const Index = ({ facet = null }) => {
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
               placeholder="Send a message..."
-              className="w-5/6 my-8 p-3 rounded border border-zinc-500 border-opacity-50 justify-start items-center gap-2.5 inline-flex"
+              className="w-5/6 my-8 ml-2 p-3 rounded border border-zinc-500 border-opacity-50 justify-start items-center gap-2.5 inline-flex"
             />
             <div className="w-1/6 my-auto m-2">
               <PrimaryButton onClick={handleMessageSubmit} active="true" label="Send">
