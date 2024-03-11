@@ -7,7 +7,7 @@ import ProgressBar from "../ProgressBar/Index";
 import Icon from "@/components/Icon";
 
 export const EnterName = ({ handleUpdateProfile }) => {
-  const [name, setName] = useState("john");
+  const [name, setName] = useState("");
   const [error, setError] = useState(null);
 
   const handleSubmit = (e) => {
@@ -45,7 +45,7 @@ export const EnterName = ({ handleUpdateProfile }) => {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="focus:outline-none"
+                  className="focus:outline-none font-['Arboria']"
                 />
               </p>
             </div>

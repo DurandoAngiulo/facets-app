@@ -40,9 +40,9 @@ export const EnterOccupation = ({ handleUpdateProfile }) => {
           <div className="w-full flex-col justify-center items-start gap-2.5 inline-flex">
             <div className="w-full">
               <RadioInput
-                label="student"
-                value="student"
-                checked={occupation === "student"}
+                label="Student"
+                value="Student"
+                checked={occupation === "Student"}
                 onChange={handleOccupationChange}
                 name="occupation"
               />
@@ -50,9 +50,9 @@ export const EnterOccupation = ({ handleUpdateProfile }) => {
 
             <div className="w-full">
               <RadioInput
-                label="part-time employed"
-                value="part-time-employed"
-                checked={occupation === "part-time-employed"}
+                label="Part-time employed"
+                value="Part-time employed"
+                checked={occupation === "Part-time employed"}
                 onChange={handleOccupationChange}
                 name="occupation"
               />
@@ -61,8 +61,8 @@ export const EnterOccupation = ({ handleUpdateProfile }) => {
             <div className="w-full">
               <RadioInput
                 label="Full time employed"
-                value="full-time-employed"
-                checked={occupation === "full-time-employed"}
+                value="Full time employed"
+                checked={occupation === "Full time employed"}
                 onChange={handleOccupationChange}
                 name="occupation"
               />
@@ -71,8 +71,8 @@ export const EnterOccupation = ({ handleUpdateProfile }) => {
             <div className="w-full">
               <RadioInput
                 label="Self-employed"
-                value="self-employed"
-                checked={occupation === "self-employed"}
+                value="Self-employed"
+                checked={occupation === "Self-employed"}
                 onChange={handleOccupationChange}
                 name="occupation"
               />
@@ -81,8 +81,8 @@ export const EnterOccupation = ({ handleUpdateProfile }) => {
             <div className="w-full">
               <RadioInput
                 label="Other"
-                value="other"
-                checked={occupation === "other"}
+                value="Other"
+                checked={occupation === "Other"}
                 onChange={handleOccupationChange}
                 name="occupation"
               />
