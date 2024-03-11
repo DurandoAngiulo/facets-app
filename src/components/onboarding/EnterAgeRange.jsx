@@ -3,29 +3,40 @@ import React, { useState } from "react";
 import Icon from "@/components/Icon";
 import { PrimaryButton } from "@/components/Button/Index";
 import ProgressBar from "../ProgressBar/Index";
-import ageRangeSlider from "../OnboardingContent/ageRangeSlider";
 
 export const EnterAgeRange = ({ handleUpdateProfile }) => {
   const [lowerBound, setLowerBound] = useState(18);
   const [upperBound, setUpperBound] = useState(70);
+  const [lowerBoundInput, setLowerBoundInput] = useState("");
+  const [upperBoundInput, setUpperBoundInput] = useState("");
 
   const handleLowerBoundChange = (event) => {
-    const newLowerBound = parseInt(event.target.value, 10);
-    setLowerBound(newLowerBound);
+    const newLowerBoundInput = event.target.value;
+    setLowerBoundInput(newLowerBoundInput);
 
-    // Ensure that lowerBound is always less than or equal to upperBound
-    if (newLowerBound > upperBound) {
-      setUpperBound(newLowerBound);
+    if (!isNaN(parseInt(newLowerBoundInput))) {
+      const newLowerBound = parseInt(newLowerBoundInput, 10);
+      setLowerBound(newLowerBound);
+
+      if (newLowerBound > upperBound) {
+        setUpperBound(newLowerBound);
+        setUpperBoundInput(newLowerBoundInput);
+      }
     }
   };
 
   const handleUpperBoundChange = (event) => {
-    const newUpperBound = parseInt(event.target.value, 10);
-    setUpperBound(newUpperBound);
+    const newUpperBoundInput = event.target.value;
+    setUpperBoundInput(newUpperBoundInput);
 
-    // Ensure that upperBound is always greater than or equal to lowerBound
-    if (newUpperBound < lowerBound) {
-      setLowerBound(newUpperBound);
+    if (!isNaN(parseInt(newUpperBoundInput))) {
+      const newUpperBound = parseInt(newUpperBoundInput, 10);
+      setUpperBound(newUpperBound);
+
+      if (newUpperBound < lowerBound) {
+        setLowerBound(newUpperBound);
+        setLowerBoundInput(newUpperBoundInput);
+      }
     }
   };
 
@@ -60,9 +71,10 @@ export const EnterAgeRange = ({ handleUpdateProfile }) => {
               type="text"
               min={18}
               max={upperBound}
-              value={lowerBound}
+              value={lowerBoundInput}
               onChange={handleLowerBoundChange}
               className="mr-4 border-solid w-full h-14 rounded border focus:outline-none border-zinc-500 border-opacity-50 p-4"
+              placeholder="Age"
             />
           </div>
 
@@ -73,9 +85,10 @@ export const EnterAgeRange = ({ handleUpdateProfile }) => {
               type="text"
               min={lowerBound}
               max={70}
-              value={upperBound}
+              value={upperBoundInput}
               onChange={handleUpperBoundChange}
               className="mr-4 border-solid w-full h-14 focus:outline-none rounded border border-zinc-500 border-opacity-50 p-4"
+              placeholder="Age"
             />
           </div>
         </div>
