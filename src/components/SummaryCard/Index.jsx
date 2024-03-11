@@ -4,6 +4,7 @@ import MaskedImage from "@/components/MaskedImage/Index";
 import ROUTES from "@/constants/routes";
 import { calculateAge } from "@/utils/util-functions.js";
 import Link from "next/link";
+import Icon from "@/components/Icon";
 
 const SummaryCard = ({
   profileId,
@@ -49,7 +50,11 @@ const SummaryCard = ({
           </div>
 
           {disabledState == true ? (
-            <PrimaryButton label="View full Facet" active={false} />
+            <>
+              <PrimaryButton label="View full Facet" active={false} />
+              <Icon iconName="editbutton" className=" w-8 absolute bottom-36 left-32" />
+              <Icon iconName="editbutton" className=" w-8 absolute bottom-24 mb-2 right-4" />
+            </>
           ) : (
             <Link href={`${ROUTES.PROFILE.path}/${profileId}`}>
               <PrimaryButton label="View full Facet" active="true" />
