@@ -241,8 +241,8 @@ export const EnterMoreDetails = ({ handleUpdateProfile }) => {
         </div>
 
         <div class="w-96 h-32 fixed bottom-0 bg-gradient-to-t from-white from-70% to-transparent"></div>
-        <div className="fixed bottom-8 w-full z-50 " style={{ maxWidth: "372px" }}>
-          <button className="w-full" id="details-continue" type="submit">
+        <div className="fixed bottom-8 w-full z-50 left-0 right-0 " style={{ maxWidth: "420px" }}>
+          <button className="w-full px-6" id="details-continue" type="submit">
             <PrimaryButton active="true" label="Save changes"></PrimaryButton>
           </button>
         </div>
