@@ -6,9 +6,8 @@ import { extractIdFromUrl } from "@/utils/util-functions";
 import { updateProfile } from "@/services/profile-service";
 import Icon from "@/components/Icon";
 import Link from "next/link";
-import BeveledContainer from "@/components/BeveledContainer/Index.jsx";
 import MaskedImage from "@/components/MaskedImage/Index";
-import { PrimaryButton, SecondaryButton, TertiaryButton } from "@/components/Button/Index";
+import { SecondaryButton } from "@/components/Button/Index";
 
 const Index = ({ facet = null }) => {
   const { currentUser, updateUserProfile } = useAuth();
@@ -28,21 +27,6 @@ const Index = ({ facet = null }) => {
     }
   }, [profileInformation, profileId]);
 
-  useEffect(() => {
-    const fetchPhotoURLs = async () => {
-      if (!facet?.photos) return;
-
-      try {
-        const photoURLs = await getFacetPhotoUrls(facet.photos);
-        const sortedPhotos = photoURLs.sort((a, b) => a.order - b.order);
-        setPhotoUrls(sortedPhotos);
-      } catch (error) {
-        console.error("Error fetching photo URLs", error);
-      }
-    };
-
-    fetchPhotoURLs();
-  }, [facet?.photos]);
 
   const handleMessageSubmit = async () => {
     if (!newMessage.trim()) return; // Ignore empty messages
@@ -83,7 +67,8 @@ const Index = ({ facet = null }) => {
               <Icon iconName="back" className="h-5" style={{ fill: "none" }} />
             </Link>
             <div className="inline-flex w-4/6">
-              <MaskedImage height={100} width={100} src={photoUrls[Index]?.url} />
+              {/* TODO: Put in proper primary image here for the person they're chatting with */}
+              <MaskedImage height={100} width={100} />
               <div className="my-auto">
                 <h3 className="gradient-text">{messageInfo.userName}</h3>
                 <div className="inline-flex align-middle">
@@ -120,9 +105,9 @@ const Index = ({ facet = null }) => {
               className="w-5/6 my-8 ml-2 p-3 rounded border border-zinc-500 border-opacity-50 justify-start items-center gap-2.5 inline-flex"
             />
             <div className="w-1/6 my-auto m-2">
-              <PrimaryButton onClick={handleMessageSubmit} active="true" label="Send">
+              <SecondaryButton onClick={handleMessageSubmit} active="true" label="Send">
                 Send
-              </PrimaryButton>
+              </SecondaryButton>
             </div>
           </div>
 
