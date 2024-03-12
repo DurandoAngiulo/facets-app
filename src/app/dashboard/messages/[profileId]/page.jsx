@@ -9,7 +9,7 @@ import Link from "next/link";
 import MaskedImage from "@/components/MaskedImage/Index";
 import { SecondaryButton } from "@/components/Button/Index";
 
-const Index = ({ facet = null }) => {
+const Index = () => {
   const { currentUser, updateUserProfile } = useAuth();
   const [messageInfo, setMessageInfo] = useState(null);
   const [newMessage, setNewMessage] = useState("");
@@ -26,7 +26,6 @@ const Index = ({ facet = null }) => {
       setMessageInfo(specificMessage);
     }
   }, [profileInformation, profileId]);
-
 
   const handleMessageSubmit = async () => {
     if (!newMessage.trim()) return; // Ignore empty messages
@@ -105,9 +104,11 @@ const Index = ({ facet = null }) => {
               className="w-5/6 my-8 ml-2 p-3 rounded border border-zinc-500 border-opacity-50 justify-start items-center gap-2.5 inline-flex"
             />
             <div className="w-1/6 my-auto m-2">
-              <SecondaryButton onClick={handleMessageSubmit} active="true" label="Send">
-                Send
-              </SecondaryButton>
+              <button onClick={handleMessageSubmit}>
+                <SecondaryButton active="true" label="Send">
+                  Send
+                </SecondaryButton>
+              </button>
             </div>
           </div>
 
