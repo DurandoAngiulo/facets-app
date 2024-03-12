@@ -53,7 +53,7 @@ export const EnterPronouns = ({ handleUpdateProfile }) => {
             </select> */}
             <input
               type="text"
-              className="focus:outline-none"
+              className="focus:outline-none font-['Arboria']"
               value={pronouns}
               onChange={(e) => setPronouns(e.target.value)}
             />

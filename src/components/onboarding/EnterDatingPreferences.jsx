@@ -111,12 +111,13 @@ export const EnterDatingPreferences = ({ handleUpdateProfile }) => {
             </label>
           </div>
         </div>
+
+        <div className="absolute px-1 bottom-16 left-0 right-0 flex justify-center ">
+          <button className="w-full px-6" id="preferences-continue" type="submit" style={{ maxWidth: "420px" }}>
+            <PrimaryButton active="true" label="Continue"></PrimaryButton>
+          </button>
+        </div>
       </form>
-      <div className="absolute px-1 bottom-16 left-0 right-0 flex justify-center ">
-        <button className="w-full px-6" id="preferences-continue" type="submit" style={{ maxWidth: "420px" }}>
-          <PrimaryButton active="true" label="Continue"></PrimaryButton>
-        </button>
-      </div>
     </div>
   );
 };

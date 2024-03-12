@@ -6,7 +6,7 @@ import { PrimaryButton } from "@/components/Button/Index";
 import ProgressBar from "../ProgressBar/Index";
 
 export const EnterBirthday = ({ handleUpdateProfile }) => {
-  const [birthday, setBirthday] = useState("2001-10-05"); // Use the correct date format for the input
+  const [birthday, setBirthday] = useState(""); // Use the correct date format for the input
   const [error, setError] = useState(null);
 
   const handleSubmit = (e) => {

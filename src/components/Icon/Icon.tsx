@@ -53,6 +53,8 @@ import contentCopy from "@/svg/content_copy.svg";
 import photoupload from "@/svg/photoupload.svg";
 import crown from "@/svg/crown.svg";
 import send from "@/svg/send.svg";
+import diamondWhite from "@/svg/diamond-white.svg";
+import editbutton from "@/svg/editbutton.svg";
 
 import { forwardRef } from "react";
 import styles from "./Icon.module.css";
@@ -112,7 +114,9 @@ export const iconRegistry = {
   contentCopy,
   photoupload,
   crown,
-  send
+  send,
+  diamondWhite,
+  editbutton
 };
 
 type IconNames = keyof typeof iconRegistry;
