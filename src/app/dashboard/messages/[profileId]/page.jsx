@@ -7,7 +7,7 @@ import { updateProfile } from "@/services/profile-service";
 import Icon from "@/components/Icon";
 import Link from "next/link";
 import MaskedImage from "@/components/MaskedImage/Index";
-import { SecondaryButton } from "@/components/Button/Index";
+import { PrimaryButton, SecondaryButton } from "@/components/Button/Index";
 
 const Index = () => {
   const { currentUser, updateUserProfile } = useAuth();
@@ -15,8 +15,6 @@ const Index = () => {
   const [newMessage, setNewMessage] = useState("");
   const pathname = usePathname();
   const profileId = extractIdFromUrl(pathname);
-  const [photoUrls, setPhotoUrls] = useState([]);
-
   const profileInformation = currentUser?.profile;
 
   useEffect(() => {
@@ -71,7 +69,7 @@ const Index = () => {
               <div className="my-auto">
                 <h3 className="gradient-text">{messageInfo.userName}</h3>
                 <div className="inline-flex align-middle">
-                  <Icon iconName="diamondBio" className="h-4 my-auto pr-2" style={{ fill: "none" }} />
+                  <Icon iconName="diamondBio" className="h-4 my-auto pr-1.5" style={{ fill: "none" }} />
                   <p style={{ color: "var(--text)" }} className="text-center italic">
                     {profileInformation?.pronouns}
                   </p>
@@ -104,7 +102,7 @@ const Index = () => {
               className="w-5/6 my-8 ml-2 p-3 rounded border border-zinc-500 border-opacity-50 justify-start items-center gap-2.5 inline-flex"
             />
             <div className="w-1/6 my-auto m-2">
-              <button onClick={handleMessageSubmit}>
+              <button onClick={handleMessageSubmit} className="w-full">
                 <SecondaryButton active="true" label="Send">
                   Send
                 </SecondaryButton>
@@ -112,9 +110,21 @@ const Index = () => {
             </div>
           </div>
 
-          <div>
-            {messageInfo.messageHistory &&
-              messageInfo.messageHistory.map((message, index) => <p key={index}>{message}</p>)}
+          <div className="w-full inline-flex mt-2">
+            <div className="w-1/3"> </div>
+            <div className="w-2/3">
+              <div
+                className="flex-end py-2 px-3 rounded-xl gradient-background"
+                style={{ background: "--berry-linear" }}
+              >
+                {messageInfo.messageHistory &&
+                  messageInfo.messageHistory.map((message, index) => (
+                    <p key={index} style={{ color: "white" }}>
+                      {message}
+                    </p>
+                  ))}
+              </div>
+            </div>
           </div>
         </div>
       ) : (

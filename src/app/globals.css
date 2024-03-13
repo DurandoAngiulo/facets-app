@@ -121,3 +121,7 @@ p {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.gradient-background {
+  background: var(--berry-linear);
+}
