@@ -79,7 +79,7 @@ const Page = ({ params }) => {
   return (
     <>
       <div className="page-container pb-6">
-        <div className="pb-6">
+        <div className="shadow-lg w-full z-50 px-4 pb-3 relative bg-white">
           <header>
             {/* Header with name and icons */}
             <div className="w-full justify-center items-center gap-2 inline-flex flex-wrap px-8">
