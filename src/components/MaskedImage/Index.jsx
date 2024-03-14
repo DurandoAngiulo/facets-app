@@ -11,7 +11,7 @@ const MaskedImage = ({ height, width, src }) => {
   useEffect(() => {
     const fetchPhoto = async (media) => {
       if (!media) {
-        setImage("https://www.gemsociety.org/wp-content/uploads/2023/07/round-purple-fancy-sapphire-brian-gavin.jpg");
+        setImage("/dist/images/sparkle-animation-2.gif");
         return;
       }
 
@@ -20,7 +20,7 @@ const MaskedImage = ({ height, width, src }) => {
         let photoResult = photo;
         setImage(photoResult);
       } catch (error) {
-        setImage("https://www.gemsociety.org/wp-content/uploads/2023/07/round-purple-fancy-sapphire-brian-gavin.jpg");
+        setImage("/dist/images/sparkle-animation-2.gif");
         console.error("Failed to fetch photo", error);
       }
     };
