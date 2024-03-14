@@ -4,7 +4,7 @@ import { db, storage } from "@/lib/firebase";
 import Icon from "@/components/Icon";
 import { useAuth } from "@/context/AuthContext";
 import ImageUploadInput from "@/components/ImageUploadInput/Index.jsx";
-import { getPhoto } from "@/services/image-service.js";
+// import { getPhoto } from "@/services/image-service.js";
 import { useState, useEffect } from "react";
 
 const Index = () => {

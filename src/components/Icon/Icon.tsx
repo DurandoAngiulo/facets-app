@@ -52,6 +52,7 @@ import shine from "@/svg/shine.svg";
 import contentCopy from "@/svg/content_copy.svg";
 import photoupload from "@/svg/photoupload.svg";
 import crown from "@/svg/crown.svg";
+import send from "@/svg/send.svg";
 import diamondWhite from "@/svg/diamond-white.svg";
 import editbutton from "@/svg/editbutton.svg";
 
@@ -113,6 +114,7 @@ export const iconRegistry = {
   contentCopy,
   photoupload,
   crown,
+  send,
   diamondWhite,
   editbutton
 };
