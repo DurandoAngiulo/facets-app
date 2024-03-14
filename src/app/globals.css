@@ -124,4 +124,5 @@ p {
 
 .gradient-background {
   background: var(--berry-linear);
+  opacity: 0.75;
 }

@@ -16,6 +16,7 @@ const Index = () => {
   const pathname = usePathname();
   const profileId = extractIdFromUrl(pathname);
   const profileInformation = currentUser?.profile;
+  const [isGradientBackground, setIsGradientBackground] = useState(false);
 
   useEffect(() => {
     if (profileInformation) {
@@ -28,6 +29,7 @@ const Index = () => {
   const handleMessageSubmit = async () => {
     if (!newMessage.trim()) return; // Ignore empty messages
 
+    setIsGradientBackground(true);
     const updatedMessageInfo = {
       ...messageInfo,
       messageHistory: [...(messageInfo.messageHistory || []), newMessage.trim()]
@@ -99,7 +101,7 @@ const Index = () => {
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
               placeholder="Send a message..."
-              className="w-5/6 my-8 ml-2 p-3 rounded border border-zinc-500 border-opacity-50 justify-start items-center gap-2.5 inline-flex"
+              className="w-5/6 my-8 ml-2 p-3 rounded border border-zinc-500 border-opacity-50 justify-start items-center gap-2.5 inline-flex outline-none"
             />
             <div className="w-1/6 my-auto m-2">
               <button onClick={handleMessageSubmit} className="w-full">
@@ -114,8 +116,8 @@ const Index = () => {
             <div className="w-1/3"> </div>
             <div className="w-2/3">
               <div
-                className="flex-end py-2 px-3 rounded-xl gradient-background"
                 style={{ background: "--berry-linear" }}
+                className={`flex-end py-2 px-3 rounded-xl ${isGradientBackground ? "gradient-background" : ""}`}
               >
                 {messageInfo.messageHistory &&
                   messageInfo.messageHistory.map((message, index) => (
